@@ -49,8 +49,8 @@ public class BoardServiceImpl implements BoardService {
 
 	// petsitterNo에 해당하는 보드 디테일 받아오기
 	@Override
-	public PetsitterboardVO getboardDetail(int petsitterNo) {
- 		return boardDAO.getboardDetail(petsitterNo);
+	public PetsitterboardVO getboardDetail(int petsitterboard_no) {
+ 		return boardDAO.getboardDetail(petsitterboard_no);
 	}
 
 	// 펫시터보드에 해당하는 예약된 날짜 받아오기

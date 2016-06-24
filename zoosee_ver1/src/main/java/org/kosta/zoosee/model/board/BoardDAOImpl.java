@@ -45,8 +45,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public PetsitterboardVO getboardDetail(int petsitterNo) {
- 		return template.selectOne("petsitterboard.getboardDetail", petsitterNo);
+	public PetsitterboardVO getboardDetail(int petsitterboard_no) {
+ 		return template.selectOne("petsitterboard.getboardDetail", petsitterboard_no);
 	}
 	
 	// Error 뜬다!! 펫시터가 여러 글을 등록해두면	 

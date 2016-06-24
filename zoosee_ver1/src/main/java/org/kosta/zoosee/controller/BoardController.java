@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.board.ListVO;
 import org.kosta.zoosee.model.board.PagingBean;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
+import org.kosta.zoosee.model.reserve.ReserveService;
+import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
 import org.springframework.stereotype.Controller;
@@ -24,13 +27,30 @@ public class BoardController {
 	private BoardService boardServie;
 	@Resource
 	private PetsitterService petsitterService;
+	@Resource
+	private ReserveService reserveService;
 
 	// 헤더에서 보드 등록 폼.JSP로 이동하는
 	@RequestMapping("interceptor_petsitterboard_registerform.do")
-	public ModelAndView registerBoard(String id) {
-		PetsitterVO petsitterVO = petsitterService.findPetsitterById(id);
+	public ModelAndView registerBoard(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		String id = null;
+		if(session != null || session.getAttribute("mvo") == null){
+			id = ((MemberVO)session.getAttribute("mvo")).getId();
+		}
 		
-		return new ModelAndView("petsitterboard_registerForm", "petsitterVO", petsitterVO);
+		PetsitterVO petsitterVO = petsitterService.findPetsitterById(id);
+		PetsitterboardVO pbVO = reserveService.getBoardVOByPetsitterId(id);
+		String flag = "false";
+		if(pbVO != null){
+			flag = "true";
+		}
+		
+		ModelAndView mv = new ModelAndView("petsitterboard_registerForm");
+		mv.addObject("petsitterVO", petsitterVO);
+		mv.addObject("flag", flag);
+		
+		return mv;
 	}
 
 	// 펫시터보드 등록하는
@@ -94,7 +114,7 @@ public class BoardController {
 
 		PetsitterboardVO petsitterboardVO = boardServie.getboardDetail(petsitterboard_no);
 		List<String> list = boardServie.getPetCalendarDate(petsitterboard_no);
-
+		
 		// 날짜 포맷 바꾸는([2016-06-01]을 [2016-6-1]로) insert할 때 바꿔야 한다.
 		for (int i = 0; i < list.size(); i++) {
 			String[] ab = list.get(i).split("-");

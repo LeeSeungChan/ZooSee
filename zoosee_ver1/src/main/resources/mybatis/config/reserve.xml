@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	  		  from PET_MEMBER m, petsitter ps
 	 	  		  where m.id=#{value} and m.id=ps.id) a, petsitterboard pb
 	 		 where a.petsitterNo=pb.petsitterNo) b, reserve r, PET_MEMBER pm, PET pet
-		where b.petsitterboard_no=r.petsitterboard_no and r.id=pm.id and pm.id=pet.id order by r.reserve_no asc
+		where b.petsitterboard_no=r.petsitterboard_no and r.id=pm.id and pm.id=pet.id order by r.reserve_no desc
 	</select>
 	<select id="showPetMomReserveList" parameterType="string" resultMap="reserveMap">
 		select B.reserve_no,B.reserve_price,B.reserve_recog,B.id,B.name,B.petNo,B.petName,B.petType,
@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from(select m.id,m.name,m.email,m.tel,m.address,pet.petNo,pet.petName,pet.petType
 				 from PET_MEMBER m, PET pet
 				 where m.id=#{value} and m.id=pet.id) A, RESERVE R, PETSITTERBOARD pb
-			where A.id=R.id and R.petsitterboard_no=pb.petsitterboard_no) B, petsitter ps, PET_MEMBER pm
+			where A.id=R.id and R.petsitterboard_no=pb.petsitterboard_no order by R.reserve_no desc) B, petsitter ps, PET_MEMBER pm
 		where ps.petsitterNo=B.petsitterNo and pm.id=ps.id
 	</select>
 	<select id="showPetMasterReserveList" parameterType="string" resultMap="reserveMap">
@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				from PET_MEMBER m, petsitter ps, PET pet
 				where m.id=#{value} and ps.id=m.id and pet.id=m.id) A, petsitterboard pb
 			where A.petsitterNo=pb.petsitterNo) B, RESERVE r
-		where B.petsitterboard_no=r.petsitterboard_no
+		where B.petsitterboard_no=r.petsitterboard_no order by R.reserve_no desc
 	</select>
 	
 	<delete id="deleteReserve">

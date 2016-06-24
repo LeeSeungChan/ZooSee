@@ -115,14 +115,11 @@ public class PetsitterVO {
 
 	@Override
 	public String toString() {
-		return "PetsitterVO [petsitterNo=" + petsitterNo + ", petNumber="
-				+ petNumber + ", service=" + service + ", price=" + price
-				+ ", petSize=" + petSize + ", petType=" + petType
-				+ ", houseImg=" + houseImg + ", petsitterImg=" + petsitterImg
-				+ ", adminRecog=" + adminRecog + "]";
+		return "PetsitterVO [petsitterNo=" + petsitterNo + ", memberVO="
+				+ ", petNumber=" + petNumber + ", service="
+				+ service + ", price=" + price + ", petSize=" + petSize
+				+ ", petType=" + petType + ", houseImg=" + houseImg
+				+ ", petsitterImg=" + petsitterImg + ", adminRecog="
+				+ adminRecog + ", memberVO=" + memberVO + "]";
 	}
-	
-	
-	
-
 }

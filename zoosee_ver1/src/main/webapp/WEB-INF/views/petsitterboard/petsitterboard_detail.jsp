@@ -152,6 +152,7 @@
 					    reserve_price = interval*price*1.1;
 					    //alert(reserve_price + "토탈 가격");
 					    $("#reserveRegForm :input[name=reserve_price]").val(reserve_price);
+					    $(".days").text(interval + "박");
 					    $(".totalPrice").text(interval*price + "원");
 					    var totalPrice = new Number(interval*price);
 					    $(".tax").text(totalPrice*0.1 + "원");
@@ -240,11 +241,11 @@
             <br>
             <div class="SBremote_main2" >
                <div style="float: left; width: 50%;">
-                  <input type="text" placeholder="Start Date" class="datepicker"
+                  <input type="text" placeholder="Start Date" class="datepicker" readonly="readonly"
                     id="sdate" name="startDay" style="width: 95%; margin-right: 5%">
                </div>
                <div style="float: right; width: 50%;">
-                  <input type="text" placeholder="End Date" class="datepicker"
+                  <input type="text" placeholder="End Date" class="datepicker" readonly="readonly"
                   	id="edate" name="endDay" style="width: 95%; margin-left: 5%">
                </div>
             </div>
@@ -255,7 +256,7 @@
                <table class="table"
                   style="margin-top: 5%; border-bottom: 1px solid #DDDDDD;">
                   <tr>
-                     <td><label style="float: left;">합계</label></td>
+                     <td><label class="days" style="float: left;">0박</label></td>
                      <td><label class="totalPrice" style="float: right;">${petsitterVO.price}원</label></td>
                   </tr>
                   <tr>

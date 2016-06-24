@@ -60,7 +60,14 @@ public class PetCalendarServiceImpl implements PetCalendarService {
 	}
 	private void registerCalendar(int sday, int eday, String[] array, PetCalendarVO petCalendarVO) {
 		for(int i = sday; i <= eday; i++){
-			petCalendarVO.setPet_calDate(array[0] + "-" + array[1] + "-" + i);
+			String index = null;
+			if(i < 10){
+				index = "0" + i;
+			}else{
+				index = String.valueOf(i);
+			}
+			
+			petCalendarVO.setPet_calDate(array[0] + "-" + array[1] + "-" + index); 	
 			petCalendarDAO.registerCalendar(petCalendarVO);
 		}
 	}

@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select page, petsitterboard_no, petsitterboard_title,petsitterNo,price,petSize,petType,name,address,petsitterImg,houseImg
 	from
 	(
-		select ceil(rownum/9) as page,petsitterboard_no,petsitterboard_title,price,petSize,petType,petsitterNo,name,address,petsitterImg,houseImg
+		select ceil(rownum/6) as page,petsitterboard_no,petsitterboard_title,price,petSize,petType,petsitterNo,name,address,petsitterImg,houseImg
 		from
 		(
 			select pb.petsitterboard_no,pb.petsitterboard_title,a.price,a.petSize,a.petType,pb.petsitterNo,a.name,a.address,a.petsitterImg,a.houseImg

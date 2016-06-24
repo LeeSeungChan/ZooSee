@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 	$(document).ready(function() {
+		var flag = "${flag}";
+		if(flag == "true"){
+			alert("이미 등록한 회원입니다.");
+			location.href="home.do";
+		}
+		
 		// 공란체크하기
 		$("#petsitterboardregForm").submit(function(){
 			if($("#petsitterboardregForm :input:radio[name=service]:checked").length == 0){
@@ -85,17 +91,17 @@
 					<table class="SBtable">
 						<tr id="trFirst">
 							<th>Title</th>
-							<td colspan="3"><input class="SBform-text" type="text"
+							<td colspan="3"><input class="SBform-text" type="text" 
 								name="petsitterboard_title" placeholder="제목을 입력하세요." /></td>
 						</tr>
 						<tr>
 							<th style="vertical-align: middle; width: 10%">StartDay</th>
 							<td style="vertical-align: middle; width: 40%">
-								<input type="text" class="datepicker SBform-text" id="sdate" name="startDay" style="width:77%;">
+								<input type="text" class="datepicker SBform-text" id="sdate" name="startDay" readonly="readonly" style="width:77%;">
 							</td>
 							<th style="vertical-align: middle; width: 10%">EndDay</th>
 							<td style="vertical-align: middle; width: 40%">
-								<input type="text" class="datepicker SBform-text" id="edate" name="endDay" style="width:77%;"></td>
+								<input type="text" class="datepicker SBform-text" id="edate" name="endDay" readonly="readonly" style="width:77%;"></td>
 						</tr>
 						<tr>
 							<th style="vertical-align: middle;">Pet Type</th>
@@ -122,11 +128,11 @@
 								<table style="width: 100%;">
 									<tr>
 										<td style="width: 20%;"><input type="radio"
-											name="petSize" value="laarge" />소형</td>
+											name="petSize" value="small" />소형</td>
 										<td style="width: 10%;"><input type="radio"
 											name="petSize" value="middle" />중형</td>
 										<td style="width: 20%;"><input type="radio"
-											name="petSize" value="small" />대형</td>
+											name="petSize" value="large" />대형</td>
 									</tr>
 								</table>
 							</td>

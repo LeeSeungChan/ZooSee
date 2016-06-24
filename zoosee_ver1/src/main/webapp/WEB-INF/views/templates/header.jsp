@@ -60,7 +60,7 @@
 				<li><a href="${initParam.root}interceptor_tradeInfo_getTradeMyList.do">거래목록</a></li>
                
                <c:if test="${mvo.rank == 'petsitter' || mvo.rank== 'petmaster'}">
-               		<li><a href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}">글 등록</a></li>
+               		<li><a href="${initParam.root}interceptor_petsitterboard_registerform.do">글 등록</a></li>
                </c:if>
                <c:if test="${mvo.rank == 'normal' || mvo.rank== 'petmom'}">
                		<li><a href="${initParam.root}interceptor_petsitter_register.do">돌보미신청</a></li>
