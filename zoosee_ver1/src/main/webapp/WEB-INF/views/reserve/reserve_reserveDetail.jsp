@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
 	alert("예약이 완료되었습니다.");
-	location.replace("reserve_reserveMyList.do?petMasterSignal=1");
+	location.replace("interceptor_reserve_reserveMyList.do?petMasterSignal=1");
 </script>
 
     <table border="1">

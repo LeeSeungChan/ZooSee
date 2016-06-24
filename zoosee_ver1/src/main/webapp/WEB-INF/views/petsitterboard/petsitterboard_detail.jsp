@@ -152,8 +152,10 @@
 					    reserve_price = interval*price*1.1;
 					    //alert(reserve_price + "토탈 가격");
 					    $("#reserveRegForm :input[name=reserve_price]").val(reserve_price);
-					    $(".tax").text(reserve_price*0.1 + "원");
-					    $(".totalPrice").text(reserve_price + "원");
+					    $(".totalPrice").text(interval*price + "원");
+					    var totalPrice = new Number(interval*price);
+					    $(".tax").text(totalPrice*0.1 + "원");
+					    $(".totalPricePlusTax").text(reserve_price + "원");
 					}
 				}
 			});
@@ -172,6 +174,14 @@
 				var rank = "${sessionScope.mvo.rank}";
 				var id = "${sessionScope.mvo.id}";
 				var boardId = "${petsitterboardVO.petsitterVO.memberVO.id}";
+				
+				if($("#sdate").val() == ""){
+					alert("시작일을 선택해 주세요.");
+					return false;
+				}else if($("#edate").val() == ""){
+					alert("종료일을 선택해 주세요.");
+					return false;
+				}
 
 				if(confirm("예약 요청하시겠습니까?")){
 					if(id == boardId){
@@ -187,6 +197,8 @@
 						location.href="${initParam.root}pet_register.do";
 						return false;
 					}
+				}else{
+					return false;
 				}
 			});
 	    });
@@ -243,8 +255,8 @@
                <table class="table"
                   style="margin-top: 5%; border-bottom: 1px solid #DDDDDD;">
                   <tr>
-                     <td><label style="float: left;">1박</label></td>
-                     <td><label style="float: right;">${petsitterVO.price}원</label></td>
+                     <td><label style="float: left;">합계</label></td>
+                     <td><label class="totalPrice" style="float: right;">${petsitterVO.price}원</label></td>
                   </tr>
                   <tr>
                      <td><label style="float: left;">부가세</label></td>
@@ -253,7 +265,7 @@
                   <tr>
                      <td><label style="float: left;">총합계</label></td>
                      <td>
-                     	<label class="totalPrice" style="float: right;">원</label>
+                     	<label class="totalPricePlusTax" style="float: right;">원</label>
                      </td>
                   </tr>
                </table>
@@ -296,9 +308,9 @@
          </div>
          <div class="SBmainDivImg2" style="border-top: 1px solid #AFAFAF;">
             <div class="SBtextDiv3">
-            <div class="SBtextDiv3_tiltle"> ${memberVO.name}돌보미소개</div>
+            <div class="SBtextDiv3_tiltle">${memberVO.name}돌보미소개</div>
             <br>
-            <div class="SBtextDiv3_content">${memberVO.existence}</div>
+            <div class="SBtextDiv3_content">${petsitterboardVO.petsitterVO.memberVO.existence}</div>
             </div>
          </div>
          <div class="SBmainDivImg2" style="border-top: 1px solid #AFAFAF;">

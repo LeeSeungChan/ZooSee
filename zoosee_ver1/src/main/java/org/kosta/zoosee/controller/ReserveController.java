@@ -73,7 +73,7 @@ public class ReserveController {
 	public ModelAndView showMyReserveList(HttpServletRequest request){
 		String petMasterSignal = request.getParameter("petMasterSignal");
 		//System.out.println(petMasterSignal);
-		if(petMasterSignal == null){
+		if(petMasterSignal == null || petMasterSignal == ""){
 			petMasterSignal = "";
 		}
 		
@@ -161,7 +161,7 @@ public class ReserveController {
 		// reservce_reocg를 1로 올려준다.
 		reserveService.updateReserveRecog(reserve_no);
 		
-		return new ModelAndView("redirect:reserve_reserveMyList.do?id="+sessionId);
+		return new ModelAndView("redirect:interceptor_reserve_reserveMyList.do?id="+sessionId);
 	}
 	// 펫시터가 승낙까지 했고 펫맘이 거래하기 누르는
 	// 펫마스터가 거래하기를 누르면 거래목록이 안나옴.
@@ -189,7 +189,7 @@ public class ReserveController {
 	// 위에서 redirect로 오는 것을 받는
 	@RequestMapping("interceptor_tradeInfo_subgetTradeMyList.do")
 	public ModelAndView subgetTradeMyList(){	
-		return new ModelAndView("redirect:tradeInfo_getTradeMyList.do");
+		return new ModelAndView("redirect:interceptor_tradeInfo_getTradeMyList.do");
 	}
 	
 	// 펫시터가 예약 거절 or 펫맘이 거래 취소
