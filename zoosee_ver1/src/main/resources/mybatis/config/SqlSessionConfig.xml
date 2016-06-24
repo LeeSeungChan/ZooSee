@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="org.kosta.zoosee.model.vo.ReserveVO" alias="reserveVO"/>
 		<typeAlias type="org.kosta.zoosee.model.vo.PetCalendarVO" alias="petCalendarVO"/>
 		<typeAlias type="org.kosta.zoosee.model.vo.TradeInfoVO" alias="tradeInfoVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.ReviewVO" alias="reviewVO"/>
 		<!-- <typeAlias type="org.kosta.zoosee.model.vo"/> -->
 	</typeAliases>	
 	<!-- mapper.xml 을 명시한다  -->
@@ -35,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/config/reserve.xml"/>
 		<mapper resource="mybatis/config/petCalendar.xml"/>
 		<mapper resource="mybatis/config/tradeInfo.xml"/>
+		<mapper resource="mybatis/config/review.xml"/>
 	</mappers>
 </configuration>
 

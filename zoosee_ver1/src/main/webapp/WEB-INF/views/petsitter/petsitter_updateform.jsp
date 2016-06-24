@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="${initParam.root}resources/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-	 	
+		$('input:radio[name="petType"]:input[value="${petsitterVO.petType}"]').attr("checked", true);
+		$('input:radio[name="petSize"]:input[value="${petsitterVO.petSize}"]').attr("checked", true);
+		$('input:radio[name="petNumber"]:input[value="${petsitterVO.petNumber}"]').attr("checked", true);
+		$('input:radio[name="service"]:input[value="${petsitterVO.service }"]').attr("checked", true);
+		
 	       $("#updateForm").submit(function(){
 	    	    var price = $("#price").val();
 				var petNumber = $("input[name=petNumber].checked").val();
@@ -12,6 +17,9 @@
 				var house_img = $("#house_img").val();
 				var petsitter_img = $("#petsitter_img").val();
 				var checkedAll = $("input[name=checkedAll]:checked").val();
+				
+				
+				
 				
 				 if(price==""){
 						alert("가격을 입력해주세요!");
@@ -28,12 +36,6 @@
 					}else if(petSize==undefined){
 						alet("팻 사이즈를 선택해주세요!");
 						return false;
-					}else if(house_img==""){
-						alert("집 사진을 등록해주세요!");
-						return false;
-					}else if(petsitter_img==""){
-						alert("본인 사진을 등록해주세요!");
-						return false;
 					}else if(checkedAll==undefined){
 						alert("필수사항에 체크해주세요!");
 						return false;
@@ -45,6 +47,28 @@
 					}
 	       });//submit
 	});//ready
+	
+	
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function (e) {
+                $('#UploadedImg').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+           }
+        }
+    
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function (e) {
+                $('#UploadedImg2').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+           }
+        }
+	
 
 </script>
 
@@ -100,7 +124,7 @@ method="post" enctype="multipart/form-data" id="updateForm">
   <label class="control-label">*원하시는 가격(1박)</label>
   <div class="input-group">
     <span class="input-group-addon">$</span>
-    <input type="text" class="form-control" style="height: 60%" name="price" id="price">
+    <input type="text" class="form-control" style="height: 60%" name="price" id="price" value="${petsitterVO.price }">
   </div>
 </div>
 
@@ -148,6 +172,8 @@ method="post" enctype="multipart/form-data" id="updateForm">
 *공지사항 확인하셨나요? <br>
 <input type="radio" name="checkedAll" >네 확인했습니다! <br><br>
 <input type="hidden" name="petsitterNo" value="${petsitterVO.petsitterNo}">
+<input type="hidden" name="orgHouseImg" value="${petsitterVO.houseImg}">
+<input type="hidden" name="orgPetsitterImg" value="${petsitterVO.petsitterImg}">
 <input type="submit" class="active btn btn-block btn-default" value="수정하기">
 <br><br>
 </form>    

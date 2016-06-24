@@ -12,6 +12,8 @@ public class PetsitterVO {
 	private String houseImg;
 	private String petsitterImg;
 	private String adminRecog;
+	private String orgHouseImg;
+	private String orgPetsitterImg;
 	
 	public PetsitterVO() {
 		super();
@@ -19,7 +21,8 @@ public class PetsitterVO {
 
 	public PetsitterVO(int petsitterNo, MemberVO memberVO, int petNumber,
 			String service, int price, String petSize, String petType,
-			String houseImg, String petsitterImg, String adminRecog) {
+			String houseImg, String petsitterImg, String adminRecog,
+			String orgHouseImg, String orgPetsitterImg) {
 		super();
 		this.petsitterNo = petsitterNo;
 		this.memberVO = memberVO;
@@ -31,6 +34,8 @@ public class PetsitterVO {
 		this.houseImg = houseImg;
 		this.petsitterImg = petsitterImg;
 		this.adminRecog = adminRecog;
+		this.orgHouseImg = orgHouseImg;
+		this.orgPetsitterImg = orgPetsitterImg;
 	}
 
 	public int getPetsitterNo() {
@@ -113,13 +118,36 @@ public class PetsitterVO {
 		this.adminRecog = adminRecog;
 	}
 
+	public String getOrgHouseImg() {
+		return orgHouseImg;
+	}
+
+	public void setOrgHouseImg(String orgHouseImg) {
+		this.orgHouseImg = orgHouseImg;
+	}
+
+	public String getOrgPetsitterImg() {
+		return orgPetsitterImg;
+	}
+
+	public void setOrgPetsitterImg(String orgPetsitterImg) {
+		this.orgPetsitterImg = orgPetsitterImg;
+	}
+
 	@Override
 	public String toString() {
 		return "PetsitterVO [petsitterNo=" + petsitterNo + ", memberVO="
-				+ ", petNumber=" + petNumber + ", service="
+				+ memberVO + ", petNumber=" + petNumber + ", service="
 				+ service + ", price=" + price + ", petSize=" + petSize
 				+ ", petType=" + petType + ", houseImg=" + houseImg
 				+ ", petsitterImg=" + petsitterImg + ", adminRecog="
-				+ adminRecog + ", memberVO=" + memberVO + "]";
+				+ adminRecog + ", orgHouseImg=" + orgHouseImg
+				+ ", orgPetsitterImg=" + orgPetsitterImg + "]";
 	}
+	
+	
+
+	
+	
+
 }

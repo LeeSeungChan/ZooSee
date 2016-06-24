@@ -3,8 +3,8 @@
 <script type="text/javascript">
  	$(document).ready(function(){
  	      var rank="${sessionScope.mvo.rank}";
- 	       if(rank=="petsitter"){
- 	          alert("이미 승인된 회원입니다!");
+ 	       if(rank=!"normal"){
+ 	          alert("이미 등록된 회원입니다!");
  	          $(location).attr('href',"home.do");
  	       }
  		

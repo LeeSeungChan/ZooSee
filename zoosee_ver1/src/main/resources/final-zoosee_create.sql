@@ -188,3 +188,18 @@ create table message(
    id varchar2(100) not null,			--메세지 작성 id
    constraint fk_pet3_id foreign key(id) references pet_member(id) on delete cascade
 )
+
+--------------------------------리뷰-------------------------------------------
+create sequence review_seq nocache;
+
+create table review(
+   review_no number primary key,		--리뷰 NO
+   content clob not null,					--리뷰 내용
+   time_posted date not null,			--리뷰 작성시간
+   star_rate number default 0,						--별점 
+   id varchar2(100) not null,			--리뷰 작성 id
+   ref_id varchar2(100) not null,		--작성대상자의 id
+   constraint fk_pet5_id foreign key(id) references pet_member(id) on delete cascade,
+   constraint fk_pet6_id foreign key(ref_id) references pet_member(id) on delete cascade
+)
+

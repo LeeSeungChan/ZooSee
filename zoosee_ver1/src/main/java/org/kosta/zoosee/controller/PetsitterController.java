@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.zoosee.model.member.MemberService;
 import org.kosta.zoosee.model.petsitter.ListVO;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.vo.FileVO;
@@ -26,6 +27,8 @@ public class PetsitterController {
 	
 	@Resource
 	private PetsitterService petsitterService;
+	@Resource
+	private MemberService memberService;
 	
 	@Resource(name="petsitterUploadPath")
 	private String uploadPath;
@@ -163,4 +166,18 @@ public class PetsitterController {
 		    petsitterService.update(petsitterVO);
 			return new ModelAndView("redirect:home.do");
 		}
+		
+		//팻시터 정보페이지
+		@RequestMapping("petsitter_detail.do")
+		public ModelAndView petsitterDetailPage(int petsitterNo){
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("petsitter_detail");
+			PetsitterVO pvo=petsitterService.getPetsitterVO(petsitterNo);
+			MemberVO mvo = memberService.getMemberVO(pvo.getMemberVO().getId());
+			pvo.setMemberVO(mvo);
+			mv.addObject("petsitterVO", pvo);
+			System.out.println(pvo.toString());
+			return mv;
+		}
+		
 }

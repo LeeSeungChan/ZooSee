@@ -231,10 +231,14 @@
          <div class="SBremote">
             <div class="SBremote_main">
                <div class="SBremote_Img_form">
+               <a href="petsitter_detail.do?petsitterNo=${petsitterVO.petsitterNo}">
                   <img src="${initParam.root}${petsitterVO.petsitterImg}" class="SBImg">
+                </a>
                </div>
                <div class="SBremote_name">
+               	  <a href="petsitter_detail.do?petsitterNo=${petsitterVO.petsitterNo}">
                   <h4 style="font-weight: bold; color: gray;">${memberVO.name}</h4>
+                  </a>
                   <h6 style="font-size: 11px;">${memberVO.address}</h6>
                </div>
             </div>
