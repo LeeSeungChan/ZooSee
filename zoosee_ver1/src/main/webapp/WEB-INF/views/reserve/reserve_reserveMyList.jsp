@@ -5,11 +5,19 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-
-			<c:if test="${sessionScope.mvo.rank == 'petmaster'}"> 예약 받은 목록 | 
-			<a class="BJA"
-					href="${initParam.root}reserve_reserveMyList.do?petMasterSignal=1">예약
-					신청 목록</a>
+			<c:if test="${sessionScope.mvo.rank == 'petmaster'}">
+				<a class="BJA" href="interceptor_reserve_reserveMyList.do?petMasterSignal=0">
+				예약받은 목록</a>
+				<a class="BJA" href="${initParam.root}interceptor_reserve_reserveMyList.do?petMasterSignal=1">
+				예약신청 목록 </a>
+			</c:if>
+			<c:if test="${sessionScope.mvo.rank == 'petmom'|| sessionScope.mvo.rank == 'prepetmaster'}">
+				<a class="BJA" href="${initParam.root}interceptor_reserve_reserveMyList.do?petMasterSignal=1">
+				예약신청 목록 </a>
+			</c:if>
+			<c:if test="${sessionScope.mvo.rank == 'petsitter'}">
+				<a class="BJA" href="interceptor_reserve_reserveMyList.do?petMasterSignal=0">
+				예약받은 목록</a>
 			</c:if>
 			<%-- 	<a class="BJA"
 				href="${initParam.root}interceptor_member_memberlist.do?rank=normal">예약받은
@@ -27,20 +35,19 @@
 			</div>
 			<div class="panel-body">예약에 관련된 목록을 제공하는 공간입니다.</div>
 		</div>
-		<div class="well well-sm">${mvo.name }님의예약을 받은 목록입니다.</div>
+		<div class="well well-sm">${mvo.name }님의 예약 받은 목록입니다.</div>
 	</div>
 	<div class="BJMain2Div" align="center">
-
 		<form id="petsitterlistForm">
 			<div class="BJWriteTableLine">
 				<div class="SBHrAllLine_1">
 					<table class="table table-striped table-hover"
 						id="petsitterlistTable">
 						<tr>
-							<td style="width: 10%">예약번호</td>
-							<td style="width: 10%">신청자</td>
-							<td style="width: 10%">이름</td>
-							<td style="width: 10%">상태</td>
+							<th style="width: 10%">예약번호</td>
+							<th style="width: 10%">신청자</td>
+							<th style="width: 10%">이름</td>
+							<th style="width: 10%">상태</td>
 						</tr>
 						<c:forEach items="${requestScope.reserveList}" var="reserveVO">
 							<c:choose>

@@ -2,24 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 더블헤더 -->
-<div class="BJHeaderLayout0">
+<%-- <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA" href="${initParam.root}interceptor_pet_list.do">더블헤더미적용1</a>
-			<a class="BJA" href="${initParam.root}interceptor_pet_register.do">더블헤더
-				미적용2</a>
+			<a class="BJA" href="${initParam.root}interceptor_pet_register.do">더블헤더미적용2</a>
 		</div>
 	</div>
-</div>
+</div> --%>
 <div class="BJMainDiv" style="margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">거래내역 목록</h3>
 			</div>
-			<div class="panel-body">님이 거래하신 내역을 보여 드리기 위한 공간입니다.</div>
+			<div class="panel-body">${mvo.name}님이 거래하신 내역을 보여 드리기 위한 공간입니다.</div>
 		</div>
-		<div class="well well-sm">님의 거래내역 목록</div>
+		<div class="well well-sm">${mvo.name}님의 거래내역 목록</div>
 	</div>
 	<div class="BJMain2Div" align="center">
 		<div class="BJWriteTableLine">

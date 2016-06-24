@@ -6,8 +6,18 @@
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<c:if test="${sessionScope.mvo.rank == 'petmaster'}">
-				<a class="BJA" href="reserve_reserveMyList.do?petMasterSignal=0">예약
-					받은 목록</a> | 예약 신청 목록 
+				<a class="BJA" href="interceptor_reserve_reserveMyList.do?petMasterSignal=0">
+				예약받은 목록</a>
+				<a class="BJA" href="${initParam.root}interceptor_reserve_reserveMyList.do?petMasterSignal=1">
+				예약신청 목록 </a>
+			</c:if>
+			<c:if test="${sessionScope.mvo.rank == 'petmom'|| sessionScope.mvo.rank == 'prepetmaster'}">
+				<a class="BJA" href="${initParam.root}interceptor_reserve_reserveMyList.do?petMasterSignal=1">
+				예약신청 목록 </a>
+			</c:if>
+			<c:if test="${sessionScope.mvo.rank == 'petsitter'}">
+				<a class="BJA" href="interceptor_reserve_reserveMyList.do?petMasterSignal=0">
+				예약받은 목록</a>
 			</c:if>
 		</div>
 	</div>
@@ -20,7 +30,7 @@
 			</div>
 			<div class="panel-body">예약에 관련된 목록을 제공하는 공간입니다.</div>
 		</div>
-		<div class="well well-sm">${mvo.name }님의예약을받은목록입니다.</div>
+		<div class="well well-sm">${mvo.name }님의 예약 신청 목록입니다.</div>
 	</div>
 	<div class="BJMain2Div" align="center">
 		<form id="petsitterlistForm">
@@ -56,7 +66,6 @@
 										</c:choose>
 									</tr>
 								</c:if>
-
 							</c:forEach>
 						</tbody>
 					</table>
