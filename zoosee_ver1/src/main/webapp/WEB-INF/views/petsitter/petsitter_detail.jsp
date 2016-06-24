@@ -68,6 +68,8 @@ $( ".star_rating a" ).click(function() {
 
 돌보미이름 :&nbsp;${petsitterVO.memberVO.name }<br>
 <img src="${initParam.root}resources/image/location.png">  주소 어쩌고저쩌고(입력) <br>
+${petsitterVO.memberVO.existence }<br>
+제공가능한 서비스:&nbsp;${petsitterVO.service }<br>
 E-MAIL : 거래승인시 관람하실 수 있습니다.<br>
 TEL : 거래승인시 관랍하실 수 있습니다.<hr>
 
