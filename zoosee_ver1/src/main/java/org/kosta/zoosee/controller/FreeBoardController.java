@@ -77,8 +77,8 @@ public class FreeBoardController {
 	public ModelAndView updateFreeBoard(FreeBoardVO freeBoardVO) {
 		System.out.println(freeBoardVO);
 		freeBoardService.updateFreeBoard(freeBoardVO);
+		return new ModelAndView("redirect:interceptor_freeBoard_showFreeBoardContentNoHit.do?freeBoardNo="+freeBoardVO.getFreeBoardNo());
 		
-		return new ModelAndView("freeBoard_showcontent","freeBoardVO",freeBoardService.showFreeBoardContentNoHit(freeBoardVO.getFreeBoardNo()));
 	}
 	
 	//게시물 view
@@ -91,21 +91,21 @@ public class FreeBoardController {
 	@RequestMapping("interceptor_freeBoard_writeReply.do")
 	public ModelAndView writeReply(FreeBoardReplyVO freeBoardReplyVO){
 		freeBoardService.writeReply(freeBoardReplyVO);
-		return new ModelAndView("redirect:interceptor_freeBoard_showFreeBoardContent.do?freeBoardNo="+freeBoardReplyVO.getRef());
+		return new ModelAndView("redirect:interceptor_freeBoard_showFreeBoardContentNoHit.do?freeBoardNo="+freeBoardReplyVO.getRef());
 	}
 	
 	//대댓글 write
 	@RequestMapping("interceptor_freeBoard_writeReply2.do")
 	public ModelAndView writeReply2(FreeBoardReplyVO freeBoardReplyVO){
 		freeBoardService.writeReply2(freeBoardReplyVO);
-		return new ModelAndView("redirect:interceptor_freeBoard_showFreeBoardContent.do?freeBoardNo="+freeBoardReplyVO.getRef());
+		return new ModelAndView("redirect:interceptor_freeBoard_showFreeBoardContentNoHit.do?freeBoardNo="+freeBoardReplyVO.getRef());
 	}
 	
 	//댓글 delete
 	@RequestMapping("interceptor_freeBoard_deleteReply.do")
 	public ModelAndView deleteReply(FreeBoardReplyVO freeBoardReplyVO){
 		freeBoardService.deleteReply(freeBoardReplyVO);
-		return new ModelAndView("redirect:interceptor_freeBoard_showFreeBoardContent.do?freeBoardNo="+freeBoardReplyVO.getRef());
+		return new ModelAndView("redirect:interceptor_freeBoard_showFreeBoardContentNoHit.do?freeBoardNo="+freeBoardReplyVO.getRef());
 	}
 
 }

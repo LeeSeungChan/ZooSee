@@ -10,6 +10,7 @@
 		</div>
 	</div>
 </div> --%>
+<div class="BJMainKING" style="margin-top: 5%;">
 <div class="BJMainDiv" style="margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">
@@ -85,6 +86,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <%-- 
 <table border="1">

@@ -69,18 +69,23 @@
 		<td>내용</td>
 		<td  align="center" colspan="2"><textarea   style="resize:none;" name="freeBoardContents" id="inputLarge" class="BJform-controlBig input-lg" rows="10" ></textarea> </td>
 	</tr>
-	<tr>
+	<!-- <tr>
 		<td></td>
 		<td 	style="margin-left:40%; " colspan="2">
 		
-			<!-- <input class="BJbtn btn-default" type="button" value="목록" id="cancelBtn"> -->
+			<input class="BJbtn btn-default" type="button" value="목록" id="cancelBtn">
 			<input class="BJbtn btn-default" type="submit" value="등록" >
 		</td>
 		
-	</tr>
+	</tr> -->
 </table>
 </div>
 </div>
+<div class="SBbtn_1">
+<input class="active SBbtn btn-default" type="submit" value="등록" >
+				
+			</div>
+
 </div>
 </div>
 </form>

@@ -3,6 +3,35 @@
 	text-align: center;
 }
 
+.BJMainKING{
+	width: 100%;
+	margin-top: 3.1%;
+}
+.BJWriteTableLine2{
+	border: 1px solid #c0c0c0;
+	border-radius: 10px;
+	
+
+}
+.BJBoardSearchLayout{
+	width:45%;
+	float: left;
+
+	
+}
+.BJBoardSearchLayoutRight{
+	width:45%;
+	float: right;
+	
+}
+.BJPetsitterListLayoutIN1{
+
+	margin-bottom: 2%;
+}
+.BJBoardSearchLayout2{
+	margin: auto;
+	height:100px;
+}
 .BJFreeBoardListWriteBtnDiv{
 
 	margin-top: 1%;
@@ -15,7 +44,7 @@
 	height: 50px;
 	margin-bottom:2%;
  	background-color: #f4f4f4;
-
+	margin-top: 3.1%;
 }
 
 .BJA{

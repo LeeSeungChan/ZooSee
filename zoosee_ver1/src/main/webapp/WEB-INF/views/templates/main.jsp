@@ -27,7 +27,7 @@
         });
     });
 </script>
-
+<div class="BJMainKING">
  <div class="BJMainDivCenter"  >
     
     <div class="BJMainText"  align="center" >
@@ -81,3 +81,4 @@
    </div>
    
 </div>
+</div>	

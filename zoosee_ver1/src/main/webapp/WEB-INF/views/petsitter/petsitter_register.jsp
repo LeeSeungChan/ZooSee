@@ -77,6 +77,7 @@
 
 </script>
 
+<div class="BJMainKING">
 <br><br>
 <h3 align="center">ZOOSEE 돌보미 신청서</h3><br><br>
  
@@ -173,4 +174,5 @@ ZOOSEE 는 그 어떤 스킬이나 역량보다 "동물에 대한 진심과 사�
 </form>
 
 
+</div>
 </div>

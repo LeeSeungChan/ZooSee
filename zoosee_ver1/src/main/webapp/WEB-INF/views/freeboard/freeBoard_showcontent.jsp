@@ -86,8 +86,8 @@
 <div class="BJDeleteAndUpdateBtn"  >
 	<c:if  test="${sessionScope.mvo.id==requestScope.freeBoardVO.memberVO.id }">
 			
-			<input type="button" name="delete" value="삭제" >
-			<input type="button" name="update" value="수정" >
+			<input class="BJbtn2" type="button" name="delete" value="삭제" >
+			<input class="BJbtn2" type="button" name="update" value="수정" >
 
 		</c:if>
 </div>

@@ -72,15 +72,16 @@
 
 	});
 </script>
+<div class="BJMainKING" style="margin-top: 5%;">
 <div class="BJMainDiv" style="margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">돌보미 게시판</h3>
+				<h3 class="panel-title">펫시터 게시판</h3>
 			</div>
 			<div class="panel-body">소중한 반려동물의 임시보호를 목적으로하는 게시판입니다.</div>
 		</div>
-		<div class="well well-sm">돌보미 게시물 등록</div>
+		<div class="well well-sm">펫시터 게시물 등록</div>
 	</div>
 	<div class="BJMain2Div">
 		<form method="post" action="interceptor_petsitterboardRegister.do"
@@ -172,4 +173,4 @@
 		</form>
 	</div>
 </div>
-
+</div>

@@ -205,7 +205,7 @@
 	    });
 	</script>
 
-
+<div class="BJMainKING">
 <div class="BJMainDiv" style="margin-bottom: 10%;">
    <div class="BJPanel" style="width: 80%; margin-left: 10%;">
       <div class="panel panel-primary">
@@ -329,4 +329,5 @@
          </div>
       </div>
    </div>
+</div>
 </div>

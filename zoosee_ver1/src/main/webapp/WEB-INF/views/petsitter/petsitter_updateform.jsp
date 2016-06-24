@@ -71,7 +71,7 @@
 	
 
 </script>
-
+<div class="BJMainKING">
 <form name="updateForm" action="interceptor_petsitter_update.do" style="text-align: center;"
 method="post" enctype="multipart/form-data" id="updateForm">
 
