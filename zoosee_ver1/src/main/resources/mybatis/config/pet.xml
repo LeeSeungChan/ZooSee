@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pet">
+
+	<insert id="registerPet" parameterType="petVO">
+		<selectKey keyProperty="petNo" resultType="int" order="BEFORE">
+			select petNo_seq.nextval from dual
+		</selectKey>
+		insert into pet(petNo,petName,petAge,petType,petGender,petNeutral,petImg,petSize,etc,id)
+		values(#{petNo},#{petName},#{petAge},#{petType},#{petGender},#{petNeutral},#{petImg},#{petSize},#{etc},#{memberVO.id})
+	</insert>
+	
+	<select id="detail" resultType="petVO">
+		select petNo,petName,petAge,petType,petGender,petNeutral,petImg,petSize,etc,id from pet
+		where petNo=#{value}
+	</select>
+	
+	<select id="getList" resultType="petVO">
+		select petNo,petName,petAge,petType,petGender,petNeutral,petImg,petSize,etc,id from pet 
+		where id=#{value}
+	</select>
+	
+	<update id="update" parameterType="petVO">
+		update pet set petName=#{petName},petAge=#{petAge},petType=#{petType},petGender=#{petGender},petNeutral=#{petNeutral},petImg=#{petImg},petSize=#{petSize},etc=#{etc}
+		where petNo=#{petNo}
+	</update>
+	
+	<update id="updatePetNoImg" parameterType="petVO">
+		update pet set petName=#{petName},petAge=#{petAge},petType=#{petType},petGender=#{petGender},petNeutral=#{petNeutral},petSize=#{petSize},etc=#{etc}
+		where petNo=#{petNo}
+	</update>
+	
+	<delete id="delete">
+		delete from pet where petNo=#{value}
+	</delete>
+	
+	<select id="getPetVO" parameterType="string" resultType="petVO">
+		select petNo,petName,petAge,petType,petGender,petNeutral,petImg,petSize,etc from PET
+		where id=#{value}
+	</select>
+	<!-- <resultMap type="petVO" id="petRM">
+		<result property="memberVO.id" column="id" />	
+	</resultMap> -->
+	
+	<resultMap type="petVO" id="petMap">
+		<result column="id" property="memberVO.id"/>
+		<result column="name" property="memberVO.name"/>
+		<result column="address" property="memberVO.address"/>
+		<result column="email" property="memberVO.email"/>
+		<result column="gender" property="memberVO.gender"/>
+		<result column="job" property="memberVO.job"/>
+		<result column="tel" property="memberVO.tel"/>
+		<result column="existence" property="memberVO.existence"/>
+	</resultMap>
+	<select id="detailPetAndMemberInfo" resultMap="petMap">
+		select pet.petNo,pet.petName,pet.petAge,pet.petType,pet.petGender,pet.petNeutral,pet.petImg,pet.petSize,pet.etc,
+		   m.id,m.name,m.address,m.gender,m.email,m.tel,m.job,m.existence
+		from PET pet, pet_member m where m.id=#{value} and pet.id=m.id
+	</select>
+	
+</mapper>	

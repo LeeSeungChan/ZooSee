@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	
+	<insert id="registerMember" parameterType="memberVO">
+		insert into Pet_MEMBER(id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence)
+		values(#{id},#{name},#{addressCode},#{address},#{detailAddress},#{gender},#{email},#{password},#{tel},#{job},#{rank},#{existence})
+	</insert>
+	
+	<select id="loginMember" resultType="memberVO" parameterType="memberVO">
+		select id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence from Pet_MEMBER
+		where id=#{id} and password=#{password}
+	</select>
+	
+	<select id="memberIdCheck" resultType="int">
+		select count(*) from pet_member where id=#{value}
+	</select>
+	
+	<update id="updateMember" parameterType="memberVO">
+		update Pet_MEMBER set name=#{name},password=#{password},addresscode=#{addressCode},detailaddress=#{detailAddress},address=#{address},email=#{email},tel=#{tel},job=#{job},existence=#{existence}
+		where id=#{id}
+	</update>
+	
+	<select id="memberList" resultType="memberVO" parameterType="string">
+		select id,name ,addresscode,address,detailaddress, gender, email, tel, job, rank, existence
+		from pet_member
+		where rank=#{value}
+	</select>
+	
+	<select id="memberListCount" resultType="int">
+		select count(*) from pet_member where rank=#{value}
+	</select>
+	
+	<select id="getMemberVO" resultType="memberVO" >
+		select id,name ,addresscode,address,detailaddress, gender, email, tel, job, rank, existence
+		from pet_member
+		where id=#{value}
+	</select>
+	
+	<delete id="deleteMember">
+		delete pet_member where id=#{id}
+	</delete>
+	<select id="findRank" resultType="string">
+		select rank from pet_member where id=#{id}
+	</select>
+	
+	<update id="upgradeRank">
+		update pet_member set rank=#{rank} where id=#{id}
+	</update>
+	
+	<!-- 이승찬 추가 - 혹시 몰라서 백업용 -->
+	<!-- <update id="registerPet">
+		update pet_member set rank='petmom' where id=#{id}
+	</update>
+	<update id="registerPetMaster">
+		update pet_member set rank='petmaster' where id=#{id}
+	</update> -->
+	
+</mapper>

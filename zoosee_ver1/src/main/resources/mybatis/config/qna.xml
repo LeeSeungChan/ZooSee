@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+	<resultMap type="qnaboardVO" id="qnaboardRM">
+		<result column="qnaboard_no" property="boardNo"/>
+		<result column="qnaboard_title" property="title"/>
+		<result column="qnaboard_question" property="question"/>
+		<result column="qnaboard_answer" property="answer"/>
+		<result column="id" property="memberVO.id"/>
+		<result column="name" property="memberVO.name"/>
+		<result column="time_posted" property="timePosted"/>
+		<result column="time_answered" property="timeAnswered"/>
+	</resultMap>
+	
+	<insert id="registerQuestion" parameterType="qnaboardVO">
+		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+			select qnaboard_seq.nextval from dual
+		</selectKey>
+		insert into QNABOARD(qnaboard_no,qnaboard_title,qnaboard_question,id,time_posted)
+		values(#{boardNo},#{title},#{question},#{memberVO.id},sysdate)
+	</insert>
+	
+	<select id="getTotalQnaCountById" resultType="int">
+		select count(*) from QNABOARD where id=#{value}
+	</select>
+	<select id="findByIdQNA" resultMap="qnaboardRM" parameterType="hashmap">
+	 	select qnaboard_no,qnaboard_title,qnaboard_answer,time_posted
+	 	from(
+	 		select ceil(rownum/10) as page,qnaboard_no,qnaboard_title,qnaboard_answer,time_posted
+	 		from(
+				select qnaboard_no,qnaboard_title,qnaboard_answer,time_posted
+				from QNABOARD where id=#{id} order by qnaboard_no desc
+			)
+	 	)
+	 	where page=#{pageNo}
+	</select>
+	
+	<select id="getContent" resultMap="qnaboardRM">
+		select m.id,m.name,q.qnaboard_no,q.qnaboard_title,q.qnaboard_answer,q.qnaboard_question,q.time_posted,q.time_answered
+		from QNABOARD q,pet_member m where qnaboard_no=#{value} and q.id=m.id
+	</select>
+	
+	<update id="updateQNA" parameterType="qnaboardVO">
+		update QNABOARD set qnaboard_title=#{title},qnaboard_question=#{question},time_posted=sysdate
+		where qnaboard_no=#{boardNo}
+	</update>
+	
+	<delete id="deleteQNA">
+		delete QNABOARD where qnaboard_no=#{value}
+	</delete>
+	
+	<select id="getAllQuestionCount" resultType="int">
+		select count(*) from QNABOARD 
+	</select>
+	
+	<select id="getQuestionList" resultMap="qnaboardRM">
+		select qnaboard_no,qnaboard_title,qnaboard_answer,id,name,time_posted
+		from(
+			select ceil(rownum/10) as page,qnaboard_no,qnaboard_title,qnaboard_answer,id,name,time_posted
+			from(
+				select q.qnaboard_no,q.qnaboard_title,q.qnaboard_answer,m.id,m.name,q.time_posted
+				from QNABOARD q,pet_member m where q.id=m.id order by q.qnaboard_no desc
+			)
+		)where page=#{value}
+	</select>
+	
+	<update id="updateAnswer" parameterType="qnaboardVO">
+		update QNABOARD set qnaboard_answer=#{answer},time_answered=sysdate where qnaboard_no=#{boardNo}
+	</update>
+	
+	<select id="getnonAnswerQuestionCount"  resultType="int">
+		select count(*) from QNABOARD where qnaboard_answer is NULL
+	</select>
+	
+	<select id="nonAnswerList" resultMap="qnaboardRM">
+		select qnaboard_no,qnaboard_title,qnaboard_answer,id,name,time_posted
+		from(
+			select ceil(rownum/10) as page,qnaboard_no,qnaboard_title,qnaboard_answer,id,name,time_posted
+			from(
+				select q.qnaboard_no,q.qnaboard_title,q.qnaboard_answer,m.id,m.name,q.time_posted
+				from QNABOARD q,pet_member m where q.id=m.id and q.qnaboard_answer is NULL order by q.qnaboard_no desc
+			)
+		)where page=#{value}
+	</select>
+	
+	<select id="findByIdQnaList" resultMap="qnaboardRM" parameterType="hashmap" >
+		select qnaboard_no,qnaboard_title,qnaboard_answer,id,name,time_posted 
+		from(
+			select ceil(rownum/10) as page,qnaboard_no,qnaboard_title,qnaboard_answer,id,name,time_posted 
+			from ( 
+				select q.qnaboard_no,q.qnaboard_title,q.qnaboard_answer,m.id,m.name,q.time_posted 
+				from QNABOARD q,pet_member m where q.id=m.id and q.id=#{id} order by q.qnaboard_no desc
+			)
+		)where page=#{pageNo}
+	</select>
+</mapper>

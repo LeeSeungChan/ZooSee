@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reserve">
+	
+	<insert id="reserveRegister" parameterType="reserveVO">
+		<selectKey keyProperty="reserve_no" resultType="int" order="BEFORE">
+			select reserve_no_seq.nextval from dual
+		</selectKey>
+		insert into RESERVE(reserve_no,reserve_price,reserve_recog,petCheckNumber,id,petNo,petsitterboard_no)
+		values(#{reserve_no},#{reserve_price},#{reserve_recog},#{petCheckNumber},#{memberVO.id},#{petVO.petNo},#{petsitterboardVO.petsitterboard_no})
+	</insert>
+	
+	<resultMap type="reserveVO" id="reserveMap">
+		<result column="id" property="memberVO.id"/>
+		<result column="name" property="memberVO.name"/>
+		<result column="address" property="memberVO.address"/>
+		<result column="email" property="memberVO.email"/>
+		<result column="tel" property="memberVO.tel"/>
+		<result column="petNo" property="petVO.petNo"/>
+		<result column="petName" property="petVO.petName"/>
+		<result column="petType" property="petVO.petType"/>
+		<result column="petsitterboard_no" property="petsitterboardVO.petsitterboard_no"/>
+		<result column="petsitterboard_title" property="petsitterboardVO.petsitterboard_title"/>
+		<result column="petsitterNo" property="petsitterboardVO.petsitterVO.petsitterNo"/>
+		<result column="petsitterId" property="petsitterboardVO.petsitterVO.memberVO.id"/>
+		<result column="petsitterName" property="petsitterboardVO.petsitterVO.memberVO.name"/>
+		<result column="petsitterAddress" property="petsitterboardVO.petsitterVO.memberVO.address"/>
+		<result column="petsitterTel" property="petsitterboardVO.petsitterVO.memberVO.tel"/>
+		<result column="petsitterEmail" property="petsitterboardVO.petsitterVO.memberVO.email"/>
+		<result column="petsitterExistence" property="petsitterboardVO.petsitterVO.memberVO.existence"/>
+	</resultMap>
+	<select id="getReserveVO" parameterType="int" resultMap="reserveMap">
+		SELECT A.reserve_no,A.reserve_price,A.reserve_recog,A.id,A.name,A.address,A.email,A.tel,A.petNo,A.petName,A.petType,
+			   A.petsitterboard_no,A.petsitterboard_title,A.petsitterNo,
+	   		   PS.id as petsitterId,MM.name as petsitterName,MM.address as petsitterAddress,MM.email as petsitterEmail,MM.tel as petsitterTel
+		FROM(SELECT R.reserve_no,R.reserve_price,R.reserve_recog,R.id,M.name,M.address,M.email,M.tel,R.petNo,pet.petName,pet.petType,
+					R.petsitterboard_no,PB.petsitterboard_title,PB.petsitterNo
+	 		 FROM RESERVE R, PETSITTERBOARD PB, PET_MEMBER M, PET pet
+	 		 WHERE R.reserve_no=#{value} and R.id=M.id and pet.id=m.id and R.petsitterboard_no=PB.petsitterboard_no) A, PETSITTER PS, PET_MEMBER MM
+		WHERE A.petsitterNo=PS.petsitterNo and PS.id=MM.id
+	</select>
+	
+	<select id="showPetsitterReserveList" parameterType="string" resultMap="reserveMap">
+		select r.reserve_no,r.reserve_price,r.reserve_recog,b.petsitterboard_no,b.petsitterboard_title,r.id,
+	   		   pm.name,b.petsitterId,b.petsitterName,b.petsitterEmail,b.petsitterTel,b.petsitterAddress,
+	   		   b.petsitterNo, pet.petNo, pet.petType
+		from(select a.id as petsitterId,a.name as petsitterName,a.email as petsitterEmail,a.tel as petsitterTel, a.address as petsitterAddress,
+		  			pb.petsitterboard_no,pb.petsitterboard_title, pb.petsitterNo
+	 		 from(select m.id,m.name,m.email,m.tel,m.address,ps.petsitterNo
+	 	  		  from PET_MEMBER m, petsitter ps
+	 	  		  where m.id=#{value} and m.id=ps.id) a, petsitterboard pb
+	 		 where a.petsitterNo=pb.petsitterNo) b, reserve r, PET_MEMBER pm, PET pet
+		where b.petsitterboard_no=r.petsitterboard_no and r.id=pm.id and pm.id=pet.id order by r.reserve_no asc
+	</select>
+	<select id="showPetMomReserveList" parameterType="string" resultMap="reserveMap">
+		select B.reserve_no,B.reserve_price,B.reserve_recog,B.id,B.name,B.petNo,B.petName,B.petType,
+			   B.petsitterboard_no,B.petsitterboard_title,B.petsitterNo,ps.id as petsitterId,pm.name as petsitterName
+		from(
+			select R.reserve_no,R.reserve_price,R.reserve_recog,A.id,A.name,A.email,A.tel,A.address,A.petNo,A.petName,A.petType,
+				   R.petsitterboard_no,pb.petsitterboard_title,pb.petsitterNo
+			from(select m.id,m.name,m.email,m.tel,m.address,pet.petNo,pet.petName,pet.petType
+				 from PET_MEMBER m, PET pet
+				 where m.id=#{value} and m.id=pet.id) A, RESERVE R, PETSITTERBOARD pb
+			where A.id=R.id and R.petsitterboard_no=pb.petsitterboard_no) B, petsitter ps, PET_MEMBER pm
+		where ps.petsitterNo=B.petsitterNo and pm.id=ps.id
+	</select>
+	<select id="showPetMasterReserveList" parameterType="string" resultMap="reserveMap">
+		select R.reserve_no,R.reserve_price,R.reserve_recog,B.petNo,B.petName,B.petType,
+			   B.petsitterboard_no,B.petsitterboard_title,
+			   B.id,B.name,B.address,B.email,B.tel,B.petsitterNo
+		from(
+			select A.id,A.name,A.address,A.email,A.tel,A.petsitterNo,
+				   A.petNo,A.petName,A.petType,
+				   pb.petsitterboard_no,pb.petsitterboard_title
+			from(
+				select m.id,m.name,m.address,m.email,m.tel,ps.petsitterNo,
+					   pet.petNo,pet.petName,pet.petType
+				from PET_MEMBER m, petsitter ps, PET pet
+				where m.id=#{value} and ps.id=m.id and pet.id=m.id) A, petsitterboard pb
+			where A.petsitterNo=pb.petsitterNo) B, RESERVE r
+		where B.petsitterboard_no=r.petsitterboard_no
+	</select>
+	
+	<delete id="deleteReserve">
+		delete from reserve where reserve_no=#{value}
+	</delete>
+	
+	<select id="getReserveRecog" parameterType="string" resultType="int">
+		SELECT reserve_recog
+		FROM RESERVE WHERE id=#{value}
+	</select>
+	
+	<select id="getReserveIdCheck" parameterType="string" resultType="int">
+		select count(*) from reserve where id=#{value}
+	</select>
+	
+	<update id="updateReserveRecog" parameterType="int">
+		UPDATE RESERVE SET reserve_recog=reserve_recog+1
+		WHERE reserve_no=#{value}
+	</update>
+</mapper>

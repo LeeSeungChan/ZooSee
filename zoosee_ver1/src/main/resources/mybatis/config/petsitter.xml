@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="petsitter">
+
+	<resultMap type="petsitterVO" id="petsitterRM">
+		<result column="name" property="memberVO.name"/>
+		<result column="id" property="memberVO.id"/>
+		<result column="address" property="memberVO.address"/>
+		<result column="gender" property="memberVO.gender"/>
+		<result column="email" property="memberVO.email"/>
+		<result column="tel" property="memberVO.tel"/>
+		<result column="job" property="memberVO.job"/>
+		<result column="rank" property="memberVO.rank"/>
+		<result column="existence" property="memberVO.existence"/>
+	</resultMap>
+	
+	<insert id="registerPetsitter"  parameterType="petsitterVO" >
+ 		insert into petsitter(petsitterNo,petNumber,service,price,petSize,petType,houseImg,petsitterImg,adminrecog,id)
+		values
+		(petsitterNo_seq.nextval,#{petNumber},#{service},#{price},#{petSize},#{petType},#{houseImg},#{petsitterImg},'nonrecog',#{memberVO.id})
+ 	</insert>
+ 	
+ 	<select id="petsitterListCount" resultType="int">
+ 		select count(*) from petsitter where adminRecog=#{value}
+ 	</select>
+ 	
+	<select id="petsitterList" resultType="petsitterVO" resultMap="petsitterRM" parameterType="string">
+		select petsitterNo,petNumber,service,price,petSize,petType,houseImg,petsitterImg,adminRecog,id,name 
+		from (
+			select ceil(rownum/10) as page,petsitterNo,petNumber,service,price,petSize,petType,houseImg,petsitterImg,adminRecog,id,name 
+			from (
+				select p.petsitterNo,p.petNumber,p.service,p.price,p.petSize,p.petType,p.houseImg,p.petsitterImg,p.adminRecog,pm.id,pm.name 
+				from petsitter p ,pet_member pm
+			    where p.id=pm.id and  adminRecog=#{value}
+			)
+		)where page=#{pageNo}
+	</select>
+	
+	<update id="recognitionPetsitter" parameterType="int">
+		update petsitter set adminrecog='recog' where petsitterNo=#{value}
+	</update>
+	
+
+	<select id="getPetsitterVO" resultType="petsitterVO" resultMap="petsitterRM">
+		select p.petsitterNo,p.petNumber,p.service,p.price,p.petSize,p.petType,p.houseImg,p.petsitterImg,p.adminRecog,
+		         pm.id,pm.name ,pm.address, pm.gender, pm.email, pm.tel, pm.job
+			from petsitter p ,pet_member pm
+		where p.id=pm.id and petsitterNo=#{value}
+	</select>
+	
+	<select id="findPetsitterById" resultType="petsitterVO" resultMap="petsitterRM">
+		select p.petsitterNo,p.petNumber,p.service,p.price,p.petSize,p.petType,p.houseImg,p.petsitterImg,p.adminRecog,
+		         pm.id,pm.name,pm.address,pm.gender,pm.email,pm.tel,pm.job,pm.rank,pm.existence
+			from petsitter p ,pet_member pm
+		where p.id=pm.id and pm.id=#{value}
+	</select>
+	
+	<delete id="deletePetsitter" >
+		delete from PETSITTER where petsitterNo=#{value}
+	</delete>
+ 	
+ 	<update id="update" parameterType="petsitterVO">
+       update petsitter set price=#{price},petType=#{petType},petSize=#{petSize},petNumber=#{petNumber},service=#{service},houseImg=#{houseImg},petsitterImg=#{petsitterImg},adminRecog=#{adminRecog}
+       where petsitterNo=#{petsitterNo}
+    </update>
+    
+</mapper>

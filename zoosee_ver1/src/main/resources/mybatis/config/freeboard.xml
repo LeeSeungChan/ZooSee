@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="freeboard">
+	
+	<resultMap type="freeBoardVO" id="freeBoardRM">
+		<result column="id" property="memberVO.id"/>
+		<result column="name" property="memberVO.name"/>
+		<result column="freeboard_no" property="freeBoardNo"/>
+		<result column="freeboard_title" property="freeBoardTitle"/>
+		<result column="freeboard_hits" property="freeBoardHits"/>
+		<result column="freeboard_contents" property="freeBoardContents"/>
+		<result column="freeboard_timeposted" property="freeBoardTimePosted"/>
+	</resultMap>
+	
+	<select id="getFreeBoardList" resultType="freeBoardVO" resultMap="freeBoardRM">
+		select fb.freeboard_no,fb.freeboard_title,fb.freeboard_hits,fb.freeBoardTimePosted,pm.id ,pm.name
+		from(
+		     select  freeboard_no,freeboard_title, freeBoardTimePosted,freeboard_hits ,ceil(rownum/5) as page, id
+			 from(
+				select freeboard_no,freeboard_title,to_char(freeboard_timePosted,'YYYY.MM.DD') as freeBoardTimePosted ,freeboard_hits,id
+				from freeboard order by freeboard_no desc
+				) 
+		) fb, pet_member pm where fb.id=pm.id and page=#{value}
+	</select>
+	
+	<select id="getFreeBoardContent" resultType="freeBoardVO" resultMap="freeBoardRM">
+		select fb.freeboard_no,fb.freeboard_title,fb.freeboard_contents,fb.freeboard_timeposted as freeBoardTimePosted ,fb.freeboard_hits,pm.id,pm.name
+		from freeboard fb, pet_member pm
+		where fb.id=pm.id and freeboard_no=#{value}
+	</select>
+
+	<update id="updateCount" parameterType="int">
+		update freeboard set freeboard_hits=freeboard_hits+1 where freeboard_no=#{value}
+	</update>
+	
+	<delete id="FreeBoardContentDelete" >
+		delete from freeboard where freeboard_no=#{value}
+	</delete>
+	
+	<insert id="FreeBoardWriteContent" parameterType="freeBoardVO" >
+		<selectKey keyProperty="freeboard_no" resultType="int" order="BEFORE">
+			select freeboard_seq.nextval from dual
+		</selectKey>
+		insert into freeboard(freeboard_no,freeboard_title,freeboard_contents,freeboard_timePosted ,id)
+		values(freeboard_seq.nextval,#{freeBoardTitle},#{freeBoardContents},sysdate,#{memberVO.id})
+	</insert>
+	
+	<update id="updateFreeBoard" parameterType="freeBoardVO">
+		update freeboard set
+		freeboard_title=#{freeBoardTitle}, freeboard_contents=#{freeBoardContents}, freeboard_timeposted=sysdate
+		where freeboard_no=#{freeBoardNo}
+	</update>
+	
+	<select id="totalContents" resultType="int">
+		select count(*) from freeboard
+	</select>
+	
+	<select id="getFreeBoardReplyNo" resultType="int">
+		select freeboard_reply_seq.nextval from dual
+	</select>
+	
+	<insert id="writeReply" parameterType="freeBoardReplyVO">
+		insert into freeboard_reply(reply_no,content,time_posted,grp,lvl,id,ref)
+		values(#{reply_no},#{content},sysdate,#{grp},#{lvl},#{id},#{ref})
+	</insert>
+	
+	<select id="getReplyList" parameterType="int" resultType="freeBoardReplyVO">
+			select case when lvl=1 then reply_no
+			when lvl>1 then null end reply_no
+			,content,to_char(time_posted,'yyyy/mm/dd hh24:mi') as time_posted,grp,lvl,id,ref,con
+			from freeboard_reply
+			where ref=#{value}
+			order by grp asc, lvl
+	</select>
+	
+	<update id="updateRestep" parameterType="freeBoardReplyVO">
+			update freeboard_reply set  restep=restep+1 where reply_no>#{freeBoardReplyNo} and ref=#{ref}
+	</update>
+	
+	<insert id="writeReply2" parameterType="freeBoardReplyVO">
+		insert into freeboard_reply(reply_no,content,time_posted,grp,lvl,id,ref)
+		values(freeboard_reply_seq.nextval,#{content},sysdate,#{grp},#{lvl},#{id},#{ref})
+	</insert>
+	
+	<select id="findMaxLvl" parameterType="int" resultType="int">
+		select max(lvl) as lvl from freeboard_reply where grp=#{value}
+	</select>
+	
+	<update id="replaceReplyContet" parameterType="freeBoardReplyVO">
+		update freeboard_reply set content=#{content}, con=#{con} where ref=#{ref} and lvl=#{lvl} and grp=#{grp}
+	</update>
+	
+	<delete id="deleteReply" parameterType="freeBoardReplyVO">
+		delete from freeboard_reply where grp=#{grp}
+	</delete>	
+	
+</mapper>

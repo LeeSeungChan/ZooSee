@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search">
+	<resultMap type="petsitterboardVO" id="petsitterboardRM">
+		<result column="petsitterNo" property="petsitterVO.petsitterNo"/>
+		<result column="price" property="petsitterVO.price"/>
+		<result column="petSize" property="petsitterVO.petSize"/>
+		<result column="petType" property="petsitterVO.petType"/>
+		<result column="petsitterImg" property="petsitterVO.petsitterImg"/>
+		<result column="houseImg" property="petsitterVO.houseImg"/>
+		<result column="adminRecog" property="petsitterVO.adminRecog"/>
+		<result column="address" property="petsitterVO.memberVO.address"/>
+		<result column="name" property="petsitterVO.memberVO.name" />
+	</resultMap>
+
+	<select id="findAllPetsitterList" resultMap="petsitterboardRM" parameterType="map">
+	select page, petsitterboard_no, petsitterboard_title,petsitterNo,price,petSize,petType,name,address,petsitterImg,houseImg
+	from
+	(
+		select ceil(rownum/9) as page,petsitterboard_no,petsitterboard_title,price,petSize,petType,petsitterNo,name,address,petsitterImg,houseImg
+		from
+		(
+			select pb.petsitterboard_no,pb.petsitterboard_title,a.price,a.petSize,a.petType,pb.petsitterNo,a.name,a.address,a.petsitterImg,a.houseImg
+			from  
+			(
+				select pt.petsitterNo,pt.price,pt.petSize,pt.petType,m.name,m.address,pt.petsitterImg,pt.houseImg 
+				from pet_member m, petsitter pt 
+				where m.id=pt.id and m.address like '%'||#{address}||'%'
+			) a, petsitterboard pb
+			where a.petsitterNo = pb.petsitterNo order by pb.petsitterboard_no desc
+		)
+	) where page=#{pageNo}
+	</select>
+	
+	<select id="petboardCount" resultType="int">
+		select count(*) from petsitterboard
+	</select>
+	
+	<select id="findAddressCount" resultType="int">
+		select count(*) from  petsitterboard pb, petsitter pt, pet_member m
+		where pt.petsitterNo = pb.petsitterNo and pt.id=m.id and m.address like '%'||#{value}||'%'
+	</select>
+</mapper>

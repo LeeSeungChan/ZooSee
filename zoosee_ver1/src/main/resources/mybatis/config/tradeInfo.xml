@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tradeInfo">
+
+	<insert id="registerTradeInfo" parameterType="tradeInfoVO">
+		<selectKey keyProperty="tradeinfo_no" resultType="int" order="BEFORE">
+			select tradeinfo_no_seq.nextval from dual
+		</selectKey>
+		insert into TRADEINFO(tradeinfo_no,tradeSdate,tradeEdate,tradePrice,id,petsitterNo,petsitterboard_no)
+		VALUES(#{tradeinfo_no},#{tradeSdate},#{tradeEdate},#{tradePrice},#{memberVO.id},#{petsitterVO.petsitterNo},#{petsitterboardVO.petsitterboard_no})
+	</insert>
+	
+	<resultMap type="tradeInfoVO" id="tradeInfoRM">
+		<result column="id" property="memberVO.id"/>
+		<result column="name" property="memberVO.name"/>
+		<result column="petsitterId" property="petsitterVO.memberVO.id"/>
+		<result column="petsitterName" property="petsitterVO.memberVO.name"/>
+		<result column="petsitterboard_no" property="petsitterboardVO.petsitterboard_no"/>
+		<result column="title" property="petsitterboardVO.petsitterboard_title"/>
+		<result column="petsitterNo" property="petsitterVO.petsitterNo"/>
+	</resultMap>
+	<select id="getTradeVOPetMomList" parameterType="map" resultMap="tradeInfoRM">
+		select A.tradeinfo_no,A.id,A.name,A.petsitterId,m.name as petsitterName,A.petsitterboard_no,A.title,
+	  		   A.tradeSdate,A.tradeEdate,A.tradePrice,A.petsitterNo
+		from(
+			SELECT m.id,m.name,t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
+				   pm.petsitterNo,PM.id as petsitterId,pb.petsitterboard_title as title
+			from pet_member m, tradeInfo t, petsitter pm, petsitterboard pb
+			where m.id=t.id and pb.petsitterNo = pm.petsitterNo and pm.petsitterNo=t.petsitterNo 
+				  and t.petsitterboard_no = pb.petsitterboard_no and m.id=#{value} order by t.tradeinfo_no desc
+			)A, pet_member m, PET pet 
+		where A.petsitterId = m.id and pet.id=A.id
+	</select>
+	
+	<resultMap type="tradeInfoVO" id="tradeInfoRM2">
+		<result column="petmom_id" property="memberVO.id"/>
+		<result column="petmom_Name" property="memberVO.name"/>
+		<result column="id" property="petsitterVO.memberVO.id"/>
+		<result column="name" property="petsitterVO.memberVO.name"/>
+		<result column="petsitterboard_no" property="petsitterboardVO.petsitterboard_no"/>
+		<result column="title" property="petsitterboardVO.petsitterboard_title"/>
+		<result column="petsitterNo" property="petsitterVO.petsitterNo"/>
+	</resultMap>
+	<select id="getTradeVOPetsitterList" parameterType="map" resultMap="tradeInfoRM2">
+		select A.tradeinfo_no,A.petmom_id,m.name as petmom_Name,A.id,A.name,A.petsitterboard_no,A.title,
+	  		   A.tradeSdate,A.tradeEdate,A.tradePrice,A.petsitterNo
+		from(
+			SELECT m.id,m.name,t.id as petmom_id,t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
+				   pm.petsitterNo,pb.petsitterboard_title as title
+			from pet_member m, tradeInfo t, petsitter pm, petsitterboard pb
+			where pm.id=m.id and pb.petsitterNo = pm.petsitterNo and pm.petsitterNo=t.petsitterNo 
+				  and t.petsitterboard_no=pb.petsitterboard_no and m.id=#{value} order by t.tradeinfo_no desc
+		)A, pet_member m, PET pet 
+		where pet.id=A.petmom_Id and A.petmom_id = m.id
+	</select>
+</mapper>

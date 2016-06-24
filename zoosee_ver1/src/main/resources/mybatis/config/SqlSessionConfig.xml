@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- MyBatis  DataSource에 대한 설정 및  SQL 정의 xml 에 대한 매핑
+		spring과 연동시에는 spring 설정에서 DataSource(dbcp) 를 정의한다. 
+-->
+<configuration>	
+	<!-- 사용할 클래스에 대한 별칭을 명시한다.  -->
+	<typeAliases>	
+		<typeAlias type="org.kosta.zoosee.model.vo.PetsitterVO" alias="petsitterVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.MemberVO" alias="memberVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.PetVO" alias="petVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.QNABoardVO" alias="qnaboardVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.FreeBoardVO" alias="freeBoardVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.PetsitterboardVO" alias="petsitterboardVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.FreeBoardReplyVO" alias="freeBoardReplyVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.MessageVO" alias="messageVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.ReserveVO" alias="reserveVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.PetCalendarVO" alias="petCalendarVO"/>
+		<typeAlias type="org.kosta.zoosee.model.vo.TradeInfoVO" alias="tradeInfoVO"/>
+		<!-- <typeAlias type="org.kosta.zoosee.model.vo"/> -->
+	</typeAliases>	
+	<!-- mapper.xml 을 명시한다  -->
+	<mappers>	
+		<mapper resource="mybatis/config/member.xml"/>	
+		<mapper resource="mybatis/config/pet.xml"/>	
+		<mapper resource="mybatis/config/petsitter.xml"/>
+		<mapper resource="mybatis/config/qna.xml"/>
+		<mapper resource="mybatis/config/petsitterboard.xml"/>
+		<mapper resource="mybatis/config/search.xml"/>
+		<mapper resource="mybatis/config/freeboard.xml"/>
+		<mapper resource="mybatis/config/message.xml"/>
+		<mapper resource="mybatis/config/reserve.xml"/>
+		<mapper resource="mybatis/config/petCalendar.xml"/>
+		<mapper resource="mybatis/config/tradeInfo.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+

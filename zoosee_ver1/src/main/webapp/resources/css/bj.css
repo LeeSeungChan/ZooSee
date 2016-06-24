@@ -1,0 +1,540 @@
+@CHARSET "UTF-8";
+.BJFreeBoardListDiv{
+	text-align: center;
+}
+
+.BJFreeBoardListWriteBtnDiv{
+
+	margin-top: 1%;
+	
+		position: absolute;
+		z-index: 5;
+}
+.BJHeaderLayout0{
+	width:100%;
+	height: 50px;
+	margin-bottom:2%;
+ 	background-color: #f4f4f4;
+
+}
+
+.BJA{
+	margin-right: 2%;
+}
+.BJHeaderLayout{
+	width:60%;
+	height: 50px;
+	display:table;
+ 	background-color: #f4f4f4;
+ 	margin-left:20%;
+}
+.BJHeader2{
+
+	display:table-cell;
+	vertical-align:middle;
+	height: 50px;
+	
+	
+
+}
+
+.BJFreeBoardShowContentMainDiv{
+	width:60%;
+	margin-left:20%;
+}
+
+.BJFreeBoardWriteDiv{
+	width:60%;
+	margin-left:20%;
+}
+.BJform-control{
+	 display: block;
+  margin-left:3%;	
+  margin-top:2%;
+  margin-bottom:2%;
+  float:left;
+  width:90%;
+  height: 50px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #777777;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.BJform-control2{
+	 display: block;
+  margin-left:3%;	
+  margin-top:2%;
+  margin-bottom:2%;
+  float:left;
+  width:90%;
+  height: 30px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #777777;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.BJMain2Div{
+	width:80%;
+	margin-left:10%;
+}
+
+
+.BJform-controlBig{
+	 display: block;
+  margin-left:3%;
+  margin-top:2%;	
+  margin-bottom:2%;
+  float:left;
+  width:90%;
+  height: 300px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #777777;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.BJFreeBoardWriteTableDiv{
+	width:100%;
+	margin-bottom: 2%;
+}
+.BJform-controlBig2{
+	 display: block;
+
+  margin-top:2%;	
+  margin-bottom:2%;
+  float:left;
+  width:100%;
+  height: 300px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #777777;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.BJform-controlBig3{
+	 display: block;
+  margin-left:6%;
+  margin-top:2%;	
+  margin-bottom:2%;
+
+  width:84%;
+  height: 300px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #777777;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.BJbtn {
+  display: inline-block;
+	margin-left:80%;
+  height:60px;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+
+}
+
+.BJbtn2 {
+  display: inline-block;
+
+
+  height:auto;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+
+  font-size: 13px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+
+}
+.BJFreeBoardUpdateDiv{
+	width:60%;
+	margin-left: 20%;
+}
+
+.BJFreeBoardUpdateTable{
+	margin: auto;
+}
+
+
+
+.BJBigButton{
+	display: inline-block;
+  margin: 0;
+  height:70px;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  float: left;
+}
+.BJBigButton2{
+	display: inline-block;
+  float:right;
+  height:55px;
+  width:10%;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+.BJWriteTableLine{
+	border: 1px solid #c0c0c0;
+	border-radius: 10px;
+	
+
+}
+
+.BJHr{
+	margin
+}
+
+.BJHrAllLine{
+	width:90%;
+	margin-top:2%;
+	margin-left:5%;
+	height:400px;
+}
+
+.BJDeleteAndUpdateBtn{
+	float: right;
+}
+
+.BJReplyAllLine{
+	width:80%;
+	margin-top:5%;
+	margin-left:10%;
+	border: 1px solid #c0c0c0;
+	 background-color: #f4f4f4;
+	border-radius: 10px;
+	
+}
+.BJMainDiv{
+	
+	whidth:60%;
+	margin-right:20%;
+	margin-left:20%;
+	height:auto;
+}
+.BJSearchDiv{
+	margin:auto;
+}
+
+.BJMainBackImg{
+	position: relative;
+	margin:auto;
+	text-align: center;
+}
+
+.BJMainText{
+	position: absolute;
+	display:inline-block;
+	margin-top:11%;
+	width:100%;
+
+	font-style: color=white;
+}
+
+.BJMainDIVBottom{
+	 padding-top: 30px;
+ 	 padding-bottom: 30px;
+  	margin:auto;
+  	color: inherit;
+  	background-color: #f4f4f4;
+	width:100%;
+	top:500px;
+	height:200px;
+	text-align:center;
+
+}
+.BJMainDivCenter{
+	width:100%;
+	height:700px;
+	/* margin-top: 120px; */
+	   background: url(../image/pet3.jpg) no-repeat center center fixed;
+	        -webkit-background-size: cover;
+	        -moz-background-size: cover;
+	        -o-background-size: cover;
+	        background-size: cover;	
+}
+
+.BJMainSearchDiv{
+	width:100%;
+	height:auto;
+	margin-top:24%;
+
+	text-align:center;
+	float: left;
+
+}
+
+
+
+.BJMainBoardDiv{
+
+	height:95%;
+	text-align:center;
+	width:60%;
+	margin:auto;
+}
+
+
+
+.BJMainBoardC1{
+	margin-left:1%;
+	margin-right:1%;
+	width:31%;
+
+	height:95%;
+	float: left;
+
+	
+}
+.BJMainBoardC2{
+	margin-left:1%;
+	margin-right:1%;
+	width:32%;
+	height:95%;
+	float: left;
+
+}
+.BJMainBoardC3{
+	margin-left:1%;
+	margin-right:1%;
+	width:31%;
+	height:95%;
+	float: left;
+
+}
+.BJMainSubmitBtnDiv{
+	margin-top:1%;
+
+	float:left;
+}
+.BJFooterDiv{
+	background-color:white;
+	text-align:center;
+	height:300px;
+	width:100%;
+}
+
+.BJFooterZOOSEELogo{
+
+	width:120px;
+	height:120px;
+	
+	margin-top:3%;
+	margin-left:46%;
+	margin-right:50%;
+}
+
+.BJFooterText{
+
+	width:100%;
+	margin-top:2%;
+	
+}
+
+
+.BJMainSearchDiv2{
+	margin-left:40%;
+	width:20%;
+	height:70px;
+}
+
+.BJform-control{
+	display: block;
+  margin:auto;	
+  width:50%;
+  height: 60px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #777777;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.BJform-group{
+	width:70%;
+	height:auto;
+	float:left;
+}
+
+.BJBtn{
+	display: inline-block;
+  margin-left:5px;
+  height:50px;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  float: left;
+}
+
+
+ .BJHeaderNav	{
+ 
+ position: fixed;
+  z-index:50;
+ width:100%;
+  min-height: 60px;
+  margin-bottom: 5px;
+  border: 1px solid transparent;
+  background-color: #ffffff;
+  border-color: #eeeeee;
+ }
+ 
+ .BJLayoutMainDiv{
+
+ 	float:right;
+ 	width:70%;
+ }
+ .BJLayoutHeaderDiv{
+ 	width:100%;
+ 	
+ }
+ .BJLayoutHeader2Div{
+ 	width:60%;
+ 	margin: auto;
+ }
+ .BJLayoutLeftDiv{
+ 	width:30%;
+ 	float:left;
+
+ }
+ 
+ .BJLayoutDiv{
+ 	width:60%;
+ 	height:800px;
+ 	margin-top:80px;
+ 	margin-left: 20%;
+ }
+.BJReplyList{
+	width: 90%;
+	margin-left:5%;
+	margin-top: 2%;
+	
+}
+.BJReplyInput{
+	width:90%;
+	margin-left:5%;
+}
