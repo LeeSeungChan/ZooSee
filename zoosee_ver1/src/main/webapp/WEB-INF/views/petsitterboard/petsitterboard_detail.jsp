@@ -207,7 +207,7 @@
    <c:set var="petsitterVO" value="${petsitterboardVO.petsitterVO }"></c:set>
    <c:set var="memberVO" value="${petsitterboardVO.petsitterVO.memberVO}"></c:set>
    <div class="BJMain2Div">
-   <form method="post" action="reserveRegister.do" id="reserveRegForm">
+   <form method="post" action="interceptor_reserveRegister.do" id="reserveRegForm">
       <input type="hidden" name="petsitterboard_no" value="${petsitterboardVO.petsitterboard_no}" />
 	  <input type="hidden" name="id" value="${sessionScope.mvo.id}" />
 	  <input type="hidden" name="petsitterId" value="${petsitterboardVO.petsitterVO.memberVO.id}"/>

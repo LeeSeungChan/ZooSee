@@ -33,7 +33,7 @@ public class TradeInfoController {
 	private PetsitterService petsitterService;
 	
 	// 버튼 누르면 초기값, 아이디 세션아이디.
-	@RequestMapping("tradeInfo_getTradeMyList.do")
+	@RequestMapping("interceptor_tradeInfo_getTradeMyList.do")
 	public ModelAndView getTradeMyList(HttpServletRequest request){
 		MemberVO memberVO = null;
 		HttpSession session = request.getSession(false);

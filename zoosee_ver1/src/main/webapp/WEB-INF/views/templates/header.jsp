@@ -56,8 +56,8 @@
 					<c:set value="0" var="petMasterSignal"></c:set>
 				</c:if>
 		
-				<li><a href="${initParam.root}reserve_reserveMyList.do?petMasterSignal=${petMasterSignal}">예약목록</a></li>
-				<li><a href="${initParam.root}tradeInfo_getTradeMyList.do">거래목록</a></li>
+				<li><a href="${initParam.root}interceptor_reserve_reserveMyList.do?petMasterSignal=${petMasterSignal}">예약목록</a></li>
+				<li><a href="${initParam.root}interceptor_tradeInfo_getTradeMyList.do">거래목록</a></li>
                
                <c:if test="${mvo.rank == 'petsitter' || mvo.rank== 'petmaster' || mvo.rank == 'prepetmatster'}">
                		<li><a href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}">글 등록</a></li>

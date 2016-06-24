@@ -42,7 +42,7 @@ public class ReserveController {
 	private PetCalendarService petCalendarService;
 	
 	// 예약 하기.
-	@RequestMapping("reserveRegister.do")
+	@RequestMapping("interceptor_reserveRegister.do")
 	public ModelAndView reserveRegister(HttpServletRequest request, ReserveVO reserveVO, PetsitterboardVO petsitterboardVO){
 		// 멤버VO set해주기
 		String id = request.getParameter("id");
@@ -69,7 +69,7 @@ public class ReserveController {
 	}
 	
 	// 본인 예약된 or 예약한 리스트 보기
-	@RequestMapping("reserve_reserveMyList.do")
+	@RequestMapping("interceptor_reserve_reserveMyList.do")
 	public ModelAndView showMyReserveList(HttpServletRequest request){
 		String petMasterSignal = request.getParameter("petMasterSignal");
 		//System.out.println(petMasterSignal);
