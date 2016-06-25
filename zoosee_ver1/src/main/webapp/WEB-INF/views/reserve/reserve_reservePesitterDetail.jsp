@@ -47,6 +47,99 @@
 	});
 </script>
 
+
+<div class="BJMainKING">
+<div class="BJMainDiv" style="margin-bottom: 6%;margin-top: 5%;">
+	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">펫시터 상세정보</h3>
+			</div>
+			<div class="panel-body">"${petsitterboardVO.petsitterVO.memberVO.name}"님의 펫시터 상세정보를 보여 드리기 위한 공간입니다.
+			</div>
+		</div>
+		<div class="well well-sm">"${petsitterboardVO.petsitterVO.memberVO.name}"님의 상세정보</div>
+	</div>
+	
+<!-- 전체 시작 -->
+<div class="WJcontainer7">
+	<!-- 왼쪽 시작-->
+	<div style="float: left; width: 50%;">
+		<br>
+		<div style="margin-top: 9%; width: 400px; height: 400px;">
+			<img style="border: 1px solid black;"
+				src="${initParam.root}${petsitterboardVO.petsitterVO.petsitterImg}"
+				class="center-block img-circle img-responsive" width="90%"
+				height="90%">
+				</div>
+	</div>
+	<!-- 오른쪽 시작 -->
+	<div style="float: right; width: 50%;" >
+		<label>Petsitter id</label> 
+		<input class="WJform-control" type="text" value="${petsitterboardVO.petsitterVO.memberVO.id}" readonly="readonly" style="background-color: #F4F4F4;"> 
+		<label>Petsitter Name</label> 
+		<input class="WJform-control" 
+			type="text" value="${petsitterboardVO.petsitterVO.memberVO.name}" readonly="readonly"
+			style="background-color: #F4F4F4">
+		<label>Petsitter Address</label> 
+		<input
+			class="WJform-control"type="text"
+			value="${petsitterboardVO.petsitterVO.memberVO.address}" readonly="readonly"
+			style="background-color: #F4F4F4"> 
+		<label>성별</label> 
+		<input
+			class="WJform-control"type="text"
+			value="${petsitterboardVO.petsitterVO.memberVO.gender}" readonly="readonly"
+			style="background-color: #F4F4F4"> 	
+		
+		<label>Petsitter email</label>
+		<input
+			class="WJform-control"  type="text"
+			value="${petsitterboardVO.petsitterVO.memberVO.email}" readonly="readonly"
+			style="background-color: #F4F4F4"> 
+		<label>Petsitter Job</label>
+		<input
+			class="WJform-control"  type="text"
+			value="${petsitterboardVO.petsitterVO.memberVO.job}" readonly="readonly"
+			style="background-color: #F4F4F4"> 
+		<label>Petsitter ex</label>
+		<input
+			class="WJform-control"  type="text"
+			value="${petsitterboardVO.petsitterVO.memberVO.existence}"readonly="readonly"
+			style="background-color: #F4F4F4"> 
+			
+			
+		<div style="border: 2px dotted red;">
+		<label style="text-align: left;" >시작일</label><br>
+		<input class="WJform-control" style="float: left; width: 49.5%; background-color: #F4F4F4" 
+		type="text" value="${reserveSdate.pet_calDate}" 
+		readonly="readonly">
+		
+		<label>종료일</label><br>
+		<input class="WJform-control" style="float: right; width: 49.5%; background-color: #F4F4F4"
+		type="text" value="${reserveEdate.pet_calDate}" 
+		 readonly="readonly">
+		
+		</div>	
+		
+		
+		<br>
+		<input type="button" value="거래하기" id="okBtn" name="okBtn"
+		class="active WJbtn btn-block btn-info"/>
+		<input type="button" value="취소하기" id="noBtn" name="noBtn"
+		class="active WJbtn btn-block btn-info"/>
+	</div>
+	</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
 <table border="1">
 	<caption>펫시터 정보</caption>
 	<tbody>

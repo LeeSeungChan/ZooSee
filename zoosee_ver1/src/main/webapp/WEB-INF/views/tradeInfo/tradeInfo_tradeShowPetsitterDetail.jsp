@@ -11,7 +11,7 @@
 	</div>
 </div> --%>
 <div class="BJMainKING">
-<div class="BJMainDiv" style="margin-bottom: 10%;">
+<div class="BJMainDiv" style="margin-bottom: 6%;margin-top: 5%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -28,7 +28,7 @@
 	<!-- 왼쪽 시작-->
 	<div style="float: left; width: 50%;">
 		<br>
-		<div style="margin: 0 auto; width: 400px; height: 400px;">
+		<div style="margin-top: 9%; width: 400px; height: 400px;">
 			<img style="border: 1px solid black;"
 				src="${initParam.root}${petsitterVO.petsitterImg}"
 				class="center-block img-circle img-responsive" width="90%"
