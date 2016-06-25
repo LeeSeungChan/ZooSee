@@ -27,4 +27,6 @@ public interface MemberDAO {
 
 	public abstract int memberListCount(String rank);
 
+	public abstract String findIdByPetsitterNo(int petsitterNo);
+
 }

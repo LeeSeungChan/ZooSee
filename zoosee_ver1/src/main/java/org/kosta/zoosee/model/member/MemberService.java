@@ -18,4 +18,6 @@ public interface MemberService {
 
 	public abstract ListVO memberList(String rank, String pageNo);
 
+	public abstract String findIdByPetsitterNo(int petsitterNo);
+
 }

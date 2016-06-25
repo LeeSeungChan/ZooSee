@@ -46,7 +46,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findRank" resultType="string">
 		select rank from pet_member where id=#{id}
 	</select>
-	
+	<select id="findIdByPetsitterNo" resultType="string">
+		select p.id from pet_member pm, petsitter p where p.id=pm.id and p.petsitterNo=#{value}
+	</select>
 	<update id="upgradeRank">
 		update pet_member set rank=#{rank} where id=#{id}
 	</update>

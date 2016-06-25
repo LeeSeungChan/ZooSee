@@ -78,4 +78,10 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
+
+	@Override
+	public String findIdByPetsitterNo(int petsitterNo) {
+		return memberDAO.findIdByPetsitterNo(petsitterNo);
+	}
+
 }

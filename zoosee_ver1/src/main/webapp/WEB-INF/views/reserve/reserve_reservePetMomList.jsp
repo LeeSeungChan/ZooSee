@@ -51,7 +51,7 @@
 										<td>${reserveVO.reserve_no}</td>
 										<td>${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}</td>
 										<td><a
-											href="reserve_showPesitterDetail.do?reserve_no=${reserveVO.reserve_no}&id=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}">
+											href="interceptor_reserve_showPesitterDetail.do?reserve_no=${reserveVO.reserve_no}&id=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}">
 												${reserveVO.petsitterboardVO.petsitterVO.memberVO.name} </a></td>
 										<c:choose>
 											<c:when test="${reserveVO.reserve_recog == '0'}">

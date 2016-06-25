@@ -29,8 +29,8 @@
 					<tr class="active">
 						<th style="width: 10%"><label>거래번호</label></th>
 						<c:if test="${mvo.rank == 'petmom'}">
-							<th style="width: 7.5%"><label>펫맘</label></th>
 							<th style="width: 7.5%"><label>펫시터</label></th>
+							<th style="width: 7.5%"><label>펫맘</label></th>
 						</c:if>
 						<c:if test="${mvo.rank == 'petsitter' || mvo.rank == 'petmaster'}">
 							<th style="width: 7.5%"><label>펫맘</label></th>

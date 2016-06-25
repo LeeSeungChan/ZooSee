@@ -105,15 +105,10 @@ public class PetsitterController {
 		//펫시터 인증
 		@RequestMapping(value="interceptor_petsitter_recognitionPetsitter.do",method=RequestMethod.POST)
 		@ResponseBody
-		public void recognitionPetsitter(int petsitterNo, HttpServletRequest request){
-			HttpSession session = request.getSession(false);
-			String id = null;
+		public void recognitionPetsitter(int petsitterNo){
+		
+			String id=memberService.findIdByPetsitterNo(petsitterNo);
 			
-			if(session != null){
-				id = ((MemberVO)session.getAttribute("mvo")).getId();
-			}
-			
-			//System.out.println("petsitterNo:"+petsitterNo);
 			petsitterService.recognitionPetsitter(petsitterNo, id);
 		}
 		
