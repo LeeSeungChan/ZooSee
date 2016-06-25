@@ -18,6 +18,8 @@ $( ".star_rating a" ).click(function() {
 
 </script>
 
+
+
 <br>
 <div class="BJMainKING">
 <div style="border:1px  solid red; width: 60%; margin-left: 20%; margin-right: 20%; height: auto; margin-bottom:10% ">
@@ -64,7 +66,7 @@ $( ".star_rating a" ).click(function() {
             src="${initParam.root}${petsitterVO.petsitterImg}"
             class="center-block img-circle img-responsive" width="85%" height="90%">
 </div>	
-<h3 style="color: #6EB9B5; margin-left: 10%;">우리 아이처럼 사랑스럽게 봐드릴게요!</h3> 
+<h3 style="color: #6EB9B5; margin-left: 10%;">${petsitterboardVO.petsitterboard_title }</h3> 
 
 돌보미이름 :&nbsp;${petsitterVO.memberVO.name }<br>
 <img src="${initParam.root}resources/image/location.png">  주소 어쩌고저쩌고(입력) <br>
