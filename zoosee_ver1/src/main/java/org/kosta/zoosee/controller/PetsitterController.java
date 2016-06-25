@@ -9,12 +9,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.member.MemberService;
 import org.kosta.zoosee.model.petsitter.ListVO;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.vo.FileVO;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
+import org.kosta.zoosee.model.vo.PetsitterboardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +31,8 @@ public class PetsitterController {
 	private PetsitterService petsitterService;
 	@Resource
 	private MemberService memberService;
+	@Resource
+	private BoardService boardService;
 	
 	@Resource(name="petsitterUploadPath")
 	private String uploadPath;
@@ -169,14 +173,16 @@ public class PetsitterController {
 		
 		//팻시터 정보페이지
 		@RequestMapping("petsitter_detail.do")
-		public ModelAndView petsitterDetailPage(int petsitterNo){
+		public ModelAndView petsitterDetailPage(int petsitterNo,int petsitterboard_no){
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("petsitter_detail");
 			PetsitterVO pvo=petsitterService.getPetsitterVO(petsitterNo);
 			MemberVO mvo = memberService.getMemberVO(pvo.getMemberVO().getId());
 			pvo.setMemberVO(mvo);
 			mv.addObject("petsitterVO", pvo);
-			System.out.println(pvo.toString());
+			//펫시터의 보드정보 가져오기
+			PetsitterboardVO bvo = boardService.getboardDetail(petsitterboard_no);
+			mv.addObject("petsitterboardVO", bvo);
 			return mv;
 		}
 		
