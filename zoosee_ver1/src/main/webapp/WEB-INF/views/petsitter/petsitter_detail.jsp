@@ -19,7 +19,7 @@ $( ".star_rating a" ).click(function() {
 </script>
 
 <br>
-
+<div class="BJMainKING">
 <div style="border:1px  solid red; width: 60%; margin-left: 20%; margin-right: 20%; height: auto; margin-bottom:10% ">
 <div style="border: 1px solid red; height: 170px; background-color:#F5F5F5;">
 <div style="border:1px solid red; margin:0 auto; width:220px; height:220px; float: left;" >
@@ -121,5 +121,5 @@ TEL : 거래승인시 관랍하실 수 있습니다.<hr>
 
 
 <br><br><br>
-
+</div>
 </div>
