@@ -175,7 +175,7 @@
 		<%-- <img class="center-block img-circle img-responsive" src="${initParam.root}${map.value.petsitterVO.petsitterImg}" style="width:100%; height: 100%;"/> --%>
 	</div>
 	<!-- 펫시터이름 -->
-	<div style=" height: 10%; width: 20%; margin-left:37%;	">
+	<div style=" height: 10%; width: 30%; margin-left:37%;	">
    	 <h3 style="margin: auto;">${map.value.petsitterVO.memberVO.name }</h3>
 	</div>
 	<!-- 펫시터보드 타이틀 -->
