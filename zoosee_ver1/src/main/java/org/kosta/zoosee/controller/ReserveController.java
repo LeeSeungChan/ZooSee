@@ -103,7 +103,7 @@ public class ReserveController {
 	}
 	
 	// 본인한테 예약한 PetMom 정보 보기
-	@RequestMapping("reserve_showPetmomDetail.do")
+	@RequestMapping("interceptor_reserve_showPetmomDetail.do")
 	public ModelAndView showPetmomDetail(HttpServletRequest request){
 		String id = request.getParameter("id");
 		int reserve_no = Integer.parseInt(request.getParameter("reserve_no"));
@@ -118,7 +118,7 @@ public class ReserveController {
 	}
 	
 	// 
-	@RequestMapping("reserve_showPesitterDetail.do")
+	@RequestMapping("interceptor_reserve_showPesitterDetail.do")
 	public ModelAndView showPesitterDetail(HttpServletRequest request){
 		String id = request.getParameter("id");
 		int reserve_no = Integer.parseInt(request.getParameter("reserve_no"));
