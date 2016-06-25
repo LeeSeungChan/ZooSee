@@ -149,13 +149,14 @@
 							interval = new Number(eday + sday + 1);
 						}
 					 	
-					    reserve_price = interval*price*1.1;
+					    reserve_price = Math.floor(interval*price*1.1);
 					    //alert(reserve_price + "토탈 가격");
 					    $("#reserveRegForm :input[name=reserve_price]").val(reserve_price);
 					    $(".days").text(interval + "박");
 					    $(".totalPrice").text(interval*price + "원");
 					    var totalPrice = new Number(interval*price);
-					    $(".tax").text(totalPrice*0.1 + "원");
+					    var tax = Math.floor(totalPrice*0.1);
+					    $(".tax").text(tax + "원");
 					    $(".totalPricePlusTax").text(reserve_price + "원");
 					}
 				}

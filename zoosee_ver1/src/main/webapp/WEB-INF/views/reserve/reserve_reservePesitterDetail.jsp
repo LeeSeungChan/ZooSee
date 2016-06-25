@@ -15,12 +15,25 @@
 			var id = trTag.eq(trIndex).children().eq(1).text();
 			alert(trTag.eq(trIndex).children().eq(0).text()); */
 			
-			// !!!! +거래완료로 바뀌어야 한다.
-			if(confirm("거래 하시겠습니까?")){
-				var str = "interceptor_reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
-				str += "petsitterId=${petsitterboardVO.petsitterVO.memberVO.id}&petsitterNo=${petsitterboardVO.petsitterVO.petsitterNo}";
-				
-				location.href = str;
+			while(true){
+				var str1 = "요청 시 잘못된 정보를 전달할 경우 이로인해 발생되는 문제에 대한 책임은 의뢰인 본인에게 있습니다. ";
+				var str2 = "예약 요청을 클릭하면 서비스 수수료가 포함된 총액을 지불하는 것과 서비스 약관, 환불정책에 동의하는 것입니다.";
+				var price = prompt(str1 + str2, "결제 금액을 입력하세요.");
+			    
+			    if(price == null){
+			    	break;
+			    }else if(price == ""){
+			       alert("금액 액수가 없습니다. 다시 입력하세요");
+			    }else if(price == "${reserveVO.reserve_price}"){
+			       alert("거래가 완료되었습니다.");
+			       
+			       var str = "interceptor_reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
+					str += "petsitterId=${petsitterboardVO.petsitterVO.memberVO.id}&petsitterNo=${petsitterboardVO.petsitterVO.petsitterNo}";
+					
+					location.href = str;
+			    }else{
+			    	alert("금액이 일치하지 않습니다. 다시 입력하세요");
+			    }
 			}
 		});
 		
@@ -58,6 +71,19 @@
 			<td>
 				<img src="${initParam.root}${petsitterboardVO.petsitterVO.petsitterImg}" />
 			</td>
+		</tr>
+		<tr>
+			<td colspan="4">예약 정보</td>
+		</tr>
+		<tr>
+			<th>예약 가격</th>
+			<td>${reserveVO.reserve_price}</td>
+		</tr>
+		<tr>
+			<th>시작일</th>
+			<td>${reserveSdate.pet_calDate}</td>
+			<th>종료일</th>
+			<td>${reserveEdate.pet_calDate}</td>
 		</tr>
 		<tr>
     		<td colspan="4">

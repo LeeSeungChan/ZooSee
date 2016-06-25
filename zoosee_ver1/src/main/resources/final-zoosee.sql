@@ -6,6 +6,8 @@ select pb.petsitterboard_no,pb.petsitterboard_title,pb.petsitterboard_contents,p
 			  where petsitterboard_no=1) pb, petsitter ps, pet_member m
 		where ps.id=m.id and ps.petsitterNo=pb.petsitterNo 
 
+		select * from petsitterboard
+		
 alter table petsitterboard drop column petsitterboard_price;
 alter table petsitterboard drop column petsitterboard_petsize;
 alter table petsitterboard drop column petsitterboard_pettype;
