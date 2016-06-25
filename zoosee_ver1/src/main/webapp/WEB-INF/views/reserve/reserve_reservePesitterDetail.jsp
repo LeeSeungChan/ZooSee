@@ -32,6 +32,7 @@
 					str += "petsitterId=${petsitterboardVO.petsitterVO.memberVO.id}&petsitterNo=${petsitterboardVO.petsitterVO.petsitterNo}";
 					
 					location.href = str;
+					break;
 			    }else{
 			    	alert("금액이 일치하지 않습니다. 다시 입력하세요");
 			    }
