@@ -3,7 +3,7 @@
 <script type="text/javascript">
  	$(document).ready(function(){
  	      var rank="${sessionScope.mvo.rank}";
- 	       if(rank=!"normal"){
+ 	       if(rank!="normal"||rank!="petmom"){
  	          alert("이미 등록된 회원입니다!");
  	          $(location).attr('href',"home.do");
  	       }
