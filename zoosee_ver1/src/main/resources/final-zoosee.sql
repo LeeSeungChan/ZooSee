@@ -1,13 +1,3 @@
-select pb.petsitterboard_no,pb.petsitterboard_title,pb.petsitterboard_contents,pb.startDay,pb.endDay,pb.petsitterNo,
-	   		   ps.petNumber,ps.service,ps.price,ps.petSize,ps.petType,ps.petsitterImg,ps.houseImg,
-	   		   m.name,m.address,m.id,m.existence
-		from (SELECT petsitterboard_no,petsitterboard_title,petsitterboard_contents,startDay,endDay,petsitterNo
-			  FROM petsitterboard
-			  where petsitterboard_no=1) pb, petsitter ps, pet_member m
-		where ps.id=m.id and ps.petsitterNo=pb.petsitterNo 
-
-		select * from petsitterboard
-		
 alter table petsitterboard drop column petsitterboard_price;
 alter table petsitterboard drop column petsitterboard_petsize;
 alter table petsitterboard drop column petsitterboard_pettype;

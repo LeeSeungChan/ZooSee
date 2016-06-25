@@ -128,14 +128,11 @@ public class ReserveController {
 		petsitterboardVO.setPetsitterVO(petsitterVO);
 		ReserveVO reserveVO = reserveService.getReserveVO(reserve_no);
 		List<PetVO> petList = petService.petList(id);
-		List<PetCalendarVO> list = reserveService.getReserveDate(reserve_no);
 		
 		ModelAndView mv = new ModelAndView("reserve_reservePesitterDetail");
 		mv.addObject("petsitterboardVO", petsitterboardVO);
 		mv.addObject("reserveVO", reserveVO);
 		mv.addObject("petList", petList);
-		mv.addObject("reserveSdate", list.get(0));
-		mv.addObject("reserveEdate", list.get(list.size()-1));
 		
 		return mv;
 	}
