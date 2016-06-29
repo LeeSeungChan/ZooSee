@@ -18,7 +18,7 @@ public interface ReserveService {
 
 	List<PetCalendarVO> getReserveDate(int reserve_no);
 
-	int reserveCancle(int re_no);
+	int reserveCancle(int re_no, String petsitterId, String petmomId);
 
 	List<ReserveVO> showMyReserveList(MemberVO memberVO, String petMasterSignal);
 

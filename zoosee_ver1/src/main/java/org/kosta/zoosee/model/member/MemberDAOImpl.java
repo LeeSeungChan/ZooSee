@@ -60,4 +60,8 @@ public class MemberDAOImpl implements MemberDAO {
 	public String findIdByPetsitterNo(int petsitterNo) {
 		return template.selectOne("member.findIdByPetsitterNo",petsitterNo);
 	}
+	@Override
+	public List<String> allMemberIdList() {
+		return template.selectList("member.allMemberIdList");
+	}
 }

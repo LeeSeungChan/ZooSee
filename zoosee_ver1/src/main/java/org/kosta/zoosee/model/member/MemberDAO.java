@@ -29,4 +29,6 @@ public interface MemberDAO {
 
 	public abstract String findIdByPetsitterNo(int petsitterNo);
 
+	public abstract List<String> allMemberIdList();
+
 }

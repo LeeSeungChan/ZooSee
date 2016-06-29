@@ -14,6 +14,6 @@ public interface PetCalendarDAO {
 
 	List<String> getPetCalendarDate(int petsitterboard_no);
 
-	void updatePetReserve(int reserve_no);
+	int updatePetReserve(int reserve_no);
 
 }

@@ -51,31 +51,23 @@
          </c:when>
          <c:otherwise>
                <ul class="nav navbar-nav navbar-right">
-               
                <c:if test="${sessionScope.mvo.id=='admin' }">
                <!-- 관리자 -->
-               <li  class="dropdown" >
+               		<li  class="dropdown" >
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >관리자페이지 <span class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
- 
-                       <li><a href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">회원리스트 및 승인(관리자)</a></li>
-                        <li><a href="${initParam.root}interceptor_admin_qna_list.do?when=all">Q&A 목록(관리자)</a></li>
-
+                      <li><a href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">회원리스트 및 승인(관리자)</a></li>
+                      <li><a href="${initParam.root}interceptor_admin_qna_list.do?when=all">Q&A 목록(관리자)</a></li>
+                      <li><a href="${initParam.root}interceptor_admin_message.do">메세지(관리자)</a></li>
                       </ul>
                     </li>
                </c:if>
-               
                <c:if test="${sessionScope.mvo.rank == 'petmaster'}">
 					<c:set value="0" var="petMasterSignal"></c:set>
 				</c:if>
-		
-				
-               
                <c:if test="${mvo.rank == 'petsitter' || mvo.rank== 'petmaster'}">
                		<li><a href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}">글 등록</a></li>
                </c:if>
-
-               
                 <c:choose>
                	<c:when test="${sessionScope.mvo.rank=='petsitter' || sessionScope.mvo.rank=='petmaster'  }">
                		 <li><a href="${initParam.root}interceptor_petsitter_updateform.do">펫시터 정보 수정</a></li>
@@ -84,13 +76,7 @@
                		<li><a href="${initParam.root}petsitter_register.do">펫시터신청</a></li>
                	</c:otherwise>
                </c:choose>
-               
-              
-               
-              
                <li><a href="${initParam.root}interceptor_message_list.do" id="message">메세지</a></li>
-               
-               
                     <li  class="dropdown" >
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${sessionScope.mvo.name} <span class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
@@ -101,7 +87,6 @@
 						<li><a href="${initParam.root}interceptor_tradeInfo_getTradeMyList.do">거래목록</a></li>
                         <li class="divider"></li>
                         <li><a href="${initParam.root}interceptor_freeBoard_list.do">게시판</a></li>
-                        
                         <li class="divider"></li>
                         <li><a href="${initParam.root}logout.do">로그아웃</a></li>
                       </ul>

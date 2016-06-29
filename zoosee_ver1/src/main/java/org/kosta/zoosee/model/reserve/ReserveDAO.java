@@ -6,7 +6,7 @@ import org.kosta.zoosee.model.vo.ReserveVO;
 
 public interface ReserveDAO {
 
-	void reserveRegister(ReserveVO reserveVO);
+	int reserveRegister(ReserveVO reserveVO);
 
 	ReserveVO getReserveVO(int reserve_no);
 

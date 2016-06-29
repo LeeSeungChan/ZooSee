@@ -11,7 +11,7 @@ public interface PetCalendarService {
 
 	void registerCalendar(ReserveVO reserveVO, int reserve_no, PetsitterboardVO petsitterboardVO, String petsitterId);
 
-	void updatePetReserve(int reserve_no);
+	void updatePetReserve(int reserve_no, String petmomId, String petsitterId);
 
 }
  

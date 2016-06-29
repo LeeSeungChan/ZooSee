@@ -34,8 +34,8 @@ public class PetCalendarDAOImpl implements PetCalendarDAO{
 	}
 
 	@Override
-	public void updatePetReserve(int reserve_no) {
-		template.update("petCalendar.updatePetReserve", reserve_no);
+	public int updatePetReserve(int reserve_no) {
+		return template.update("petCalendar.updatePetReserve", reserve_no);
 	}
 
 }

@@ -55,4 +55,14 @@ public class MessageDAOImpl implements MessageDAO {
 		template.insert("message.insertMessage",message);		
 	}
 
+	@Override
+	public List<MessageVO> getMessageListAdmin(HashMap<String, String> map) {
+		return template.selectList("message.getMessageListAdmin",map);
+	}
+
+	@Override
+	public int getMessageListAdminCount(String id) {
+		return template.selectOne("message.getMessageListAdminCount",id);
+	}
+
 }

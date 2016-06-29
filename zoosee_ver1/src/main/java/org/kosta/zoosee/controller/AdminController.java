@@ -2,9 +2,12 @@ package org.kosta.zoosee.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.admin.AdminService;
 import org.kosta.zoosee.model.qnaboard.ListVO;
+import org.kosta.zoosee.model.vo.MemberVO;
+import org.kosta.zoosee.model.vo.MessageVO;
 import org.kosta.zoosee.model.vo.QNABoardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,5 +53,23 @@ public class AdminController {
 		String id=request.getParameter("id");
 		ListVO list=adminService.findByIdQnaList(id,pageNo);
 		return new ModelAndView("admin_qna_find_view","listVO",list);
+	}
+	/*관리자 페이지 - 모든 회원에게 메세지 보내기*/
+	@RequestMapping("interceptor_admin_sendMessage.do")
+	public ModelAndView sendMessage(MessageVO messageVO,HttpServletRequest request){
+		adminService.sendMessage(messageVO);
+		HttpSession session=request.getSession(false);
+		String id=((MemberVO)session.getAttribute("mvo")).getId();
+		return new ModelAndView("redirect:interceptor_admin_MessageList.do?id="+id);
+	}
+	/*관리자 페이지 - 보낸 메세지 리스트*/
+	@RequestMapping("interceptor_admin_MessageList.do")
+	public ModelAndView messageList(HttpServletRequest request,String pageNo,String id){
+		if(id==null){
+			HttpSession session=request.getSession(false);
+			id=((MemberVO)session.getAttribute("mvo")).getId();
+		}
+		org.kosta.zoosee.model.message.ListVO list=adminService.messageList(id,pageNo);
+		return new ModelAndView("admin_message_list","listVO",list);
 	}
 }

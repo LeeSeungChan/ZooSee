@@ -6,7 +6,7 @@ import org.kosta.zoosee.model.vo.TradeInfoVO;
 
 public interface TradeInfoDAO {
 
-	void registerTradeInfo(TradeInfoVO tradeInfoVO);
+	int registerTradeInfo(TradeInfoVO tradeInfoVO);
 
 	List<TradeInfoVO> getTradeVOPetMomList(String id);
 

@@ -20,13 +20,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		)where page=#{pageNo}
 	</select>
+	<select id="getMessageListAdmin" resultType="messageVO" parameterType="hashmap">
+		select message_no,title,content,time_posted,checked
+		from (
+			select ceil(rownum/10) as page,message_no,title,content,to_char(time_posted,'yyyy/mm/dd hh24:mi:ss') as time_posted,checked
+			from (
+				select message_no,title,content,time_posted,checked
+				from message where id=#{id} and title like '%'||'[관리자]'||'%' order by message_no desc
+			)
+		)where page=#{pageNo}
+	</select>
 	
 	<select id="getTotalMessage" resultType="int">
 		select count(*) from message where id=#{value}
 	</select>
 	
+	<select id="getMessageListAdminCount" resultType="int">
+		select count(*) from message where id=#{value} and title like '%'||'[관리자]'||'%'
+	</select>
+	
 	<select id="getMessageByNo" resultType="messageVO">
-		select * from message where message_no=#{value}
+		select * from message where message_no=#{value} 
 	</select>
 	
 	<update id="updateChecked" parameterType="messageVO">

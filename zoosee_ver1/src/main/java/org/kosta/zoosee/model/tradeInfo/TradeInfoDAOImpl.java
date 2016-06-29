@@ -14,8 +14,8 @@ public class TradeInfoDAOImpl implements TradeInfoDAO{
 	private SqlSessionTemplate template;
 
 	@Override // 거래내역 insert하기
-	public void registerTradeInfo(TradeInfoVO tradeInfoVO) {
-		template.insert("tradeInfo.registerTradeInfo", tradeInfoVO);
+	public int registerTradeInfo(TradeInfoVO tradeInfoVO) {
+		return template.insert("tradeInfo.registerTradeInfo", tradeInfoVO);
 	}
 
 	@Override // PetMom이 로그인시 list 찾기

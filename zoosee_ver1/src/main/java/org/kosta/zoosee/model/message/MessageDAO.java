@@ -23,4 +23,10 @@ public interface MessageDAO {
 			HashMap<String, String> map);
 
 	public abstract void insertMessage(MessageVO message);
+
+	public abstract List<MessageVO> getMessageListAdmin(
+			HashMap<String, String> map);
+
+	public abstract int getMessageListAdminCount(String id);
+
 }

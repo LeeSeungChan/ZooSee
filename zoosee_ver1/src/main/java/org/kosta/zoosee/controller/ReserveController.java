@@ -45,9 +45,8 @@ public class ReserveController {
 	@RequestMapping("interceptor_reserveRegister.do")
 	public ModelAndView reserveRegister(HttpServletRequest request, ReserveVO reserveVO, PetsitterboardVO petsitterboardVO){
 		// 멤버VO set해주기
-		String id = request.getParameter("id");
+		String id = request.getParameter("id");//예약자 id
 		reserveVO.setMemberVO(reserveService.getMemberVO(id));
-		
 		// 예약요청하기
 		reserveService.reserveRegister(reserveVO, petsitterboardVO);
 		
@@ -144,46 +143,46 @@ public class ReserveController {
 	// 예약을 승인을 할 때
 	// 펫시터 기준
 	@RequestMapping("interceptor_reserve_reserveAccept.do")
-	public ModelAndView reserveAccept(HttpServletRequest request){
-		int reserve_no = Integer.parseInt(request.getParameter("reserve_no")); // reserve_no
-		String id = request.getParameter("id"); // 신청자(PETMOM) 아이디
-		String sessionId = null; // 본인(PETSITTER) 아이디 session에서 받아온다.
+	public ModelAndView reserveAccept(HttpServletRequest request,int reserve_no,String id){
+	/*	int reserve_no = Integer.parseInt(request.getParameter("reserve_no")); // reserve_no
+		String id = request.getParameter("id"); // 신청자(PETMOM) 아이디*/		
+		String petsitterId = null; // 본인(PETSITTER) 아이디 session에서 받아온다.
 		HttpSession session = request.getSession(false);
 		
-		int checkId = reserveService.getReserveIdCheck(id);
+		int checkId = reserveService.getReserveIdCheck(id); // 신청자(PETMOM) 아이디
 		if(checkId == 0){
 			return new ModelAndView("redirect:reserve_reserveAcceptFail.jsp");
 		}
 		
-		if(session != null){
-			sessionId = ((MemberVO)session.getAttribute("mvo")).getId();
+		if(session != null){  // 본인(PETSITTER) 아이디
+			petsitterId = ((MemberVO)session.getAttribute("mvo")).getId();
 		}
 		
 		// pet_Calendar의 pet_reserve를 no에서 yes로 업데이트
-		petCalendarService.updatePetReserve(reserve_no);
+		petCalendarService.updatePetReserve(reserve_no,id,petsitterId);
 		
 		// reservce_reocg를 1로 올려준다.
 		reserveService.updateReserveRecog(reserve_no);
 		
-		return new ModelAndView("redirect:interceptor_reserve_reserveMyList.do?id="+sessionId);
+		return new ModelAndView("redirect:interceptor_reserve_reserveMyList.do?id="+petsitterId);
 	}
 	// 펫시터가 승낙까지 했고 펫맘이 거래하기 누르는
 	// 펫마스터가 거래하기를 누르면 거래목록이 안나옴.
 	@RequestMapping("interceptor_reserve_reserveDealAccept.do")
-	public ModelAndView reserveDealAccept(HttpServletRequest request){
-		String petsitterId = request.getParameter("petsitterId");
-		int reserve_no = Integer.parseInt(request.getParameter("reserve_no"));
+	public ModelAndView reserveDealAccept(HttpServletRequest request,String petsitterId,int reserve_no){
+		/*String petsitterId = request.getParameter("petsitterId");
+		int reserve_no = Integer.parseInt(request.getParameter("reserve_no"));*/
 		//int petsitterNo = Integer.parseInt(request.getParameter("petsitterNo"));
-		String id = null; 
+		String petmomId = null; 
 		// 본인(펫맘) 아이디 session에서 받아온다.
 		HttpSession session = request.getSession(false);
 		if(session != null){
-			id = ((MemberVO)session.getAttribute("mvo")).getId();
+			petmomId = ((MemberVO)session.getAttribute("mvo")).getId();
 		}
 		
 		// 거래내역에 삽입한다.
 		TradeInfoVO tradeInfoVO = new TradeInfoVO();
-		tradeInfoServie.registerTradeInfo(tradeInfoVO, reserve_no, id, petsitterId);
+		tradeInfoServie.registerTradeInfo(tradeInfoVO, reserve_no, petmomId, petsitterId);
 		
 		// recog를 2로 올려준다
 		reserveService.updateReserveRecog(reserve_no);
@@ -198,8 +197,8 @@ public class ReserveController {
 	
 	// 펫시터가 예약 거절 or 펫맘이 거래 취소
 	@RequestMapping("interceptor_reserve_reserveCancel.do")
-	public ModelAndView reserveCancle(String reserve_no){
-		int check = reserveService.reserveCancle(Integer.parseInt(reserve_no));
+	public ModelAndView reserveCancle(String reserve_no,String petsitterId,String petmomId){
+		int check = reserveService.reserveCancle(Integer.parseInt(reserve_no),petsitterId,petmomId);
 
 		return new ModelAndView("redirect:reserve_reserveDelete.do?check="+check);
 	}

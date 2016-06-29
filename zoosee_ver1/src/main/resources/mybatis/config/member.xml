@@ -53,6 +53,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update pet_member set rank=#{rank} where id=#{id}
 	</update>
 	
+	<select id="allMemberIdList" resultType="string">
+		select id from pet_member
+	</select>
+	
 	<!-- 이승찬 추가 - 혹시 몰라서 백업용 -->
 	<!-- <update id="registerPet">
 		update pet_member set rank='petmom' where id=#{id}

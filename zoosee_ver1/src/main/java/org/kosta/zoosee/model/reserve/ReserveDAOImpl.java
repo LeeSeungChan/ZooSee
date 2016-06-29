@@ -14,8 +14,8 @@ public class ReserveDAOImpl implements ReserveDAO{
 	private SqlSessionTemplate template;
 
 	@Override
-	public void reserveRegister(ReserveVO reserveVO) {
-		template.insert("reserve.reserveRegister", reserveVO);
+	public int reserveRegister(ReserveVO reserveVO) {
+		return template.insert("reserve.reserveRegister", reserveVO);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class ReserveDAOImpl implements ReserveDAO{
 	// 펫시터가 거래 승낙시 RESERVE의 reserve_recog를 1로 없데이트
 	@Override
 	public void updateReserveRecog(int reserve_no) {
- 		template.update("reserve.updateReserveRecog", reserve_no);
+ 		 template.update("reserve.updateReserveRecog", reserve_no);
 	}
 
 	// PetMom id로 reserveList 찾기
