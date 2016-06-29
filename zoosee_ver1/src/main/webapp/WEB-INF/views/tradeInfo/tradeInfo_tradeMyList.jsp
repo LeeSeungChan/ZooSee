@@ -10,6 +10,16 @@
 		</div>
 	</div>
 </div> --%>
+<script>
+	function openPopup(id){
+		var content=null;
+		
+		window.open("${initParam.root}reviewPopup.jsp?id="+id,"","width=400 height=500 left=150 top=100 ")
+				
+
+		
+	}
+</script>
 <div class="BJMainKING">
 <div class="BJMainKING" style="margin-top: 5%;">
 <div class="BJMainDiv" style="margin-bottom: 10%;">
@@ -81,6 +91,7 @@
 							<td style="vertical-align: middle;">${tradeInfoVO.tradePrice}</td>
 							<td style="vertical-align: middle;">${tradeInfoVO.tradeSdate}</td>
 							<td style="vertical-align: middle;">${tradeInfoVO.tradeEdate}</td>
+							<td style="vertical-align: middle;"><input type="button" value="리뷰" onclick="openPopup('${tradeInfoVO.petsitterVO.memberVO.id}')"></td>
 						</tr>
 					</c:forEach>
 				</table>

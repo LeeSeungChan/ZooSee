@@ -4,6 +4,23 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
-
+	<insert id="inputReview" parameterType="reviewVO">
+		insert into review(review_no, content, time_posted, star_rate, id, ref_id)
+		values (review_seq.nextval, #{content}, sysdate, #{star_rate}, #{id}, #{ref_id})
+	</insert>
+	
+	<select id="getReviewVOById" resultType="reviewVO">
+		select r.review_no, r.content, r.time_posted, r.star_rate, pm.id, r.ref_id, pm.name
+		from (
+			select id,name from pet_member 
+		) pm, review r where  r.id=pm.id and r.ref_id=#{value}
+	</select>
+	
+	    <select id="avg" resultType="double">
+       select round(avg(star_rate),1)
+      from review
+      where ref_id=#{value}
+      group by ref_id
+    </select>
 	
 </mapper>

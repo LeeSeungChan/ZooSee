@@ -12,9 +12,11 @@ import org.kosta.zoosee.model.board.ListVO;
 import org.kosta.zoosee.model.board.PagingBean;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.reserve.ReserveService;
+import org.kosta.zoosee.model.review.ReviewService;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
+import org.kosta.zoosee.model.vo.ReviewVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,8 @@ public class BoardController {
 	private PetsitterService petsitterService;
 	@Resource
 	private ReserveService reserveService;
-
+	@Resource
+	private ReviewService reviewService;
 	// 헤더에서 보드 등록 폼.JSP로 이동하는
 	@RequestMapping("interceptor_petsitterboard_registerform.do")
 	public ModelAndView registerBoard(HttpServletRequest request) {
@@ -133,6 +136,8 @@ public class BoardController {
 
 		mv.addObject("petsitterboardVO", petsitterboardVO);
 		mv.addObject("calendarList", list);
+		List<ReviewVO> reviewList=reviewService.getReviewVOById(petsitterboardVO.getPetsitterVO().getMemberVO().getId());
+		mv.addObject("reviewList", reviewList);
 
 		return mv;
 	}

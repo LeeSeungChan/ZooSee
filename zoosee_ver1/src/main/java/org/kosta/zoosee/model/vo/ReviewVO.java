@@ -8,9 +8,30 @@ public class ReviewVO {
 	private int star_rate;
 	private String id;
 	private String ref_id;
+	private String name;
 	
 	public ReviewVO() {
 		super();
+	}
+
+	public ReviewVO(int review_no, String content, String time_posted,
+			int star_rate, String id, String ref_id, String name) {
+		super();
+		this.review_no = review_no;
+		this.content = content;
+		this.time_posted = time_posted;
+		this.star_rate = star_rate;
+		this.id = id;
+		this.ref_id = ref_id;
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public ReviewVO(int review_no, String content, String time_posted,
@@ -76,8 +97,10 @@ public class ReviewVO {
 	public String toString() {
 		return "ReviewVO [review_no=" + review_no + ", content=" + content
 				+ ", time_posted=" + time_posted + ", star_rate=" + star_rate
-				+ ", id=" + id + ", ref_id=" + ref_id + "]";
+				+ ", id=" + id + ", ref_id=" + ref_id + ", name=" + name + "]";
 	}
+
+
 	
 	
 
