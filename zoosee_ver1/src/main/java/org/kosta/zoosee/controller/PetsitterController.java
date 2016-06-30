@@ -181,4 +181,13 @@ public class PetsitterController {
 			return mv;
 		}
 		
+		//펫시터 자기정보 보기
+		@RequestMapping("interceptor_petsitter_info.do")
+		public ModelAndView petsitter_info(String id){
+			PetsitterVO petsitterVO = petsitterService.findPetsitterById(id);
+			return new ModelAndView("petsitter_info","petsitterVO",petsitterVO);
+		}
+		
+
+		
 }
