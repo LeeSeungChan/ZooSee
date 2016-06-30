@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.kosta.zoosee.model.member.MemberDAO;
 import org.kosta.zoosee.model.message.MessageDAO;
+import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.qnaboard.ListVO;
 import org.kosta.zoosee.model.qnaboard.PagingBean;
 import org.kosta.zoosee.model.qnaboard.QNABoardDAO;
@@ -23,6 +24,8 @@ public class AdminServiceImpl implements AdminService {
 	private MemberDAO memberDAO;
 	@Resource
 	private MessageDAO messageDAO;
+	@Resource
+	private MessageService messageService;
 
 	@Override
 	public ListVO getQuestionList(String pageNo) {
@@ -44,14 +47,7 @@ public class AdminServiceImpl implements AdminService {
 	public void updateAnswer(QNABoardVO qnaBoardVO) {
 		int i=qnaBoardDAO.updateAnswer(qnaBoardVO);
 		if(i==1){
-			String title="[알람] Q&A 답변 등록";
-			StringBuilder content=new StringBuilder(" 귀하가 등록하신 1:1 질문에 답변이 등록되었습니다.");
-			content.append("이용해 주셔서 감사합니다.");
-			MessageVO message=new MessageVO();
-			message.setTitle(title);
-			message.setContent(content.toString());
-			message.setId(qnaBoardVO.getMemberVO().getId());
-			messageDAO.insertMessage(message);
+			messageService.sendMessageOnServer(qnaBoardVO.getMemberVO().getId(),4);
 		}
 	}
 

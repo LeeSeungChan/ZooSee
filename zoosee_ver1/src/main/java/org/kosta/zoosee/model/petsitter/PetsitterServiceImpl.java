@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 
 import org.kosta.zoosee.model.member.MemberDAO;
 import org.kosta.zoosee.model.message.MessageDAO;
+import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.qnaboard.PagingBean;
-import org.kosta.zoosee.model.vo.MessageVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 	private MemberDAO memberDAO;
 	@Resource
 	private MessageDAO messageDAO;
+	@Resource
+	private MessageService messageService;
 
 	@Override
 	public void registerPetsitter(PetsitterVO petsitterVO) {
@@ -40,7 +42,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 			map.put("rank", inputRank);
 			memberDAO.upgradeRank(map);
 			// 메세지 보내기
-			String title = "[알람] 펫시터 신청 ";
+			messageService.sendMessageOnServer(id, 6);
+			/*String title = "[알람] 펫시터 신청 ";
 			StringBuilder content = new StringBuilder("펫 시터를 신청하셨습니다.");
 			content.append("귀하의 등록 정보를 관리자가 검증후 인증이 완료됩니다.");
 			content.append("펫시터의 인증이 완료되면 펫시터 게시판에 글을 등록하실 수 있습니다. 감사합니다.");
@@ -48,7 +51,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 			message.setTitle(title);
 			message.setContent(content.toString());
 			message.setId(id);
-			messageDAO.insertMessage(message);
+			messageDAO.insertMessage(message);*/
 		}
 	}
 
@@ -86,7 +89,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 			map.put("rank", inputRank);
 			memberDAO.upgradeRank(map);
 			// 메세지 보내기
-			String title = "[알람] 펫시터 인증완료 ";
+			messageService.sendMessageOnServer(id, 7);
+			/*String title = "[알람] 펫시터 인증완료 ";
 			StringBuilder content = new StringBuilder("펫시터로 인증되셨습니다.");
 			content.append("펫시터 게시판에 글을 등록하시면 이용자가 귀하의 정보를 열람할 수 있습니다.");
 			content.append("ZOOSEE 의 예약시스템을 이용하실 수 있습니다. ");
@@ -96,7 +100,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 			message.setTitle(title);
 			message.setContent(content.toString());
 			message.setId(id);
-			messageDAO.insertMessage(message);
+			messageDAO.insertMessage(message);*/
 		}
 	}
 	
@@ -133,14 +137,15 @@ public class PetsitterServiceImpl implements PetsitterService {
 		int i = petsitterDAO.update(petsitterVO);
 		if (i == 1) {
 			// 메세지 보내기
-			String title = "[알람] 펫시터 수정 신청";
+			messageService.sendMessageOnServer(petsitterVO.getMemberVO().getId(), 8);
+			/*String title = "[알람] 펫시터 수정 신청";
 			StringBuilder content = new StringBuilder("펫시터정보를 수정하셨습니다.");
 			content.append("따라서 귀하는 관리자의 검증을 받아야 게시판에 글을 등록하실 수 있습니다. 감사합니다.");
 			MessageVO message = new MessageVO();
 			message.setTitle(title);
 			message.setContent(content.toString());
 			message.setId(petsitterVO.getMemberVO().getId());
-			messageDAO.insertMessage(message);
+			messageDAO.insertMessage(message);*/
 		}
 	}
 

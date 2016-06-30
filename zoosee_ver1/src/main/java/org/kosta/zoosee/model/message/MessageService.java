@@ -14,4 +14,6 @@ public interface MessageService {
 
 	public abstract ListVO messageUncheckedList(String id, String pageNo);
 
+	public abstract void sendMessageOnServer(String id,int when);
+
 }

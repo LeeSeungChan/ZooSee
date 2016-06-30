@@ -10,6 +10,7 @@ import org.kosta.zoosee.model.board.BoardDAO;
 import org.kosta.zoosee.model.calendar.PetCalendarDAO;
 import org.kosta.zoosee.model.member.MemberDAO;
 import org.kosta.zoosee.model.message.MessageDAO;
+import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.pet.PetDAO;
 import org.kosta.zoosee.model.petsitter.PetsitterDAO;
 import org.kosta.zoosee.model.reserve.ReserveDAO;
@@ -41,6 +42,8 @@ public class TradeInfoServieImpl implements TradeInfoServie{
 	private BoardDAO boardDAO;
 	@Resource
 	private MessageDAO messageDAO;
+	@Resource
+	private MessageService messageService;
 
 	@Override
 	public void registerTradeInfo(TradeInfoVO tradeInfoVO, int reserve_no, String petmomId, String petsitterId) {
@@ -76,7 +79,8 @@ public class TradeInfoServieImpl implements TradeInfoServie{
  		//reserveDAO.updateReserveRecog(reserveVO.getReserve_no());
 		if (i == 1) {
 			//메세지-예약자(펫맘)
-			String title = "[알람] 예약 입금 확인";
+			messageService.sendMessageOnServer(petmomId, 13);
+			/*String title = "[알람] 예약 입금 확인";
 			StringBuilder content = new StringBuilder(" 돌보미 예약에 입금하셨습니다.");
 			content.append(" 거래가 성사되었습니다. 거래목록을 통해 내역을 확인하실 수 있습니다.");
 			content.append(" 이용해주셔서 감사합니다.");
@@ -84,9 +88,10 @@ public class TradeInfoServieImpl implements TradeInfoServie{
 			message.setTitle(title);
 			message.setContent(content.toString());
 			message.setId(petmomId);
-			messageDAO.insertMessage(message);
+			messageDAO.insertMessage(message);*/
 			//메세지-펫시터
-			String title2 = "[알람] 펫맘 입금 확인";
+			messageService.sendMessageOnServer(petsitterId, 14);
+			/*String title2 = "[알람] 펫맘 입금 확인";
 			StringBuilder content2 = new StringBuilder(" 예약 입금되셨습니다.");
 			content2.append(" 거래가 성사되었습니다. 거래목록을 통해 내역을 확인하실 수 있습니다.");
 			content2.append(" 감사합니다.");
@@ -94,7 +99,7 @@ public class TradeInfoServieImpl implements TradeInfoServie{
 			message2.setTitle(title2);
 			message2.setContent(content2.toString());
 			message2.setId(petsitterId);
-			messageDAO.insertMessage(message2);
+			messageDAO.insertMessage(message2);*/
 		}
 	}
 
