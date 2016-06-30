@@ -5,6 +5,9 @@ alter table petsitterboard drop column petsitterboard_pettype;
 delete tablename where condition
 delete pet_member where id='java' cascade CONSTRAINTS
 
+	select b.petsitterboard_no from petsitterboard b,petsitter p
+		where p.id='java' and p.petsitterNo=b.petsitterNo
+
 -- 펫 고유 번호(시퀀스)
 create sequence petNo_seq;
 drop sequence petNo_seq;

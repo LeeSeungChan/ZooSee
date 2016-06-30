@@ -111,4 +111,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE a.petsitterNo=pb.petsitterNo
 	</select>
 	
+	<select id="myPetsitterboard" resultType="int">
+		select b.petsitterboard_no from petsitterboard b,petsitter p
+		where p.id=#{value} and p.petsitterNo=b.petsitterNo
+	</select>
+	
 </mapper>

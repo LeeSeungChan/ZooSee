@@ -27,5 +27,6 @@ public interface ReserveDAO {
 	int getReserveIdCheck(String id);
 
 	List<ReserveVO> showPetMasterReserveList(String id);
-
+	
+	ReserveVO popupPayment(int reserve_no);
 }

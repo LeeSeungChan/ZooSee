@@ -54,4 +54,9 @@ public class BoardDAOImpl implements BoardDAO{
 	public PetsitterboardVO getBoardVOByPetsitterId(String id) {	 
 		return template.selectOne("petsitterboard.getBoardVOByPetsitterId", id);	 
 	}
+
+	@Override
+	public int myPetsitterboard(String id) {
+		return template.selectOne("petsitterboard.myPetsitterboard",id);
+	}
 }

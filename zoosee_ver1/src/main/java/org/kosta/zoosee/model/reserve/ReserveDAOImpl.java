@@ -73,4 +73,9 @@ public class ReserveDAOImpl implements ReserveDAO{
 	public int getReserveIdCheck(String id) {
 		return template.selectOne("reserve.getReserveIdCheck",id);
 	}
+	
+	@Override
+	public ReserveVO popupPayment(int reserve_no) {
+		return template.selectOne("reserve.popupPayment", reserve_no);
+	}
 }

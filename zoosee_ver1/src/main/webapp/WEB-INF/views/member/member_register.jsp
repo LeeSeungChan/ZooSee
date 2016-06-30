@@ -128,7 +128,7 @@
 
    </script>
 <!-- 전체 시작 -->
-<div class="WJcontainer4">
+<div class="WJcontainer" style="margin-top: 5%;">
 	<!-- 텍스트는 왼쪽 정렬 및 삽입 중간 정렬 -->
 	<div class="WJLayout"
 		style="text-align: left;">

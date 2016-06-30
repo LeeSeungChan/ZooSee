@@ -25,6 +25,12 @@
   	    		$(this).parent().attr("class","dropdown");
   	    	}   
   	    });
+  		
+  		$("#logout").click(function(){
+  			if(!confirm("로그아웃하시겠습니까?")){
+  				return false;
+  			}
+  		})
   	})
 </script> <!-- navbar-fixed-top -->
 
@@ -65,12 +71,11 @@
 			<c:if test="${sessionScope.mvo.rank == 'petmaster'}">
 				<c:set value="0" var="petMasterSignal" />
 				</c:if>
-			<c:if test="${mvo.rank == 'petsitter' || mvo.rank== 'petmaster'}">
-				<li><a href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}">글 등록</a></li>
-			</c:if>
 			<c:choose>
 				<c:when test="${sessionScope.mvo.rank=='petsitter' || sessionScope.mvo.rank=='petmaster'}">
-					<li><a href="${initParam.root}interceptor_petsitter_updateform.do">펫시터 정보 수정</a></li>
+				<li><a href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}">글 등록</a></li>
+					<%-- <li><a href="${initParam.root}interceptor_petsitter_updateform.do">펫시터 정보 수정</a></li>
+					<li><a href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터 정보 보기</a></li> --%>
 				</c:when>
 				<c:otherwise>
 					<li><a href="${initParam.root}petsitter_register.do">펫시터신청</a></li>
@@ -89,7 +94,7 @@
 						<li class="divider"></li>
 						<li><a href="${initParam.root}interceptor_freeBoard_list.do">게시판</a></li>
 						<li class="divider"></li>
-						<li><a href="${initParam.root}logout.do">로그아웃</a></li>
+						<li><a href="${initParam.root}logout.do" id="logout">로그아웃</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -98,30 +103,3 @@
 	</div>
 <!--   </div> -->
 </nav>
-
-
-<%-- <a href="${initParam.root}home.do">홈</a>
-<c:choose>
-   <c:when test="${empty sessionScope.mvo}">
-      <a href="${initParam.root}member_login.do">로그인</a>
-      <a href="${initParam.root}member_register.do">회원가입</a>
-   </c:when>
-   <c:otherwise>
-      ${sessionScope.mvo.name}님 환영
-      <a href="${initParam.root}logout.do">로그아웃</a>
-      <a href="${initParam.root}pet_register.do">펫등록</a>
-      <a href="${initParam.root}pet_list.do">펫목록</a>
-      <a href="${initParam.root}petsitter_register.do">돌보미신청</a>
-      <a href="${initParam.root}petsitter_updateform.do?id=${sessionScope.mvo.id}">돌보미정보수정</a>
-      <a href="${initParam.root}qna_board_register.do">qna 등록</a>
-      <a href="${initParam.root}qna_list.do">qna 목록</a><br>
-      <a href="${initParam.root}member_detail.do">회원정보</a>
-      <a href="${initParam.root}petsitter_petsitterList.do?value=recog">회원관리</a><!-- //관리자 페이지 -->
-      <a href="${initParam.root}admin_qna_list.do?when=all">관리자qna 목록</a><!-- //관리자 페이지 -->
-      <a href="${initParam.root}freeBoard_list.do?">자유게시판</a>
-      
-      <c:if test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
-         <a href="${initParam.root}petsitterboard_registerform.do?id=${sessionScope.mvo.id}">글 등록</a>
-      </c:if>
-   </c:otherwise>
-</c:choose> --%>

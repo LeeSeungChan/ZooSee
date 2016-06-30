@@ -4,9 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.kosta.zoosee.model.message.MessageDAO;
+import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.reserve.ReserveDAO;
-import org.kosta.zoosee.model.vo.MessageVO;
 import org.kosta.zoosee.model.vo.PetCalendarVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
 import org.kosta.zoosee.model.vo.ReserveVO;
@@ -19,7 +18,7 @@ public class PetCalendarServiceImpl implements PetCalendarService {
 	@Resource
 	private ReserveDAO reserveDAO;
 	@Resource
-	private MessageDAO messageDAO;
+	private MessageService messageService;
 
 	@Override
 	public List<String> getPetCalendarDate(int petsitterboard_no) {
@@ -81,25 +80,9 @@ public class PetCalendarServiceImpl implements PetCalendarService {
 		int i=petCalendarDAO.updatePetReserve(reserve_no);
 		if (i == 1) {
 			//메세지-예약자(펫맘)
-			String title = "[알람] 예약 요청 승인";
-			StringBuilder content = new StringBuilder(" 신청하신 반려견 돌보미 예약을 돌보미가 승인하였습니다.");
-			content.append(" 예약목록을 통해 내역을 확인하실 수 있습니다. 결제 후 돌보미의 정보를 추가로 확인 하실 수 있습니다.");
-			content.append(" 이용해주셔서 감사합니다.");
-			MessageVO message = new MessageVO();
-			message.setTitle(title);
-			message.setContent(content.toString());
-			message.setId(petmomId);
-			messageDAO.insertMessage(message);
+			messageService.sendMessageOnServer(petmomId,2);
 			//메세지-펫시터
-			String title2 = "[알람] 예약 승인 확인";
-			StringBuilder content2 = new StringBuilder(" 회원님의 돌보미 글에 예약 요청을 승인하셨습니다.");
-			content2.append(" 예약목록을 통해 내역을 확인하실 수 있습니다. 요청하신 회원님께서 결제하시면 거래가 성사됩니다.");
-			content2.append( "결제가 완료되어야 거래가 완료됩니다. 감사합니다.");
-			MessageVO message2 = new MessageVO();
-			message2.setTitle(title2);
-			message2.setContent(content2.toString());
-			message2.setId(petsitterId);
-			messageDAO.insertMessage(message2);
+			messageService.sendMessageOnServer(petsitterId,3);
 		}
 	}
 	

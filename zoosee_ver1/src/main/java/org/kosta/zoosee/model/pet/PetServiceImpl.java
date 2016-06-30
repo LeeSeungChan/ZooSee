@@ -6,8 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.zoosee.model.member.MemberDAO;
-import org.kosta.zoosee.model.message.MessageDAO;
-import org.kosta.zoosee.model.vo.MessageVO;
+import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.vo.PetVO;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ public class PetServiceImpl implements PetService {
 	@Resource
 	private MemberDAO memberDAO;
 	@Resource
-	private MessageDAO messageDAO;
+	private MessageService messageService;
 	
 	/*펫 등록*/
 	@Override
@@ -39,7 +38,8 @@ public class PetServiceImpl implements PetService {
 			}
 			memberDAO.upgradeRank(map); 
 			//메세지 보내기
-			String title="[알람] 펫 등록 ";
+			messageService.sendMessageOnServer(id, 5);
+			/*String title="[알람] 펫 등록 ";
 			StringBuilder content=new StringBuilder(pvo.getPetName()+"을 펫으로 등록하셨습니다.");
 			content.append("펫의 정보를 수정하실 때는 펫 관리 페이지를 이용하세요.");
 			content.append("ZOOSEE 의 예약을 이용하실 수 있습니다. 감사합니다.");
@@ -47,7 +47,7 @@ public class PetServiceImpl implements PetService {
 			message.setTitle(title);
 			message.setContent(content.toString());
 			message.setId(id);
-			messageDAO.insertMessage(message);
+			messageDAO.insertMessage(message);*/
 		}
 	}
 

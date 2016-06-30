@@ -38,7 +38,7 @@ public class BoardController {
 	public ModelAndView registerBoard(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		String id = null;
-		if(session != null || session.getAttribute("mvo") == null){
+		if(session != null && session.getAttribute("mvo") != null){
 			id = ((MemberVO)session.getAttribute("mvo")).getId();
 		}
 		
@@ -140,5 +140,13 @@ public class BoardController {
 		mv.addObject("reviewList", reviewList);
 
 		return mv;
+	}
+	@RequestMapping("interceptor_petsitterboard_myPetsitterBoard.do")
+	public ModelAndView myPetsitterboard(HttpServletRequest request){
+		HttpSession session=request.getSession(false);
+		String id=((MemberVO)session.getAttribute("mvo")).getId();
+		int petsitterboard_no=boardServie.myPetsitterboard(id);
+		
+		return new ModelAndView("redirect:petsitterboardDetail.do?petsitterboard_no="+petsitterboard_no);
 	}
 }

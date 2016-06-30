@@ -18,4 +18,6 @@ public interface BoardService {
 
 	List<String> getPetCalendarDate(int petsitterboard_no);
 
+	int myPetsitterboard(String id);
+
 }

@@ -43,6 +43,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE A.petsitterNo=PS.petsitterNo and PS.id=MM.id
 	</select>
 	
+	<select id="popupPayment" resultMap="reserveMap">
+		select r.reserve_no,r.reserve_price,p.id as petsitterId from reserve r,petsitterboard b,petsitter p
+		where r.reserve_no=#{value} and r.petsitterboard_no=b.petsitterboard_no and b.petsitterNo=p.petsitterNo
+	</select>
+	
 	<select id="showPetsitterReserveList" parameterType="string" resultMap="reserveMap">
 		select r.reserve_no,r.reserve_price,r.reserve_recog,b.petsitterboard_no,b.petsitterboard_title,r.id,
 	   		   pm.name,b.petsitterId,b.petsitterName,b.petsitterEmail,b.petsitterTel,b.petsitterAddress,
