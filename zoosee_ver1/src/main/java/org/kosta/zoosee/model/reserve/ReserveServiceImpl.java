@@ -207,4 +207,9 @@ public class ReserveServiceImpl implements ReserveService {
 	public int getReserveIdCheck(String id) {
 		return reserveDAO.getReserveIdCheck(id);
 	}
+	
+	@Override
+	public ReserveVO popupPayment(int reserve_no) {
+		return reserveDAO.popupPayment(reserve_no);
+	}
 }

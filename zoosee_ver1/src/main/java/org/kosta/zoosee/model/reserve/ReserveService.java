@@ -35,5 +35,7 @@ public interface ReserveService {
 	void updateReserveRecog(int reserve_no);
 
 	int getReserveIdCheck(String id);
+	
+	ReserveVO popupPayment(int reserve_no);
 }
  
