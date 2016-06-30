@@ -42,11 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        	where petsitterNo=#{petsitterNo}
 	</update>
 	
-	<select id="getConditionList" resultType="petsitterboardVO">
+	<select id="getConditionList" resultMap="petsitterboardRM">
 	select page, petsitterboard_no, petsitterboard_title,price,petSize,petType,address,petsitterImg,houseImg
 	from
 	(
-		select ceil(rownum/9) as page,petsitterboard_no,petsitterboard_title,price,petSize,petType,petsitterNo,address,petsitterImg,houseImg
+		select ceil(rownum/6) as page,petsitterboard_no,petsitterboard_title,price,petSize,petType,petsitterNo,address,petsitterImg,houseImg
 		from
 		(
 			select pb.petsitterboard_no,pb.petsitterboard_title,a.price,a.petSize,a.petType,pb.petsitterNo,a.address,a.petsitterImg,a.houseImg

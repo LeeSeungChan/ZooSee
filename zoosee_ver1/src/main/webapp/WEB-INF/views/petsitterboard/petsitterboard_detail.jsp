@@ -214,8 +214,17 @@
                return false;
             }
          });
-       });
-   </script>
+        
+        $("#addressMap").click(function(){
+			//alert("${petsitterboardVO.petsitterVO.memberVO.address}");
+			var address = "${petsitterboardVO.petsitterVO.memberVO.address}";
+			var id = "${petsitterboardVO.petsitterVO.memberVO.id}";
+			
+			window.open("${initParam.root}mapDetail.do?id="+id+"&address="+address,"",
+					"toolbar=yes,scrollbars=yes,top=100,left=600,width=740,height=760");
+		});
+	});
+</script>
 
 <c:set var="petsitterVO" value="${petsitterboardVO.petsitterVO }"></c:set>
 <c:set var="memberVO" value="${petsitterboardVO.petsitterVO.memberVO}"></c:set>
@@ -252,6 +261,7 @@
 	                		<h4 style="font-weight:bold; color:gray;">${memberVO.name}</h4>
 	                  	</a>
 	                	<h6 style="font-size: 11px;">${memberVO.address}</h6>
+	                	<span class="label label-success" id="addressMap">지도 보기</span>
 	                </div>
 	            </div><br/>
 	            <div class="SBremote_main2" >

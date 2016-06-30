@@ -6,7 +6,7 @@
 		<c:when test="${check == 1}">
 			 <script type="text/javascript">
     			alert("예약 신청을 거절하셨습니다.");
-    			location.replace("${initParam.root}reserve_reserveMyList.do?id=${mvo.id}");
+    			location.replace("${initParam.root}interceptor_reserve_reserveMyList.do?id=${mvo.id}");
     		</script>
 		</c:when>
 		<c:otherwise>

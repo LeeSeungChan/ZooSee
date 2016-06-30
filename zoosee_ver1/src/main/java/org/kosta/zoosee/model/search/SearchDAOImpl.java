@@ -33,7 +33,7 @@ public class SearchDAOImpl implements SearchDAO
 	@Override
 	public int findAddressCount(String address) 
 	{
-		System.out.println(address);
+		//System.out.println(address);
 		List<Integer> list = template.selectList("search.findAddressCount", address);
 		int count = list.get(0);
 		return count;

@@ -10,16 +10,14 @@
 		</div>
 	</div>
 </div> --%>
-<script>
+<script type="text/javascript">
 	function openPopup(id){
 		var content=null;
 		
 		window.open("${initParam.root}reviewPopup.jsp?id="+id,"","width=400 height=500 left=150 top=100 ")
-				
-
-		
 	}
 </script>
+
 <div class="BJMainKING">
 <div class="BJMainKING" style="margin-top: 5%;">
 <div class="BJMainDiv" style="margin-bottom: 10%;">

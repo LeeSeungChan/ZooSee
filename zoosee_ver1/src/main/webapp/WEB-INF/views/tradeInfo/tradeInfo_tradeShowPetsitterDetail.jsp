@@ -49,12 +49,16 @@
 			class="WJform-control"type="text"
 			value="${petsitterVO.memberVO.address}" readonly="readonly"
 			style="background-color: #F4F4F4"> 
-		<label>성별</label> 
+		<label>Petsitter Gender</label> 
 		<input
 			class="WJform-control"type="text"
 			value="${petsitterVO.memberVO.gender}" readonly="readonly"
 			style="background-color: #F4F4F4"> 	
-		
+		<label>Petsitter Tel</label> 
+		<input
+			class="WJform-control"type="text"
+			value="${petsitterVO.memberVO.tel}" readonly="readonly"
+			style="background-color: #F4F4F4"> 
 		<label>Petsitter email</label>
 		<input
 			class="WJform-control"  type="text"

@@ -23,6 +23,9 @@
                 $top.fadeOut();
             }
         });
+        $("button").click(function(){
+        	$(":input[name=address]").val("");
+        });
     });
 </script>
 
