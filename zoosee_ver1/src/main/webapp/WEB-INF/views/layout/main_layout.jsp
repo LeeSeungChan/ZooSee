@@ -19,10 +19,10 @@
 	<script type="text/javascript" src="${initParam.root}resources/js/jquery-ui.min.js"></script>
 </head>
 <body>
-<div id="container">
-	<div id="header"><tiles:insertAttribute name="header" /></div>
-	<div id="main"><tiles:insertAttribute name="main"/></div>
-	<div id="footer"><tiles:insertAttribute name="footer" /></div>
-</div>
+	<div id="container">
+		<div id="header"><tiles:insertAttribute name="header" /></div>
+		<div id="main"><tiles:insertAttribute name="main"/></div>
+		<div id="footer"><tiles:insertAttribute name="footer" /></div>
+	</div>
 </body>
 </html>

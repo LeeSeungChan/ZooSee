@@ -6,10 +6,9 @@
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA" href="${initParam.root}interceptor_freeBoard_list.do">자유게시판</a>
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_write.do">자유게시판
-				글등록</a> <a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a>
-			<a class="BJA"
-				href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+			<a class="BJA" href="${initParam.root}interceptor_freeBoard_write.do">자유게시판 글등록</a> 
+			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a>
+			<a class="BJA" href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
 		</div>
 	</div>
 </div>
@@ -28,7 +27,6 @@
 	<div class="BJMain2Div">
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine">
-
 				<table class="table table-striped table-hover ">
 					<thead>
 						<tr>
@@ -41,76 +39,59 @@
 					</thead>
 					<tbody>
 						<c:forEach var="freeBoardList" items="${requestScope.listVO.list}">
-							<tr>
-								<td>${freeBoardList.freeBoardNo }</td>
-								<td><c:choose>
-										<c:when test="${sessionScope.mvo!=null}">
-											<a
-												href="${initParam.root}interceptor_freeBoard_showFreeBoardContent.do?freeBoardNo=${freeBoardList.freeBoardNo }">
+						<tr>
+							<td>${freeBoardList.freeBoardNo }</td>
+							<td>
+								<c:choose>
+									<c:when test="${sessionScope.mvo!=null}">
+										<a href="${initParam.root}interceptor_freeBoard_showFreeBoardContent.do?freeBoardNo=${freeBoardList.freeBoardNo}">
 												${freeBoardList.freeBoardTitle}</a>
-										</c:when>
-										<c:otherwise>
-				${freeBoardList.freeBoardTitle}
-				</c:otherwise>
-									</c:choose></td>
-								<td>${freeBoardList.memberVO.name }</td>
-								<td>${freeBoardList.freeBoardTimePosted }</td>
-								<td>${freeBoardList.freeBoardHits }</td>
-							</tr>
+									</c:when>
+									<c:otherwise>
+										${freeBoardList.freeBoardTitle}
+									</c:otherwise>
+								</c:choose>
+							</td>
+							<td>${freeBoardList.memberVO.name }</td>
+							<td>${freeBoardList.freeBoardTimePosted }</td>
+							<td>${freeBoardList.freeBoardHits }</td>
+						</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-
-
-
 			</div>
 		</div>
 		<!-- 자유게시판 페이징 -->
 		<div class="BJFreeBoardListPagingDiv" style="text-align: center;">
-
 			<ul class="pagination pagination-sm">
 				<c:set var="pb" value="${requestScope.listVO.pagingBean}"></c:set>
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
-						<li><a
-							href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+						<li><a href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
 					</c:otherwise>
 				</c:choose>
-
-				<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
-					end="${pb.endPageOfPageGroup}">
+				<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
-							<li><a
-								href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${i}">${i}</a></li>
+							<li><a href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${i}">${i}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="active"><a>${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-
-
-
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
-						<li><a
-							href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+						<li><a href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>
 					</c:otherwise>
 				</c:choose>
-
-
 			</ul>
-
 		</div>
 	</div>
 </div>
-
-
-
