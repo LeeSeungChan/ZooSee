@@ -17,10 +17,6 @@ $( ".star_rating a" ).click(function() {
 
 
 </script>
-
-
-
-<br>
 <div class="BJMainKING">
 <div style="border:1px  solid red; width: 60%; margin-left: 20%; margin-right: 20%; height: auto; margin-bottom:10% ">
 <div style="border: 1px solid red; height: 170px; background-color:#F5F5F5;">
@@ -38,12 +34,8 @@ $( ".star_rating a" ).click(function() {
 <div style="border: 1px solid black; float: right; margin-top: 3%; margin-right: 4%;">
 	<img src="${initParam.root}resources/image/recog.PNG">
 </div>
-
-
-
 </div>
 <br><br><br>
-
 <div style="border: 1px solid black; width: 40%; float:left; height: 400px; border-radius: 10px;"> 	
 <div style="border: 1px solid red; width: 100%; height: 15%; border-radius: 10px; background-color: #F5F5F5; ">
 	<h3 style="color: #868686; margin-left: 10%;">*POTHO</h3>
@@ -51,16 +43,11 @@ $( ".star_rating a" ).click(function() {
 <div style="border: 1px solid blue; width: 100%; height: 85%;border-radius: 10px;">
 <img src="${initParam.root }${petsitterVO.houseImg}" style="height: 100%; width: 100%; border-radius: 10px;">
 </div>
-
 </div>
-
-
 <div style="border: 1px solid black; width: 50%; float:right; height: 400px; border-radius: 10px;"> 	
 <div style="border: 1px solid red; width: 100%; height: 15%; border-radius: 10px; background-color: #F5F5F5; ">
 	<h3 style="color: #868686; margin-left: 10%;">*DETAIL</h3>
 </div>
-
-
 <div style="border:1px solid red; margin:0 auto; width:30%; height:40%; float: left;" >
          <img id="UploadedImg" style="border: 3px solid #DFDFDF;"
             src="${initParam.root}${petsitterVO.petsitterImg}"
@@ -74,21 +61,14 @@ ${petsitterVO.memberVO.existence }<br>
 제공가능한 서비스:&nbsp;${petsitterVO.service }<br>
 E-MAIL : 거래승인시 관람하실 수 있습니다.<br>
 TEL : 거래승인시 관랍하실 수 있습니다.<hr>
-
-
-
 <p align="right">1박</p>
 <h1 align="right">${petsitterVO.price }원</h1>
 <span class="star-rating" style="border: 1px solid red; margin-left: 64%" >
 <span style ="width:90%"></span>
 </span>
-
 </div>
-
-
 <div style="border: 1px solid; float: bottom; margin-top: 34%;">
 </div>
-
 <div class="BJReplyAllLine" style="width: 100%; margin-left: 0%">
 <%--댓글리스트 --%>
 <!-- 댓글리스트 div -->
@@ -117,11 +97,6 @@ TEL : 거래승인시 관랍하실 수 있습니다.<hr>
 </form>	
 </div>
 </div>
-
-
-
-
-
 <br><br><br>
 </div>
 </div>

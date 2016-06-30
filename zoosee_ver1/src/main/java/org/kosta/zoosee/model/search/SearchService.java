@@ -2,7 +2,6 @@ package org.kosta.zoosee.model.search;
 
 import java.util.List;
 
-import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
 
 public interface SearchService {

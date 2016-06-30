@@ -11,6 +11,19 @@
    width: 90%;
    height: 90%;
 }
+.HGDiv{
+	border:1px solid #DFDFDF; 
+	border-radius: 6px; 
+	background-color:#F4F4F4;
+	 text-align: center; 
+	 width: 30%;
+	  margin-left: 35%
+}
+.HGDiv2{
+	margin:0 auto; 
+	width:500px; 
+	height:500px;
+}
 
 .SBImg2 {
    border: 1px solid #AFAFAF;

@@ -22,4 +22,6 @@ public interface BoardDAO {
 
 	PetsitterboardVO getBoardVOByPetsitterId(String id);
 
+	int myPetsitterboard(String id);
+
 }

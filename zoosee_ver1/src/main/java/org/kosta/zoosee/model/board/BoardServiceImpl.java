@@ -58,4 +58,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<String> getPetCalendarDate(int petsitterboard_no) {
 		return petCalendarService.getPetCalendarDate(petsitterboard_no);
 	}
+
+	@Override
+	public int myPetsitterboard(String id) {
+		return boardDAO.myPetsitterboard(id);
+	}
 }
