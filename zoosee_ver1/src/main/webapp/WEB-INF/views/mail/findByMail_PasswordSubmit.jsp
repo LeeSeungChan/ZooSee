@@ -27,7 +27,7 @@
 </div>
 <!-- 전체 시작 -->
 <div style="width: 100%;">
-	<div style="border: 2px solid #02749C; border-radius: 10px; height: 400px; width: 60%; margin-top: 5%; margin-left: 20%; background-color: white">
+	<div style="border: 2px solid #02749C; border-radius: 10px; height: 403px; width: 60%; margin-top: 5%; margin-left: 20%; background-color: white">
 		<div style=" width: 90%; height: auto; margin-top: 5%; margin-left: 5%;">
 		<div align="center">
 		<img src="${initParam.root}resources/image/Mzoosee.png">
