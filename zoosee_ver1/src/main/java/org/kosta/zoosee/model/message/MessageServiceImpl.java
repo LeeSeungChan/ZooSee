@@ -96,8 +96,8 @@ public class MessageServiceImpl implements MessageService {
 			message.setTitle(title);
 			message.setContent(content);
 			message.setId(id);
-			System.out.println(message);
-			//messageDAO.insertMessage(message);
+			//System.out.println(message);
+			messageDAO.insertMessage(message);
 		} catch (Exception e) {
 			System.out.println("메세지 에러");
 			e.printStackTrace();
