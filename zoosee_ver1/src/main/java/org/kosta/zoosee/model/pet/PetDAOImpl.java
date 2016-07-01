@@ -25,7 +25,7 @@ public class PetDAOImpl implements PetDAO {
 
 	@Override
 	public List<PetVO> petList(String id) {
-		return template.selectList("pet.getList",id);
+		return template.selectList("pet.petList",id);
 	}
 
 	@Override

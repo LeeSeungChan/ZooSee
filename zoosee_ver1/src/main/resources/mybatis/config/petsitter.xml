@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 				select p.petsitterNo,p.adminRecog,pm.id,pm.name,pm.tel,pm.email 
 				from petsitter p ,pet_member pm
-			    where p.id=pm.id and  adminRecog=#{value}
+			    where p.id=pm.id and  adminRecog=#{value} order by petsitterNo desc
 			)
 		)where page=#{pageNo}
 	</select>

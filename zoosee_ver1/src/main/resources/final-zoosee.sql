@@ -1,7 +1,8 @@
 alter table petsitterboard drop column petsitterboard_price;
 alter table petsitterboard drop column petsitterboard_petsize;
 alter table petsitterboard drop column petsitterboard_pettype;
-
+select count(*) from pet_member
+		where rank='petmom' or rank='pre_petmaster' or rank='petmaster'
 
 select petsitterNo,adminRecog,id,name,tel,email
 		from (

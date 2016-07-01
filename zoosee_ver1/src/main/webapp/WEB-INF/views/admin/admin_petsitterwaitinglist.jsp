@@ -8,36 +8,20 @@
 	 펫시터 대기 리스트에서 각 이름을 클릭시 그 사람의 펫시터 신청서를 볼 수 있어야함
  -->
 <script>
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 						;
-						$("#recogForm :input[name=recogBtn]")
-								.click(
-										function() {
-											//alert($(this).parent().parent().children().eq(6).html("승인됨"));
-											if (confirm("승인하시겠습니까?")) {
-												$
-														.ajax({
-															type : "post",
-															url : "interceptor_petsitter_recognitionPetsitter.do",
-															data : "petsitterNo="
-																	+ $(this)
-																			.parent()
-																			.parent()
-																			.children()
-																			.eq(
-																					0)
-																			.text(),
-														});
-												$(this).parent().parent()
-														.children().eq(3).html(
-																"승인됨")
-											}
-
-										});
-
-					});
+		$("#recogForm :input[name=recogBtn]").click(function() {
+			//alert($(this).parent().parent().children().eq(6).html("승인됨"));
+			if (confirm("승인하시겠습니까?")) {
+				$.ajax({
+					type : "post",
+					url : "interceptor_admin_recognitionPetsitter.do",
+					data : "petsitterNo="+ $(this).parent().parent().children().eq(0).text(),
+				});
+				$(this).parent().parent().children().eq(5).html("승인됨")
+			}
+		});
+	});
 </script>
 <link rel="stylesheet" type="text/css"
 	href="${initParam.root}resources/css/sb.css">
@@ -81,7 +65,7 @@
 								<td>${l.petsitterNo}</td>
 								<td>${l.memberVO.id}</td>
 								<td><a
-									href="interceptor_petsitter_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=nonrecog">${l.memberVO.name}</a></td>
+									href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=nonrecog">${l.memberVO.name}</a></td>
 								<td>${l.memberVO.email}</td>
 								<td>${l.memberVO.tel}</td>
 								<td><input type="button" name="recogBtn" value="승인"></td>

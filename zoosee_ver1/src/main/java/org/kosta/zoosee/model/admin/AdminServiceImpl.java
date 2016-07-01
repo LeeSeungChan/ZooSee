@@ -8,11 +8,13 @@ import javax.annotation.Resource;
 import org.kosta.zoosee.model.member.MemberDAO;
 import org.kosta.zoosee.model.message.MessageDAO;
 import org.kosta.zoosee.model.message.MessageService;
+import org.kosta.zoosee.model.pet.PetDAO;
 import org.kosta.zoosee.model.qnaboard.ListVO;
 import org.kosta.zoosee.model.qnaboard.PagingBean;
 import org.kosta.zoosee.model.qnaboard.QNABoardDAO;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.MessageVO;
+import org.kosta.zoosee.model.vo.PetVO;
 import org.kosta.zoosee.model.vo.QNABoardVO;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,9 @@ public class AdminServiceImpl implements AdminService {
 	private MessageDAO messageDAO;
 	@Resource
 	private MessageService messageService;
+	@Resource
+	private PetDAO petDAO;
+	
 
 	@Override
 	public ListVO getQuestionList(String pageNo) {
@@ -113,6 +118,16 @@ public class AdminServiceImpl implements AdminService {
 		int totalContents=memberDAO.getPetmomListCount();
 		PagingBean pagingBean=new PagingBean(totalContents, Integer.parseInt(pageNo));
 		return new org.kosta.zoosee.model.member.ListVO(list, pagingBean);
+	}
+
+	@Override
+	public MemberVO getPetmomInfo(String id) {
+		return memberDAO.getMemberVO(id);
+	}
+
+	@Override
+	public List<PetVO> getPetListById(String id) {
+		return petDAO.petList(id);
 	}
 	
 }

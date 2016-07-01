@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where petNo=#{value}
 	</select>
 	
-	<select id="getList" resultType="petVO">
+	<select id="petList" resultType="petVO">
 		select petNo,petName,petAge,petType,petGender,petNeutral,petImg,petSize,etc,id from pet 
 		where id=#{value}
 	</select>

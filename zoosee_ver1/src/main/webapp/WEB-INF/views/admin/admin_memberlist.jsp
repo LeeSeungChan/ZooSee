@@ -3,8 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!-- 멤버  리스트 보여주는 화면 -->
 <script>
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
 				;
 				$("#memberlistForm :input[name=deleteBtn]").click(
 						function() {
@@ -12,12 +11,12 @@
 							if (confirm("멤버를 추방하시겠습니까?")) {
 								$.ajax({
 									type : "post",
-									url : "member_deleteMember.do",
+									url : "interceptor_admin_delete.do",
 									data : "id="
 											+ $(this).parent().parent()
 													.children().eq(0).text(),
 								});
-								$(this).parent().parent().children().eq(2)
+								$(this).parent().parent().children().eq(4)
 										.html("삭제됨")
 							}
 						});
@@ -62,7 +61,7 @@
 						<c:forEach items="${requestScope.listVO.list }" var="l">
 							<tr>
 								<td>${l.id}</td>
-								<td><a href="interceptor_member_getMemberVO.do?id=${l.id}">${l.name}</a></td>
+								<td><a href="interceptor_admin_getMemberVO.do?id=${l.id}">${l.name}</a></td>
 								<td>${l.email}</td>
 								<td>${l.tel}</td>
 								<td><input type="button" name="deleteBtn" value="탈퇴"></td>

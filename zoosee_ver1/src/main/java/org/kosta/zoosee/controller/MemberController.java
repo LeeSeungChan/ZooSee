@@ -57,11 +57,7 @@ public class MemberController {
 		}
 		return mv;
 	}
-	//멤버정보보기
-	@RequestMapping("interceptor_member_getMemberVO.do")
-	public ModelAndView getMemberVO(String id){
-		return new ModelAndView("member_memberInfo","mvo",memberService.getMemberVO(id));
-	}
+	
 	//멤버 회원 탈퇴
 	@RequestMapping("interceptor_member_delete.do")
 	public ModelAndView deleteMember(HttpServletRequest request){
