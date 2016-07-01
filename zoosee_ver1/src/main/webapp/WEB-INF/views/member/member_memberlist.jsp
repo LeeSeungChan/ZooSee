@@ -29,15 +29,11 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA"
-				href="${initParam.root}interceptor_member_memberlist.do?rank=normal">일반회원</a>
-			<a class="BJA"
-				href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">펫시터</a>
-			<a class="BJA"
-				href="${initParam.root}interceptor_petsitter_petsitterList.do?value=nonrecog">펫시터
+			<a class="BJA" href="${initParam.root}interceptor_member_memberlist.do?rank=normal">일반회원</a>
+			<a class="BJA" href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a>
+			<a class="BJA" href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">펫시터</a>
+			<a class="BJA" href="${initParam.root}interceptor_petsitter_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
-
-
 		</div>
 	</div>
 </div>
@@ -53,18 +49,22 @@
 	</div>
 	<div class="BJMain2Div" align="center">
 		<div class="BJWriteTableLine">
-			<div class="SBHrAllLine">
+			<div class="SBHrAllLine_1">
 				<form id="memberlistForm">
 					<table class="table table-striped table-hover" id="memberlistTable">
 						<tr>
 							<th style="width: 10%">Id</th>
 							<th style="width: 10%">Name</th>
+							<th style="width: 10%">e-Mail</th>
+							<th style="width: 10%">Tel</th>
 							<th style="width: 10%">관리</th>
 						</tr>
 						<c:forEach items="${requestScope.listVO.list }" var="l">
 							<tr>
 								<td>${l.id}</td>
 								<td><a href="interceptor_member_getMemberVO.do?id=${l.id}">${l.name}</a></td>
+								<td>${l.email}</td>
+								<td>${l.tel}</td>
 								<td><input type="button" name="deleteBtn" value="탈퇴"></td>
 							</tr>
 						</c:forEach>

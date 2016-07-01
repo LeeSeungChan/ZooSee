@@ -1,8 +1,11 @@
 alter table petsitterboard drop column petsitterboard_price;
 alter table petsitterboard drop column petsitterboard_petsize;
 alter table petsitterboard drop column petsitterboard_pettype;
-
-delete tablename where condition
+	select id,name,email,tel,rank 
+		from(select ceil(rownum/10) as page,id,name,email,tel,rank from pet_member
+			where rank='petmom' or rank='pre_petmaster' or rank='petmaster'
+		) where page='1'
+delete tablename where condition petmaster
 delete pet_member where id='java' cascade CONSTRAINTS
 
 	select b.petsitterboard_no from petsitterboard b,petsitter p

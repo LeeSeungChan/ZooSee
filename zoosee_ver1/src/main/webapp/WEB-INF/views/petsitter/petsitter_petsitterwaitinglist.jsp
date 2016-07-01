@@ -45,15 +45,11 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA"
-				href="${initParam.root}interceptor_member_memberlist.do?rank=normal">일반회원</a>
-			<a class="BJA"
-				href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">펫시터</a>
-			<a class="BJA"
-				href="${initParam.root}interceptor_petsitter_petsitterList.do?value=nonrecog">펫시터
+			<a class="BJA" href="${initParam.root}interceptor_member_memberlist.do?rank=normal">일반회원</a>
+			<a class="BJA" href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a>
+			<a class="BJA" href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">펫시터</a>
+			<a class="BJA" href="${initParam.root}interceptor_petsitter_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
-
-
 		</div>
 	</div>
 </div>

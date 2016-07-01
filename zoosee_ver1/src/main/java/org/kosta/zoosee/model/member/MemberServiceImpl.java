@@ -54,7 +54,10 @@ public class MemberServiceImpl implements MemberService {
 		if(pageNo==null){
 			pageNo="1";
 		}
-		List<MemberVO> list =memberDAO.memberList(rank);
+		HashMap<String,String> map=new HashMap<String, String>();
+		map.put("rank", rank);
+		map.put("pageNo", pageNo);
+		List<MemberVO> list =memberDAO.memberList(map);
 		int totalContents=memberDAO.memberListCount(rank);
 		PagingBean pagingBean=new PagingBean(totalContents, Integer.parseInt(pageNo));
 		return new ListVO(list, pagingBean);

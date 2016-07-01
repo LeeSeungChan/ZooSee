@@ -33,8 +33,8 @@ public class MemberDAOImpl implements MemberDAO {
 		return template.update("member.updateMember",vo);
 	}
 	@Override
-	public List<MemberVO> memberList(String rank) {
-		return template.selectList("member.memberList",rank);
+	public List<MemberVO> memberList(HashMap<String,String> map) {
+		return template.selectList("member.memberList", map);
 	}
 	@Override
 	public MemberVO getMemberVO(String id) {
@@ -78,5 +78,13 @@ public class MemberDAOImpl implements MemberDAO {
 	public void updateMemberPassword(int password) 
 	{
 		template.update("member.updateMemberPassword",password);
+	}
+	@Override
+	public List<MemberVO> getPetmomList(int pageNo) {
+		return template.selectList("member.getPetmomList",pageNo);
+	}
+	@Override
+	public int getPetmomListCount() {
+		return template.selectOne("member.getPetmomListCount");
 	}
 }

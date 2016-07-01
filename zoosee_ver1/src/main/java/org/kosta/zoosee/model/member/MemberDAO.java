@@ -15,7 +15,7 @@ public interface MemberDAO {
 
 	public abstract int updateMember(MemberVO vo);
 
-	public abstract List<MemberVO> memberList(String rank);
+	public abstract List<MemberVO> memberList(HashMap<String,String> map);
 
 	public abstract MemberVO getMemberVO(String id);
 
@@ -36,5 +36,9 @@ public interface MemberDAO {
 	public abstract MemberVO findPasswordByMemberVO(HashMap<String,String> map);
 
 	public abstract void updateMemberPassword(int password);
+
+	public abstract List<MemberVO> getPetmomList(int pageNo);
+
+	public abstract int getPetmomListCount();
 
 }

@@ -11,6 +11,7 @@ import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.qnaboard.ListVO;
 import org.kosta.zoosee.model.qnaboard.PagingBean;
 import org.kosta.zoosee.model.qnaboard.QNABoardDAO;
+import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.MessageVO;
 import org.kosta.zoosee.model.vo.QNABoardVO;
 import org.springframework.stereotype.Service;
@@ -101,6 +102,17 @@ public class AdminServiceImpl implements AdminService {
 		int totalContents=messageDAO.getMessageListAdminCount(id);
 		org.kosta.zoosee.model.message.PagingBean pagingBean=new org.kosta.zoosee.model.message.PagingBean(totalContents, Integer.parseInt(pageNo));
 		return new org.kosta.zoosee.model.message.ListVO(list, pagingBean);
+	}
+
+	@Override
+	public org.kosta.zoosee.model.member.ListVO getPetmomList(String pageNo) {
+		if(pageNo==null){
+			pageNo="1";
+		}
+		List<MemberVO> list=memberDAO.getPetmomList(Integer.parseInt(pageNo));
+		int totalContents=memberDAO.getPetmomListCount();
+		PagingBean pagingBean=new PagingBean(totalContents, Integer.parseInt(pageNo));
+		return new org.kosta.zoosee.model.member.ListVO(list, pagingBean);
 	}
 	
 }

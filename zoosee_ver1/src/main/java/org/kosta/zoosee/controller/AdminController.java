@@ -72,4 +72,10 @@ public class AdminController {
 		org.kosta.zoosee.model.message.ListVO list=adminService.messageList(id,pageNo);
 		return new ModelAndView("admin_message_list","listVO",list);
 	}
+	/*관리자 페이지 - 펫 맘 리스트*/
+	@RequestMapping("interceptor_admin_petmomList.do")
+	public ModelAndView  getPetmomList(String pageNo){
+		org.kosta.zoosee.model.member.ListVO list=adminService.getPetmomList(pageNo);
+		return new ModelAndView("admin_petmomlist","listVO",list);	
+	}
 }

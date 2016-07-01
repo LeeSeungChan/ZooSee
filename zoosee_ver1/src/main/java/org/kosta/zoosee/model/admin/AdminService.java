@@ -20,4 +20,6 @@ public interface AdminService {
 
 	org.kosta.zoosee.model.message.ListVO messageList(String id, String pageNo);
 
+	org.kosta.zoosee.model.member.ListVO getPetmomList(String pageNo);
+
 }

@@ -25,9 +25,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="memberList" resultType="memberVO" parameterType="string">
-		select id,name ,addresscode,address,detailaddress, gender, email, tel, job, rank, existence
-		from pet_member
-		where rank=#{value}
+		select id,name,email,tel,rank
+			from(select ceil(rownum/10) as page,id,name,email,tel,rank
+			from pet_member where rank=#{rank}
+		)where page=#{pageNo}
 	</select>
 	
 	<select id="memberListCount" resultType="int">
@@ -55,6 +56,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="allMemberIdList" resultType="string">
 		select id from pet_member
+	</select>
+	<!-- 관리자 펫맘 리스트 뽑기 -->
+	<select id="getPetmomList" resultType="memberVO">
+		select id,name,email,tel,rank 
+		from(select ceil(rownum/10) as page,id,name,email,tel,rank from pet_member
+			where rank='petmom' or rank='pre_petmaster' or rank='petmaster'
+		) where page=#{value}
+	</select>
+	<select id="getPetmomListCount" resultType="int">
+		select id,name,email,tel,rank from pet_member
+		where rank='petmom' or rank='pre_petmaster' or rank='petmaster'
 	</select>
 	<!-- 아이디 찾기 -->
 	<select id="findEmailByMemberVO" resultType="memberVO">
