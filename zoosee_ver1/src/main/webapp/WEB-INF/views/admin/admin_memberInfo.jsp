@@ -18,50 +18,101 @@
 		</div>
 	</div>
 </div>
-<div class="BJMainDiv">
-	<div class="BJMain2Div">
-		<div class="BJWriteTableLine">
 
-			<div class="WJLayout" style="text-align: left; margin-bottom: 5%;">
-				<form>
-					<h3>${memberVO.name }님의회원정보</h3>
-					<div class="WJform-group">
-						<label>id</label> <input class="WJform-control" type="text"
-							value="${memberVO.id}" readonly="readonly">
-					</div>
-					<div class="WJform-group">
-						<label>Name</label> <input class="WJform-control" type="text"
-							value="${memberVO.name}" readonly="readonly">
-					</div>
-					<div class="WJform-group">
-						<label>Address</label> <input class="WJform-control"
-							value="우편번호 : ${memberVO.addressCode}" disabled="disabled">
-						<input class="WJform-control" value="${memberVO.address}"
-							disabled="disabled"> <input class="WJform-control"
-							value="${memberVO.detailAddress}" disabled="disabled">
-					</div>
-					<div class="WJform-group">
-						<label>Email address</label> <input class="WJform-control"
-							type="text" value="${memberVO.email}" readonly="readonly">
-					</div>
-					<div class="WJform-group">
-						<label>Gender</label> <input class="WJform-control" type="text"
-							value="${memberVO.gender}" readonly="readonly">
-					</div>
-					<div class="WJform-group">
-						<label>Tel</label> <input class="WJform-control" type="text"
-							value="${memberVO.tel}" readonly="readonly">
-					</div>
-					<div class="WJform-group">
-						<label>Job</label> <input class="WJform-control" type="text"
-							value="${memberVO.job }" readonly="readonly">
-					</div>
-					<div class="WJform-group">
-						<label>Existence</label> <input class="WJform-control"
-							value="${memberVO.existence}" disabled="disabled">
-					</div>
-				</form>
+<div class="BJMainDiv">
+	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">일반회원 정보</h3>
 			</div>
+			<div class="panel-body">일반회원 정보를 보여드리는 공간입니다.</div>
+		</div>
+		<div class="well well-sm">${memberVO.name }님의 회원정보</div>
+	</div>
+	<div class="BJWriteTableLine" style="text-align: left; margin-left: 10%; margin-right: 10%;">
+			<table style=" margin-left: 25%; width: 50%; margin-top: 2%; margin-bottom: 2%;">
+				<tr>
+					<th style=" text-align: right; vertical-align: middle; width: 25%;">아이디</th>
+					<td>
+						<div style="margin-bottom: 1%; margin-top: 1%; margin-left: 10%;">
+							<input class="WJform-control6" type="text" value="${memberVO.id}" 
+							readonly="readonly" style="background-color: #F4F4F4;">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th style="text-align: right; vertical-align: middle;">이름</th>
+					<td><div style="margin-bottom: 1%; margin-top: 1%; margin-left: 10%;">
+					<input class="WJform-control6" type="text" value="${memberVO.name}" readonly="readonly"
+						style="background-color: #F4F4F4;"></div></td>
+				</tr>
+				<tr>
+					<th style="text-align: right; vertical-align: middle;">주소</th>
+					<td><div style="margin-bottom: 1%; margin-top: 1%; margin-left: 10%;">
+					<input class="WJform-control6" type="text" value="우편번호 : ${memberVO.addressCode}" readonly="readonly"
+						style="background-color: #F4F4F4;">
+					<input class="WJform-control6" type="text" value="${memberVO.address}" readonly="readonly"
+						style="background-color: #F4F4F4;">
+					<input class="WJform-control6" type="text" value="${memberVO.detailAddress}" readonly="readonly"
+						style="background-color: #F4F4F4;"></div></td>
+				</tr>
+				<tr>
+					<th style="text-align: right; vertical-align: middle;">성별</th>
+					<td><div style="margin-bottom: 1%; margin-top: 1%;  margin-left: 10%;">
+					<input class="WJform-control6" type="text" value="${memberVO.gender}" readonly="readonly"
+						style="background-color: #F4F4F4;"></div></td>
+				</tr>
+				<tr>
+					<th style="text-align: right; vertical-align: middle;">전화번호</th>
+					<td><div style="margin-bottom: 1%; margin-top: 1%; margin-left: 10%;">
+					<input class="WJform-control6" type="text" value="${memberVO.tel}" readonly="readonly"
+						style="background-color: #F4F4F4;"></div></td>
+				</tr>
+				<tr>
+					<th style="text-align: right; vertical-align: middle;">직업</th>
+					<td><div style="margin-bottom: 1%; margin-top: 1%; margin-left: 10%;">
+					<input class="WJform-control6" type="text" value="${memberVO.job}" readonly="readonly"
+						style="background-color: #F4F4F4;"></div></td>
+				</tr>
+				<tr>
+					<th style="text-align: right; vertical-align: middle;">펫 키운 경험</th>
+					<td><div style="margin-bottom: 1%; margin-top: 1%; margin-left: 10%;">
+					<input class="WJform-control6" type="text" value="${memberVO.existence}" readonly="readonly"
+						style="background-color: #F4F4F4;"></div></td>
+				</tr>
+			</table>
+
+
+			<%--
+			<label>이름</label> <input class="WJform-control6" type="text"
+				value="${memberVO.id}" readonly="readonly"
+				style="background-color: #F4F4F4;">	 		
+				<label>이름</label> <input class="WJform-control6" type="text"
+				value="${memberVO.name}" readonly="readonly"
+				style="background-color: #F4F4F4;">	
+			<label>주소</label> <input class="WJform-control6" type="text"
+				value="우편번호 :${memberVO.addressCode}" readonly="readonly"
+				style="background-color: #F4F4F4;">
+			<input class="WJform-control6" type="text"
+				value=" ${memberVO.address}" readonly="readonly"
+				style="background-color: #F4F4F4;">
+			<input class="WJform-control6" type="text"
+				value="${memberVO.detailAddress}" readonly="readonly"
+				style="background-color: #F4F4F4;">
+			<label>이메일</label> <input class="WJform-control6" type="text"
+				value="${memberVO.email}" readonly="readonly"
+				style="background-color: #F4F4F4;">			
+			<label>성별</label> <input class="WJform-control6" type="text"
+				value="${memberVO.gender}" readonly="readonly"
+				style="background-color: #F4F4F4;">
+			<label>전화번호</label> <input class="WJform-control6" type="text"
+				value="${memberVO.tel}" readonly="readonly"
+				style="background-color: #F4F4F4;">
+			<label>직업</label> <input class="WJform-control6" type="text"
+				value="${memberVO.job}" readonly="readonly"
+				style="background-color: #F4F4F4;">
+			<label>펫 키운 경험</label> <input class="WJform-control6" type="text"
+				value="${memberVO.existence}" readonly="readonly"
+				style="background-color: #F4F4F4;"> --%>
 		</div>
 	</div>
-</div>

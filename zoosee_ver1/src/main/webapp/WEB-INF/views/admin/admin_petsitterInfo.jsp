@@ -48,14 +48,14 @@
 			<div align="center">
 				<img style="border: 1px solid black;"
 					class="img-responsive img-rounded"
-					src="${initParam.root}${requestScope.pvo.petsitterImg}" width="90%"
+					src="${initParam.root}${requestScope.pvo.petsitterImg}" width="100%"
 					height="335px;">
 				<div align="center">
 					<label>회원사진</label>
 				</div>
 				<img style="border: 1px solid black;"
 					class="img-responsive img-rounded"
-					src="${initParam.root}${requestScope.pvo.houseImg}" width="90%"
+					src="${initParam.root}${requestScope.pvo.houseImg}" width="100%"
 					height="335px;">
 				<div align="center">
 					<label>집사진</label>
@@ -66,7 +66,7 @@
 		<!-- 오른쪽 -->
 		<form id="petsitterInfoForm">
 			<div style="width: 50%; float: right; text-align: left;">
-				<div style="margin-left: 5%; width: 90%;">
+				<div style="margin-left: 10%; width: 90%;">
 					<label>아이디</label> <input class="WJform-control" type="text"
 						value="${requestScope.pvo.memberVO.id }" readonly="readonly"
 						style="background-color: #F4F4F4;"> <label>이름</label> <input
@@ -101,7 +101,7 @@
 						value=" ${requestScope.pvo.petType}" readonly="readonly"
 						style="background-color: #F4F4F4;"><br> <input
 						type="button" name="backBtn" value="확인"
-						class="active WJbtn btn-block btn-default">
+						class="active WJbtn btn-block btn-info">
 				</div>
 			</div>
 		</form>

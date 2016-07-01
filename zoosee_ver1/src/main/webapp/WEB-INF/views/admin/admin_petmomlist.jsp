@@ -44,7 +44,7 @@ $(document).ready(function() {
 			</div>
 			<div class="panel-body">고객의 등급에 따라 관리한다.</div>
 		</div>
-		<div class="well well-sm">Member List</div>
+		<div class="well well-sm">PetMom List</div>
 	</div>
 	<div class="BJMain2Div" align="center">
 		<div class="BJWriteTableLine">
