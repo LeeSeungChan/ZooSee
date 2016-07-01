@@ -7672,9 +7672,14 @@ label {
 
 
 .star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:#777;}
-
+.star_rating a.on {color:#f7d30b;}
+.star_rating2 a:first-child {margin-left:0;}
+.star_rating2 a.on {color:#f7d30b;}
 
 .star-rating { width:205px; }
-.star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(star.png)no-repeat; }
+.star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(../image/star.png)no-repeat; }
 .star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
+
+.star-rating2 { width:150px; }
+.star-rating2,.star-rating2 span { display:inline-block; height:25px; overflow:hidden; background:url(../image/starS.png)no-repeat; }
+.star-rating2 span{ background-position:left bottom; line-height:0; }

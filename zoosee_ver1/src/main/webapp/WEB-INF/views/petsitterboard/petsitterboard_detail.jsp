@@ -300,7 +300,7 @@
 	</form>
       
 	<!-- 페이지화면 -->
-    <div class="SBmainDivLeft">
+    <div class="SBmainDivLeft" style="overflow:hidden;">
     	<div class="SBmainDivImg">
         	<div class="SBremote_Img_form2">
             	<img src="${initParam.root}${petsitterVO.houseImg}" class="SBImg2">
@@ -338,41 +338,55 @@
                 <div class="SBtextDiv3_content">${petsitterboardVO.petsitterboard_contents }</div>
             </div><hr/> 
  
-			<!-- 평균 별점 -->        
-			<span class="star-rating" style="border: 1px solid red; margin-left: 64%">
-				<span id="star-rating" style ="width:100%"></span>
-			</span>         
-         
-			<!-- 리뷰 리스트 --> 
-			<c:forEach items="${requestScope.reviewList }" varStatus="status" var="reviewList">
-				<div class="BJReplyList" style="border: 1px solid red; width:100%; margin-left: 0%">
-					<table border=1 style="width:100%;">
-						<c:if test="${reviewList==null }">
-							<tr>
-						         <td colspan="5" align="center">
-						         	<h3 style="color: #6EB9B5;">등록된 후기가 없습니다!!<br> 첫번 째 고객님이 되어주세요!! >_</h3>
-						         </td>
-						    </tr>
-						</c:if>
+ 
+ <div style="margin-bottom: 5%; ">
+ <!-- 평균 별점 -->
+ <div  style=" height:45px; width:100%; font-size: 25px; vertical-align: middle;" >후기(${requestScope.reviewList.size() })
+ <div style="float:right; margin-right:50%; margin-bottom: 2%;">  
+<span class="star-rating"  style="margin-top: 1%;">
+<span id="star-rating" style ="width:100%;"></span>
+</span>         
+   </div>
+         </div>	
+ <!--   리뷰 리스트 -->
 
-					      	<tr>
-					      		<td>${reviewList.name}</td>
-					      		<td>${reviewList.time_posted}</td>
-					      	</tr>
-					      	<tr>
-					      		<td colspan="2">${reviewList.content}</td>
-					      	</tr>
-					      	<tr>
-					      		<td>${reviewList.star_rate}</td>
-					      		<td>
-					      			<span class="star-rating" style="border: 1px solid red;">
-										<span id="star-rating${status.index }" style ="width:${reviewList.star_rate*20}%; float: left;"></span>
-									</span>
-								</td>
-							</tr>
-						</table>
-					</div >
-				</c:forEach>
+
+<c:forEach items="${requestScope.reviewList }" varStatus="status" var="reviewList">
+<div class="BJReplyList" style=" width:100%; margin-left: 0%">
+<table  style="width:100%;">
+	<c:if test="${reviewList==null }">
+		<tr>
+	         <td colspan="5" align="center">
+	         <h3 style="color: #6EB9B5;">등록된 후기가 없습니다!!<br> 첫번 째 고객님이 되어주세요!! </h3>
+	         </td>
+	    </tr>
+	</c:if>
+
+      <tr>
+         <td align="left" >${reviewList.name}</td>
+        	<td >
+      	<span class="star-rating2" style="margin-left:75%;" >
+<span id="star-rating${status.index }" style ="width:${reviewList.star_rate*17}%;  float: left;"></span>
+</span> </td>
+      </tr>
+      <tr>
+      	<td colspan="2" align="left">${reviewList.content}</td>
+      </tr>
+      <tr>
+      	<td colspan="2" align="left">${reviewList.time_posted}</td>
+      
+      </tr>
+</table>
+<hr>
+</div >
+</c:forEach>
+</div>
+		
+		
+		
+		
+		
+		
          	</div>
       	</div>
 	</div>

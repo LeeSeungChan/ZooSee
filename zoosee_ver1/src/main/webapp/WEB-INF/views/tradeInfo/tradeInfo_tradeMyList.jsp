@@ -13,8 +13,8 @@
 <script type="text/javascript">
 	function openPopup(id){
 		var content=null;
-		
-		window.open("${initParam.root}reviewPopup.jsp?id="+id,"","width=400 height=500 left=150 top=100 ")
+		window.open("${initParam.root}reviewPopup.jsp?id="+id,"","width=700 height=400 left=150 top=100 ");
+	
 	}
 </script>
 
@@ -89,7 +89,7 @@
 							<td style="vertical-align: middle;">${tradeInfoVO.tradePrice}</td>
 							<td style="vertical-align: middle;">${tradeInfoVO.tradeSdate}</td>
 							<td style="vertical-align: middle;">${tradeInfoVO.tradeEdate}</td>
-							<td style="vertical-align: middle;"><input type="button" value="리뷰" onclick="openPopup('${tradeInfoVO.petsitterVO.memberVO.id}')"></td>
+							<td style="vertical-align: middle;"><input type="button" class="BJbtn2" value="리뷰" onclick="openPopup('${tradeInfoVO.petsitterVO.memberVO.id}')"></td>
 						</tr>
 					</c:forEach>
 				</table>

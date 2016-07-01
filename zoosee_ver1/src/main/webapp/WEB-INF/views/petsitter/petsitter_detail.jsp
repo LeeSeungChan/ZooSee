@@ -69,33 +69,48 @@ TEL : 거래승인시 관랍하실 수 있습니다.<hr>
 </div>
 <div style="border: 1px solid; float: bottom; margin-top: 34%;">
 </div>
-<div class="BJReplyAllLine" style="width: 100%; margin-left: 0%">
-<%--댓글리스트 --%>
-<!-- 댓글리스트 div -->
-<div class="BJReplyList" >
+
+<!-- 후기 -->
+<div class="BJReplyAllLine" style="width: 100%; margin-left: 0%; ">
+<h3 style="color: #868686; margin-left: 5%;">*REVIEW</h3>
+<c:forEach items="${requestScope.reviewList }" varStatus="status" var="reviewList">
+<div class="BJReplyList" style=" width:90%; margin-left: 5%">
 <table  style="width:100%;">
+	<c:if test="${reviewList==null }">
 		<tr>
-			<td colspan="5" align="center"><h3 style="color: #6EB9B5;">등록된 후기가 없습니다!! 첫번 째 고객님이 되어주세요!! >_<</h3>
-			</td>
-		<tr>
-			<td colspan="5"><hr></td>
-		</tr>
+	         <td colspan="5" align="center">
+	         <h3 style="color: #6EB9B5;">등록된 후기가 없습니다!!<br> 첫번 째 고객님이 되어주세요!!</h3>
+	         </td>
+	    </tr>
+	</c:if>
+
+      <tr>
+         <td align="left" >${reviewList.name}</td>
+        	<td >
+      	<span class="star-rating2" style=" margin-left:85%;" >
+<span id="star-rating${status.index }" style ="width:${reviewList.star_rate*17}%; float: left;"></span>
+</span> </td>
+      </tr>
+      <tr>
+      	<td colspan="2" align="left">${reviewList.content}</td>
+      </tr>
+      <tr>
+      	<td colspan="2" align="left">${reviewList.time_posted}</td>
+      
+      </tr>
 </table>
+<hr>
 </div >
-<%--댓글작성란 --%>
-<div class="BJReplyInput" >
-<form action="interceptor_review_write.do" id="reviewForm">
-	<table>
-		<tr>
-			<td>${sessionScope.mvo.id }</td>
-			<td><textarea style="resize:none;" class="BJform-controlBig2 input-lg" name="content" id="content"  rows="3" cols="100"  ></textarea></td>
-			<td align="center"><input class="BJBigButton" 	type="submit" value="댓글쓰기"></td>
-		</tr>
-	</table>
-	<input type="hidden" name="id" value="${sessionScope.mvo.id }">
-	<input type="hidden" name="ref" value="${requestScope.freeBoardVO.freeBoardNo }">
-</form>	
-</div>
+</c:forEach>
+
+
+
+
+
+
+
+
+
 </div>
 <br><br><br>
 </div>

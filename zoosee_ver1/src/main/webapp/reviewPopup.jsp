@@ -8,23 +8,43 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.root}resources/js/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/bj.css">
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("#reviewForm").submit(function(){
-			if(confirm("입력하시겠습니까?")){
-				window.close();
-			}else{
-				return false;
-			}
-		});
+	 	/* $("#reviewForm :input[type='submit']").click(function(){
+	 		if($("#textConent").val()==""){
+	 			alert("후기를 입력하세요!");
+	 			$("#textConent").focus();
+	 			return false;
+	 		}
+	 		
+	 		$("#reviewForm").submit();	 
 		
+	 		self.close();
+	 	}); */
+	 	$("#reviewForm").submit(function(){
+	 		if($("#textConent").val()==""){
+	 			alert("후기를 입력하세요!");
+	 			$("#textConent").focus();
+	 			return false;
+	 		}
+	 		if(confirm("등록하시겠습니까?")){
+	 			window.close();
+	 		}else{
+	 			return false;
+	 		}
+	 		
+	 	});
+		
+		$("#cBtn").click(function(){
+			window.close();
+		});
 		
 		   $( ".star_rating a" ).click(function() {
 		          $(this).parent().children("a").removeClass("on");
 		          $(this).addClass("on").prevAll("a").addClass("on");
 		          var index = $('.on').length;
-		          alert(index);
 		          $("#star_rate").val(index);
 		       
 		   
@@ -33,21 +53,37 @@
 </script>
 </head>
 <body>
-${param.id}님에 대한 후기를 작성해주세요~!
-<form method="post", id="reviewForm"action="interceptor_tradeInfo_inputReview.do">
+
+<form  id="reviewForm"action="interceptor_tradeInfo_inputReview.do">
 	<input type="hidden" name="ref_id" value="${param.id}">
 	<input type="hidden" name="id" value="${SessionScope.mvo.id}">
-	<textarea   style="resize:none;" name="content" rows="10" ></textarea>
-	<input type="submit" value="입력">
-	      <p class="star_rating">
+	
+<%--댓글작성란 --%>
+<div class="BJReplyInput" >
+<h2 style="margin-left: 13%;">${param.id}님에 대한 후기를 작성해주세요~!</h2>
+<hr>
+<p class="star_rating" style="margin-left: 13%;">
              <a href="#" class="on">★</a>
                 <a href="#" class="on">★</a>
                 <a href="#" class="on">★</a>
-                <a href="#" class="on">★</a>
-                <a href="#" class="on">★</a>
+                <a href="#" >★</a>
+                <a href="#" >★</a>
             </p>
             <input type="hidden" name="star_rate" id="star_rate" value=5>
-	<input type="button" value="취소" >
+	<table>
+	 
+		<tr>
+			<td><textarea id="textConent" style="resize:none;margin-left: 17%;" class="BJform-controlBig2 input-lg" name="content" rows="3" cols="60"  ></textarea></td>
+			<td align="center"><input class="BJBigButton" 	type="submit" value="댓글쓰기"></td>
+		</tr>
+	</table>
+	
+	<hr>
+	<div style="margin-left: 45%;"><input type="button" class="BJbtn2" id="cBtn" value="취소" ></div>
+</div>	
+	
+	
+	     
 </form>
 </body>
 </html>

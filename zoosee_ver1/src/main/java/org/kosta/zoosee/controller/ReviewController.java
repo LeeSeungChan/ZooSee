@@ -31,9 +31,9 @@ public class ReviewController {
 		return new ModelAndView("popup_reviewPopup","petsitterVO",pvo);
 	}
 	
-	@RequestMapping(value="interceptor_tradeInfo_inputReview.do",method=RequestMethod.POST)
+	@RequestMapping("interceptor_tradeInfo_inputReview.do")
 	public void inputReview(ReviewVO rvo,HttpServletRequest request){
-		System.out.println(1);
+
 		HttpSession session=request.getSession(false);
 		if(session!=null){
 			rvo.setId(((MemberVO)session.getAttribute("mvo")).getId()); 
@@ -46,7 +46,6 @@ public class ReviewController {
    @RequestMapping(value="avg_star_rate.do",method=RequestMethod.POST)
    @ResponseBody
    public Object avgStarRate(String id){
-	   System.out.println("아이디@@@@@@@@@@"+id);
       Double avg = reviewService.avg(id);
 
       HashMap<String,Double> map = new HashMap<String,Double>();

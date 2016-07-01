@@ -21,13 +21,12 @@ public class ReviewDAOImpl implements ReviewDAO{
 
 	@Override
 	public List<ReviewVO> getReviewVOById(String id) {
-		System.out.println(template.selectList("review.getReviewVOById",id));
 		return template.selectList("review.getReviewVOById",id);
 	}
 	   @Override
 	   public Double avg(String id) {
 	      Double result =template.selectOne("review.avg",id);
-	      System.out.println("DAO"+result);
+
 	      return template.selectOne("review.avg",id);
 	   }
 	

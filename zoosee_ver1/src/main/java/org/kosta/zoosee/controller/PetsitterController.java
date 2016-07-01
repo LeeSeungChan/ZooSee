@@ -13,10 +13,12 @@ import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.member.MemberService;
 import org.kosta.zoosee.model.petsitter.ListVO;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
+import org.kosta.zoosee.model.review.ReviewService;
 import org.kosta.zoosee.model.vo.FileVO;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
+import org.kosta.zoosee.model.vo.ReviewVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +35,9 @@ public class PetsitterController {
 	private MemberService memberService;
 	@Resource
 	private BoardService boardService;
+	@Resource
+	private ReviewService reviewService;
+	
 	
 	@Resource(name="petsitterUploadPath")
 	private String uploadPath;
@@ -175,6 +180,12 @@ public class PetsitterController {
 			MemberVO mvo = memberService.getMemberVO(pvo.getMemberVO().getId());
 			pvo.setMemberVO(mvo);
 			mv.addObject("petsitterVO", pvo);
+			
+			
+			//후기 리스트 가져오기
+			List<ReviewVO> reviewList=reviewService.getReviewVOById(pvo.getMemberVO().getId());
+			System.out.println("asdfasdfasdfasdf:"+reviewList);
+			mv.addObject("reviewList", reviewList);
 			//펫시터의 보드정보 가져오기
 			PetsitterboardVO bvo = boardService.getboardDetail(petsitterboard_no);
 			mv.addObject("petsitterboardVO", bvo);
