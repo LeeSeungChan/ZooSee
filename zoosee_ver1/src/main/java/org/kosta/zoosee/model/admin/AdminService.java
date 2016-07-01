@@ -30,4 +30,6 @@ public interface AdminService {
 
 	List<PetVO> getPetListById(String id);
 
+	org.kosta.zoosee.model.member.ListVO adminList(String pageNo);
+
 }

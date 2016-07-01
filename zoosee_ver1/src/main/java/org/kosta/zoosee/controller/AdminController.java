@@ -104,19 +104,20 @@ public class AdminController {
 				.getPetmomList(pageNo);
 		return new ModelAndView("admin_petmomlist", "listVO", list);
 	}
-	/*관리자 페이지 -펫맘 정보*/
+
+	/* 관리자 페이지 -펫맘 정보 */
 	@RequestMapping("interceptor_admin_getPetmomInfo.do")
-	public ModelAndView getPetmomInfo(String id){
-		MemberVO memberVO=adminService.getPetmomInfo(id);
-		List<PetVO> list=adminService.getPetListById(id);
-		ModelAndView mv=new ModelAndView();
-		mv.addObject("memberVO",memberVO);
-		mv.addObject("petList",list);
+	public ModelAndView getPetmomInfo(String id) {
+		MemberVO memberVO = adminService.getPetmomInfo(id);
+		List<PetVO> list = adminService.getPetListById(id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", memberVO);
+		mv.addObject("petList", list);
 		mv.setViewName("admin_petmomInfo");
 		return mv;
 	}
 
-	/* 관리자 페이지 - 펫시터정보보기*/
+	/* 관리자 페이지 - 펫시터정보보기 */
 	@RequestMapping("interceptor_admin_getPetsitterVO.do")
 	public ModelAndView getPetsitterVO(int petsitterNo, String value) {
 		PetsitterVO pvo = petsitterService.getPetsitterVO(petsitterNo);
@@ -125,6 +126,7 @@ public class AdminController {
 		mv.addObject("value", value);
 		return mv;
 	}
+
 	/* 관리자 페이지 - 펫시터 리스트 */
 	@RequestMapping("interceptor_admin_petsitterList.do")
 	public ModelAndView petsitterList(String value, HttpServletRequest request) {
@@ -182,4 +184,11 @@ public class AdminController {
 		petsitterService.recognitionPetsitter(petsitterNo, id);
 	}
 
+	/* 관리자 페이지 - 직원 관리 */
+	@RequestMapping("interceptor_admin_adminList.do")
+	public ModelAndView adminList(String pageNo) {
+		org.kosta.zoosee.model.member.ListVO list = adminService
+				.adminList(pageNo);
+		return new ModelAndView("admin_adminList", "listVO", list);
+	}
 }
