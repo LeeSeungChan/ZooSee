@@ -20,7 +20,7 @@
 	window.open(
 		"${initParam.root}popup_findId.do",
 		"EventFrame",
-		"menubar=no,width=600,height=600,toolbar=no"
+		"menubar=no,width=700,height=550,left=590,top=180,toolbar=no"
 	);
  }
  function findPasswordPopup()
@@ -28,7 +28,7 @@
 	window.open(
 		"${initParam.root}popup_findPassword.do",
 		"EventFrame",
-		"menubar=no,width=500,height=360,toolbar=no"
+		"menubar=no,width=700,height=600,left=590,top=180,toolbar=no"
 	);
  }
  </script>
