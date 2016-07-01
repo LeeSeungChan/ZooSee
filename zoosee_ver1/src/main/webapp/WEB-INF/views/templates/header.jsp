@@ -63,7 +63,7 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">회원리스트 및 승인(관리자)</a></li>
+						<li><a href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">회원리스트 및 승인(관리자)</a></li>
 						<li><a href="${initParam.root}interceptor_admin_qna_list.do?when=all">Q&A 목록(관리자)</a></li>
 					</ul>
 				</li>

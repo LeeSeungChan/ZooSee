@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.kosta.zoosee.model.member.ListVO;
 import org.kosta.zoosee.model.member.MemberService;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
@@ -58,15 +57,6 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
-	//멤버 리스트를 보여준다.
-	@RequestMapping("interceptor_member_memberlist.do")
-	public ModelAndView memberList(String rank,HttpServletRequest requestion){
-		String pageNo=requestion.getParameter("pageNo");
-		ListVO list=memberService.memberList(rank,pageNo);
-		return new ModelAndView("member_memberlist","listVO",list);	
-	}
-	
 	//멤버정보보기
 	@RequestMapping("interceptor_member_getMemberVO.do")
 	public ModelAndView getMemberVO(String id){

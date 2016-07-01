@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.admin.AdminService;
+import org.kosta.zoosee.model.member.MemberService;
+import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.qnaboard.ListVO;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.MessageVO;
@@ -17,6 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
 	@Resource
 	private AdminService adminService;
+	@Resource
+	private PetsitterService petsitterService;
+	@Resource
+	private MemberService memberService;
 	
 	/* 관리자 페이지 - 회원이 등록한 모든 Q&A게시물 보기 */
 	@RequestMapping("interceptor_admin_qna_list.do")
@@ -78,4 +84,28 @@ public class AdminController {
 		org.kosta.zoosee.model.member.ListVO list=adminService.getPetmomList(pageNo);
 		return new ModelAndView("admin_petmomlist","listVO",list);	
 	}
+	/*관리자 페이지 - 펫시터 리스트*/
+	@RequestMapping("interceptor_admin_petsitterList.do")
+	public ModelAndView petsitterList(String value,HttpServletRequest request){
+		String pageNo=request.getParameter("pageNo");
+		ModelAndView mv=new ModelAndView();
+		org.kosta.zoosee.model.petsitter.ListVO list=new org.kosta.zoosee.model.petsitter.ListVO();
+		if(value.equals("recog")){//value -> recog 이면 펫시터 리스트 
+			list=petsitterService.petsitterList(value,pageNo);
+			mv.setViewName("admin_petsitterlist");
+		}else{//value -> nonrecog 이면 펫시터 대기자 리스트 
+			list=petsitterService.petsitterList(value,pageNo);
+			mv.setViewName("admin_petsitterwaitinglist");
+		}
+		mv.addObject("listVO",list);
+		return mv;
+	}
+	/*관리자 페이지 - 멤버 리스트*/
+	@RequestMapping("interceptor_admin_memberlist.do")
+	public ModelAndView memberList(String rank,HttpServletRequest requestion){
+		String pageNo=requestion.getParameter("pageNo");
+		org.kosta.zoosee.model.member.ListVO list=memberService.memberList(rank,pageNo);
+		return new ModelAndView("admin_memberlist","listVO",list);	
+	}
+	
 }

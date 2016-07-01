@@ -28,11 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
 	<select id="petsitterList" resultType="petsitterVO" resultMap="petsitterRM" parameterType="string">
-		select petsitterNo,petNumber,service,price,petSize,petType,houseImg,petsitterImg,adminRecog,id,name 
+		select petsitterNo,adminRecog,id,name,tel,email
 		from (
-			select ceil(rownum/10) as page,petsitterNo,petNumber,service,price,petSize,petType,houseImg,petsitterImg,adminRecog,id,name 
+			select ceil(rownum/10) as page, petsitterNo,adminRecog,id,name,tel,email
 			from (
-				select p.petsitterNo,p.petNumber,p.service,p.price,p.petSize,p.petType,p.houseImg,p.petsitterImg,p.adminRecog,pm.id,pm.name 
+				select p.petsitterNo,p.adminRecog,pm.id,pm.name,pm.tel,pm.email 
 				from petsitter p ,pet_member pm
 			    where p.id=pm.id and  adminRecog=#{value}
 			)

@@ -45,10 +45,10 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_member_memberlist.do?rank=normal">일반회원</a>
+			<a class="BJA" href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
 			<a class="BJA" href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a>
-			<a class="BJA" href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">펫시터</a>
-			<a class="BJA" href="${initParam.root}interceptor_petsitter_petsitterList.do?value=nonrecog">펫시터
+			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
+			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>
@@ -72,6 +72,8 @@
 							<th style="width: 10%">Pet Sitter No</th>
 							<th style="width: 10%">Id</th>
 							<th style="width: 10%">Name</th>
+							<th style="width: 10%">e-Mail</th>
+							<th style="width: 10%">Tel</th>
 							<th style="width: 10%">관리</th>
 						</tr>
 						<c:forEach items="${requestScope.listVO.list }" var="l">
@@ -80,6 +82,8 @@
 								<td>${l.memberVO.id}</td>
 								<td><a
 									href="interceptor_petsitter_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=nonrecog">${l.memberVO.name}</a></td>
+								<td>${l.memberVO.email}</td>
+								<td>${l.memberVO.tel}</td>
 								<td><input type="button" name="recogBtn" value="승인"></td>
 							</tr>
 						</c:forEach>
@@ -93,7 +97,7 @@
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
 						<li><a
-							href="interceptor_petsitter_petsitterList.do?value=nonrecog&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+							href="interceptor_admin_petsitterList.do?value=nonrecog&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
@@ -104,7 +108,7 @@
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a
-								href="interceptor_petsitter_petsitterList.do?value=nonrecog&pageNo=${i}">${i}</a>
+								href="interceptor_admin_petsitterList.do?value=nonrecog&pageNo=${i}">${i}</a>
 							<li>
 						</c:when>
 						<c:otherwise>
@@ -115,7 +119,7 @@
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
 						<li><a
-							href="interceptor_petsitter_petsitterList.do?value=nonrecog&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+							href="interceptor_admin_petsitterList.do?value=nonrecog&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

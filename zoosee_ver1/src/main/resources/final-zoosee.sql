@@ -1,15 +1,17 @@
 alter table petsitterboard drop column petsitterboard_price;
 alter table petsitterboard drop column petsitterboard_petsize;
 alter table petsitterboard drop column petsitterboard_pettype;
-	select id,name,email,tel,rank 
-		from(select ceil(rownum/10) as page,id,name,email,tel,rank from pet_member
-			where rank='petmom' or rank='pre_petmaster' or rank='petmaster'
-		) where page='1'
-delete tablename where condition petmaster
-delete pet_member where id='java' cascade CONSTRAINTS
 
-	select b.petsitterboard_no from petsitterboard b,petsitter p
-		where p.id='java' and p.petsitterNo=b.petsitterNo
+
+select petsitterNo,adminRecog,id,name,tel,email
+		from (
+			select ceil(rownum/10) as page, petsitterNo,adminRecog,id,name,tel,email
+			from (
+				select p.petsitterNo,p.adminRecog,pm.id,pm.name,pm.tel,pm.email 
+				from petsitter p ,pet_member pm
+			    where p.id=pm.id and  adminRecog='recog'
+			)
+		)where page='1'
 
 -- 펫 고유 번호(시퀀스)
 create sequence petNo_seq;

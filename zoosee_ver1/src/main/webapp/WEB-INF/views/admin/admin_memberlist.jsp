@@ -29,10 +29,10 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_member_memberlist.do?rank=normal">일반회원</a>
+			<a class="BJA" href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
 			<a class="BJA" href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a>
-			<a class="BJA" href="${initParam.root}interceptor_petsitter_petsitterList.do?value=recog">펫시터</a>
-			<a class="BJA" href="${initParam.root}interceptor_petsitter_petsitterList.do?value=nonrecog">펫시터
+			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
+			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>
@@ -78,7 +78,7 @@
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
 						<li><a
-							href="i${initParam.root}interceptor_member_memberlist.do?rank=normal&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+							href="i${initParam.root}interceptor_admin_memberlist.do?rank=normal&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
@@ -89,7 +89,7 @@
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a
-								href="${initParam.root}interceptor_member_memberlist.do?rank=normal&pageNo=${i}">${i}</a>
+								href="${initParam.root}interceptor_admin_memberlist.do?rank=normal&pageNo=${i}">${i}</a>
 							<li>
 						</c:when>
 						<c:otherwise>
@@ -100,7 +100,7 @@
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
 						<li><a
-							href="${initParam.root}interceptor_member_memberlist.do?rank=normal&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+							href="${initParam.root}interceptor_admin_memberlist.do?rank=normal&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

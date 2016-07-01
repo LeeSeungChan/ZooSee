@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.member.MemberService;
-import org.kosta.zoosee.model.petsitter.ListVO;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.review.ReviewService;
 import org.kosta.zoosee.model.vo.FileVO;
@@ -79,26 +78,7 @@ public class PetsitterController {
 	      petsitterVO.setMemberVO(mvo);
 	      petsitterService.registerPetsitter(petsitterVO);
 	      return new ModelAndView("redirect:home.do");
-	   }
-
-	
-	//펫시터 리스트를 보여준다.
-	@RequestMapping("interceptor_petsitter_petsitterList.do")
-	public ModelAndView petsitterList(String value,HttpServletRequest request){
-		String pageNo=request.getParameter("pageNo");
-		ModelAndView mv=new ModelAndView();
-		ListVO list=new ListVO();
-		if(value.equals("recog")){//value -> recog 이면 펫시터 리스트 
-			list=petsitterService.petsitterList(value,pageNo);
-			mv.setViewName("petsitter_petsitterlist");
-		}else{//value -> nonrecog 이면 펫시터 대기자 리스트 
-			list=petsitterService.petsitterList(value,pageNo);
-			mv.setViewName("petsitter_petsitterwaitinglist");
-		}
-		mv.addObject("listVO",list);
-		return mv;
-	}
-	
+	   }	
 		
 		//펫시터 추방
 		@RequestMapping("interceptor_petsitter_deletePetsitter.do")
