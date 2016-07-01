@@ -64,4 +64,19 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<String> allMemberIdList() {
 		return template.selectList("member.allMemberIdList");
 	}
+	@Override
+	public MemberVO findEmailByMemberVO(String email) 
+	{
+		return template.selectOne("member.findEmailByMemberVO",email);
+	}
+	@Override
+	public MemberVO findPasswordByMemberVO(HashMap<String,String> map) 
+	{
+		return template.selectOne("member.findPasswordByMemberVO",map);
+	}
+	@Override
+	public void updateMemberPassword(int password) 
+	{
+		template.update("member.updateMemberPassword",password);
+	}
 }

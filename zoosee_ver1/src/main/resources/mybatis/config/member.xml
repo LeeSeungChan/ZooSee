@@ -56,7 +56,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="allMemberIdList" resultType="string">
 		select id from pet_member
 	</select>
-	
+	<!-- 아이디 찾기 -->
+	<select id="findEmailByMemberVO" resultType="memberVO">
+		select id,name from pet_member where email=#{value}
+	</select>
+	<!-- 임시 비밀번호 select -->
+	<select id="findPasswordByMemberVO" parameterType="map" resultType="memberVO">
+	  	select name,password from pet_member where id=#{id} and email=#{email}
+	</select>
+	<!-- 임시비밀번호 update -->
+	<update id="updateMemberPassword">
+		update pet_member set password=#{value}
+	</update>
 	<!-- 이승찬 추가 - 혹시 몰라서 백업용 -->
 	<!-- <update id="registerPet">
 		update pet_member set rank='petmom' where id=#{id}

@@ -15,7 +15,23 @@
          }
    });
 });
-</script>
+ function findIdPopup() 
+ {
+	window.open(
+		"${initParam.root}popup_findId.do",
+		"EventFrame",
+		"menubar=no,width=600,height=600,toolbar=no"
+	);
+ }
+ function findPasswordPopup()
+ {
+	window.open(
+		"${initParam.root}popup_findPassword.do",
+		"EventFrame",
+		"menubar=no,width=500,height=360,toolbar=no"
+	);
+ }
+ </script>
 <!-- 전체 시작 -->
 <div class="WJcontainer3">
 	<!-- 텍스트는 왼쪽 정렬 및 삽입 중간 정렬 시작 -->
@@ -44,7 +60,11 @@
 		<button type="submit" class="active WJbtn btn-block btn-primary" style="margin-bottom: 5%">Submit</button>
 		<div align="center">
 			아직도 ZOOSEE 계정이 없으세요? <br>
-			<a href="${initParam.root}member_register.do">회원가입</a>
+			<a href="${initParam.root}member_register.do">회원가입</a><br>
+			아이디가 기억나지 않으신가요?<br>
+			<a href="javascript:findIdPopup()">아이디찾기</a><br>
+			비밀번호가 기억나지 않으신가요?<br>
+			<a href="javascript:findPasswordPopup()">비밀번호찾기</a>
 		</div>
 		</div>
 		

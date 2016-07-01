@@ -1,5 +1,6 @@
 package org.kosta.zoosee.model.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -78,5 +79,29 @@ public class MemberServiceImpl implements MemberService {
 	public String findIdByPetsitterNo(int petsitterNo) {
 		return memberDAO.findIdByPetsitterNo(petsitterNo);
 	}
+	
+	// 아이디 찾기
+		@Override
+		public MemberVO findEmailByMemberVO(String email) 
+		{
+			return memberDAO.findEmailByMemberVO(email);
+		}
+
+		// 비밀번호 찾기
+		@Override
+		public MemberVO findPasswordByMemberVO(String id, String email) 
+		{
+			HashMap<String,String> map = new HashMap<String,String>();
+			map.put("id", id);
+			map.put("email",email);
+			return memberDAO.findPasswordByMemberVO(map);
+		}
+
+		// 임시 비밀번호를 update
+		@Override
+		public void updateMemberPassword(int password) 
+		{
+			memberDAO.updateMemberPassword(password);
+		}
 
 }

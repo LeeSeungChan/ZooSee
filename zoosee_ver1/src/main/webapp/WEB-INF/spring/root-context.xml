@@ -39,5 +39,19 @@
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
+<!-- mailSender 설정 -->
+<bean id="mailsender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="zooseekosta@gmail.com" />
+		<property name="password" value="zoosee116" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

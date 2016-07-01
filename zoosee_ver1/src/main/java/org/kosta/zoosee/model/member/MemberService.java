@@ -20,4 +20,10 @@ public interface MemberService {
 
 	public abstract String findIdByPetsitterNo(int petsitterNo);
 
+	public abstract MemberVO findEmailByMemberVO(String email);
+
+	public abstract MemberVO findPasswordByMemberVO(String id, String email);
+
+	public abstract void updateMemberPassword(int password);
+
 }

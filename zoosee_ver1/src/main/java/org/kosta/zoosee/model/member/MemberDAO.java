@@ -31,4 +31,10 @@ public interface MemberDAO {
 
 	public abstract List<String> allMemberIdList();
 
+	public abstract MemberVO findEmailByMemberVO(String email);
+
+	public abstract MemberVO findPasswordByMemberVO(HashMap<String,String> map);
+
+	public abstract void updateMemberPassword(int password);
+
 }
