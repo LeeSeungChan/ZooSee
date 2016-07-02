@@ -59,4 +59,16 @@ public class BoardDAOImpl implements BoardDAO{
 	public int myPetsitterboard(String id) {
 		return template.selectOne("petsitterboard.myPetsitterboard",id);
 	}
+
+	@Override
+	public void myPetsitterBoardDelete(int petsitterboard_no) {
+		template.delete("petsitterboard.myPetsitterBoardDelete",petsitterboard_no);
+		
+	}
+
+	@Override
+	public void myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO) {
+		template.update("petsitterboard.myPetsitterboardUpdate",petsitterboardVO);
+		
+	}
 }

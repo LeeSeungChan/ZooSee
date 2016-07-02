@@ -24,4 +24,8 @@ public interface BoardDAO {
 
 	int myPetsitterboard(String id);
 
+	void myPetsitterBoardDelete(int petsitterboard_no);
+
+	void myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO);
+
 }

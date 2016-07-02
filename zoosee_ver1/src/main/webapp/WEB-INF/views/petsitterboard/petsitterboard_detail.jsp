@@ -21,7 +21,14 @@
       
 	$(document).ready(function(){
 		dateFormatChange();
-         
+        
+		$("#deleteId").click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardDelete.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}";
+			}
+				
+		});
+		
 		var startDay = "${petsitterboardVO.startDay}";
 		var endDay = "${petsitterboardVO.endDay}";
 
@@ -228,6 +235,25 @@
 
 <c:set var="petsitterVO" value="${petsitterboardVO.petsitterVO }"></c:set>
 <c:set var="memberVO" value="${petsitterboardVO.petsitterVO.memberVO}"></c:set>
+<!-- 더블헤더 -->
+<c:if test="${sessionScope.mvo.id== petsitterboardVO.petsitterVO.memberVO.id}">
+	<div class="BJHeaderLayout0">
+		<div class="BJHeaderLayout" >
+			<div class="BJHeader2" >
+				<a class="BJA" href="${initParam.root}interceptor_member_detail.do">마이페이지</a>
+				<a class="BJA" href="${initParam.root}interceptor_member_update.do">회원정보수정</a>
+				<c:if test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
+			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 돌보미게시글등록</a>
+			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
+			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardUpdateView.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}">내 글 수정</a>
+			       <a class="BJA" id="deleteId" href="#">내 글 삭제</a>
+		    	</c:if>
+			</div>
+		</div>
+	</div>
+</c:if>
+
+
 
 <div class="BJMainKING">
 <div class="BJMainDiv" style="margin-bottom: 10%;">

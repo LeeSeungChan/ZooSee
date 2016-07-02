@@ -116,4 +116,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where p.id=#{value} and p.petsitterNo=b.petsitterNo
 	</select>
 	
+	
+	<delete id="myPetsitterBoardDelete">
+		delete from petsitterboard where petsitterboard_no=#{value}
+	</delete>
+	
+	<update id="myPetsitterboardUpdate" parameterType="petsitterboardVO">
+		update petsitterboard set petsitterboard_title=#{petsitterboard_title},petsitterboard_contents=#{petsitterboard_contents},startDay=#{startDay},endDay=#{endDay}
+		where petsitterboard_no=#{petsitterboard_no}
+	</update>
+	
 </mapper>

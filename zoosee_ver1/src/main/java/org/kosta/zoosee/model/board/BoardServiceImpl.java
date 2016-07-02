@@ -63,4 +63,17 @@ public class BoardServiceImpl implements BoardService {
 	public int myPetsitterboard(String id) {
 		return boardDAO.myPetsitterboard(id);
 	}
+
+	@Override
+	public void myPetsitterBoardDelete(int petsitterboard_no) {
+		boardDAO.myPetsitterBoardDelete(petsitterboard_no);
+		
+	}
+
+	@Override
+	public void myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO) {
+		boardDAO.updatePetsitterVO(petsitterVO);
+		boardDAO.myPetsitterboardUpdate(petsitterboardVO);
+		
+	}
 }

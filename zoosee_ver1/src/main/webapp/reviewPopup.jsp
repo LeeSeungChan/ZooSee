@@ -12,30 +12,22 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-	 	/* $("#reviewForm :input[type='submit']").click(function(){
+		$("#reviewBtn").click(function(){
 	 		if($("#textConent").val()==""){
 	 			alert("후기를 입력하세요!");
 	 			$("#textConent").focus();
 	 			return false;
 	 		}
 	 		
-	 		$("#reviewForm").submit();	 
-		
-	 		self.close();
-	 	}); */
-	 	$("#reviewForm").submit(function(){
-	 		if($("#textConent").val()==""){
-	 			alert("후기를 입력하세요!");
-	 			$("#textConent").focus();
-	 			return false;
-	 		}
 	 		if(confirm("등록하시겠습니까?")){
+	 			var id="${mvo.id}";
+	 			var url="${initParam.root}interceptor_tradeInfo_inputReview.do?ref_id=${param.id}&id="+id+"&star_rate="+$('#star_rate').val()+"&content="+$('#textConent').val();
+	 			opener.parent.location=url;
 	 			window.close();
-	 		}else{
-	 			return false;
 	 		}
-	 		
+		
 	 	});
+	 	
 		
 		$("#cBtn").click(function(){
 			window.close();
@@ -69,12 +61,12 @@
                 <a href="#" >★</a>
                 <a href="#" >★</a>
             </p>
-            <input type="hidden" name="star_rate" id="star_rate" value=5>
+            <input type="hidden" name="star_rate" id="star_rate" value=3>
 	<table>
 	 
 		<tr>
 			<td><textarea id="textConent" style="resize:none;margin-left: 17%;" class="BJform-controlBig2 input-lg" name="content" rows="3" cols="60"  ></textarea></td>
-			<td align="center"><input class="BJBigButton" 	type="submit" value="댓글쓰기"></td>
+			<td align="center"><input class="BJBigButton"  id="reviewBtn"	type="button" value="댓글쓰기"></td>
 		</tr>
 	</table>
 	

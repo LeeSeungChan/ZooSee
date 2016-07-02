@@ -72,7 +72,7 @@ TEL : 거래승인시 관랍하실 수 있습니다.<hr>
 
 <!-- 후기 -->
 <div class="BJReplyAllLine" style="width: 100%; margin-left: 0%; ">
-<h3 style="color: #868686; margin-left: 5%;">*REVIEW</h3>
+<h3 style="color: #868686; margin-left: 5%;">*REVIEW(${requestScope.reviewList.size() })</h3>
 <c:forEach items="${requestScope.reviewList }" varStatus="status" var="reviewList">
 <div class="BJReplyList" style=" width:90%; margin-left: 5%">
 <table  style="width:100%;">

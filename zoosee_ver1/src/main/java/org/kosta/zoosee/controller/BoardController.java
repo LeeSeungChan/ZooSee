@@ -30,7 +30,7 @@ public class BoardController {
 	@Resource
 	private PetsitterService petsitterService;
 	@Resource
-	private ReserveService reserveService;
+	private ReserveService reserveService;																																							
 	@Resource
 	private ReviewService reviewService;
 	// 헤더에서 보드 등록 폼.JSP로 이동하는
@@ -149,4 +149,26 @@ public class BoardController {
 		
 		return new ModelAndView("redirect:petsitterboardDetail.do?petsitterboard_no="+petsitterboard_no);
 	}
+	
+	
+	//게시글 수정 뷰
+		@RequestMapping("interceptor_petsitterboard_myPetsitterBoardUpdateView.do")
+		public ModelAndView myPetsitterboardUpdateView(int petsitterboard_no){
+			PetsitterboardVO petsitterboardVO=boardServie.getboardDetail(petsitterboard_no);
+			return new ModelAndView("petsitterboard_updateForm","petsitterboardVO",petsitterboardVO);
+		}
+		
+		//게시글 수정
+			@RequestMapping("interceptor_petsitterboardUpdate.do")
+			public ModelAndView myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO){            
+				boardServie.myPetsitterboardUpdate(petsitterboardVO,petsitterVO);
+				return new ModelAndView("redirect:interceptor_petsitterboard_myPetsitterBoard.do");
+			}
+		
+		//게시글삭제
+		@RequestMapping("interceptor_petsitterboard_myPetsitterBoardDelete.do")
+		public ModelAndView myPetsitterBoardDelete(int petsitterboard_no){
+			boardServie.myPetsitterBoardDelete(petsitterboard_no);
+			return new ModelAndView("redirect:home.do");
+		}
 }

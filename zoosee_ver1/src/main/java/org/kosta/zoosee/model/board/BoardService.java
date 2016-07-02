@@ -20,4 +20,9 @@ public interface BoardService {
 
 	int myPetsitterboard(String id);
 
+	void myPetsitterBoardDelete(int petsitterboard_no);
+
+	void myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,
+			PetsitterVO petsitterVO);
+
 }

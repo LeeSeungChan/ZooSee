@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.review.ReviewService;
 import org.kosta.zoosee.model.vo.MemberVO;
@@ -24,21 +25,20 @@ public class ReviewController {
 	private ReviewService reviewService;
 	@Resource
 	private PetsitterService petsitterService;
+	@Resource
+	private BoardService boardService;
 	
-	@RequestMapping("interceptor_popup_reviewPopup.do")
-	public ModelAndView reviewPopup(String id){
-		PetsitterVO pvo=petsitterService.findPetsitterById(id);
-		return new ModelAndView("popup_reviewPopup","petsitterVO",pvo);
-	}
 	
+	//리뷰 등록
 	@RequestMapping("interceptor_tradeInfo_inputReview.do")
-	public void inputReview(ReviewVO rvo,HttpServletRequest request){
-
+	public ModelAndView inputReview(ReviewVO rvo,HttpServletRequest request){
 		HttpSession session=request.getSession(false);
 		if(session!=null){
 			rvo.setId(((MemberVO)session.getAttribute("mvo")).getId()); 
 		}
 		reviewService.inputReview(rvo);
+		int petsitterboard_no=boardService.myPetsitterboard(rvo.getRef_id());
+		return new ModelAndView("redirect:petsitterboardDetail.do","petsitterboard_no",petsitterboard_no);
 		
 	}
 	
