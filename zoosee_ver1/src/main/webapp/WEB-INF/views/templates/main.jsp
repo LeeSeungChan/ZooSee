@@ -1,7 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+	function clickNotification(notification, flag){
+		// notification 클릭하면 새로 이동
+		notification.onclick = function(event) {
+			//event.preventDefault(); // prevent the browser from focusing the Notification's tab
+			var petMasterSignal = 0;
+			if("${sessionScope.mvo.rank}" == "petmaster"){
+				petMasterSignal = 2;
+			}
+			
+			if(flag == "request"){
+				location.href='interceptor_reserve_reserveMyList.do?petMasterSignal='+petMasterSignal;
+			}
+			if(flag == "complete"){
+				location.href='interceptor_reserve_reserveMyList.do?petMasterSignal='+petMasterSignal;
+			}
+			if(flag == "deal"){
+				location.href='interceptor_tradeInfo_getTradeMyList.do';
+			}
+		}
+	}
+	
+	function showNotification(title1, title2, title3, image, flag){
+		if(title1 != null && flag == "request"){
+			options1 = {
+		    	body: title1,
+		    	icon: '${initParam.root}'+image
+		    }
+			var notification = new Notification("ZooSee Alarm", options1);
+			setTimeout(notification.close.bind(notification), 5000);
+			clickNotification(notification, flag);
+		}
+		if(title2 != null && flag == "complete"){
+			options2 = {
+		    	body: title2,
+		    	icon: '${initParam.root}'+image
+		    }
+			
+			var notification2 = new Notification("ZooSee Alarm", options2);
+			setTimeout(notification2.close.bind(notification2), 5000);
+			clickNotification(notification2, flag);
+		}
+		if(title3 != null && flag == "deal"){
+			options3 = {
+		    	body: title3,
+		    	icon: '${initParam.root}'+image
+		    }
+			
+			var notification3 = new Notification("ZooSee Alarm", options3);
+			setTimeout(notification3.close.bind(notification3), 5000);
+			clickNotification(notification3, flag);
+		}
+	}
+	
+	function prepareNotification(petMomName, petsitterName, petImg, flag){
+		var str = new Array();
+		var options1, options2;
+		var rank = "${sessionScope.mvo.rank}";
+		
+		if(rank == "petsitter" || rank == "petmaster"){
+			str[0] = "'" + petMomName + "'님이 '" + petsitterName + "'님에게 '예약신청'하였습니다.";
+			str[2] = "'" + petMomName + "'님이 신청한 예약이 '결제완료'되었습니다.";
+			
+			showNotification(str[0], null, str[2], petImg, flag);
+		}else if(rank == "petmom"){
+			str[1] = "'" + petMomName + "(본인)'님이 신청한 예약이 '예약완료'되었습니다.";
+			
+			showNotification(null, str[1], null, null, flag);	
+		}
+	}
+
     $(document).ready(function(){
+		var name = "${sessionScope.mvo.name}";
+    	
+		if(name == null || name == ""){
+    		console.log("no login");    		
+    	}else{
+    		<c:forEach items="${requestScope.reserveTotalList.reserveRequestList}" var="reserveVO">
+    			/* var jsonData = {
+    				"petMomName":"${reserveVO.memberVO.name}",
+    				"name":"${sessionScope.mvo.name}",
+    				"flag":"request"};	
+    			console.log(jsonData + "|" + typeof jsonData); */
+    		
+    			prepareNotification("${reserveVO.memberVO.name}", name, "${reserveVO.petVO.petImg}", "request")
+   			</c:forEach>
+   			<c:forEach items="${requestScope.reserveTotalList.reserveCompleteList}" var="reserveVO">
+   				prepareNotification("${reserveVO.memberVO.name}", name, "${reserveVO.petVO.petImg}", "complete");
+			</c:forEach>
+			<c:forEach items="${requestScope.reserveTotalList.reserveDealList}" var="reserveVO">
+				prepareNotification("${reserveVO.memberVO.name}", name, "${reserveVO.petVO.petImg}", "deal");
+			</c:forEach>
+    	}
+    	
     	var $body = $(document.body), //자주 사용하기에 캐시되게 변수에 넣어준다
     	$top = '';
 

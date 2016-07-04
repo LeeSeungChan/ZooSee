@@ -1,5 +1,6 @@
 package org.kosta.zoosee.model.member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.kosta.zoosee.model.message.MessageDAO;
 import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.qnaboard.PagingBean;
 import org.kosta.zoosee.model.vo.MemberVO;
+import org.kosta.zoosee.model.vo.ReserveVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -84,27 +86,55 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	// 아이디 찾기
-		@Override
-		public MemberVO findEmailByMemberVO(String email) 
-		{
-			return memberDAO.findEmailByMemberVO(email);
-		}
+	@Override
+	public MemberVO findEmailByMemberVO(String email) {
+		return memberDAO.findEmailByMemberVO(email);
+	}
 
-		// 비밀번호 찾기
-		@Override
-		public MemberVO findPasswordByMemberVO(String id, String email) 
-		{
-			HashMap<String,String> map = new HashMap<String,String>();
-			map.put("id", id);
-			map.put("email",email);
-			return memberDAO.findPasswordByMemberVO(map);
-		}
+	// 비밀번호 찾기
+	@Override
+	public MemberVO findPasswordByMemberVO(String id, String email) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("id", id);
+		map.put("email",email);
+		return memberDAO.findPasswordByMemberVO(map);
+	}
 
-		// 임시 비밀번호를 update
-		@Override
-		public void updateMemberPassword(int password) 
-		{
-			memberDAO.updateMemberPassword(password);
+	// 임시 비밀번호를 update
+	@Override
+	public void updateMemberPassword(int password) {
+		memberDAO.updateMemberPassword(password);
+	}
+	
+	@Override
+	public HashMap<String, List<ReserveVO>> showReserveList(List<ReserveVO> reserveList) {
+		HashMap<String, List<ReserveVO>> map = new HashMap<String, List<ReserveVO>>();
+		
+		// 예약 신청(reserve_recog=0)인 리스트 뽑기
+		List<ReserveVO> reserveRequestList = new ArrayList<ReserveVO>();
+		for (int i = 0; i < reserveList.size(); i++) {
+			if (reserveList.get(i).getReserve_recog() == 0) {
+				reserveRequestList.add(reserveList.get(i));
+			}
 		}
-
+		// 예약 완료(reserve_recog=1)인 리스트 뽑기
+		List<ReserveVO> reserveCompleteList = new ArrayList<ReserveVO>();
+		for (int i = 0; i < reserveList.size(); i++) {
+			if (reserveList.get(i).getReserve_recog() == 1) {
+				reserveCompleteList.add(reserveList.get(i));
+			}
+		}
+		// 거래 중(reserve_recog=2)인 리스트 뽑기
+		List<ReserveVO> reserveDealList = new ArrayList<ReserveVO>();
+		for (int i = 0; i < reserveList.size(); i++) {
+			if (reserveList.get(i).getReserve_recog() == 2) {
+				reserveDealList.add(reserveList.get(i));
+			}
+		}
+		
+		map.put("reserveRequestList", reserveRequestList);
+		map.put("reserveCompleteList", reserveCompleteList);
+		map.put("reserveDealList", reserveDealList);
+		return map;
+	}
 }

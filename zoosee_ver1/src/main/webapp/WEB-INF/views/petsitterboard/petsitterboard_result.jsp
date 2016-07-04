@@ -176,7 +176,7 @@
 			</div>
 		</div><br/>
 
-<button onclick="notifyMe()">Notify me!</button>
+<%-- <button onclick="notifyMe()">Notify me!</button> --%>
 
 		<div align="center">
 		<!-- <div align="right" style="border:1px solid blue;">	 -->

@@ -2,13 +2,16 @@ package org.kosta.zoosee.controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.member.MemberService;
+import org.kosta.zoosee.model.reserve.ReserveService;
 import org.kosta.zoosee.model.vo.MemberVO;
+import org.kosta.zoosee.model.vo.ReserveVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class MemberController {
 	@Resource
 	private MemberService memberService;
+	@Resource
+	private ReserveService reserveService;
 	
 	/* Member 회원가입하는 메서드 */
 	@RequestMapping(value="registerMember.do", method=RequestMethod.POST)
@@ -28,15 +33,25 @@ public class MemberController {
 	}
 	/* Member 로그인 메서드 */
 	@RequestMapping(value="loginMember.do", method=RequestMethod.POST)
-	public String loginMember(MemberVO mvo, HttpServletRequest request){
-		//System.out.println(mvo.toString());
+	public ModelAndView loginMember(MemberVO mvo, HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("home");
+		
 		MemberVO vo = memberService.loginMember(mvo);
 		HttpSession session = request.getSession();
 		if(vo != null){
 			session.setAttribute("mvo", vo);
-			return "home";
+			
+			String petMasterSignal = "";
+			if(vo.getRank().equals("petmaster")){
+				// showMyReserveList에서 petmaster의 전체 예약목록을 뽑아오기 위해 2로 설정
+				petMasterSignal = "2";
+			}
+			List<ReserveVO> reserveList = reserveService.showMyReserveList(vo, petMasterSignal);
+			HashMap<String, List<ReserveVO>> map = memberService.showReserveList(reserveList);
+			mv.addObject("reserveTotalList", map);
+			return mv;
 		}else{
-			return "member_loginFail";
+			return new ModelAndView("member_loginFail");
 		}
 	}
 	/* Member 회원가입시 아이디 중복확인 메서드 */

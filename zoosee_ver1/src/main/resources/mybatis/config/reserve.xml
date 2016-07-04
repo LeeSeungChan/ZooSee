@@ -22,9 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="petNo" property="petVO.petNo"/>
 		<result column="petName" property="petVO.petName"/>
 		<result column="petType" property="petVO.petType"/>
+		<result column="petImg" property="petVO.petImg"/>
 		<result column="petsitterboard_no" property="petsitterboardVO.petsitterboard_no"/>
 		<result column="petsitterboard_title" property="petsitterboardVO.petsitterboard_title"/>
 		<result column="petsitterNo" property="petsitterboardVO.petsitterVO.petsitterNo"/>
+		<result column="petsitterImg" property="petsitterboardVO.petsitterVO.petsitterImg"/>
 		<result column="petsitterId" property="petsitterboardVO.petsitterVO.memberVO.id"/>
 		<result column="petsitterName" property="petsitterboardVO.petsitterVO.memberVO.name"/>
 		<result column="petsitterAddress" property="petsitterboardVO.petsitterVO.memberVO.address"/>
@@ -50,39 +52,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="showPetsitterReserveList" parameterType="string" resultMap="reserveMap">
 		select r.reserve_no,r.reserve_price,r.reserve_recog,b.petsitterboard_no,b.petsitterboard_title,r.id,
-	   		   pm.name,b.petsitterId,b.petsitterName,b.petsitterEmail,b.petsitterTel,b.petsitterAddress,
-	   		   b.petsitterNo, pet.petNo, pet.petType
+	   		   pm.name,b.petsitterId,b.petsitterName,b.petsitterEmail,b.petsitterTel,b.petsitterAddress,b.petsitterImg,
+	   		   b.petsitterNo, pet.petNo, pet.petType, pet.petImg
 		from(select a.id as petsitterId,a.name as petsitterName,a.email as petsitterEmail,a.tel as petsitterTel, a.address as petsitterAddress,
-		  			pb.petsitterboard_no,pb.petsitterboard_title, pb.petsitterNo
-	 		 from(select m.id,m.name,m.email,m.tel,m.address,ps.petsitterNo
+		  			a.petsitterImg,pb.petsitterboard_no,pb.petsitterboard_title, pb.petsitterNo
+	 		 from(select m.id,m.name,m.email,m.tel,m.address,ps.petsitterNo,ps.petsitterImg
 	 	  		  from PET_MEMBER m, petsitter ps
 	 	  		  where m.id=#{value} and m.id=ps.id) a, petsitterboard pb
 	 		 where a.petsitterNo=pb.petsitterNo) b, reserve r, PET_MEMBER pm, PET pet
 		where b.petsitterboard_no=r.petsitterboard_no and r.id=pm.id and pm.id=pet.id order by r.reserve_no desc
 	</select>
 	<select id="showPetMomReserveList" parameterType="string" resultMap="reserveMap">
-		select B.reserve_no,B.reserve_price,B.reserve_recog,B.id,B.name,B.petNo,B.petName,B.petType,
+		select B.reserve_no,B.reserve_price,B.reserve_recog,B.id,B.name,B.petNo,B.petName,B.petType,B.petImg,
 			   B.petsitterboard_no,B.petsitterboard_title,B.petsitterNo,ps.id as petsitterId,pm.name as petsitterName
 		from(
-			select R.reserve_no,R.reserve_price,R.reserve_recog,A.id,A.name,A.email,A.tel,A.address,A.petNo,A.petName,A.petType,
+			select R.reserve_no,R.reserve_price,R.reserve_recog,A.id,A.name,A.email,A.tel,A.address,A.petNo,A.petName,A.petType,A.petImg,
 				   R.petsitterboard_no,pb.petsitterboard_title,pb.petsitterNo
-			from(select m.id,m.name,m.email,m.tel,m.address,pet.petNo,pet.petName,pet.petType
+			from(select m.id,m.name,m.email,m.tel,m.address,pet.petNo,pet.petName,pet.petType,pet.petImg
 				 from PET_MEMBER m, PET pet
 				 where m.id=#{value} and m.id=pet.id) A, RESERVE R, PETSITTERBOARD pb
 			where A.id=R.id and R.petsitterboard_no=pb.petsitterboard_no order by R.reserve_no desc) B, petsitter ps, PET_MEMBER pm
 		where ps.petsitterNo=B.petsitterNo and pm.id=ps.id
 	</select>
 	<select id="showPetMasterReserveList" parameterType="string" resultMap="reserveMap">
-		select R.reserve_no,R.reserve_price,R.reserve_recog,B.petNo,B.petName,B.petType,
+		select R.reserve_no,R.reserve_price,R.reserve_recog,B.petNo,B.petName,B.petType,B.petImg,
 			   B.petsitterboard_no,B.petsitterboard_title,
 			   B.id,B.name,B.address,B.email,B.tel,B.petsitterNo
 		from(
 			select A.id,A.name,A.address,A.email,A.tel,A.petsitterNo,
-				   A.petNo,A.petName,A.petType,
+				   A.petNo,A.petName,A.petType,A.petImg
 				   pb.petsitterboard_no,pb.petsitterboard_title
 			from(
 				select m.id,m.name,m.address,m.email,m.tel,ps.petsitterNo,
-					   pet.petNo,pet.petName,pet.petType
+					   pet.petNo,pet.petName,pet.petType,pet.petImg
 				from PET_MEMBER m, petsitter ps, PET pet
 				where m.id=#{value} and ps.id=m.id and pet.id=m.id) A, petsitterboard pb
 			where A.petsitterNo=pb.petsitterNo) B, RESERVE r

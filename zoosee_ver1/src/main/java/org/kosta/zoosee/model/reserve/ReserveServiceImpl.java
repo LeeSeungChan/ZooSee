@@ -15,7 +15,6 @@ import org.kosta.zoosee.model.pet.PetDAO;
 import org.kosta.zoosee.model.petsitter.PetsitterDAO;
 import org.kosta.zoosee.model.tradeInfo.TradeInfoDAO;
 import org.kosta.zoosee.model.vo.MemberVO;
-import org.kosta.zoosee.model.vo.MessageVO;
 import org.kosta.zoosee.model.vo.PetCalendarVO;
 import org.kosta.zoosee.model.vo.PetVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
@@ -124,8 +123,14 @@ public class ReserveServiceImpl implements ReserveService {
 			// PetMaster 중에서 변수가 1이면 맘 and 0이면 시터 입장
 			if (petMasterSignal.equals("1")) {
 				list = reserveDAO.showPetMomReserveList(id);
-			} else {
+			}else if(petMasterSignal.equals("0")){
 				list = reserveDAO.showPetsitterReserveList(id);
+			}else if(petMasterSignal.equals("2")){
+				// list 2개 뽑아와서 합치기
+				List<ReserveVO> list1 = reserveDAO.showPetMomReserveList(id);
+				List<ReserveVO> list2 = reserveDAO.showPetsitterReserveList(id);
+				list.addAll(0, list1);
+				list.addAll(list.size()-1, list2);
 			}
 		}
 		return list;

@@ -1,6 +1,10 @@
 package org.kosta.zoosee.model.member;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.kosta.zoosee.model.vo.MemberVO;
+import org.kosta.zoosee.model.vo.ReserveVO;
 
 public interface MemberService {
 
@@ -25,5 +29,8 @@ public interface MemberService {
 	public abstract MemberVO findPasswordByMemberVO(String id, String email);
 
 	public abstract void updateMemberPassword(int password);
+
+	public abstract HashMap<String, List<ReserveVO>> showReserveList(
+			List<ReserveVO> reserveList);
 
 }
