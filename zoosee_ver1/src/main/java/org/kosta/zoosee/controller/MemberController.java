@@ -1,6 +1,8 @@
 package org.kosta.zoosee.controller;
 
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -70,8 +72,26 @@ public class MemberController {
 		return new ModelAndView("member_delete_result","result",result);
 	}
 	@RequestMapping("interceptor_member_detail.do")
-	public ModelAndView memberDetail()
-	{
+	public ModelAndView memberDetail(){
 		return new ModelAndView("member_detail");
 	}
+	
+	//비밀번호 체크
+	@RequestMapping(value="check.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Object check(MemberVO mvo){
+		HashMap<String,String> map = new HashMap<String, String>();
+		MemberVO vo = memberService.loginMember(mvo);
+		if(vo!=null){
+			map.put("check","ok");
+			return map;
+		}else{
+			map.put("check","fail");
+			return map;
+		}
+	}
+
+	
+	
+	
 }

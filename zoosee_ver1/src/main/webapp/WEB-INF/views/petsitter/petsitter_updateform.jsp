@@ -6,6 +6,32 @@
 	$(document)
 			.ready(
 					function() {
+						
+						$("#pass_check_btn").click(function(){
+							var id=$("#id").val();
+							var password=$("#password").val();
+								$.ajax({
+						               type : "post",
+						               url : "check.do",
+						               data : "id="+id+"&password="+password,
+						               dataType:"json",
+						               success:function(result){
+						            	   if(result.check=="ok"){
+						            		   alert("비밀번호가 확인되었습니다.");
+						            		   $("#checked").css("display","block");
+						            		   $("#unchecked").css("display","none");
+						            	   }else{
+						            		  	alert("비밀번호가 일치하지 않습니다");
+						            		  	return false;
+						            	   }
+						               }//success
+								});//ajax
+							});//onclick
+
+						
+						
+						
+						
 						$(
 								'input:radio[name="petType"]:input[value="${petsitterVO.petType}"]')
 								.attr("checked", true);
@@ -85,6 +111,47 @@
 	}
 </script>
 <link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/sb.css">
+<!-- 비밀번호 체크폼 -->
+<span id="unchecked">
+<div class="WJcontainer3">
+	<div style="border: 1px solid #0f0fd9; border-radius: 10px; height: 550px; width:50%;  margin-top:10%; margin-left:25%; background-color: white">
+	<%-- <img src="${initParam.root}resources/image/Mmain.jpg" style="position: absolute; height:230px;  width:30%;"> --%>
+	<div class="WJLayout2"
+		style=" text-align: left;">
+		<!-- 사진 중간 정렬 시작-->
+		<div align="center">
+			<a href="home.do"><img
+				src="${initParam.root}resources/image/Mzoosee.png"></a>
+		</div>
+		<!-- 사진 중간 정렬 끝-->
+		<form action="" id="memberLoginForm" method="post" >
+		<!-- 왼쪽 시작-->
+		<div style="float: center; " >
+		정보 수정을 위해 	비밀번호를 입력해주세요.<br>
+		<div class="WJform-group">
+			<input type="hidden" id="id" value="${sessionScope.mvo.id}">
+			<input class="WJform-control" id="password"
+				name="password" placeholder="Password" type="password">
+			<input type="hidden" name="checked" id="checked" value="false">
+		</div>
+		<br>
+		<button type="button" class="active WJbtn btn-block btn-primary" style="margin-bottom: 5%" id="pass_check_btn">확인</button>
+		<div align="center">
+			비밀번호가 기억나지 않으신가요?<br>
+			<a href="javascript:findPasswordPopup()">비밀번호찾기</a>
+		</div>
+		</div>
+		
+		</form>
+		</div>
+		<!-- 텍스트는 왼쪽 정렬 및 삽입 중간 정렬 끝-->
+		</div>
+</div>
+</span>
+
+
+<!-- 비밀번호 체크 OK -->
+<span id="checked">
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
@@ -214,3 +281,4 @@
 		</div>
 	</form>
 </div>
+</span>
