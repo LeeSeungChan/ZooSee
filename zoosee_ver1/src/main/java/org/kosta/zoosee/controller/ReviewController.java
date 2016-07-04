@@ -29,6 +29,11 @@ public class ReviewController {
 	private BoardService boardService;
 	
 	
+	@RequestMapping("popup_reviewPopup.do")
+	public ModelAndView reviewPopup(String id){
+		return new ModelAndView("popup_reviewPopup","id",id);
+	}
+	
 	//리뷰 등록
 	@RequestMapping("interceptor_tradeInfo_inputReview.do")
 	public ModelAndView inputReview(ReviewVO rvo,HttpServletRequest request){

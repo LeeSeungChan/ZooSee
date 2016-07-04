@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	function openPopup(id){
 		var content=null;
-		window.open("${initParam.root}reviewPopup.jsp?id="+id,"","width=700 height=400 left=150 top=100 ");
+		window.open("${initParam.root}popup_reviewPopup.do?id="+id,"","width=700 height=400 left=150 top=100 ");
 	
 	}
 </script>

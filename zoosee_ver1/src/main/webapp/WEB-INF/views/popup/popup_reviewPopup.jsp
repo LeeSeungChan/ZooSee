@@ -6,9 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="${initParam.root}resources/js/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/bj.css">
+
 <script type="text/javascript">
 
 	$(document).ready(function(){
