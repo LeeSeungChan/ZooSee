@@ -26,7 +26,7 @@
 </div>
 <div class="BJMainDiv" style="margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h3 class="panel-title">1:1 Q&A 게시판</h3>
 			</div>

@@ -17,7 +17,7 @@
 </div>
 <div class="BJMainDiv" style="margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h3 class="panel-title">1:1 Q&A 게시판</h3>
 			</div>
@@ -51,7 +51,7 @@
 										${Question.title }</a>
 								</td>
 								<td>
-									<a href="${initParam.root}interceptor_member_getMemberVO.do?id=${Question.memberVO.id}">
+									<a href="${initParam.root}interceptor_admin_getMemberVO.do?id=${Question.memberVO.id}">
 										${Question.memberVO.name}(${Question.memberVO.id})</a>
 								</td>
 								<td>${Question.timePosted }</td>

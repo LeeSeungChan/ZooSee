@@ -39,7 +39,7 @@
 </div>
 <div class="BJMainDiv" style="margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h3 class="panel-title">회원 관리</h3>
 			</div>

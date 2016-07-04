@@ -93,7 +93,7 @@
                                                                                  -webkit-border-radius: 100px;">
                  <div style="margin-bottom: 3%; margin-top: 3%;"></div>
                  </td>
-                 <td>(${p.petName}, ${p.petType}, ${p.petGender}, ${p.petAge})</td>
+                 <td><div style="width: 200px;margin-left: 5%;">(${p.petName}, ${p.petType}, ${p.petGender}, ${p.petAge})</div></td>
                  </tr>
 				</c:forEach>
 			</table>
