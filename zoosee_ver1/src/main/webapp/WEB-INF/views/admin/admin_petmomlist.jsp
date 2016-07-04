@@ -1,26 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 멤버  리스트 보여주는 화면 -->
 <script>
-$(document).ready(function() {
-	;
-	$("#memberlistForm :input[name=deleteBtn]").click(
+	$(document).ready(
 			function() {
-				//alert($(this).parent().parent().children().eq(6).html("승인됨"));
-				if (confirm("멤버를 추방하시겠습니까?")) {
-					$.ajax({
-						type : "post",
-						url : "interceptor_admin_delete.do",
-						data : "id="
-								+ $(this).parent().parent()
-										.children().eq(0).text(),
-					});
-					$(this).parent().parent().children().eq(4)
-							.html("삭제됨")
-				}
+				;
+				$("#memberlistForm :input[name=deleteBtn]").click(
+						function() {
+							//alert($(this).parent().parent().children().eq(6).html("승인됨"));
+							if (confirm("멤버를 추방하시겠습니까?")) {
+								$.ajax({
+									type : "post",
+									url : "interceptor_admin_delete.do",
+									data : "id="
+											+ $(this).parent().parent()
+													.children().eq(0).text(),
+								});
+								$(this).parent().parent().children().eq(4)
+										.html("삭제됨")
+							}
+						});
 			});
-});
 </script>
 <link rel="stylesheet" type="text/css"
 	href="${initParam.root}resources/css/sb.css">
@@ -28,10 +29,14 @@ $(document).ready(function() {
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a> <a
+				class="BJA"
+				href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>
@@ -42,7 +47,7 @@ $(document).ready(function() {
 			<div class="panel-heading">
 				<h3 class="panel-title">회원 관리</h3>
 			</div>
-			<div class="panel-body">고객의 등급에 따라 관리한다.</div>
+			<div class="panel-body">고객의 등급에 따라 관리하는 공간입니다.</div>
 		</div>
 		<div class="well well-sm">PetMom List</div>
 	</div>

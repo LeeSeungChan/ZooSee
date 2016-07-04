@@ -41,4 +41,12 @@ public interface MemberDAO {
 
 	public abstract int getPetmomListCount();
 
+	public abstract MemberVO findInfoById(String id);
+
+	public abstract List<MemberVO> findInfoByName(String name);
+
+	public abstract int addAdmin(String id);
+
+	public abstract int resign(String id);
+
 }

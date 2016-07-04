@@ -43,7 +43,7 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">회원 관리</h3>
 			</div>
-			<div class="panel-body">고객의 등급에 따라 관리한다.</div>
+			<div class="panel-body">고객의 등급에 따라 관리하는 공간입니다.</div>
 		</div>
 		<div class="well well-sm">Pre Pet Sitter List</div>
 	</div>

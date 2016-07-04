@@ -3,24 +3,30 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!-- 멤버  리스트 보여주는 화면 -->
 <script>
-	/* $(document).ready(function() {
+	 $(document).ready(function() {
 				;
 				$("#memberlistForm :input[name=deleteBtn]").click(
 						function() {
-							//alert($(this).parent().parent().children().eq(6).html("승인됨"));
-							if (confirm("퇴사하셨습니까?")) {
+							if (confirm("계정을 삭제 하시겠습니까?")) {
 								$.ajax({
 									type : "post",
 									url : "interceptor_admin_resign.do",
 									data : "id="
 											+ $(this).parent().parent()
 													.children().eq(0).text(),
+									succes : function(data){
+										if(data=="ok"){
+											alert("계정이 삭제되었습니다.");
+										}else{
+											alert("계정 삭제에 실패하셨습니다. 다시 시도하세요.");
+										}
+									}
 								});
 								$(this).parent().parent().children().eq(4)
 										.html("삭제됨")
 							}
 						});
-			}); */
+			}); 
 </script>
 <link rel="stylesheet" type="text/css"
 	href="${initParam.root}resources/css/sb.css">
@@ -29,6 +35,7 @@
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA" href="${initParam.root}interceptor_admin_adminList.do">직원 목록</a>
+			<a class="BJA" href="${initParam.root}interceptor_admin_findById.do">관리자 권한 부여</a>
 		</div>
 	</div>
 </div>
@@ -38,7 +45,7 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">사원 관리</h3>
 			</div>
-			<div class="panel-body">고객의 등급에 따라 관리한다.</div>
+			<div class="panel-body">사원의 목록을 열람 , 관리할 수 있습니다.</div>
 		</div>
 	</div>
 	<div class="BJMain2Div" align="center">

@@ -32,4 +32,12 @@ public interface AdminService {
 
 	org.kosta.zoosee.model.member.ListVO adminList(String pageNo);
 
+	MemberVO findInfoById(String id);
+
+	List<MemberVO> findInfoByName(String name);
+
+	int addAdmin(String id);
+
+	int resign(String id);
+
 }

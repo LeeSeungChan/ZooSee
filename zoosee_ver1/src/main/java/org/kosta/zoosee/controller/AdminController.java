@@ -191,4 +191,42 @@ public class AdminController {
 				.adminList(pageNo);
 		return new ModelAndView("admin_adminList", "listVO", list);
 	}
+	/* 관리자 페이지 - 관리자 권한 부여*/
+	@RequestMapping("interceptor_admin_findInfoByValue.do")
+	public ModelAndView findInfoByValue(String value,String how){
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("how",how);
+		System.out.println(how);
+		mv.setViewName("admin_adminManage");
+		if(how.equals("id")){
+			MemberVO memberVO=adminService.findInfoById(value);
+			System.out.println(memberVO);
+			mv.addObject("memberVO",memberVO);
+		}else if(how.equals("name")){
+			List<MemberVO> list=adminService.findInfoByName(value);
+			System.out.println(list);
+			mv.addObject("list",list);
+		}
+		return mv;
+	}
+	@RequestMapping(value="interceptor_admin_addAdmin.do",method=RequestMethod.POST)
+	@ResponseBody
+	public String addAdmin(String id){
+		String result="ok";
+		int i=adminService.addAdmin(id);
+		if(i==0){
+			result="fail";
+		}
+		return result;
+	}
+	@RequestMapping(value="interceptor_admin_resign.do",method=RequestMethod.POST)
+	@ResponseBody
+	public String resign(String id){
+		String result="ok";
+		int i=adminService.resign(id);
+		if(i==0){
+			result="fail";
+		}
+		return result;
+	}
 }

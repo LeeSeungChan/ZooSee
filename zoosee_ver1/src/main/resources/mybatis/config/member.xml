@@ -4,7 +4,6 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	
 	<insert id="registerMember" parameterType="memberVO">
 		insert into Pet_MEMBER(id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence)
 		values(#{id},#{name},#{addressCode},#{address},#{detailAddress},#{gender},#{email},#{password},#{tel},#{job},#{rank},#{existence})
@@ -80,6 +79,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateMemberPassword">
 		update pet_member set password=#{value}
 	</update>
+	<select id="findInfoById" resultType="memberVO">
+		select id,name,email,tel,rank from pet_member where id=#{value}	
+	</select>
+	<select id="findInfoByName" resultType="memberVO">
+		select id,name,email,tel,rank from pet_member where name=#{value}	
+	</select>
+	<update id="addAdmin">
+		update pet_member set rank='admin' where id=#{value}
+	</update>
+	<delete id="resign">
+		delete pet_member where id=#{value}
+	</delete>
 	<!-- 이승찬 추가 - 혹시 몰라서 백업용 -->
 	<!-- <update id="registerPet">
 		update pet_member set rank='petmom' where id=#{id}

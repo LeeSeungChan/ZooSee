@@ -87,4 +87,20 @@ public class MemberDAOImpl implements MemberDAO {
 	public int getPetmomListCount() {
 		return template.selectOne("member.getPetmomListCount");
 	}
+	@Override
+	public MemberVO findInfoById(String id) {
+		return template.selectOne("member.findInfoById",id);
+	}
+	@Override
+	public List<MemberVO> findInfoByName(String name) {
+		return template.selectList("member.findInfoByName",name);
+	}
+	@Override
+	public int addAdmin(String id) {
+		return template.update("member.addAdmin",id);
+	}
+	@Override
+	public int resign(String id){
+		return template.delete("member.resign",id);
+	}
 }

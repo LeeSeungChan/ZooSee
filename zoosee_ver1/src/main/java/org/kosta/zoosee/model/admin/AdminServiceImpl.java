@@ -150,4 +150,24 @@ public class AdminServiceImpl implements AdminService {
 		PagingBean pagingBean = new PagingBean(totalContents, Integer.parseInt(pageNo));
 		return new org.kosta.zoosee.model.member.ListVO(list, pagingBean);
 	}
+
+	@Override
+	public MemberVO findInfoById(String id) {
+		return memberDAO.findInfoById(id);
+	}
+
+	@Override
+	public List<MemberVO> findInfoByName(String name) {
+		return memberDAO.findInfoByName(name);
+	}
+
+	@Override
+	public int addAdmin(String id) {
+		return memberDAO.addAdmin(id);
+	}
+
+	@Override
+	public int resign(String id) {
+		return memberDAO.resign(id);
+	}
 }
