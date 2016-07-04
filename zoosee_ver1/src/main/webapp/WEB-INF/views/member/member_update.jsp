@@ -119,9 +119,23 @@
 
    </script>
 
-<!-- 비밀번호 확인 폼 -->
 
 <span id="unchecked">
+   <!-- 더블헤더 -->
+<div class="BJHeaderLayout0">
+<div class="BJHeaderLayout" >
+<div class="BJHeader2" >
+	<a class="BJA" href="${initParam.root}interceptor_member_detail.do">마이페이지</a>
+	<a class="BJA" href="${initParam.root}interceptor_member_update.do">회원정보수정</a>
+	<c:if test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
+       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 돌보미게시글등록</a>
+       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
+     </c:if>
+	</div>
+</div>
+</div>
+
+<!-- 비밀번호 확인 폼 -->
 <div class="WJcontainer3">
 	<div style="border: 1px solid #0f0fd9; border-radius: 10px; height: 550px; width:50%;  margin-top:10%; margin-left:25%; background-color: white">
 	<%-- <img src="${initParam.root}resources/image/Mmain.jpg" style="position: absolute; height:230px;  width:30%;"> --%>

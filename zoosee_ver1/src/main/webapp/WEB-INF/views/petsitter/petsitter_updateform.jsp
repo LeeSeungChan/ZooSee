@@ -113,6 +113,27 @@
 <link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/sb.css">
 <!-- 비밀번호 체크폼 -->
 <span id="unchecked">
+<div class="BJHeaderLayout0">
+	<div class="BJHeaderLayout">
+		<div class="BJHeader2">
+			<a class="BJA" href="${initParam.root}interceptor_pet_list.do">펫목록</a>
+			<a class="BJA" href="${initParam.root}interceptor_pet_register.do">펫등록</a>
+			<c:choose>
+				<c:when test="${mvo.rank=='petsitter' || mvo.rank=='petmaster'}">
+					<a class="BJA"
+						href="${initParam.root}interceptor_petsitter_updateform.do">펫시터
+						정보 수정</a>
+					<a class="BJA"
+						href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터
+						정보 보기</a>
+				</c:when>
+				<c:otherwise>
+					<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+</div>
 <div class="WJcontainer3">
 	<div style="border: 1px solid #0f0fd9; border-radius: 10px; height: 550px; width:50%;  margin-top:10%; margin-left:25%; background-color: white">
 	<%-- <img src="${initParam.root}resources/image/Mmain.jpg" style="position: absolute; height:230px;  width:30%;"> --%>
