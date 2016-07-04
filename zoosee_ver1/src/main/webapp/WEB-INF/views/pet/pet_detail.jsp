@@ -42,6 +42,20 @@
 		<div class="BJHeader2">
 			<a class="BJA" href="${initParam.root}interceptor_pet_list.do">펫목록</a>
 			<a class="BJA" href="${initParam.root}interceptor_pet_register.do">펫등록</a>
+			<c:choose>
+				<c:when
+					test="${sessionScope.mvo.rank=='petsitter' || sessionScope.mvo.rank=='petmaster'}">
+					<a class="BJA"
+						href="${initParam.root}interceptor_petsitter_updateform.do">펫시터
+						정보 수정</a>
+					<a class="BJA"
+						href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터
+						정보 보기</a>
+				</c:when>
+				<c:otherwise>
+					<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 </div>

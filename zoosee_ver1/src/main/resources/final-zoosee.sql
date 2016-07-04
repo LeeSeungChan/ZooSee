@@ -15,7 +15,7 @@ select petsitterNo,adminRecog,id,name,tel,email
 			    where p.id=pm.id and  adminRecog='recog'
 			)
 		)where page='1'
-
+select * from MESSAGE where id='java'
 -- 펫 고유 번호(시퀀스)
 create sequence petNo_seq;
 drop sequence petNo_seq;
