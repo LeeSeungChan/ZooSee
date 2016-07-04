@@ -10,7 +10,7 @@
 			$(":input[name=okBtn]").click(function(){
 				if(confirm("결제하시겠습니까?")){
 					var page="popup_payment.do?reserve_no=${reserveVO.reserve_no}";
-					window.open(page,'팝업창','width=700, height=500, left=600, top=200, resizable=no');
+					window.open(page,'팝업창','width=700, height=510, left=600, top=150, resizable=no');
 				}
 				return false;
 			 });

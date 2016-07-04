@@ -32,8 +32,10 @@
     		}else{
     			var of= "${initParam.root}interceptor_reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
 				of += "petsitterId=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}";
-				document.write("진행중");
+				document.write("<br><br><br><br><br><br><br><br><br><br><br><h2>결제 진행중...</h2>");
+				document.write("<h2>잠시만 기다려 주세요...</h2>");
 				wait(3000);
+				alert("결제가 완료되었습니다. \n감사합니다.^^");
 				opener.parent.location=of;
 				self.close();
     		}
@@ -74,8 +76,10 @@
     		}else{
     			var of= "${initParam.root}interceptor_reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
 				of += "petsitterId=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}";
-				document.write("진행중");
+				document.write("<br><br><br><br><br><br><br><br><br><br><br><h2>결제 진행중...</h2>");
+				document.write("<h2>잠시만 기다려 주세요...</h2>");
 				wait(3000);
+				alert("결제가 완료되었습니다. \n감사합니다.^^");
 				opener.parent.location=of;
 				self.close();
     		}
@@ -166,7 +170,9 @@
 			<table style="margin-top:3%; margin-bottom: 3%;">
 				<tr>
 					<th style="text-align: center; vertical-align: middle; width: 45%;">카드종류</th>
-					<td style="margin-left: 10%;"><select class="WJform-control4" id="card" name="card" >
+					<td style="margin-left: 10%;">
+					<div style="margin-bottom: 1%; margin-top: 1%;">
+					<select class="WJform-control4" id="card" name="card" >
 							<option value="">-Select-</option>
 							<option value="신한카드">신한카드(구:LG 카드 포함)</option>
 							<option value="비씨카드">BC(비씨)카드</option>
@@ -174,21 +180,25 @@
 							<option value="삼성카드">삼성카드</option>
 							<option value="롯데카드">롯데카드</option>
 							<option value="하나카드">하나카드</option>
-					</select></td>
+					</select>
+					</div>
+					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">할부기간</th>
-					<td><select class="WJform-control4" id="MIP" name="MIP">
+					<td>
+					<select class="WJform-control4" id="MIP" name="MIP" style="margin-bottom: 1%; margin-top: 1%;">
 							<option value="">-Select-</option>
 							<option value="1">1개월</option>
 							<option value="2">2개월</option>
 							<option value="3">3개월</option>
-					</select></td>
+					</select>
+					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">카드번호</th>
 					<td>
-					<div align="left" >
+					<div align="left" style="margin-bottom: 1%; margin-top: 1%;">
 					<input class="WJform-control5" type="text" id="cardNum1" name="cardNum1" style="width: 20%"> -
 					<input class="WJform-control5" type="text" id="cardNum2" name="cardNum2" style="width: 20%"> -
 					<input class="WJform-control5" type="text" id="cardNum3" name="cardNum3" style="width: 20%"> -
@@ -198,14 +208,18 @@
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">유효기간</th>
-					<td >
+					<td>
+					<div style="margin-bottom: 1%; margin-top: 1%;">
 					<input class="WJform-control4" type="text" id="valid" name="valid" style="width: 50%; " placeholder="ex) MMYY">
+					</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">비밀번호</th>
 					<td>
+					<div style="margin-bottom: 1%; margin-top: 1%;">
 					<input class="WJform-control4" type="password" id="password" style="width: 50%; " name="password">
+					</div>
 					</td>
 				</tr>
 				
@@ -236,24 +250,31 @@
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">입금자명</th>
 					<td >
+					<div style="margin-bottom: 1%; margin-top: 1%;">
 					<input class="WJform-control4" type="text" id="name" name="name" style="width: 70%; ">
+					</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">입금예정일</th>
 					<td >
+					<div style="margin-bottom: 1%; margin-top: 1%;">
 					<input class="WJform-control4" type="text" id="date" name="date" style="width: 70%; " placeholder="ex)20160630">
+					</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">계좌번호</th>
 					<td >
+					<div style="margin-bottom: 1%; margin-top: 1%;">
 					<input class="WJform-control4" type="text" id="payNum" name="payNum" style="width: 100%; ">
+					</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle; width: 45%;">입금은행</th>
 					<td style="margin-left: 10%;">
+					<div style="margin-bottom: 1%; margin-top: 1%;">
 					<select class="WJform-control4" id="bank" name="bank" >
 							<option value="">-Select-</option>
 							<option value="신한은행">신한은행</option>
@@ -262,7 +283,9 @@
 							<option value="국민은행">국민은행</option>
 							<option value="하나은행">하나은행</option>
 							<option value="농협">농협</option>
-					</select></td>
+					</select>
+					</div>
+					</td>
 				</tr>
 			</table>
 			</div>
