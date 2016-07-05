@@ -15,8 +15,8 @@
 		               success:function(result){
 		            	   if(result.check=="ok"){
 		            		   alert("비밀번호가 확인되었습니다.");
-		            		   $("#checked").css("display","block");
-		            		   $("#unchecked").css("display","none");
+		            		   $("#checkedpass").css("display","");
+								$("#unchecked").css("display","none");
 		            	   }else{
 		            		  	alert("비밀번호가 일치하지 않습니다");
 		            		  	return false;
@@ -176,7 +176,7 @@
 
    
    
-<span id="checked">
+<span id="checkedpass" style="display: none;">
    <!-- 더블헤더 -->
 <div class="BJHeaderLayout0">
 <div class="BJHeaderLayout" >

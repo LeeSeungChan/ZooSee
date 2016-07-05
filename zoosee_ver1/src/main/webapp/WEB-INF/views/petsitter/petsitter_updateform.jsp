@@ -17,12 +17,11 @@
 						               dataType:"json",
 						               success:function(result){
 						            	   if(result.check=="ok"){
-						            		   alert("비밀번호가 확인되었습니다.");
-						            		   $("#checked").css("display","block");
+						            		   $("#checkedpass").css("display","");
 						            		   $("#unchecked").css("display","none");
+						            		   alert("비밀번호가 확인되었습니다.");
 						            	   }else{
 						            		  	alert("비밀번호가 일치하지 않습니다");
-						            		  	return false;
 						            	   }
 						               }//success
 								});//ajax
@@ -172,7 +171,7 @@
 
 
 <!-- 비밀번호 체크 OK -->
-<span id="checked">
+<span id="checkedpass" style="display: none;">
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
