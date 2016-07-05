@@ -19,7 +19,7 @@
 				<h3 class="panel-title">MESSAGE</h3>
 			</div>
 			<div class="panel-body">
-				${sessionScope.mvo.name } 님의 메세지입니다.
+				${sessionScope.mvo.name } 님의 전체 메세지 목록입니다.
 				<div style="text-align: right;">
 					<a href="interceptor_message_updateCheckedAll.do?id=${sessionScope.mvo.id }">메세지 모두 읽기</a>
 				</div>

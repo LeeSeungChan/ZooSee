@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ReviewController {
-	
 	@Resource
 	private ReviewService reviewService;
 	@Resource

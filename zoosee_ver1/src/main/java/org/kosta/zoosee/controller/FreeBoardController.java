@@ -75,7 +75,6 @@ public class FreeBoardController {
 	//게시물 업데이트
 	@RequestMapping("interceptor_freeBoard_updateFreeBoard.do")
 	public ModelAndView updateFreeBoard(FreeBoardVO freeBoardVO) {
-		System.out.println(freeBoardVO);
 		freeBoardService.updateFreeBoard(freeBoardVO);
 		return new ModelAndView("redirect:interceptor_freeBoard_showFreeBoardContentNoHit.do?freeBoardNo="+freeBoardVO.getFreeBoardNo());
 		

@@ -20,8 +20,6 @@ import org.kosta.zoosee.model.vo.PetsitterboardVO;
 import org.kosta.zoosee.model.vo.ReviewVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -128,8 +126,7 @@ public class PetsitterController {
 
 	// 팻시터 정보페이지
 	@RequestMapping("petsitter_detail.do")
-	public ModelAndView petsitterDetailPage(int petsitterNo,
-			int petsitterboard_no) {
+	public ModelAndView petsitterDetailPage(int petsitterNo, int petsitterboard_no) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("petsitter_detail");
 		PetsitterVO pvo = petsitterService.getPetsitterVO(petsitterNo);
@@ -138,9 +135,7 @@ public class PetsitterController {
 		mv.addObject("petsitterVO", pvo);
 
 		// 후기 리스트 가져오기
-		List<ReviewVO> reviewList = reviewService.getReviewVOById(pvo
-				.getMemberVO().getId());
-		System.out.println("asdfasdfasdfasdf:" + reviewList);
+		List<ReviewVO> reviewList = reviewService.getReviewVOById(pvo.getMemberVO().getId());
 		mv.addObject("reviewList", reviewList);
 		// 펫시터의 보드정보 가져오기
 		PetsitterboardVO bvo = boardService.getboardDetail(petsitterboard_no);

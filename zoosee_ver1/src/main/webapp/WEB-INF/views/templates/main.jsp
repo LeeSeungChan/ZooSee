@@ -68,7 +68,7 @@
 		}else if(rank == "petmom"){
 			str[1] = "'" + petMomName + "(본인)'님이 신청한 예약이 '예약완료'되었습니다.";
 			
-			showNotification(null, str[1], null, null, flag);	
+			showNotification(null, str[1], null, petImg, flag);	
 		}
 	}
 
