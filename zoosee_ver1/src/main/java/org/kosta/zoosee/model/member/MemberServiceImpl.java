@@ -102,8 +102,12 @@ public class MemberServiceImpl implements MemberService {
 
 	// 임시 비밀번호를 update
 	@Override
-	public void updateMemberPassword(int password) {
-		memberDAO.updateMemberPassword(password);
+	public void updateMemberPassword(String id, int password) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("password", String.valueOf(password));
+		
+		memberDAO.updateMemberPassword(map);
 	}
 	
 	@Override

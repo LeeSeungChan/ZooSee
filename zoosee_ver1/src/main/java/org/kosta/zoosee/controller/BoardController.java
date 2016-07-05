@@ -141,34 +141,54 @@ public class BoardController {
 
 		return mv;
 	}
+
 	@RequestMapping("interceptor_petsitterboard_myPetsitterBoard.do")
-	public ModelAndView myPetsitterboard(HttpServletRequest request){
-		HttpSession session=request.getSession(false);
-		String id=((MemberVO)session.getAttribute("mvo")).getId();
-		int petsitterboard_no=boardServie.myPetsitterboard(id);
-		
-		return new ModelAndView("redirect:petsitterboardDetail.do?petsitterboard_no="+petsitterboard_no);
+	public ModelAndView myPetsitterboard(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		String id = ((MemberVO) session.getAttribute("mvo")).getId();
+		int petsitterboard_no = boardServie.myPetsitterboard(id);
+
+		return new ModelAndView("redirect:petsitterboardDetail.do?petsitterboard_no="+ petsitterboard_no);
 	}
 	
-	
 	//게시글 수정 뷰
-		@RequestMapping("interceptor_petsitterboard_myPetsitterBoardUpdateView.do")
-		public ModelAndView myPetsitterboardUpdateView(int petsitterboard_no){
-			PetsitterboardVO petsitterboardVO=boardServie.getboardDetail(petsitterboard_no);
-			return new ModelAndView("petsitterboard_updateForm","petsitterboardVO",petsitterboardVO);
-		}
-		
-		//게시글 수정
-			@RequestMapping("interceptor_petsitterboardUpdate.do")
-			public ModelAndView myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO){            
-				boardServie.myPetsitterboardUpdate(petsitterboardVO,petsitterVO);
-				return new ModelAndView("redirect:interceptor_petsitterboard_myPetsitterBoard.do");
+	@RequestMapping("interceptor_petsitterboard_myPetsitterBoardUpdateView.do")
+	public ModelAndView myPetsitterboardUpdateView(int petsitterboard_no) {
+		ModelAndView mv = new ModelAndView("petsitterboard_updateForm");
+		List<String> list = boardServie.getPetCalendarDate(petsitterboard_no);
+
+		// 날짜 포맷 바꾸는([2016-06-01]을 [2016-6-1]로) insert할 때 바꿔야 한다.
+		for (int i = 0; i < list.size(); i++) {
+			String[] ab = list.get(i).split("-");
+			String str = "";
+
+			for (int j = 0; j < ab.length; j++) {
+				if (ab[j].startsWith("0")) {
+					String b = ab[j].substring(1);
+					ab[j] = b;
+				}
+				str += ab[j] + "-";
 			}
-		
-		//게시글삭제
-		@RequestMapping("interceptor_petsitterboard_myPetsitterBoardDelete.do")
-		public ModelAndView myPetsitterBoardDelete(int petsitterboard_no){
-			boardServie.myPetsitterBoardDelete(petsitterboard_no);
-			return new ModelAndView("redirect:home.do");
+			String str2 = str.substring(0, str.length() - 1);
+			list.set(i, str2);
 		}
+		mv.addObject("calendarList", list);
+		PetsitterboardVO petsitterboardVO = boardServie.getboardDetail(petsitterboard_no);
+		mv.addObject("petsitterboardVO", petsitterboardVO);
+		return mv;
+	}
+		
+	//게시글 수정
+	@RequestMapping("interceptor_petsitterboardUpdate.do")
+	public ModelAndView myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO){            
+		boardServie.myPetsitterboardUpdate(petsitterboardVO,petsitterVO);
+		return new ModelAndView("redirect:interceptor_petsitterboard_myPetsitterBoard.do");
+	}
+	
+	//게시글삭제
+	@RequestMapping("interceptor_petsitterboard_myPetsitterBoardDelete.do")
+	public ModelAndView myPetsitterBoardDelete(int petsitterboard_no){
+		boardServie.myPetsitterBoardDelete(petsitterboard_no);
+		return new ModelAndView("redirect:home.do");
+	}
 }

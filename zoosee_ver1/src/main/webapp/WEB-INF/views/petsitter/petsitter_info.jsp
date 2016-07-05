@@ -114,7 +114,7 @@
 						class="form-control"
 						style="height: 60%; background-color: #F4F4F4;" id="name"
 						name="name" readonly="readonly"
-						value="${petsitterVO.petNumber }마리">
+						value="${petsitterVO.petNumber }">
 				</div>
 			</div>
 			<br>
@@ -125,7 +125,7 @@
 					<span class="input-group-addon">Service</span> <input type="text"
 						class="form-control"
 						style="height: 60%; background-color: #F4F4F4;" id="name"
-						name="name" readonly="readonly" value="${petsitterVO.service }마리">
+						name="name" readonly="readonly" value="${petsitterVO.service }">
 				</div>
 			</div>
 			<br> <br> <input type="button"

@@ -28,7 +28,7 @@ public interface MemberService {
 
 	public abstract MemberVO findPasswordByMemberVO(String id, String email);
 
-	public abstract void updateMemberPassword(int password);
+	public abstract void updateMemberPassword(String id, int password);
 
 	public abstract HashMap<String, List<ReserveVO>> showReserveList(
 			List<ReserveVO> reserveList);

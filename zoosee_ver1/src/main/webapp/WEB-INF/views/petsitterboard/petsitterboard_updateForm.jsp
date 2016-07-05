@@ -2,82 +2,190 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('input:radio[name="petType"]:input[value="${petsitterboardVO.petsitterVO.petType}"]').attr("checked", true);
-		$('input:radio[name="petSize"]:input[value="${petsitterboardVO.petsitterVO.petSize}"]').attr("checked", true);
-		$('input:radio[name="petNumber"]:input[value="${petsitterboardVO.petsitterVO.petNumber}"]').attr("checked", true);
-		$('input:radio[name="service"]:input[value="${petsitterboardVO.petsitterVO.service }"]').attr("checked", true);
-		
-		var flag = "${flag}";
-		if(flag == "true"){
-			alert("이미 등록한 회원입니다.");
-			location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do";
-		}
-		
-		
-		
-		// 공란체크하기
-		$("#petsitterboardregForm").submit(function(){
-			if($("#petsitterboardregForm :input:radio[name=service]:checked").length == 0){
-				alert("서비스를 선택하세요.");
-				return false;
-			}else if($("#petsitterboardregForm :input[name=petsitterboard_title]").val() == ""){
-				alert("제목을 입력하세요.");
-				return false;
-			}else if($("#petsitterboardregForm #ta").val() == ""){
-				alert("내용을 입력하세요.");
-				return false;
-			}
-		});
+	var a = new Array();
+    var receiveData = new Array();
+     
+    // Controller로부터 예약된 날짜 리스트를 받아와서 JS Array object로 변환
+    function dateFormatChange(){
+    	var data = "${calendarList}";
+      	data = data.substring(1, data.length-1);
+      	a = data.split(",");
+      	receiveData = [];
+        
+      	for(var i = 0; i < a.length; i++){
+        	a[i] = a[i].trim();
+         	receiveData[i] = a[i];
+      	}
+   }
+    
+   	$(document).ready(function() {
+		dateFormatChange();
+      
+      	$('input:radio[name="petType"]:input[value="${petsitterboardVO.petsitterVO.petType}"]').attr("checked", true);
+      	$('input:radio[name="petSize"]:input[value="${petsitterboardVO.petsitterVO.petSize}"]').attr("checked", true);
+      	$('input:radio[name="petNumber"]:input[value="${petsitterboardVO.petsitterVO.petNumber}"]').attr("checked", true);
+      	$('input:radio[name="service"]:input[value="${petsitterboardVO.petsitterVO.service }"]').attr("checked", true); 
+      
+      	var flag = "${flag}";
+      	if(flag == "true"){
+        	alert("이미 등록한 회원입니다.");
+        	location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do";
+      	}
+     
+      	// 공란체크하기
+      	$("#petsitterboardregForm").submit(function(){
+        	if($("#petsitterboardregForm :input:radio[name=service]:checked").length == 0){
+            	alert("서비스를 선택하세요.");
+            	return false;
+         	}else if($("#petsitterboardregForm :input[name=petsitterboard_title]").val() == ""){
+            	alert("제목을 입력하세요.");
+            	return false;
+         	}else if($("#petsitterboardregForm #ta").val() == ""){
+            	alert("내용을 입력하세요.");
+            	return false;
+         	}
+      	});
+      
+      	var startDay = "${petsitterboardVO.startDay}";
+      	var endDay = "${petsitterboardVO.endDay}";
 
-		$(".datepicker").datepicker(); 
-		$.datepicker.regional['ko'] = {
-			closeText: '닫기',
-		    prevText: '이전달',
-		    nextText: '다음달',
-		    //currentText: '오늘',
-		    monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
-		      			 '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
-		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		    dayNames: ['일','월','화','수','목','금','토'],
-		    dayNamesShort: ['일','월','화','수','목','금','토'],
-		    dayNamesMin: ['일','월','화','수','목','금','토'],
-		    weekHeader: 'Wk',
-		    dateFormat: 'yy-mm-dd',
-		    firstDay: 0,
-		    isRTL: false,
-		    showMonthAfterYear: true,
-		    yearSuffix: '',
-		    //showOn: 'both',
-		    buttonText: "달력",
-		    //buttonImage:'${initParam.root}resources/image/calendar-1.jpg',
-		    //buttonImageOnly: false,
-		    changeMonth: true,
-		    changeYear: true,
-		    showButtonPanel: true,
-		   	yearRange: ':c+10',
-		};
-		$.datepicker.setDefaults($.datepicker.regional['ko']);
-		    
-		//$('#sdate').datepicker();
-		$('#sdate').datepicker("option", "minDate", new Date());
-		$('#sdate').datepicker("option", "maxDate", $("#edate").val());
-		$('#sdate').datepicker("option", "onClose", function ( selectedDate ) {
-			$("#edate").datepicker( "option", "minDate", selectedDate );
-		});
-		 
-		//$('#edate').datepicker();
-		$('#edate').datepicker("option", "minDate", $("#sdate").val());
-		$('#edate').datepicker("option", "onClose", function ( selectedDate ) {
-			$("#sdate").datepicker( "option", "maxDate", selectedDate );
-		});
-
-		$("input:radio[name=service][value="+ "<c:out value='${petsitterVO.service}'/>"+ "]").attr("checked", "checked");
-		$("input:radio[name=petSize][value="+ "<c:out value='${petsitterVO.petSize}'/>"+ "]").attr("checked", "checked");
-		$("input:radio[name=petType][value="+ "<c:out value='${petsitterVO.petType}'/>"+ "]").attr("checked", "checked");
-		$(":input[name=price]").val('${petsitterVO.price}');
-
-	});
+        $("#sdate").datepicker({
+           	closeText: '닫기',
+            prevText: '이전달',
+            nextText: '다음달',
+            currentText: '오늘',
+            monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                         '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+            monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            dayNames: ['일','월','화','수','목','금','토'],
+            dayNamesShort: ['일','월','화','수','목','금','토'],
+            dayNamesMin: ['일','월','화','수','목','금','토'],
+            weekHeader: 'Wk',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: '',
+            showOn: 'focus',
+            //buttonText: "달력",
+            //buttonImage:'${initParam.root}resources/image/calendar-1.jpg',
+            //buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            yearRange: ':c+10',
+            beforeShowDay: function(date){
+            	var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+                  
+               	//for (var i = 0; i < disabledDays.length; i++) {
+               	if($.inArray(day, receiveData) > -1) {
+                  	return [false];
+               	}else{
+                   return [true];
+               	}
+         	},
+            minDate: new Date(),
+           	// maxDate: endDay,
+            onSelect:function(selectedDate){
+               $("#edate").datepicker("option", "minDate", selectedDate );
+            } 
+      	});
+       
+        var reserve_price;
+        var interval;
+        var price = new Number("${petsitterboardVO.petsitterVO.price}");
+         
+        $("#edate").datepicker({
+           	closeText: '닫기',
+            prevText: '이전달',
+            nextText: '다음달',
+            currentText: '오늘',
+            monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                         '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+            monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            dayNames: ['일','월','화','수','목','금','토'],
+            dayNamesShort: ['일','월','화','수','목','금','토'],
+            dayNamesMin: ['일','월','화','수','목','금','토'],
+            weekHeader: 'Wk',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: '',
+            showOn: 'focus',
+            //buttonText: "달력",
+            //buttonImage:'${initParam.root}resources/image/calendar-1.jpg',
+            //buttonImageOnly: false,
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            yearRange: ':c+10',
+            beforeShowDay: function(date){
+            	var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+                  
+                if($.inArray(day, receiveData) > -1) {
+                   return [false];
+                }else{
+                    return [true];
+                 }
+            },
+            minDate: startDay,
+            //maxDate: endDay,
+            onSelect: function(selectedDate){
+            	if($("#sdate").val() == ""){
+                   alert("시작일을 먼저 입력하세요");
+                }else{
+                    var sdate = new Date($("#sdate").datepicker("getDate"));
+                     var edate = new Date($("#edate").datepicker("getDate"));
+            
+                    if((edate.getMonth() - sdate.getMonth()) > 1){
+                       alert("두 달 이내로 선택하세요");
+                    }else if(edate.getMonth() == sdate.getMonth()){
+                       interval = edate.getDate() - sdate.getDate();
+                     
+                       if(interval == 0){
+                           interval = 1;
+                           price = price/2;
+                       }
+                        //alert(edate.getDate() - sdate.getDate() + 1 + "일");
+                     }else{
+                       var month  = sdate.getMonth()+1;
+                       var sday;
+                       var eday = edate.getDate();
+                     
+                        switch(month){
+                           case 1: case 3: case 5: case 7: case 8: case 10: case 12:{
+                                 sday = 31 - sdate.getDate();
+                                 break;
+                           }
+                           case 4: case 6: case 9: case 11: {
+                                 sday = 30 - sdate.getDate();
+                                 break;
+                           }
+                           case 2:{
+                                 sday = 28 - sdate.getDate();
+                                 break;
+                           }
+                        }
+                        var tday = (eday + sday + 1);
+                     
+                        //alert((tday - 1) + "박" + tday + "일");
+                        interval = new Number(eday + sday + 1);
+                     }
+                   
+                    reserve_price = Math.floor(interval*price*1.1);
+                    //alert(reserve_price + "토탈 가격");
+                    $("#reserveRegForm :input[name=reserve_price]").val(reserve_price);
+                    $(".days").text(interval + "박");
+                    $(".totalPrice").text(interval*price + "원");
+                    var totalPrice = new Number(interval*price);
+                    var tax = Math.floor(totalPrice*0.1);
+                    $(".tax").text(tax + "원");
+                    $(".totalPricePlusTax").text(reserve_price + "원");
+            }
+         }
+      });
+   });
 </script>
 <div class="BJHeaderLayout0">
 <div class="BJHeaderLayout" >

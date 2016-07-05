@@ -72,16 +72,16 @@
 			<c:if test="${sessionScope.mvo.rank == 'petmaster'}">
 				<c:set value="0" var="petMasterSignal" />
 				</c:if>
-			<c:choose>
+		<%--<c:choose>
 				<c:when test="${sessionScope.mvo.rank=='petsitter' || sessionScope.mvo.rank=='petmaster'}">
 				<li><a href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}">글 등록</a></li>
-					<%-- <li><a href="${initParam.root}interceptor_petsitter_updateform.do">펫시터 정보 수정</a></li>
-					<li><a href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터 정보 보기</a></li> --%>
+					<li><a href="${initParam.root}interceptor_petsitter_updateform.do">펫시터 정보 수정</a></li>
+					<li><a href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터 정보 보기</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="${initParam.root}petsitter_register.do">펫시터신청</a></li>
 				</c:otherwise>
-			</c:choose>
+			</c:choose>--%>
 				<li><a href="${initParam.root}interceptor_message_list.do" id="message">메세지</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${sessionScope.mvo.name} 

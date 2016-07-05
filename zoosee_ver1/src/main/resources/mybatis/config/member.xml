@@ -76,8 +76,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	select name,password from pet_member where id=#{id} and email=#{email}
 	</select>
 	<!-- 임시비밀번호 update -->
-	<update id="updateMemberPassword">
-		update pet_member set password=#{value}
+	<update id="updateMemberPassword" parameterType="map">
+		update pet_member set password=#{password} where id=#{id}
 	</update>
 	<select id="findInfoById" resultType="memberVO">
 		select id,name,email,tel,rank from pet_member where id=#{value}	

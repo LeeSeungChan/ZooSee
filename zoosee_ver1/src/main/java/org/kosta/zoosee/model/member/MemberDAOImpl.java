@@ -75,9 +75,9 @@ public class MemberDAOImpl implements MemberDAO {
 		return template.selectOne("member.findPasswordByMemberVO",map);
 	}
 	@Override
-	public void updateMemberPassword(int password) 
+	public void updateMemberPassword(HashMap<String, String> map) 
 	{
-		template.update("member.updateMemberPassword",password);
+		template.update("member.updateMemberPassword",map);
 	}
 	@Override
 	public List<MemberVO> getPetmomList(int pageNo) {

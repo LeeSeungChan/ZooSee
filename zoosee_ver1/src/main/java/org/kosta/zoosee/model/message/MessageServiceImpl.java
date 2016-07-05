@@ -56,7 +56,6 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public ListVO messageUncheckedList(String id, String pageNo) {
-		System.out.println(id + pageNo);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		if (pageNo == null) {
@@ -64,7 +63,6 @@ public class MessageServiceImpl implements MessageService {
 		}
 		map.put("pageNo", pageNo);
 		List<MessageVO> list = messageDAO.messageUncheckedList(map);
-		System.out.println(list);
 		int totalContent = messageDAO.countMessage(id);
 		PagingBean pagingBean = new PagingBean(totalContent,
 				Integer.parseInt(pageNo));
@@ -88,10 +86,8 @@ public class MessageServiceImpl implements MessageService {
 			String content = "";
 			b = sheet.getCell(1,when);
 			title = b.getContents();
-			System.out.println(title);
 			c = sheet.getCell(2,when);
 			content = c.getContents();
-			System.out.println(title + content);
 			MessageVO message = new MessageVO();
 			message.setTitle(title);
 			message.setContent(content);

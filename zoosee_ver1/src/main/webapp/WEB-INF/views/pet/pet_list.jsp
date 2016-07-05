@@ -2,20 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$("#delete")
-								.click(
-										function() {
-											if (confirm("삭제하겠습니까?")) {
-												location
-														.replace("interceptor_pet_delete.do?petNo=${petVO.petNo}");
-											} else {
-												return false;
-											}
-										});
-					});
+	$(document).ready(function() {
+		$("#delete").click(function() {
+			if (confirm("삭제하겠습니까?")) {
+				location.replace("interceptor_pet_delete.do?petNo=${petVO.petNo}");
+			} else {
+				return false;
+			}
+		});
+	});
 </script>
 <link rel="stylesheet" type="text/css"
 	href="${initParam.root}resources/css/sb.css">

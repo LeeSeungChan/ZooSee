@@ -35,7 +35,7 @@ public interface MemberDAO {
 
 	public abstract MemberVO findPasswordByMemberVO(HashMap<String,String> map);
 
-	public abstract void updateMemberPassword(int password);
+	public abstract void updateMemberPassword(HashMap<String, String> map);
 
 	public abstract List<MemberVO> getPetmomList(int pageNo);
 

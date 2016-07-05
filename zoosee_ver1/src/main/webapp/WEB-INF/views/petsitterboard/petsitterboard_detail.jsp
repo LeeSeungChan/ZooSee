@@ -4,47 +4,46 @@
 
 <script type="text/javascript">
 	var a = new Array();
-	var receiveData = new Array();
-      
-	// Controller로부터 예약된 날짜 리스트를 받아와서 JS Array object로 변환
-	function dateFormatChange(){
-		var data = "${calendarList}";
-		data = data.substring(1, data.length-1);
-		a = data.split(",");
-		receiveData = [];
+   	var receiveData = new Array();
+    
+   	// Controller로부터 예약된 날짜 리스트를 받아와서 JS Array object로 변환
+   	function dateFormatChange(){
+    	var data = "${calendarList}";
+      data = data.substring(1, data.length-1);
+      a = data.split(",");
+      receiveData = [];
          
-		for(var i = 0; i < a.length; i++){
-			a[i] = a[i].trim();
-			receiveData[i] = a[i];
-		}
-	}
+      for(var i = 0; i < a.length; i++){
+         a[i] = a[i].trim();
+         receiveData[i] = a[i];
+      }
+   }
       
-	$(document).ready(function(){
-		dateFormatChange();
-        
-		$("#deleteId").click(function(){
-			if(confirm("삭제하시겠습니까?")){
-				location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardDelete.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}";
-			}
-				
-		});
-		
-		var startDay = "${petsitterboardVO.startDay}";
-		var endDay = "${petsitterboardVO.endDay}";
+   $(document).ready(function(){
+      dateFormatChange();
 
-		$.ajax({
-        	type:"POST",
+      $("#deleteId").click(function(){
+         if(confirm("삭제하시겠습니까?")){
+            location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardDelete.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}";
+         } 
+      });
+      
+      var startDay = "${petsitterboardVO.startDay}";
+      var endDay = "${petsitterboardVO.endDay}";
+
+      $.ajax({
+           type:"POST",
             url:"avg_star_rate.do",
             data:"id=${requestScope.reviewList[0].ref_id }",
             dataType:"json",
             success:function(result){
-            	var avg = result.avg*20;
+               var avg = result.avg*20;
                 $("#star-rating").css({width: avg+'%'});  
             }
         });
-		
+      
         $("#sdate").datepicker({
-        	closeText: '닫기',
+           closeText: '닫기',
             prevText: '이전달',
             nextText: '다음달',
             currentText: '오늘',
@@ -69,28 +68,28 @@
             showButtonPanel: true,
             yearRange: ':c+10',
             beforeShowDay: function(date){
-            	var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+               var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
                   
-            	//for (var i = 0; i < disabledDays.length; i++) {
-	            if($.inArray(day, receiveData) > -1) {
-	            	return [false];
-	            }else{
-	                return [true];
-	            }
-			},
-            minDate: new Date(),
+               //for (var i = 0; i < disabledDays.length; i++) {
+               if($.inArray(day, receiveData) > -1) {
+                  return [false];
+               }else{
+                   return [true];
+               }
+         },
+            minDate: /* new Date() */startDay,
             maxDate: endDay,
             onSelect:function(selectedDate){
-            	$("#edate").datepicker("option", "minDate", selectedDate );
+               $("#edate").datepicker("option", "minDate", selectedDate );
             } 
-		});
+      	});
          
         var reserve_price;
         var interval;
         var price = new Number("${petsitterboardVO.petsitterVO.price}");
          
         $("#edate").datepicker({
-        	closeText: '닫기',
+           closeText: '닫기',
             prevText: '이전달',
             nextText: '다음달',
             currentText: '오늘',
@@ -115,57 +114,102 @@
             showButtonPanel: true,
             yearRange: ':c+10',
             beforeShowDay: function(date){
-            	var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+               var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
                   
                 if($.inArray(day, receiveData) > -1) {
-                	return [false];
+                   return [false];
                 }else{
                     return [true];
-               	}
+                  }
             },
             minDate: startDay,
             maxDate: endDay,
             onSelect: function(selectedDate){
-            	if($("#sdate").val() == ""){
-                	alert("시작일을 먼저 입력하세요");
-                }else{
-                 	var sdate = new Date($("#sdate").datepicker("getDate"));
-                  	var edate = new Date($("#edate").datepicker("getDate"));
+
+               var sDay= $("#sdate").val().split("-");
+               var eDay=$("#edate").val().split("-");
+            	var rDay=receiveData
+            	var length=eDay[2]-sDay[2];
+            	var result=1;//0 예약불가 1 예약가능
+            
+            	if(sDay[1]==eDay[1]){
+               		for(var i=0;i<length;i++){
+                    	for(var j=0;j<receiveData.length;j++){
+                        	var rDay=[];
+                          	rDay=receiveData[j].split("-");
+                          	if(sDay[2]==rDay[2]){
+                            	result=0;
+                             	break;
+                          	}
+                       	}
+                       	sDay[2]++;
+                    } 
+            }else{
+               var lastDay=new Date(sDay[0],sDay[1],0);
+               for(var i=sDay[2];i<lastDay.getDate();i++){
+                       for(var j=0;j<receiveData.length;j++){
+                          var rDay=[];
+                          rDay=receiveData[j].split("-");
+                          
+                          /* if(sDay[2]==lastDay.getDate()){
+                             sDay[2]=1;
+                          } */
+                          if(sDay[2]==rDay[2]){
+                             result=0;
+                             break;
+                          }
+                       }
+                       sDay[2]++;
+                    } 
+            }
+
+            if(result==0){
+            	alert("날짜를 다시 확인하세요");
+                $("#edate").val("");
+            }
+   
+           if($("#sdate").val() == ""){
+           		alert("시작일을 먼저 입력하세요");
+               	$("#edate").val("");
+               	
+           }else{
+           		var sdate = new Date($("#sdate").datepicker("getDate"));
+                    var edate = new Date($("#edate").datepicker("getDate"));
             
                     if((edate.getMonth() - sdate.getMonth()) > 1){
-                    	alert("두 달 이내로 선택하세요");
+                       alert("두 달 이내로 선택하세요");
                     }else if(edate.getMonth() == sdate.getMonth()){
-                    	interval = edate.getDate() - sdate.getDate();
+                       interval = edate.getDate() - sdate.getDate();
                      
-                    	if(interval == 0){
-                        	interval = 1;
-                        	price = price/2;
-                    	}
-                     	//alert(edate.getDate() - sdate.getDate() + 1 + "일");
-                  	}else{
-                    	var month  = sdate.getMonth()+1;
-                    	var sday;
-                    	var eday = edate.getDate();
+                       if(interval == 0){
+                           interval = 1;
+                           price = price/2;
+                       }
+                        //alert(edate.getDate() - sdate.getDate() + 1 + "일");
+                     }else{
+                       var month  = sdate.getMonth()+1;
+                       var sday;
+                       var eday = edate.getDate();
                      
-                     	switch(month){
-                        	case 1: case 3: case 5: case 7: case 8: case 10: case 12:{
-                           		sday = 31 - sdate.getDate();
-                           		break;
-                        	}
-                        	case 4: case 6: case 9: case 11: {
-                           		sday = 30 - sdate.getDate();
-                           		break;
-                        	}
-                        	case 2:{
-                           		sday = 28 - sdate.getDate();
-                           		break;
-                        	}
-                     	}
-                     	var tday = (eday + sday + 1);
+                        switch(month){
+                           case 1: case 3: case 5: case 7: case 8: case 10: case 12:{
+                                 sday = 31 - sdate.getDate();
+                                 break;
+                           }
+                           case 4: case 6: case 9: case 11: {
+                                 sday = 30 - sdate.getDate();
+                                 break;
+                           }
+                           case 2:{
+                                 sday = 28 - sdate.getDate();
+                                 break;
+                           }
+                        }
+                        var tday = (eday + sday + 1);
                      
-                     	//alert((tday - 1) + "박" + tday + "일");
-                     	interval = new Number(eday + sday + 1);
-                  	}
+                        //alert((tday - 1) + "박" + tday + "일");
+                        interval = new Number(eday + sday + 1);
+                     }
                    
                     reserve_price = Math.floor(interval*price*1.1);
                     //alert(reserve_price + "토탈 가격");
@@ -176,15 +220,15 @@
                     var tax = Math.floor(totalPrice*0.1);
                     $(".tax").text(tax + "원");
                     $(".totalPricePlusTax").text(reserve_price + "원");
-				}
-			}
-		});
+            }
+         }
+      });
         /*$.datepicker.setDefaults($.datepicker.regional['ko']); 
         $.datepicker.regional['ko'] = {
         };*/
 
         $("#petCheckNumber").change(function(){
-        	var petCheckNumber = new Number($("#petCheckNumber").val());
+           var petCheckNumber = new Number($("#petCheckNumber").val());
             reserve_price = interval*price*(petCheckNumber+1);
             
             $("#reserveRegForm :input[name=reserve_price]").val(reserve_price);
@@ -196,7 +240,7 @@
             var boardId = "${petsitterboardVO.petsitterVO.memberVO.id}";
             
             if($("#sdate").val() == ""){
-            	alert("시작일을 선택해 주세요.");
+               alert("시작일을 선택해 주세요.");
                 return false;
             }else if($("#edate").val() == ""){
                 alert("종료일을 선택해 주세요.");
@@ -204,13 +248,13 @@
             }
 
             if(confirm("예약 요청하시겠습니까?")){
-            	if(id == boardId){
-                	alert("본인한테 예약 불가합니다.");
+               if(id == boardId){
+                   alert("본인한테 예약 불가합니다.");
                     this.reset();
                     return false;
                }else if(id == null || id == ""){
-               		alert("로그인 후 예약 가능합니다.");
-            		location.href="${initParam.root}member_login.do";
+                     alert("로그인 후 예약 가능합니다.");
+                  location.href="${initParam.root}member_login.do";
                     return false;
                }else if(rank == 'normal' || rank == 'petsitter'){
                     alert("펫등록 후 예약 가능합니다.");
@@ -223,14 +267,14 @@
          });
         
         $("#addressMap").click(function(){
-			//alert("${petsitterboardVO.petsitterVO.memberVO.address}");
-			var address = "${petsitterboardVO.petsitterVO.memberVO.address}";
-			var id = "${petsitterboardVO.petsitterVO.memberVO.id}";
-			
-			window.open("${initParam.root}mapDetail.do?id="+id+"&address="+address,"",
-					"toolbar=yes,scrollbars=yes,top=100,left=600,width=740,height=760");
-		});
-	});
+         //alert("${petsitterboardVO.petsitterVO.memberVO.address}");
+         var address = "${petsitterboardVO.petsitterVO.memberVO.address}";
+         var id = "${petsitterboardVO.petsitterVO.memberVO.id}";
+         
+         window.open("${initParam.root}mapDetail.do?id="+id+"&address="+address,"",
+               "toolbar=yes,scrollbars=yes,top=100,left=600,width=740,height=760");
+      });
+   });
 </script>
 
 <c:set var="petsitterVO" value="${petsitterboardVO.petsitterVO }"></c:set>

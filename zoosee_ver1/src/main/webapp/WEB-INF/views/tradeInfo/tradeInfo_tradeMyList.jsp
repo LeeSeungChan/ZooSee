@@ -18,8 +18,17 @@
 	}
 </script>
 
+
 <div class="BJMainKING">
-<div class="BJMainKING" style="margin-top: 5%;">
+<div class="BJMainKING">
+<!-- 더블헤더 -->
+<div class="BJHeaderLayout0">
+	<div class="BJHeaderLayout">
+		<div class="BJHeader2">
+			
+		</div>
+	</div>
+</div>
 <div class="BJMainDiv" style="margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">

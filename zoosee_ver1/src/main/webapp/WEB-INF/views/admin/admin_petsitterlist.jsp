@@ -52,7 +52,6 @@
 					<table class="table table-striped table-hover"
 						id="petsitterlistTable">
 						<tr>
-							<th style="width: 10%">Pet Sitter No</th>
 							<th style="width: 10%">Id</th>
 							<th style="width: 10%">Name</th>
 							<th style="width: 10%">e-Mail</th>
@@ -61,7 +60,6 @@
 						</tr>
 						<c:forEach items="${requestScope.listVO.list }" var="l">
 							<tr>
-								<td>${l.petsitterNo}</td>
 								<td>${l.memberVO.id}</td>
 								<td><a
 									href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=recog">${l.memberVO.name}</a></td>

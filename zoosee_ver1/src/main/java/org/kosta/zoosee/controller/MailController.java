@@ -29,10 +29,11 @@ public class MailController {
 	@RequestMapping("findidMail.do")
 	public ModelAndView findIdMail(HttpServletRequest request) {
 		String email = request.getParameter("email");
-		if (email.equals("") || !email.contains("@")) {
+		String check = mailservice.send(email);
+		
+		if (check.equals("fail")) {
 			return new ModelAndView("mail_IdFail");
 		} else {
-			mailservice.send(email);
 			return new ModelAndView("mail_IdResult");
 		}
 	}
