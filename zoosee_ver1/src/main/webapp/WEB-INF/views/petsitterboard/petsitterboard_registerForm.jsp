@@ -104,8 +104,9 @@
 					<table class="SBtable">
 						<tr id="trFirst">
 							<th>Title</th>
-							<td colspan="3"><input class="SBform-text" type="text" 
-								name="petsitterboard_title" placeholder="제목을 입력하세요." /></td>
+							<td colspan="3">
+								<input class="SBform-text" type="text" name="petsitterboard_title" placeholder="제목을 입력하세요." />
+							</td>
 						</tr>
 						<tr>
 							<th style="vertical-align: middle; width: 10%">StartDay</th>
@@ -114,23 +115,20 @@
 							</td>
 							<th style="vertical-align: middle; width: 10%">EndDay</th>
 							<td style="vertical-align: middle; width: 40%">
-								<input type="text" class="datepicker SBform-text" id="edate" name="endDay" readonly="readonly" style="width:77%;"></td>
+								<input type="text" class="datepicker SBform-text" id="edate" name="endDay" readonly="readonly" style="width:77%;">
+							</td>
 						</tr>
 						<tr>
 							<th style="vertical-align: middle;">Pet Type</th>
 							<td colspan="3">
 								<table style="width: 100%;">
 									<tr>
-										<td style="width: 15%;"><input type="radio"
-											name="petType" value="dog" />강아지</td>
-										<td style="width: 10%;"><input type="radio"
-											name="petType" value="cat" />고양이</td>
-										<td style="width: 10%;"><input type="radio"
-											name="petType" value="bird" />조류</td>
-										<td style="width: 10%;"><input type="radio"
-											name="petType" value="fish" />어류</td>
-										<td style="width: 15%;"><input type="radio"
-											name="petType" value="etc" />기타</td>
+										<td style="width: 15%;">
+											<input type="radio" name="petType" value="dog" />강아지</td>
+										<td style="width: 10%;">
+											<input type="radio" name="petType" value="cat" />고양이</td>
+										<td style="width: 15%;">
+											<input type="radio" name="petType" value="etc" />기타</td>
 									</tr>
 								</table>
 							</td>
@@ -140,12 +138,15 @@
 							<td style="vertical-align: middle;">
 								<table style="width: 100%;">
 									<tr>
-										<td style="width: 20%;"><input type="radio"
-											name="petSize" value="small" />소형</td>
-										<td style="width: 10%;"><input type="radio"
-											name="petSize" value="middle" />중형</td>
-										<td style="width: 20%;"><input type="radio"
-											name="petSize" value="large" />대형</td>
+										<td style="width: 20%;">
+											<input type="radio" name="petSize" value="small" />소형
+										</td>
+										<td style="width: 10%;">
+											<input type="radio" name="petSize" value="middle" />중형
+										</td>
+										<td style="width: 20%;">
+											<input type="radio" name="petSize" value="large" />대형
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -153,29 +154,26 @@
 							<td>
 								<table style="width: 100%;">
 									<tr>
-										<td style="width: 20%;"><input type="radio"
-											name="service" value="목욕" /> 목욕</td>
-										<td style="width: 10%;"><input type="radio"
-											name="service" value="산책" /> 산책</td>
-										<td style="width: 20%;"><input type="radio"
-											name="service" value="픽업" /> 픽업</td>
+										<td style="width: 20%;"><input type="radio" name="service" value="목욕" />목욕</td>
+										<td style="width: 10%;"><input type="radio"name="service" value="산책" />산책</td>
+										<td style="width: 20%;"><input type="radio" name="service" value="픽업" />픽업</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
 						<tr>
 							<th style="vertical-align: middle;">Price</th>
-							<td><input type="text" class="SBform-text" name="price"
-								style="width: 80%;"></td>
+							<td><input type="text" class="SBform-text" name="price" style="width: 80%;"></td>
 							<td colspan="2" style="vertical-align: middle;">
 								<div style="float: left;">가격은 1박 한마리 기준으로 입력해주세요!</div>
 							</td>
 						</tr>
 						<tr>
 							<th>Content</th>
-							<td colspan="3"><textarea id="ta"
-									name="petsitterboard_contents" class="SBform-textarea"
-									style="height: 400px; resize: none;" placeholder="자신의 펫 시터 활동을 홍보할 수 있는 내용을 입력하세요."></textarea></td>
+							<td colspan="3">
+								<textarea id="ta" name="petsitterboard_contents" class="SBform-textarea" 
+									style="height: 400px; resize: none;" placeholder="자신의 펫 시터 활동을 홍보할 수 있는 내용을 입력하세요."></textarea>
+							</td>
 					</table>
 				</div>
 			</div>

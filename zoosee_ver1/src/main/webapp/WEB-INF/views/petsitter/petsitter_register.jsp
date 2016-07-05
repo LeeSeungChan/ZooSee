@@ -126,14 +126,15 @@ ZOOSEE 는 그 어떤 스킬이나 역량보다 "동물에 대한 진심과 사�
 
 *가능한 펫 종류 <br>
 <input type="radio" name="petType" value="dog">강아지
-<input type="radio" name="petType" value="cat">야옹이<br><br>
+<input type="radio" name="petType" value="cat">야옹이
+<input type="radio" name="petType" value="etc">기타<br><br>
 
 
 
 *원하는 펫 크기 <br>
-<input type="radio" name="petSize" value="small"> 아기팻
-<input type="radio" name="petSize" value="middle"> 보통
-<input type="radio" name="petSize" value="big"> 커더란 팻!<br> <br>
+<input type="radio" name="petSize" value="small"> 소형
+<input type="radio" name="petSize" value="middle"> 중형
+<input type="radio" name="petSize" value="big"> 대형<br> <br>
 
 
 *돌봄 가능한 팻  <br>

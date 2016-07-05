@@ -144,10 +144,6 @@
 							<label for="checkbox1">강아지</label>
 							<input type="radio" name="petType" id="checkbox2" value="cat"/>
 							<label for="checkbox2">고양이</label>
-							<input type="radio" name="petType" id="checkbox3" value="bird"/>
-							<label for="checkbox3">새</label>
-							<input type="radio" name="petType" id="checkbox4" value="bird"/>
-							<label for="checkbox3">물고기</label>
 							<input type="radio" name="petType" id="checkbox5" value="etc"/>
 							<label for="checkbox5">기타</label><br/>
 						</div>

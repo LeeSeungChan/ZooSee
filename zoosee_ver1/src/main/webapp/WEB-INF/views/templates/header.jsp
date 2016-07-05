@@ -63,9 +63,9 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">회원 관리(관리자)</a></li>
-						<li><a href="${initParam.root}interceptor_admin_qna_list.do?when=all">Q&A 목록(관리자)</a></li>
-						<li><a href="${initParam.root}interceptor_admin_adminList.do">직원 관리(관리자)</a></li>
+						<li><a href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">회원 관리</a></li>
+						<li><a href="${initParam.root}interceptor_admin_qna_list.do?when=all">Q&A 목록</a></li>
+						<li><a href="${initParam.root}interceptor_admin_adminList.do">직원 관리</a></li>
 					</ul>
 				</li>
 			</c:if>

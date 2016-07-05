@@ -4,20 +4,20 @@
 
 <script type="text/javascript">
 	var a = new Array();
-   	var receiveData = new Array();
-    
-   	// Controller로부터 예약된 날짜 리스트를 받아와서 JS Array object로 변환
-   	function dateFormatChange(){
-    	var data = "${calendarList}";
-      data = data.substring(1, data.length-1);
-      a = data.split(",");
-      receiveData = [];
-         
-      for(var i = 0; i < a.length; i++){
-         a[i] = a[i].trim();
-         receiveData[i] = a[i];
-      }
-   }
+	var receiveData = new Array();
+   
+  	// Controller로부터 예약된 날짜 리스트를 받아와서 JS Array object로 변환
+  	function dateFormatChange(){
+	   	var data = "${calendarList}";
+	    data = data.substring(1, data.length-1);
+	    a = data.split(",");
+	    receiveData = [];
+	        
+	    for(var i = 0; i < a.length; i++){
+	    	a[i] = a[i].trim();
+	        receiveData[i] = a[i];
+	    }
+  	}
       
    $(document).ready(function(){
       dateFormatChange();

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){
 		$("#payment2").submit(function(){ 
     		if($("#card").val()==""){
@@ -137,33 +137,33 @@
 			<th style="text-align: right; vertical-align: middle;">결제 방법</th>
 			<td>
 				<div class="radio" align="center">
-					<label class="radio-inline"> <input type="radio"
-						name="method" value="convenience"
-						onclick="change(this.value,'convenience');"> ZOOSEE 간편결제
-					</label> <label class="radio-inline"> <input type="radio"
-						name="method" value="credit"
-						onclick="change(this.value,'credit');"> 신용/체크카드
-					</label> <label class="radio-inline"> <input type="radio"
-						name="method" value="noBankbook"
-						onclick="change(this.value,'noBankbook');"> 무통장입금
+					<label class="radio-inline"> 
+						<input type="radio" name="method" value="convenience" onclick="change(this.value,'convenience');"> 
+							ZOOSEE 간편결제
+					</label> 
+					<label class="radio-inline"> 
+						<input type="radio"name="method" value="credit" onclick="change(this.value,'credit');"> 
+							신용/체크카드
+					</label> 
+					<label class="radio-inline"> 
+						<input type="radio" name="method" value="noBankbook" onclick="change(this.value,'noBankbook');"> 
+						무통장입금
 					</label>
 				</div>
 			</td>
 		</table>
 	</form>
 
-
 	<div id="con1" style="display: none; ">
 		<h5>ZOOSEE 간편결제</h5>
 		<div class="BJWriteTableLine" >
-		<div style="margin-top:3%; margin-bottom: 3%; text-align: center;">
-		ZOOSEE Pay는 준비중입니다. <br> 빠른시일내로 찾아 뵙겠습니다.
-		</div>
+			<div style="margin-top:3%; margin-bottom: 3%; text-align: center;">
+				ZOOSEE Pay는 준비중입니다. <br> 빠른시일내로 찾아 뵙겠습니다.
+			</div>
 		</div>
 	</div>
 
-
-		<form id="payment2" name="payment2">
+	<form id="payment2" name="payment2">
 	<div id="con2" style="display: none">
 		<h5>신용/체크카드</h5>
 		<div class="BJWriteTableLine" >
@@ -171,58 +171,58 @@
 				<tr>
 					<th style="text-align: center; vertical-align: middle; width: 45%;">카드종류</th>
 					<td style="margin-left: 10%;">
-					<div style="margin-bottom: 1%; margin-top: 1%;">
-					<select class="WJform-control4" id="card" name="card" >
-							<option value="">-Select-</option>
-							<option value="신한카드">신한카드(구:LG 카드 포함)</option>
-							<option value="비씨카드">BC(비씨)카드</option>
-							<option value="현대카드">현대카드</option>
-							<option value="삼성카드">삼성카드</option>
-							<option value="롯데카드">롯데카드</option>
-							<option value="하나카드">하나카드</option>
-					</select>
-					</div>
+						<div style="margin-bottom: 1%; margin-top: 1%;">
+							<select class="WJform-control4" id="card" name="card" >
+								<option value="">-Select-</option>
+								<option value="신한카드">신한카드(구:LG 카드 포함)</option>
+								<option value="비씨카드">BC(비씨)카드</option>
+								<option value="현대카드">현대카드</option>
+								<option value="삼성카드">삼성카드</option>
+								<option value="롯데카드">롯데카드</option>
+								<option value="하나카드">하나카드</option>
+							</select>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">할부기간</th>
 					<td>
-					<select class="WJform-control4" id="MIP" name="MIP" style="margin-bottom: 1%; margin-top: 1%;">
+						<select class="WJform-control4" id="MIP" name="MIP" style="margin-bottom: 1%; margin-top: 1%;">
 							<option value="">-Select-</option>
 							<option value="1">1개월</option>
 							<option value="2">2개월</option>
 							<option value="3">3개월</option>
-					</select>
+						</select>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">카드번호</th>
 					<td>
-					<div align="left" style="margin-bottom: 1%; margin-top: 1%;">
-					<input class="WJform-control5" type="text" id="cardNum1" name="cardNum1" style="width: 20%"> -
-					<input class="WJform-control5" type="text" id="cardNum2" name="cardNum2" style="width: 20%"> -
-					<input class="WJform-control5" type="text" id="cardNum3" name="cardNum3" style="width: 20%"> -
-					<input class="WJform-control5" type="text" id="cardNum4" name="cardNum4" style="width: 20%">
-					</div>
+						<div align="left" style="margin-bottom: 1%; margin-top: 1%;">
+							<input class="WJform-control5" type="text" id="cardNum1" name="cardNum1" style="width: 20%"> -
+							<input class="WJform-control5" type="text" id="cardNum2" name="cardNum2" style="width: 20%"> -
+							<input class="WJform-control5" type="text" id="cardNum3" name="cardNum3" style="width: 20%"> -
+							<input class="WJform-control5" type="text" id="cardNum4" name="cardNum4" style="width: 20%">
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">유효기간</th>
 					<td>
-					<div style="margin-bottom: 1%; margin-top: 1%;">
-					<input class="WJform-control4" type="text" id="valid" name="valid" style="width: 50%; " placeholder="ex) MMYY">
-					</div>
+						<div style="margin-bottom: 1%; margin-top: 1%;">
+							<input class="WJform-control4" type="text" id="valid" name="valid" style="width: 50%; " 
+								placeholder="ex) MMYY">
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">비밀번호</th>
 					<td>
-					<div style="margin-bottom: 1%; margin-top: 1%;">
-					<input class="WJform-control4" type="password" id="password" style="width: 50%; " name="password">
-					</div>
+						<div style="margin-bottom: 1%; margin-top: 1%;">
+							<input class="WJform-control4" type="password" id="password" style="width: 50%; " name="password">
+						</div>
 					</td>
 				</tr>
-				
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">약관동의</th>
 					<td style="text-align: left;" >
@@ -234,68 +234,66 @@
 				</tr>
 			</table>
 		</div>
-			<input type="submit" id="update" value="결제"
-			class="active WJbtn btn-info update" style="float: left; width: 25%; margin-left:24%; margin-top: 2%; margin-bottom: 2%;">
-		<input type="button" id="delete" value="취소" onclick="javascript:self.close()"
-			class="active WJbtn btn-info"
+		<input type="submit" id="update" value="결제" class="active WJbtn btn-info update" 
+			style="float: left; width: 25%; margin-left:24%; margin-top: 2%; margin-bottom: 2%;">
+		<input type="button" id="delete" value="취소" onclick="javascript:self.close()" class="active WJbtn btn-info"
 			style="float: right; width: 25%; margin-right:24%; margin-top: 2%; margin-bottom: 2%">
 	</div>
-		</form>
+	</form>
 
-<form id="payment3" name="payment3">
+	<form id="payment3" name="payment3">
 	<div id="con3" style="display: none">
 		<h5>무통장입금</h5>
 			<div class="BJWriteTableLine" align="center">
 			<table style="margin-top:3%; margin-bottom: 3%;">
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">입금자명</th>
-					<td >
-					<div style="margin-bottom: 1%; margin-top: 1%;">
-					<input class="WJform-control4" type="text" id="name" name="name" style="width: 70%; ">
-					</div>
+					<td>
+						<div style="margin-bottom: 1%; margin-top: 1%;">
+							<input class="WJform-control4" type="text" id="name" name="name" style="width: 70%; ">
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">입금예정일</th>
-					<td >
-					<div style="margin-bottom: 1%; margin-top: 1%;">
-					<input class="WJform-control4" type="text" id="date" name="date" style="width: 70%; " placeholder="ex)20160630">
-					</div>
+					<td>
+						<div style="margin-bottom: 1%; margin-top: 1%;">
+							<input class="WJform-control4" type="text" id="date" name="date" style="width: 70%; " placeholder="ex)20160630">
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle;">계좌번호</th>
-					<td >
-					<div style="margin-bottom: 1%; margin-top: 1%;">
-					<input class="WJform-control4" type="text" id="payNum" name="payNum" style="width: 100%; ">
-					</div>
+					<td>
+						<div style="margin-bottom: 1%; margin-top: 1%;">
+							<input class="WJform-control4" type="text" id="payNum" name="payNum" style="width: 100%; ">
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align: center; vertical-align: middle; width: 45%;">입금은행</th>
 					<td style="margin-left: 10%;">
-					<div style="margin-bottom: 1%; margin-top: 1%;">
-					<select class="WJform-control4" id="bank" name="bank" >
-							<option value="">-Select-</option>
-							<option value="신한은행">신한은행</option>
-							<option value="기업은행">기업은행</option>
-							<option value="우리은행">우리은행</option>
-							<option value="국민은행">국민은행</option>
-							<option value="하나은행">하나은행</option>
-							<option value="농협">농협</option>
-					</select>
-					</div>
+						<div style="margin-bottom: 1%; margin-top: 1%;">
+							<select class="WJform-control4" id="bank" name="bank" >
+								<option value="">-Select-</option>
+								<option value="신한은행">신한은행</option>
+								<option value="기업은행">기업은행</option>
+								<option value="우리은행">우리은행</option>
+								<option value="국민은행">국민은행</option>
+								<option value="하나은행">하나은행</option>
+								<option value="농협">농협</option>
+							</select>
+						</div>
 					</td>
 				</tr>
 			</table>
 			</div>
-			<input type="submit" id="update" value="진행"
-			class="active WJbtn btn-info update" style="float: left; width: 25%; margin-left:24%; margin-top: 2%; margin-bottom: 2%;">
-		<input type="button" id="delete" value="취소" onclick="javascript:self.close()"
-			class="active WJbtn btn-info"
-			style="float: right; width: 25%; margin-right:24%; margin-top: 2%; margin-bottom: 2%">
-	</div>
-</form>
+			<input type="submit" id="update" value="진행" class="active WJbtn btn-info update" 
+				style="float: left; width: 25%; margin-left:24%; margin-top: 2%; margin-bottom: 2%;">
+			<input type="button" id="delete" value="취소" onclick="javascript:self.close()" class="active WJbtn btn-info"
+				style="float: right; width: 25%; margin-right:24%; margin-top: 2%; margin-bottom: 2%">
+		</div>
+	</form>
 </div>
 
 <!-- 

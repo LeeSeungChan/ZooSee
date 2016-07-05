@@ -16,27 +16,25 @@
 		});
 	});
 </script>
-<link rel="stylesheet" type="text/css"
-	href="${initParam.root}resources/css/sb.css">
-		<div class="BJHeaderLayout0">
-<div class="BJHeaderLayout" >
-<div class="BJHeader2" >
-	<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A 목록</a>	
-	<a class="BJA"  href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
-	<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a> 
-	<a class="BJA" href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+<link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/sb.css">
+
+<div class="BJHeaderLayout0">
+	<div class="BJHeaderLayout" >
+		<div class="BJHeader2" >
+			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A 목록</a>	
+			<a class="BJA"  href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a> 
+			<a class="BJA" href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+		</div>
 	</div>
 </div>
-</div>
-<div class="BJMainDiv"
-	style=" margin-bottom: 10%;">
+<div class="BJMainDiv" style=" margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">1:1 Q&A 게시판</h3>
 			</div>
-			<div class="panel-body">1:1 Q&A 게시판은 고객님의 궁금증을 풀어드리기 위한 공간입니다.
-			</div>
+			<div class="panel-body">1:1 Q&A 게시판은 고객님의 궁금증을 풀어드리기 위한 공간입니다.</div>
 		</div>
 		<div class="well well-sm">Question Update</div>
 	</div>
@@ -50,14 +48,16 @@
 							<table class="SBtable">
 								<tr>
 									<td style="width: 15%;"><label>Title</label></td>
-									<td style="width: 85%;"><input class="SBform-text"
-										type="text" id="title" name="title"
-										value="${qnaBoardVO.title}"></td>
+									<td style="width: 85%;">
+										<input class="SBform-text" type="text" id="title" name="title" value="${qnaBoardVO.title}">
+									</td>
 								</tr>
 								<tr>
 									<td><label>Question</label></td>
-									<td><textarea class="SBform-textarea" id="question"
-											name="question" style="height: 400px; resize: none;">${qnaBoardVO.question}</textarea></td>
+									<td>
+										<textarea class="SBform-textarea" id="question" name="question" 
+										style="height: 400px; resize: none;">${qnaBoardVO.question}</textarea>
+									</td>
 								</tr>
 							</table>
 						</div>

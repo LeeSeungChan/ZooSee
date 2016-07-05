@@ -117,8 +117,7 @@
                <option value="">-Select-</option>
                <option value="강아지">강아지</option>
                <option value="고양이">고양이</option>
-               <option value="새">새</option>
-               <option value="파충류">파충류</option>
+               <option value="기타">기타</option>
              </select>
         <label>Pet Gender</label>
       	<div class="radio" align="center">

@@ -132,7 +132,7 @@ public class ReserveController {
 		ModelAndView mv = new ModelAndView("reserve_reservePesitterDetail");
 		List<PetCalendarVO> list2 = reserveService.getReserveDate(reserve_no);
 		mv.addObject("reserveSdate", list2.get(0));
-		      mv.addObject("reserveEdate", list2.get(list2.size()-1));
+		mv.addObject("reserveEdate", list2.get(list2.size()-1));
 		mv.addObject("petsitterboardVO", petsitterboardVO);
 		mv.addObject("reserveVO", reserveVO);
 		mv.addObject("petList", petList);

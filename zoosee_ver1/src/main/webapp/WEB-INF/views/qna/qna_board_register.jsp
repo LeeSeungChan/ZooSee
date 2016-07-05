@@ -17,8 +17,7 @@
 	});
 </script>
 
-<link rel="stylesheet" type="text/css"
-	href="${initParam.root}resources/css/sb.css">
+<link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/sb.css">
 	<div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
@@ -29,15 +28,13 @@
 		</div>
 	</div>
 </div>
-<div class="BJMainDiv"
-	style=" margin-bottom: 10%;">
+<div class="BJMainDiv" style=" margin-bottom: 10%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">1:1 Q&A 게시판</h3>
 			</div>
-			<div class="panel-body">1:1 Q&A 게시판은 고객님의 궁금증을 풀어드리기 위한 공간입니다.
-			</div>
+			<div class="panel-body">1:1 Q&A 게시판은 고객님의 궁금증을 풀어드리기 위한 공간입니다.</div>
 		</div>
 		<div class="well well-sm">Question Write</div>
 	</div>
@@ -48,13 +45,13 @@
 					<table class="SBtable">
 						<tr>
 							<th style="width: 15%;">Title</th>
-							<td style="width: 85%;"><input class="SBform-text"
-								type="text" id="title" name="title"></td>
+							<td style="width: 85%;"><input class="SBform-text" type="text" id="title" name="title"></td>
 						</tr>
 						<tr>
 							<th>Question</th>
-							<td><textarea class="SBform-textarea" id="question"
-									name="question" style="height: 400px; resize: none;"></textarea></td>
+							<td>
+								<textarea class="SBform-textarea" id="question" name="question" style="height: 400px; resize: none;"></textarea>
+							</td>
 					</table>
 				</div>
 			</div>
@@ -62,6 +59,5 @@
 				<input type="submit" class="active SBbtn btn-default" value="질문 등록">
 			</div>
 		</form>
-
 	</div>
 </div>

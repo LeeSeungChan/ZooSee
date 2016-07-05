@@ -5,16 +5,13 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_message_list.do">
-				전체 메세지 목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_message_uncheckedlist.do">안
-				읽은 메세지 목록</a>
+			<a class="BJA" href="${initParam.root}interceptor_message_list.do">전체 메세지 목록</a> 
+			<a class="BJA" href="${initParam.root}interceptor_message_uncheckedlist.do">안 읽은 메세지 목록</a>
 		</div>
 	</div>
 </div>
 
 <div class="BJMainDiv">
-
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -33,10 +30,8 @@
 			<div class="BJHrAllLine">
 				<table class="BJFreeBoardShowContentTable ">
 					<tr>
-
 						<td align="right">제목 :</td>
 						<td align="left" colspan=3>${message.title }</td>
-
 					</tr>
 					<tr>
 						<td align="right">보낸사람 :</td>
@@ -46,21 +41,14 @@
 						<td align="right">받은시간 :</td>
 						<td align="left" colspan=3>${message.time_posted }</td>
 					</tr>
-
 				</table>
 				<hr class="BJHr">
 				${message.content }
-
-
-
 			</div>
 		</div>
 	</div>
+</div>
 
-
-
-
-
-
-
+<div style="width:100%; height: 50px; margin-top: 2%;">
+	<input class="active WJbtn btn-block btn-info" style="width:5%; margin-left:48%; "onclick="history.go(-1)" type="button" value="확인" >   
 </div>

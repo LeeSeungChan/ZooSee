@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css"
-	href="${initParam.root}resources/css/sb.css">
+<link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/sb.css">
 
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
@@ -38,12 +37,16 @@
 					</tr>
 					<c:forEach items="${listVO.list}" var="qnaBoard">
 						<tr>
-							<td><a
-								href="${initParam.root}interceptor_qna_content.do?boardNo=${qnaBoard.boardNo}">${qnaBoard.title}</a></td>
-							<td><c:choose>
+							<td>
+								<a href="${initParam.root}interceptor_qna_content.do?boardNo=${qnaBoard.boardNo}">
+									${qnaBoard.title}</a>
+							</td>
+							<td>
+								<c:choose>
 									<c:when test="${empty qnaBoard.answer}">X</c:when>
 									<c:otherwise>O</c:otherwise>
-								</c:choose></td>
+								</c:choose>
+							</td>
 							<td>${qnaBoard.timePosted}</td>
 						</tr>
 					</c:forEach>
@@ -55,15 +58,13 @@
 				<c:set var="pb" value="${listVO.pagingBean}"></c:set>
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
-						<li><a
-							href="interceptor_qna_list.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+						<li><a href="interceptor_qna_list.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
 					</c:otherwise>
 				</c:choose>
-				<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
-					end="${pb.endPageOfPageGroup}">
+				<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a href="interceptor_qna_list.do?pageNo=${i}">${i}</a></li>
@@ -75,8 +76,7 @@
 				</c:forEach>
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
-						<li><a
-							href="interceptor_qna_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+						<li><a href="interceptor_qna_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

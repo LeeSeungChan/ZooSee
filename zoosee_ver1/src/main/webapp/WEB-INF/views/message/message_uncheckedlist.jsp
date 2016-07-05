@@ -23,8 +23,7 @@
 					<div class="panel-body">
 						${sessionScope.mvo.name } 님의 읽지 않은 메세지가 없습니다.
 						<div style="text-align: right;">
-							<a href="${initParam.root}interceptor_message_list.do">메세지
-								전체보기</a>
+							<a href="${initParam.root}interceptor_message_list.do">메세지 전체보기</a>
 						</div>
 					</div>
 				</div>
@@ -42,8 +41,7 @@
 					<div class="panel-body">
 						${sessionScope.mvo.name } 님의 읽지 않은 메세지 목록입니다.
 						<div style="text-align: right;">
-							<a href="interceptor_message_updateCheckedAll.do?id=${sessionScope.mvo.id }">메세지
-								모두 읽기</a> 
+							<a href="interceptor_message_updateCheckedAll.do?id=${sessionScope.mvo.id }">메세지 모두 읽기</a> 
 						</div>
 					</div>
 				</div>
@@ -64,11 +62,13 @@
 							<tbody>
 								<c:forEach items="${requestScope.listVO.list }" var="message">
 									<tr>
-										<td><c:if test="${message.checked==0}">읽지않음</c:if> <c:if
-												test="${message.checked==1}">읽음</c:if></td>
-										<td><a
-											href="interceptor_message_content.do?message_no=${message.message_no }">
-												${message.title}</a></td>
+										<td>
+											<c:if test="${message.checked==0}">읽지않음</c:if> 
+											<c:if test="${message.checked==1}">읽음</c:if></td>
+										<td>
+											<a href="interceptor_message_content.do?message_no=${message.message_no }">
+												${message.title}</a>
+										</td>
 										<td>관리자</td>
 										<td>${message.time_posted }</td>
 									</tr>
@@ -85,8 +85,9 @@
 					<c:set var="pb" value="${requestScope.listVO.pagingBean}"></c:set>
 					<c:choose>
 						<c:when test="${pb.previousPageGroup}">
-							<li><a
-								href="${initParam.root}interceptor_message_uncheckedlist.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+							<li>
+								<a href="${initParam.root}interceptor_message_uncheckedlist.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
+							</li>
 						</c:when>
 						<c:otherwise>
 							<li class="disabled"><a>&laquo;</a></li>
@@ -96,8 +97,7 @@
 						end="${pb.endPageOfPageGroup}">
 						<c:choose>
 							<c:when test="${pb.nowPage!=i}">
-								<li><a
-									href="${initParam.root}interceptor_message_uncheckedlist.do?pageNo=${i}">${i}</a></li>
+								<li><a href="${initParam.root}interceptor_message_uncheckedlist.do?pageNo=${i}">${i}</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="active"><a>${i}</a></li>
@@ -106,8 +106,7 @@
 					</c:forEach>
 					<c:choose>
 						<c:when test="${pb.nextPageGroup}">
-							<li><a
-								href="${initParam.root}interceptor_message_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+							<li><a href="${initParam.root}interceptor_message_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="disabled"><a>&raquo;</a></li>
