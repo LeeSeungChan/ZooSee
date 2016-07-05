@@ -10,7 +10,6 @@ import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.review.ReviewService;
 import org.kosta.zoosee.model.vo.MemberVO;
-import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.ReviewVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

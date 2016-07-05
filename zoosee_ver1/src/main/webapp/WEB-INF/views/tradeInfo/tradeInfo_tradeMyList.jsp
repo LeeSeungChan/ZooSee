@@ -103,7 +103,11 @@
 							<td style="vertical-align: middle;">${tradeInfoVO.tradePrice}</td>
 							<td style="vertical-align: middle;">${tradeInfoVO.tradeSdate}</td>
 							<td style="vertical-align: middle;">${tradeInfoVO.tradeEdate}</td>
-							<td style="vertical-align: middle;"><input type="button" class="BJbtn2" value="리뷰" onclick="openPopup('${tradeInfoVO.petsitterVO.memberVO.id}')"></td>
+							<c:if test="${sessionScope.mvo.id!=tradeInfoVO.petsitterVO.memberVO.id }">
+                        		<td style="vertical-align: middle;">
+                        			<input type="button" class="BJbtn2" value="리뷰" onclick="openPopup('${tradeInfoVO.petsitterVO.memberVO.id}')">
+                        		</td>
+                    		</c:if>
 						</tr>
 					</c:forEach>
 				</table>

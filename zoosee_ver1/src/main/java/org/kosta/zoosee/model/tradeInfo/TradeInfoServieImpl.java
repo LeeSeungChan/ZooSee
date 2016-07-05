@@ -15,7 +15,6 @@ import org.kosta.zoosee.model.pet.PetDAO;
 import org.kosta.zoosee.model.petsitter.PetsitterDAO;
 import org.kosta.zoosee.model.reserve.ReserveDAO;
 import org.kosta.zoosee.model.vo.MemberVO;
-import org.kosta.zoosee.model.vo.MessageVO;
 import org.kosta.zoosee.model.vo.PetCalendarVO;
 import org.kosta.zoosee.model.vo.PetVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
