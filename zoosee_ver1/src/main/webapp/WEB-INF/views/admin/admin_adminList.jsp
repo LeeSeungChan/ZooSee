@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<c:if test="${! empty listVO.list}">
-			<ul class="pagination pagination-sm">
+			<ul class="pagination_1 pagination-sm">
 				<c:set var="pb" value="${listVO.pagingBean}"></c:set>
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">

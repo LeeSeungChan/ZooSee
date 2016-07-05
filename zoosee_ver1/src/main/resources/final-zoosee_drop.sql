@@ -57,3 +57,7 @@ drop sequence message_seq;
 
 --알림 메세지 테이블
 drop table message;
+
+
+drop sequence review_seq;
+drop table review

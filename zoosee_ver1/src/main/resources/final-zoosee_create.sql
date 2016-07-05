@@ -191,6 +191,8 @@ create table message(
 
 --------------------------------리뷰-------------------------------------------
 create sequence review_seq nocache;
+drop sequence review_seq;
+drop table review
 
 create table review(
    review_no number primary key,		--리뷰 NO

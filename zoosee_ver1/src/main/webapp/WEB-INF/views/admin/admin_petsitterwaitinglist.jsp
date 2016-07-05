@@ -50,6 +50,11 @@
 	<div class="BJMain2Div" align="center">
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine_1">
+				<c:choose>
+				<c:when test="${empty listVO.list }">
+					<div style="margin-bottom: 3%">펫시터 승인을 기다리는 회원이 없습니다.</div>
+				</c:when>
+				<c:otherwise>
 				<form id="recogForm">
 					<table class="table table-striped table-hover" id="recogTable">
 						<tr>
@@ -73,10 +78,12 @@
 						</c:forEach>
 					</table>
 				</form>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<c:if test="${! empty listVO.list}">
-			<ul class="pagination pagination-sm">
+			<ul class="pagination_1 pagination-sm">
 				<c:set var="pb" value="${listVO.pagingBean}"></c:set>
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">

@@ -56,7 +56,7 @@
 				</table>
 			</div>
 		</div>
-		<ul class="pagination pagination-sm">
+		<ul class="pagination_1 pagination-sm">
 			<c:if test="${! empty listVO.list }">
 				<c:set var="pb" value="${listVO.pagingBean}"></c:set>
 				<c:choose>
