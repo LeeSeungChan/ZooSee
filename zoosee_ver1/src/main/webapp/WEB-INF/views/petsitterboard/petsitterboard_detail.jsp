@@ -19,31 +19,31 @@
 	    }
   	}
       
-   $(document).ready(function(){
-      dateFormatChange();
+	$(document).ready(function(){
+		dateFormatChange();
 
-      $("#deleteId").click(function(){
-         if(confirm("삭제하시겠습니까?")){
-            location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardDelete.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}";
-         } 
-      });
+      	$("#deleteId").click(function(){
+        	if(confirm("삭제하시겠습니까?")){
+            	location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardDelete.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}";
+        	} 
+      	});
       
-      var startDay = "${petsitterboardVO.startDay}";
-      var endDay = "${petsitterboardVO.endDay}";
+      	var startDay = "${petsitterboardVO.startDay}";
+      	var endDay = "${petsitterboardVO.endDay}";
 
-      $.ajax({
-           type:"POST",
+      	$.ajax({
+        	type:"POST",
             url:"avg_star_rate.do",
             data:"id=${requestScope.reviewList[0].ref_id }",
             dataType:"json",
             success:function(result){
-               var avg = result.avg*20;
+            	var avg = result.avg*20;
                 $("#star-rating").css({width: avg+'%'});  
             }
         });
       
         $("#sdate").datepicker({
-           closeText: '닫기',
+           	closeText: '닫기',
             prevText: '이전달',
             nextText: '다음달',
             currentText: '오늘',
@@ -68,19 +68,19 @@
             showButtonPanel: true,
             yearRange: ':c+10',
             beforeShowDay: function(date){
-               var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            	var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
                   
-               //for (var i = 0; i < disabledDays.length; i++) {
-               if($.inArray(day, receiveData) > -1) {
-                  return [false];
-               }else{
-                   return [true];
-               }
-         },
-            minDate: /* new Date() */startDay,
+               	//for (var i = 0; i < disabledDays.length; i++) {
+              	if($.inArray(day, receiveData) > -1) {
+                	return [false];
+            	}else{
+                   	return [true];
+               	}
+         	},
+            minDate: new Date(), //startDay,
             maxDate: endDay,
             onSelect:function(selectedDate){
-               $("#edate").datepicker("option", "minDate", selectedDate );
+            	$("#edate").datepicker("option", "minDate", selectedDate );
             } 
       	});
          
@@ -89,7 +89,7 @@
         var price = new Number("${petsitterboardVO.petsitterVO.price}");
          
         $("#edate").datepicker({
-           closeText: '닫기',
+        	closeText: '닫기',
             prevText: '이전달',
             nextText: '다음달',
             currentText: '오늘',
@@ -114,10 +114,10 @@
             showButtonPanel: true,
             yearRange: ':c+10',
             beforeShowDay: function(date){
-               var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            	var day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
                   
                 if($.inArray(day, receiveData) > -1) {
-                   return [false];
+                	return [false];
                 }else{
                     return [true];
                   }
@@ -125,16 +125,15 @@
             minDate: startDay,
             maxDate: endDay,
             onSelect: function(selectedDate){
-
-               var sDay= $("#sdate").val().split("-");
-               var eDay=$("#edate").val().split("-");
+				var sDay= $("#sdate").val().split("-");
+               	var eDay=$("#edate").val().split("-");
             	var rDay=receiveData
             	var length=eDay[2]-sDay[2];
             	var result=1;//0 예약불가 1 예약가능
             
             	if(sDay[1]==eDay[1]){
                		for(var i=0;i<length;i++){
-                    	for(var j=0;j<receiveData.length;j++){
+                   		for(var j=0;j<receiveData.length;j++){
                         	var rDay=[];
                           	rDay=receiveData[j].split("-");
                           	if(sDay[2]==rDay[2]){
@@ -144,72 +143,71 @@
                        	}
                        	sDay[2]++;
                     } 
-            }else{
-               var lastDay=new Date(sDay[0],sDay[1],0);
-               for(var i=sDay[2];i<lastDay.getDate();i++){
-                       for(var j=0;j<receiveData.length;j++){
-                          var rDay=[];
-                          rDay=receiveData[j].split("-");
+            	}else{
+               		var lastDay=new Date(sDay[0],sDay[1],0);
+               		for(var i=sDay[2];i<lastDay.getDate();i++){
+                    	for(var j=0;j<receiveData.length;j++){
+                        	var rDay=[];
+                          	rDay=receiveData[j].split("-");
                           
-                          /* if(sDay[2]==lastDay.getDate()){
-                             sDay[2]=1;
-                          } */
-                          if(sDay[2]==rDay[2]){
-                             result=0;
-                             break;
-                          }
-                       }
-                       sDay[2]++;
+	                        /*if(sDay[2]==lastDay.getDate()){
+	                        	sDay[2]=1;
+	                        }*/
+                          	if(sDay[2]==rDay[2]){
+                            	result=0;
+                             	break;
+                          	}
+                       	}
+                       	sDay[2]++;
                     } 
-            }
+            	}
 
-            if(result==0){
-            	alert("날짜를 다시 확인하세요");
-                $("#edate").val("");
-            }
+            	if(result==0){
+            		alert("날짜를 다시 확인하세요");
+                	$("#edate").val("");
+            	}
    
-           if($("#sdate").val() == ""){
-           		alert("시작일을 먼저 입력하세요");
-               	$("#edate").val("");
-               	
-           }else{
-           		var sdate = new Date($("#sdate").datepicker("getDate"));
+           		if($("#sdate").val() == ""){
+           			alert("시작일을 먼저 입력하세요");
+               		$("#edate").val(""); 	
+           		}else{
+           			var sdate = new Date($("#sdate").datepicker("getDate"));
                     var edate = new Date($("#edate").datepicker("getDate"));
             
                     if((edate.getMonth() - sdate.getMonth()) > 1){
-                       alert("두 달 이내로 선택하세요");
+                    	alert("두 달 이내로 선택하세요");
                     }else if(edate.getMonth() == sdate.getMonth()){
-                       interval = edate.getDate() - sdate.getDate();
+                       	interval = edate.getDate() - sdate.getDate();
                      
-                       if(interval == 0){
-                           interval = 1;
-                           price = price/2;
-                       }
+                       	if(interval == 0){
+                        	interval = 1;
+                           	price = price/2;
+                       	}
                         //alert(edate.getDate() - sdate.getDate() + 1 + "일");
-                     }else{
-                       var month  = sdate.getMonth()+1;
-                       var sday;
-                       var eday = edate.getDate();
+                     	}else{
+                       		var month  = sdate.getMonth()+1;
+                       		var sday;
+                       		var eday = edate.getDate();
                      
-                        switch(month){
-                           case 1: case 3: case 5: case 7: case 8: case 10: case 12:{
-                                 sday = 31 - sdate.getDate();
-                                 break;
-                           }
-                           case 4: case 6: case 9: case 11: {
-                                 sday = 30 - sdate.getDate();
-                                 break;
-                           }
-                           case 2:{
-                                 sday = 28 - sdate.getDate();
-                                 break;
-                           }
-                        }
-                        var tday = (eday + sday + 1);
+                        	switch(month){
+                           		case 1: case 3: case 5: case 7: case 8: case 10: case 12:{
+                                	sday = 31 - sdate.getDate();
+                                	break;
+                           		}
+                           		case 4: case 6: case 9: case 11: {
+                                	sday = 30 - sdate.getDate();
+                                 	break;
+                          		}
+                           		case 2:{
+                                	sday = 28 - sdate.getDate();
+                                	break;
+                           		}
+                        	}
+                        	var tday = (eday + sday + 1);
                      
-                        //alert((tday - 1) + "박" + tday + "일");
-                        interval = new Number(eday + sday + 1);
-                     }
+                        	//alert((tday - 1) + "박" + tday + "일");
+                        	interval = new Number(eday + sday + 1);
+                     	}
                    
                     reserve_price = Math.floor(interval*price*1.1);
                     //alert(reserve_price + "토탈 가격");
@@ -220,15 +218,15 @@
                     var tax = Math.floor(totalPrice*0.1);
                     $(".tax").text(tax + "원");
                     $(".totalPricePlusTax").text(reserve_price + "원");
-            }
-         }
-      });
+				}
+			}
+		});
         /*$.datepicker.setDefaults($.datepicker.regional['ko']); 
         $.datepicker.regional['ko'] = {
         };*/
 
         $("#petCheckNumber").change(function(){
-           var petCheckNumber = new Number($("#petCheckNumber").val());
+        	var petCheckNumber = new Number($("#petCheckNumber").val());
             reserve_price = interval*price*(petCheckNumber+1);
             
             $("#reserveRegForm :input[name=reserve_price]").val(reserve_price);
@@ -240,7 +238,7 @@
             var boardId = "${petsitterboardVO.petsitterVO.memberVO.id}";
             
             if($("#sdate").val() == ""){
-               alert("시작일을 선택해 주세요.");
+               	alert("시작일을 선택해 주세요.");
                 return false;
             }else if($("#edate").val() == ""){
                 alert("종료일을 선택해 주세요.");
@@ -248,13 +246,13 @@
             }
 
             if(confirm("예약 요청하시겠습니까?")){
-               if(id == boardId){
-                   alert("본인한테 예약 불가합니다.");
+            	if(id == boardId){
+                	alert("본인한테 예약 불가합니다.");
                     this.reset();
                     return false;
                }else if(id == null || id == ""){
-                     alert("로그인 후 예약 가능합니다.");
-                  location.href="${initParam.root}member_login.do";
+                    alert("로그인 후 예약 가능합니다.");
+                  	location.href="${initParam.root}member_login.do";
                     return false;
                }else if(rank == 'normal' || rank == 'petsitter'){
                     alert("펫등록 후 예약 가능합니다.");
@@ -267,11 +265,11 @@
          });
         
         $("#addressMap").click(function(){
-         //alert("${petsitterboardVO.petsitterVO.memberVO.address}");
-         var address = "${petsitterboardVO.petsitterVO.memberVO.address}";
-         var id = "${petsitterboardVO.petsitterVO.memberVO.id}";
-         
-         window.open("${initParam.root}mapDetail.do?id="+id+"&address="+address,"",
+	        //alert("${petsitterboardVO.petsitterVO.memberVO.address}");
+	        var address = "${petsitterboardVO.petsitterVO.memberVO.address}";
+	        var id = "${petsitterboardVO.petsitterVO.memberVO.id}";
+	         
+	        window.open("${initParam.root}mapDetail.do?id="+id+"&address="+address,"",
                "toolbar=yes,scrollbars=yes,top=100,left=600,width=740,height=760");
       });
    });
@@ -296,8 +294,6 @@
 		</div>
 	</div>
 </c:if>
-
-
 
 <div class="BJMainKING">
 <div class="BJMainDiv" style="margin-bottom: 10%;">
@@ -407,58 +403,48 @@
             	<div class="SBtextDiv3_tiltle">${petsitterboardVO.petsitterboard_title }</div><br>
                 <div class="SBtextDiv3_content">${petsitterboardVO.petsitterboard_contents }</div>
             </div><hr/> 
- 
- 
- <div style="margin-bottom: 5%; ">
- <!-- 평균 별점 -->
- <div  style=" height:45px; width:100%; font-size: 25px; vertical-align: middle;" >후기(${requestScope.reviewList.size() })
- <div style="float:right; margin-right:50%; margin-bottom: 2%;">  
-<span class="star-rating"  style="margin-top: 1%;">
-<span id="star-rating" style ="width:100%;"></span>
-</span>         
-   </div>
-         </div>	
- <!--   리뷰 리스트 -->
-
-
-<c:forEach items="${requestScope.reviewList }" varStatus="status" var="reviewList">
-<div class="BJReplyList" style=" width:100%; margin-left: 0%">
-<table  style="width:100%;">
-	<c:if test="${reviewList==null }">
-		<tr>
-	         <td colspan="5" align="center">
-	         <h3 style="color: #6EB9B5;">등록된 후기가 없습니다!!<br> 첫번 째 고객님이 되어주세요!! </h3>
-	         </td>
-	    </tr>
-	</c:if>
-
-      <tr>
-         <td align="left" >${reviewList.name}</td>
-        	<td >
-      	<span class="star-rating2" style="margin-left:75%;" >
-<span id="star-rating${status.index }" style ="width:${reviewList.star_rate*17}%;  float: left;"></span>
-</span> </td>
-      </tr>
-      <tr>
-      	<td colspan="2" align="left">${reviewList.content}</td>
-      </tr>
-      <tr>
-      	<td colspan="2" align="left">${reviewList.time_posted}</td>
-      
-      </tr>
-</table>
-<hr>
-</div >
-</c:forEach>
-</div>
-		
-		
-		
-		
-		
-		
-         	</div>
-      	</div>
+            
+			<div style="margin-bottom: 5%; ">
+			<!-- 평균 별점 -->
+				<div style=" height:45px; width:100%; font-size: 25px; vertical-align: middle;">
+					후기(${requestScope.reviewList.size()})
+					<div style="float:right; margin-right:50%; margin-bottom: 2%;">  
+						<span class="star-rating"  style="margin-top: 1%;">
+							<span id="star-rating" style ="width:100%;"></span>
+						</span>         
+					</div>
+				</div>	
+ 				<!-- 리뷰 리스트 -->
+				<c:forEach items="${requestScope.reviewList }" varStatus="status" var="reviewList">
+				<div class="BJReplyList" style=" width:100%; margin-left: 0%">
+					<table style="width:100%;">
+					<c:if test="${reviewList==null }">
+						<tr>
+							<td colspan="5" align="center">
+								<h3 style="color: #6EB9B5;">등록된 후기가 없습니다!!<br>첫번 째 고객님이 되어주세요!!</h3>
+							</td>
+						</tr>
+					</c:if>
+						<tr>
+							<td align="left" >${reviewList.name}</td>
+							<td>
+								<span class="star-rating2" style="margin-left:75%;" >
+									<span id="star-rating${status.index }" style="width:${reviewList.star_rate*17}%; float:left;"></span>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="left">${reviewList.content}</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="left">${reviewList.time_posted}</td>
+						</tr>
+					</table><hr>
+				</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
 	</div>
 </div>
 </div>
