@@ -35,6 +35,8 @@ public class PetServiceImpl implements PetService {
 				map.put("rank", "petmaster");
 			}else if(rank.equals("pre_petsitter")){
 				map.put("rank", "pre_petmaster");
+			}else if(rank.equals("petmaster")){
+				map.put("rank", "petmaster");
 			}
 			memberDAO.upgradeRank(map); 
 			//메세지 보내기
