@@ -36,12 +36,12 @@
 			</div>
 			<div class="panel-body">1:1 Q&A 게시판은 고객님의 궁금증을 풀어드리기 위한 공간입니다.</div>
 		</div>
-		<div class="well well-sm">Question Write</div>
+		<div class="well well-sm">질문 작성</div>
 	</div>
 	<div class="BJMain2Div">
 		<form id="registerQNAForm" action="interceptor_registerQNA.do">
 			<div class="BJWriteTableLine">
-				<div class="SBHrAllLine_1">
+				<div class="SBHrAllLine">
 					<table class="SBtable">
 						<tr>
 							<th style="width: 15%;">Title</th>
@@ -50,7 +50,7 @@
 						<tr>
 							<th>Question</th>
 							<td>
-								<textarea class="SBform-textarea" id="question" name="question" style="height: 400px; resize: none;"></textarea>
+								<textarea class="SBform-textarea" id="question" name="question" style="resize: none;" rows="15"></textarea>
 							</td>
 					</table>
 				</div>

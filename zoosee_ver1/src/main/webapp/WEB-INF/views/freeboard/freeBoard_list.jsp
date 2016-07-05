@@ -32,7 +32,7 @@
 						<tr>
 							<th style="width: 10%;">No</th>
 							<th style="width: 50%;">Title</th>
-							<th>Name</th>
+							<th>Writer</th>
 							<th>TimePosted</th>
 							<th>Hit</th>
 						</tr>
