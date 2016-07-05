@@ -53,6 +53,7 @@
 			<div class="SBHrAllLine_1">
 				<form id="memberlistForm">
 					<table class="table table-striped table-hover" id="memberlistTable">
+						<thead>
 						<tr>
 							<th style="width: 10%">Id</th>
 							<th style="width: 10%">Name</th>
@@ -60,15 +61,18 @@
 							<th style="width: 10%">Tel</th>
 							<th style="width: 10%">관리</th>
 						</tr>
-						<c:forEach items="${requestScope.listVO.list }" var="l">
-							<tr>
-								<td>${l.id}</td>
-								<td>${l.name}</td>
-								<td>${l.email}</td>
-								<td>${l.tel}</td>
-								<td><input type="button" name="deleteBtn" value="퇴사"></td>
-							</tr>
-						</c:forEach>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.listVO.list }" var="l">
+								<tr>
+									<td>${l.id}</td>
+									<td>${l.name}</td>
+									<td>${l.email}</td>
+									<td>${l.tel}</td>
+									<td><input type="button" name="deleteBtn" value="퇴사"></td>
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</form>
 			</div>

@@ -72,15 +72,15 @@
 				<div class="SBHrAllLine">
 					<table class="SBtable">
 						<tr>
-							<th style="width: 10%"><label style="font-weight: bold;">Title</label></th>
-							<th style="width: 45%">${qnaBoardVO.title}</th>
-							<th style="width: 20%"><label style="font-weight: bold;">Writer</label></th>
-							<th style="width: 25%">${qnaBoardVO.memberVO.name}(${qnaBoardVO.memberVO.id})</th>
+							<th style="width: 10%">Title</th>
+							<td style="width: 45%">${qnaBoardVO.title}</td>
+							<th style="width: 20%">Writer</th>
+							<td style="width: 25%">${qnaBoardVO.memberVO.name}(${qnaBoardVO.memberVO.id})</td>
 						</tr>
 						<tr>
 							<th colspan="2">Question</th>
-							<th><label style="font-weight: bold;">Posted Time</label></th>
-							<th>${qnaBoardVO.timePosted}</th>
+							<th>Posted Time</th>
+							<td>${qnaBoardVO.timePosted}</td>
 						</tr>
 						<tr>
 							<th colspan="4">
@@ -101,9 +101,9 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<th colspan="2"><label style="font-weight: bold;">Answer</label></th>
-									<th><label style="font-weight: bold;">Answered Time</label></th>
-									<th>${qnaBoardVO.timeAnswered}</th>
+									<th colspan="2">Answer</th>
+									<th>Answered Time</th>
+									<td>${qnaBoardVO.timeAnswered}</td>
 								</tr>
 								<tr>
 									<th colspan="4">

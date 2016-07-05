@@ -56,22 +56,27 @@
 			<div class="SBHrAllLine_1">
 				<form id="memberlistForm">
 					<table class="table table-striped table-hover" id="memberlistTable">
-						<tr>
-							<th style="width: 10%">Id</th>
-							<th style="width: 10%">Name</th>
-							<th style="width: 10%">e-Mail</th>
-							<th style="width: 10%">Tel</th>
-							<th style="width: 10%">관리</th>
-						</tr>
-						<c:forEach items="${requestScope.listVO.list }" var="l">
+						<thead>
 							<tr>
-								<td>${l.id}</td>
-								<td><a href="interceptor_admin_getPetmomInfo.do?id=${l.id}">${l.name}</a></td>
-								<td>${l.email}</td>
-								<td>${l.tel}</td>
-								<td><input type="button" name="deleteBtn" value="탈퇴"></td>
+								<th style="width: 10%">Id</th>
+								<th style="width: 10%">Name</th>
+								<th style="width: 10%">e-Mail</th>
+								<th style="width: 10%">Tel</th>
+								<th style="width: 10%">관리</th>
 							</tr>
-						</c:forEach>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.listVO.list }" var="l">
+								<tr>
+									<td>${l.id}</td>
+									<td><a
+										href="interceptor_admin_getPetmomInfo.do?id=${l.id}">${l.name}</a></td>
+									<td>${l.email}</td>
+									<td>${l.tel}</td>
+									<td><input type="button" name="deleteBtn" value="탈퇴"></td>
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</form>
 			</div>

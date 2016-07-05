@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 멤버  리스트 보여주는 화면 -->
 <script>
-	$(document).ready(function() {
+	$(document).ready(
+			function() {
 				;
 				$("#memberlistForm :input[name=deleteBtn]").click(
 						function() {
@@ -28,10 +29,14 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a> <a
+				class="BJA"
+				href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>
@@ -51,22 +56,26 @@
 			<div class="SBHrAllLine_1">
 				<form id="memberlistForm">
 					<table class="table table-striped table-hover" id="memberlistTable">
-						<tr>
-							<th style="width: 10%">Id</th>
-							<th style="width: 10%">Name</th>
-							<th style="width: 10%">e-Mail</th>
-							<th style="width: 10%">Tel</th>
-							<th style="width: 10%">관리</th>
-						</tr>
-						<c:forEach items="${requestScope.listVO.list }" var="l">
+						<thead>
 							<tr>
-								<td>${l.id}</td>
-								<td><a href="interceptor_admin_getMemberVO.do?id=${l.id}">${l.name}</a></td>
-								<td>${l.email}</td>
-								<td>${l.tel}</td>
-								<td><input type="button" name="deleteBtn" value="탈퇴"></td>
+								<th style="width: 10%">Id</th>
+								<th style="width: 10%">Name</th>
+								<th style="width: 10%">e-Mail</th>
+								<th style="width: 10%">Tel</th>
+								<th style="width: 10%">관리</th>
 							</tr>
-						</c:forEach>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.listVO.list }" var="l">
+								<tr>
+									<td>${l.id}</td>
+									<td><a href="interceptor_admin_getMemberVO.do?id=${l.id}">${l.name}</a></td>
+									<td>${l.email}</td>
+									<td>${l.tel}</td>
+									<td><input type="button" name="deleteBtn" value="탈퇴"></td>
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</form>
 			</div>

@@ -50,5 +50,5 @@
 </div>
 
 <div style="width:100%; height: 50px; margin-top: 2%;">
-	<input class="active WJbtn btn-block btn-info" style="width:5%; margin-left:48%; "onclick="history.go(-1)" type="button" value="확인" >   
+	<input class="active SBbtn btn-default" style="width:5%; margin-left:48%; "onclick="history.go(-1)" type="button" value="확인" >   
 </div>

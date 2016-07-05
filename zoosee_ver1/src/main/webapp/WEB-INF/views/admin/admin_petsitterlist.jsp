@@ -5,19 +5,33 @@
 	   
  -->
 <script>
-	$(document).ready(function() {
-		$("#petsitterlistForm :input[name=deleteBtn]").click(function() {
-			//alert($(this).parent().parent().children().eq(6).html("승인됨"));
-			if (confirm("펫시터를 추방하시겠습니까?")) {
-				$.ajax({
-					type : "post",
-					url : "interceptor_admin_deletePetsitter.do",
-					data : "petsitterNo="+ $(this).parent().parent().children().eq(0).text(),
-				});
-				$(this).parent().parent().children().eq(5).html("삭제됨")
-			}
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						$("#petsitterlistForm :input[name=deleteBtn]")
+								.click(
+										function() {
+											//alert($(this).parent().parent().children().eq(6).html("승인됨"));
+											if (confirm("펫시터를 추방하시겠습니까?")) {
+												$
+														.ajax({
+															type : "post",
+															url : "interceptor_admin_deletePetsitter.do",
+															data : "petsitterNo="
+																	+ $(this)
+																			.parent()
+																			.parent()
+																			.children()
+																			.eq(
+																					0)
+																			.text(),
+														});
+												$(this).parent().parent()
+														.children().eq(5).html(
+																"삭제됨")
+											}
+										});
+					});
 </script>
 
 <link rel="stylesheet" type="text/css"
@@ -26,10 +40,14 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a> <a
+				class="BJA"
+				href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>
@@ -51,23 +69,27 @@
 				<div class="SBHrAllLine_1">
 					<table class="table table-striped table-hover"
 						id="petsitterlistTable">
-						<tr>
-							<th style="width: 10%">Id</th>
-							<th style="width: 10%">Name</th>
-							<th style="width: 10%">e-Mail</th>
-							<th style="width: 10%">Tel</th>
-							<th style="width: 10%">관리</th>
-						</tr>
-						<c:forEach items="${requestScope.listVO.list }" var="l">
+						<thead>
 							<tr>
-								<td>${l.memberVO.id}</td>
-								<td><a
-									href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=recog">${l.memberVO.name}</a></td>
-								<td>${l.memberVO.email}</td>
-								<td>${l.memberVO.tel}</td>
-								<td><input type="button" name="deleteBtn" value="탈퇴"></td>
+								<th style="width: 10%">Id</th>
+								<th style="width: 10%">Name</th>
+								<th style="width: 10%">e-Mail</th>
+								<th style="width: 10%">Tel</th>
+								<th style="width: 10%">관리</th>
 							</tr>
-						</c:forEach>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.listVO.list }" var="l">
+								<tr>
+									<td>${l.memberVO.id}</td>
+									<td><a
+										href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=recog">${l.memberVO.name}</a></td>
+									<td>${l.memberVO.email}</td>
+									<td>${l.memberVO.tel}</td>
+									<td><input type="button" name="deleteBtn" value="탈퇴"></td>
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</div>
 			</div>

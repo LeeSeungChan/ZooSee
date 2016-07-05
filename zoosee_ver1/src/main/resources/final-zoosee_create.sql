@@ -5,9 +5,9 @@ DROP TABLE PET_MEMBER
 CREATE TABLE PET_MEMBER(
 	id varchar2(100) primary key,			-- 아이디
 	name varchar2(100) not null,			-- 이름
-	addressCode varchar2(100) not null,		-- 주소
-	address varchar2(100) not null,
-	detailAddress varchar2(100) not null,
+	addressCode varchar2(100) not null,		-- 우편번호
+	address varchar2(100) not null,				-- 주소
+	detailAddress varchar2(100) not null,		-- 상세주소
 	gender varchar2(100) not null,			-- 성별
 	email varchar2(100) not null,			-- 메일주소
 	password varchar2(100) not null,		-- 비밀번호
@@ -136,13 +136,13 @@ CREATE TABLE TRADEINFO(
 create sequence qnaboard_seq;
 -- 질문게시판(1:1)
 CREATE TABLE QNABOARD(
-	qnaboard_no number primary key not null,
-	qnaboard_title varchar2(100) not null,
-	qnaboard_question clob not null,
-	time_posted date not null,
-	time_answered date,
-	qnaboard_answer clob,
-	id varchar2(100) not null,
+	qnaboard_no number primary key not null, 	--게시물 번호
+	qnaboard_title varchar2(100) not null,		--제목
+	qnaboard_question clob not null,				--질문
+	time_posted date not null,					--작성시간
+	time_answered date,							--답변시간
+	qnaboard_answer clob,						--답변
+	id varchar2(100) not null,					--아이디
 	constraint fk_qnaboard_id foreign key(id) references PET_MEMBER(id) on delete cascade
 )  
 

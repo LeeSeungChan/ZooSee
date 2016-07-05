@@ -50,17 +50,17 @@
 				<div class="SBHrAllLine">
 					<table class="BJFreeBoardWriteTableDiv" >
 						<tr>
-							<td>제목</td>
+							<th>제목</th>
 							<td>
 								<input class="BJform-control2" id="focusedInput" type="text" name="freeBoardTitle" >
 							</td> 
 						</tr>
 						<tr>
-							<td>이름</td>
+							<th>이름</th>
 							<td style="float: left; margin-left: 3%; ">${sessionScope.mvo.name }</td>
 						</tr>
 						<tr>
-							<td>내용</td>
+							<th>내용</th>
 							<td  align="center" colspan="2"><textarea   style="resize:none;" name="freeBoardContents" id="inputLarge" class="BJform-controlBig input-lg" rows="10" ></textarea> </td>
 						</tr>
 						<!-- <tr>

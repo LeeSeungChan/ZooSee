@@ -30,11 +30,14 @@
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine_1">
 				<table class="table table-striped table-hover" style="width: 100%;">
+					<thead>
 					<tr>
 						<th style="width: 50%">Question</th>
 						<th style="width: 20%">Answer</th>
 						<th style="width: 30%">Posted Time</th>
 					</tr>
+					</thead>
+					<tbody>
 					<c:forEach items="${listVO.list}" var="qnaBoard">
 						<tr>
 							<td>
@@ -50,6 +53,7 @@
 							<td>${qnaBoard.timePosted}</td>
 						</tr>
 					</c:forEach>
+					</tbody>
 				</table>
 			</div>
 		</div>

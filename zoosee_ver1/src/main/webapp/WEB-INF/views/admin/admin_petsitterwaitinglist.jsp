@@ -8,20 +8,34 @@
 	 펫시터 대기 리스트에서 각 이름을 클릭시 그 사람의 펫시터 신청서를 볼 수 있어야함
  -->
 <script>
-	$(document).ready(function() {
+	$(document)
+			.ready(
+					function() {
 						;
-		$("#recogForm :input[name=recogBtn]").click(function() {
-			//alert($(this).parent().parent().children().eq(6).html("승인됨"));
-			if (confirm("승인하시겠습니까?")) {
-				$.ajax({
-					type : "post",
-					url : "interceptor_admin_recognitionPetsitter.do",
-					data : "petsitterNo="+ $(this).parent().parent().children().eq(0).text(),
-				});
-				$(this).parent().parent().children().eq(5).html("승인됨")
-			}
-		});
-	});
+						$("#recogForm :input[name=recogBtn]")
+								.click(
+										function() {
+											//alert($(this).parent().parent().children().eq(6).html("승인됨"));
+											if (confirm("승인하시겠습니까?")) {
+												$
+														.ajax({
+															type : "post",
+															url : "interceptor_admin_recognitionPetsitter.do",
+															data : "petsitterNo="
+																	+ $(this)
+																			.parent()
+																			.parent()
+																			.children()
+																			.eq(
+																					0)
+																			.text(),
+														});
+												$(this).parent().parent()
+														.children().eq(5).html(
+																"승인됨")
+											}
+										});
+					});
 </script>
 <link rel="stylesheet" type="text/css"
 	href="${initParam.root}resources/css/sb.css">
@@ -29,10 +43,14 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a> <a
+				class="BJA"
+				href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
+			<a class="BJA"
+				href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>
@@ -51,34 +69,38 @@
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine_1">
 				<c:choose>
-				<c:when test="${empty listVO.list }">
-					<div style="margin-bottom: 3%">펫시터 승인을 기다리는 회원이 없습니다.</div>
-				</c:when>
-				<c:otherwise>
-				<form id="recogForm">
-					<table class="table table-striped table-hover" id="recogTable">
-						<tr>
-							<th style="width: 10%">Pet Sitter No</th>
-							<th style="width: 10%">Id</th>
-							<th style="width: 10%">Name</th>
-							<th style="width: 10%">e-Mail</th>
-							<th style="width: 10%">Tel</th>
-							<th style="width: 10%">관리</th>
-						</tr>
-						<c:forEach items="${requestScope.listVO.list }" var="l">
-							<tr>
-								<td>${l.petsitterNo}</td>
-								<td>${l.memberVO.id}</td>
-								<td><a
-									href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=nonrecog">${l.memberVO.name}</a></td>
-								<td>${l.memberVO.email}</td>
-								<td>${l.memberVO.tel}</td>
-								<td><input type="button" name="recogBtn" value="승인"></td>
-							</tr>
-						</c:forEach>
-					</table>
-				</form>
-				</c:otherwise>
+					<c:when test="${empty listVO.list }">
+						<div style="margin-bottom: 3%">펫시터 승인을 기다리는 회원이 없습니다.</div>
+					</c:when>
+					<c:otherwise>
+						<form id="recogForm">
+							<table class="table table-striped table-hover" id="recogTable">
+								<thead>
+									<tr>
+										<th style="width: 10%">Pet Sitter No</th>
+										<th style="width: 10%">Id</th>
+										<th style="width: 10%">Name</th>
+										<th style="width: 10%">e-Mail</th>
+										<th style="width: 10%">Tel</th>
+										<th style="width: 10%">관리</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${requestScope.listVO.list }" var="l">
+										<tr>
+											<td>${l.petsitterNo}</td>
+											<td>${l.memberVO.id}</td>
+											<td><a
+												href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=nonrecog">${l.memberVO.name}</a></td>
+											<td>${l.memberVO.email}</td>
+											<td>${l.memberVO.tel}</td>
+											<td><input type="button" name="recogBtn" value="승인"></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</form>
+					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
