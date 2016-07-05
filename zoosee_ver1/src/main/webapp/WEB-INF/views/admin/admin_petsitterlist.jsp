@@ -5,33 +5,18 @@
 	   
  -->
 <script>
-	$(document)
-			.ready(
-					function() {
-						$("#petsitterlistForm :input[name=deleteBtn]")
-								.click(
-										function() {
-											//alert($(this).parent().parent().children().eq(6).html("승인됨"));
-											if (confirm("펫시터를 추방하시겠습니까?")) {
-												$
-														.ajax({
-															type : "post",
-															url : "interceptor_admin_deletePetsitter.do",
-															data : "petsitterNo="
-																	+ $(this)
-																			.parent()
-																			.parent()
-																			.children()
-																			.eq(
-																					0)
-																			.text(),
-														});
-												$(this).parent().parent()
-														.children().eq(5).html(
-																"삭제됨")
-											}
-										});
-					});
+$(document).ready(function() {
+	$("#petsitterlistForm :input[name=deleteBtn]").click(function() {
+		if (confirm("펫시터를 추방하시겠습니까?")) {
+			$.ajax({
+				type : "post",
+				url : "interceptor_admin_deletePetsitter.do",
+				data : "id="+ $(this).parent().parent().children().eq(0).text(),
+			});
+			$(this).parent().parent().children().eq(4).html("삭제됨");
+		}
+	});					
+});
 </script>
 
 <link rel="stylesheet" type="text/css"
@@ -86,7 +71,7 @@
 										href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=recog">${l.memberVO.name}</a></td>
 									<td>${l.memberVO.email}</td>
 									<td>${l.memberVO.tel}</td>
-									<td><input type="button" name="deleteBtn" value="탈퇴"></td>
+									<td><input type="button" class="BJbtn2" name="deleteBtn" value="탈퇴"></td>
 								</tr>
 							</c:forEach>
 						</tbody>

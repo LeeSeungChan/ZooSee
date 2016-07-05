@@ -31,7 +31,7 @@
 	<form name="updateForm" action="interceptor_petsitter_update.do"
 		style="text-align: center;" method="post"
 		enctype="multipart/form-data" id="updateForm">
-		<h3 align="center">ZOOSEE 돌보미 정보</h3>
+		<h3 align="center">ZOOSEE 펫시터 정보</h3>
 		<br> <br>
 		<div class="HGDiv">
 			<br>
@@ -39,7 +39,7 @@
 				<img id="UploadedImg2" style="border: 3px solid #DFDFDF;"
 					src="${petsitterVO.petsitterImg}"
 					class="center-block img-circle img-responsive" width="90%"
-					height="90%"> *돌보미 사진
+					height="90%"> *펫시터 사진
 			</div>
 			<div style="margin: 0 auto; width: 500px; height: 500px;"
 				align="center">
@@ -51,7 +51,7 @@
 			<br>
 			<div class="form-group"
 				style="width: 200px; text-align: center; margin-left: auto; margin-right: auto;">
-				<label class="control-label">*돌보미님 아이디</label>
+				<label class="control-label">*펫시터님 아이디</label>
 				<div class="input-group">
 					<span class="input-group-addon">ID</span> <input type="text"
 						class="form-control"
@@ -63,7 +63,7 @@
 			<br>
 			<div class="form-group"
 				style="width: 200px; text-align: center; margin-left: auto; margin-right: auto;">
-				<label class="control-label">*돌보미님 이름</label>
+				<label class="control-label">*펫시터님 이름</label>
 				<div class="input-group">
 					<span class="input-group-addon">NAME</span> <input type="text"
 						class="form-control"

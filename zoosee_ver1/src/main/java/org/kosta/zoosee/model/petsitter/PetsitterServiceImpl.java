@@ -112,8 +112,23 @@ public class PetsitterServiceImpl implements PetsitterService {
 	}
 
 	@Override
-	public void deletePetsitter(int petsitterNo) {
-		petsitterDAO.deletePetsitter(petsitterNo);
+	public void deletePetsitter(String id) {
+		petsitterDAO.deletePetsitter(id);
+		
+		// 멤버 등급
+				String rank = memberDAO.findRank(id);
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("id", id);
+				String inputRank = "rank";
+				if (rank.equals("petsitter")) {// 멤버의 rank가 petsitter 이면
+													// normal로 update
+					inputRank = "normal";
+				} else if (rank.equals("petmaster")) {// 멤버의 rank가 petmaster이면
+															// petmom로 update
+					inputRank = "petmom";
+				}
+				map.put("rank", inputRank);
+				memberDAO.upgradeRank(map);
 	}
 
 	@Override

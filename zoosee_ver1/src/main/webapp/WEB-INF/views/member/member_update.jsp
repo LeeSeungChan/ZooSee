@@ -126,7 +126,7 @@
                test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
                <a class="BJA"
                   href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}">
-                  돌보미게시글등록</a>
+                  펫시터게시글등록</a>
                <a class="BJA"
                   href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do">내
                   글 보기</a>

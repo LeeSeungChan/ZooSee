@@ -15,7 +15,7 @@ public interface PetsitterDAO {
 
 	public abstract PetsitterVO getPetsitterVO(int petsitterNo);
 
-	public abstract void deletePetsitter(int petsitterNo);
+	public abstract void deletePetsitter(String id);
 
 	public abstract PetsitterVO findPetsitterById(String id);
 

@@ -287,7 +287,7 @@
 				<a class="BJA" href="${initParam.root}interceptor_member_detail.do">마이페이지</a>
 				<a class="BJA" href="${initParam.root}interceptor_member_update.do">회원정보수정</a>
 				<c:if test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
-			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 돌보미게시글등록</a>
+			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 펫시터게시글등록</a>
 			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
 			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardUpdateView.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}">내 글 수정</a>
 			       <a class="BJA" id="deleteId" href="#">내 글 삭제</a>
@@ -304,11 +304,11 @@
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">돌보미 게시판</h3>
+				<h3 class="panel-title">펫시터 게시판</h3>
 			</div>
-			<div class="panel-body">고객님의 소중한 반려견을 위해 임시보호를 지원하는 돌보미 게시판입니다.</div>
+			<div class="panel-body">고객님의 소중한 반려견을 위해 임시보호를 지원하는 펫시터 게시판입니다.</div>
 		</div>
-		<div class="well well-sm">돌보미 정보 확인 및 예약</div>
+		<div class="well well-sm">펫시터 정보 확인 및 예약</div>
 	</div>
 	<div class="BJMain2Div">
 	<form method="post" action="interceptor_reserveRegister.do" id="reserveRegForm">
@@ -398,7 +398,7 @@
 		</div>
         <div class="SBmainDivImg2" style="border-top: 1px solid #AFAFAF;">
         	<div class="SBtextDiv3">
-            	<div class="SBtextDiv3_tiltle">${memberVO.name}돌보미소개</div><br>
+            	<div class="SBtextDiv3_tiltle">${memberVO.name}펫시터소개</div><br>
             	<div class="SBtextDiv3_content">${petsitterboardVO.petsitterVO.memberVO.existence}</div>
             </div>
         </div>

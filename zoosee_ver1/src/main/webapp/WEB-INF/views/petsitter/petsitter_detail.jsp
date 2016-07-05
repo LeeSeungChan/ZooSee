@@ -55,7 +55,7 @@ $( ".star_rating a" ).click(function() {
 </div>	
 <h3 style="color: #6EB9B5; margin-left: 10%;">${petsitterboardVO.petsitterboard_title }</h3> 
 
-돌보미이름 :&nbsp;${petsitterVO.memberVO.name }<br>
+펫시터이름 :&nbsp;${petsitterVO.memberVO.name }<br>
 <img src="${initParam.root}resources/image/location.png">  주소 어쩌고저쩌고(입력) <br>
 ${petsitterVO.memberVO.existence }<br>
 제공가능한 서비스:&nbsp;${petsitterVO.service }<br>

@@ -79,12 +79,12 @@
 
 <div class="BJMainKING">
 <br><br>
-<h3 align="center">ZOOSEE 돌보미 신청서</h3><br><br>
+<h3 align="center">ZOOSEE 펫시터 신청서</h3><br><br>
  
 <div style="text-align: center; text-align: center; width: 30%; margin-left: 35%" >
 <blockquote>
   <p>*지원하기전 확인해주세요!<br>
-ZOOSEE 는 그 어떤 스킬이나 역량보다 "동물에 대한 진심과 사랑"을<br> 최우선으로 돌보미분을 모시고 있습니다.<br>
+ZOOSEE 는 그 어떤 스킬이나 역량보다 "동물에 대한 진심과 사랑"을<br> 최우선으로 펫시터분을 모시고 있습니다.<br>
 따라서 강아지에 대한 진심을 담아 지원서를 진정성있게 <br>작성해주시면 감사하겠습니다!<br><br>
 *이런 분들은 지원이 어려워요<br>
 1. 미성년자 / 2. 임산부 /  3. 열살미만의 아동과 함께 거주하시는 분 <br>	  4. 한달 20일 이상 활동이 불가능한 경우<br><br>
@@ -162,13 +162,13 @@ ZOOSEE 는 그 어떤 스킬이나 역량보다 "동물에 대한 진심과 사�
          <img id="UploadedImg2" style="border: 3px solid #DFDFDF;"
             src="${initParam.root}resources/image/Pzoosee.png"
             class="center-block img-circle img-responsive" width="90%" height="90%">
-            *돌보미 사진
+            *펫시터 사진
          <input id="petsitter_img" name="file[1]" type="file" onchange="readURL2(this)">
   </div>
 
 <hr>
 
-*돌보미는 지원자 '본인에 한해서만' 활동 가능합니다. 확인하셨나요? <br>
+*펫시터는 지원자 '본인에 한해서만' 활동 가능합니다. 확인하셨나요? <br>
 <input type="radio" name="checkedAll" >네 확인했습니다! <br><br>
 <input type="submit" class="active btn btn-block btn-default" value="신청하기">
 <br><br>

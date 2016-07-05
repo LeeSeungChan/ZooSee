@@ -41,8 +41,8 @@ public class PetsitterDAOImpl implements PetsitterDAO {
 	}
 
 	@Override
-	public void deletePetsitter(int petsitterNo) {
-		template.selectOne("petsitter.deletePetsitter",petsitterNo);
+	public void deletePetsitter(String id) {
+		template.selectOne("petsitter.deletePetsitter",id);
 	}
 
 	@Override

@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="deletePetsitter" >
-		delete from PETSITTER where petsitterNo=#{value}
+		delete from PETSITTER where id=#{value}
 	</delete>
  	
  	<update id="update" parameterType="petsitterVO">

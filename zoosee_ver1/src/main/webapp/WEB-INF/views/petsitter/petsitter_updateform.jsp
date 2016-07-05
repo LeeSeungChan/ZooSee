@@ -163,12 +163,12 @@
 	<div class="BJMainKING">
 	<form name="updateForm" action="interceptor_petsitter_update.do" style="text-align: center;" method="post"
 		enctype="multipart/form-data" id="updateForm">
-		<h3 align="center">ZOOSEE 돌보미 정보수정</h3><br> <br>
+		<h3 align="center">ZOOSEE 펫시터 정보수정</h3><br> <br>
 		<div style="text-align: center; text-align: center; width: 30%; margin-left: 35%">
 			<blockquote>
 				<p>
 					*수정하기전 확인해주세요!<br> 회원정보 수정시 일반등급의 회원으로 재조정되며<br> 관리자의 승인을
-					다시 받아야 합니다.<br> <br> *승인신청은 자동으로 되며 관리자 승인 후 돌보미게시판을 이용하실
+					다시 받아야 합니다.<br> <br> *승인신청은 자동으로 되며 관리자 승인 후 펫시터게시판을 이용하실
 					수 있습니다!<br> <br>
 				</p>
 			</blockquote>
@@ -177,7 +177,7 @@
 		<div class="HGDiv">
 			<br>
 			<div class="form-group" style="width: 200px; text-align: center; margin-left: auto; margin-right: auto;">
-				<label class="control-label">*돌보미님 아이디</label>
+				<label class="control-label">*펫시터님 아이디</label>
 				<div class="input-group">
 					<span class="input-group-addon">ID</span> 
 					<input type="text" class="form-control" style="height: 60%; background-color: #F4F4F4;" id="name" 
@@ -185,7 +185,7 @@
 				</div>
 			</div><br>
 			<div class="form-group" style="width: 200px; text-align: center; margin-left: auto; margin-right: auto;">
-				<label class="control-label">*돌보미님 이름</label>
+				<label class="control-label">*펫시터님 이름</label>
 				<div class="input-group">
 					<span class="input-group-addon">NAME</span> 
 					<input type="text" class="form-control" style="height: 60%; background-color: #F4F4F4;" id="name"
@@ -227,7 +227,7 @@
 		
 			<div style="margin: 0 auto; width: 500px; height: 500px;" align="center">
 				<img id="UploadedImg2" style="border: 3px solid #DFDFDF;" src="${petsitterVO.petsitterImg}"
-					class="center-block img-circle img-responsive" width="90%" height="90%"> *돌보미 사진 <input id="petsitter_img"
+					class="center-block img-circle img-responsive" width="90%" height="90%"> *펫시터 사진 <input id="petsitter_img"
 					name="file[1]" type="file" onchange="readURL2(this)">
 			</div>
 			<hr>

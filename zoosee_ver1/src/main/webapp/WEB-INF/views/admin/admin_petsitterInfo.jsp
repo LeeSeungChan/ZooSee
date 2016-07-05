@@ -35,12 +35,12 @@
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h3 class="panel-title">돌보미 상세보기</h3>
+				<h3 class="panel-title">펫시터 상세보기</h3>
 			</div>
-			<div class="panel-body">돌보미 ${mvo.name }님의 상세정보를 보여 드리기 위한
+			<div class="panel-body">펫시터 ${mvo.name }님의 상세정보를 보여 드리기 위한
 				공간입니다.</div>
 		</div>
-		<div class="well well-sm">돌보미 ${mvo.name }님의 상세정보</div>
+		<div class="well well-sm">펫시터 ${mvo.name }님의 상세정보</div>
 	</div>
 	<div style="margin-left: 10%; width: 80%; height: 600px;">
 		<!-- 왼쪽 -->

@@ -73,7 +73,7 @@
 										href="interceptor_admin_getPetmomInfo.do?id=${l.id}">${l.name}</a></td>
 									<td>${l.email}</td>
 									<td>${l.tel}</td>
-									<td><input type="button" name="deleteBtn" value="탈퇴"></td>
+									<td><input type="button" class="BJbtn2" name="deleteBtn" value="탈퇴"></td>
 								</tr>
 							</c:forEach>
 						</tbody>

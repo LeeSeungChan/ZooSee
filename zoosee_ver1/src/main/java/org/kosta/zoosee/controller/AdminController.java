@@ -170,8 +170,8 @@ public class AdminController {
 	/* 관리자 페이지 - 펫시터 추방 */
 	@RequestMapping(value = "interceptor_admin_deletePetsitter.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void deletePetsitter(int petsitterNo) {
-		petsitterService.deletePetsitter(petsitterNo);
+	public void deletePetsitter(String id) {
+		petsitterService.deletePetsitter(id);
 	}
 
 	/* 관리자 페이지 - 펫시터 인증 */

@@ -94,7 +94,7 @@
 												href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=nonrecog">${l.memberVO.name}</a></td>
 											<td>${l.memberVO.email}</td>
 											<td>${l.memberVO.tel}</td>
-											<td><input type="button" name="recogBtn" value="승인"></td>
+											<td><input type="button"  class="BJbtn2"name="recogBtn" value="승인"></td>
 										</tr>
 									</c:forEach>
 								</tbody>
