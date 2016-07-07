@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
+
 <script src="${initParam.root}resources/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	
@@ -9,26 +11,24 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_pet_list.do">펫목록</a>
-			<a class="BJA" href="${initParam.root}interceptor_pet_register.do">펫등록</a>
-			<c:choose>
-				<c:when test="${mvo.rank=='petsitter' || mvo.rank=='petmaster'}">
+			<a class="BJA" href="${initParam.root}pet_list.do">펫목록</a>
+			<a class="BJA" href="${initParam.root}pet_register.do">펫등록</a>
+				<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
 					<a class="BJA"
-						href="${initParam.root}interceptor_petsitter_updateform.do">펫시터
+						href="${initParam.root}ps_petsitter_updateform.do">펫시터
 						정보 수정</a>
 					<a class="BJA"
-						href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터
+						href="${initParam.root}ps_petsitter_info.do?id=<sec:authentication property="principal.id"/>">펫시터
 						정보 보기</a>
-				</c:when>
-				<c:otherwise>
+				</sec:authorize>
+				<sec:authorize ifAnyGranted="ROLE_MEMBER,ROLE_PETMOM">
 					<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
-				</c:otherwise>
-			</c:choose>
+				</sec:authorize>
 		</div>
 	</div>
 </div>
 <div class="BJMainKING">
-	<form name="updateForm" action="interceptor_petsitter_update.do"
+	<form name="updateForm" action="ps_petsitter_update.do"
 		style="text-align: center;" method="post"
 		enctype="multipart/form-data" id="updateForm">
 		<h3 align="center">ZOOSEE 펫시터 정보</h3>

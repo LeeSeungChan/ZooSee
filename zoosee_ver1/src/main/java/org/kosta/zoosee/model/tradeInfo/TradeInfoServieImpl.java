@@ -12,8 +12,10 @@ import org.kosta.zoosee.model.member.MemberDAO;
 import org.kosta.zoosee.model.message.MessageDAO;
 import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.pet.PetDAO;
+import org.kosta.zoosee.model.pet.PetService;
 import org.kosta.zoosee.model.petsitter.PetsitterDAO;
 import org.kosta.zoosee.model.reserve.ReserveDAO;
+import org.kosta.zoosee.model.reserve.ReserveService;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetCalendarVO;
 import org.kosta.zoosee.model.vo.PetVO;
@@ -21,6 +23,7 @@ import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
 import org.kosta.zoosee.model.vo.ReserveVO;
 import org.kosta.zoosee.model.vo.TradeInfoVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,6 +46,11 @@ public class TradeInfoServieImpl implements TradeInfoServie{
 	private MessageDAO messageDAO;
 	@Resource
 	private MessageService messageService;
+	@Resource
+	private PetService petService;
+	@Resource
+	private ReserveService reserveService;
+	
 
 	@Override
 	public void registerTradeInfo(TradeInfoVO tradeInfoVO, int reserve_no, String petmomId, String petsitterId) {
@@ -55,14 +63,15 @@ public class TradeInfoServieImpl implements TradeInfoServie{
  		PetsitterboardVO petsitterboardVO = boardDAO.getBoardVOByPetsitterId(petsitterId); // petsitterId로 펫보드 정보 받아오기
  		petsitterboardVO.setPetsitterVO(petsitterVO);
 
- 		PetVO petVO = petDAO.getPetVO(petmomId); // 펫맘 id로 펫정보 받아오기
+ 		List<PetVO> petVOList = petDAO.getPetVOList(petmomId);
+ 		PetVO petVO = petVOList.get(0); // 펫맘 id로 펫정보 받아오기
  		petVO.setMemberVO(memberVO);
-
- 		ReserveVO reserveVO = reserveDAO.getReserveVO(reserve_no); // reserve_no로 예약정보 받아오기
+ 		List<Integer> petNolist = petService.getPetNo(memberVO.getId());
+		ReserveVO reserveVO = reserveService.getReserveVO(reserve_no,petNolist.get(0));
  		reserveVO.setMemberVO(memberVO);
  		reserveVO.setPetVO(petVO);
  		reserveVO.setPetsitterboardVO(petsitterboardVO);
-
+ 		
  		List<PetCalendarVO> petCalendarList = petCalendarDAO.getReserveDate(reserve_no); // reserve_no로 예약 날짜(달력) 정보
 
  		tradeInfoVO.setTradeSdate(petCalendarList.get(0).getPet_calDate());
@@ -72,33 +81,12 @@ public class TradeInfoServieImpl implements TradeInfoServie{
  		
  		//System.out.println(tradeInfoVO.toString());
  		int i=tradeInfoDAO.registerTradeInfo(tradeInfoVO);
- 		
- 		// 펫시터가 거래 승낙시 RESERVE의 reserve_recog를 1로 없데이트
- 		//System.out.println(reserveVO.getReserve_no());
- 		//reserveDAO.updateReserveRecog(reserveVO.getReserve_no());
+
 		if (i == 1) {
 			//메세지-예약자(펫맘)
 			messageService.sendMessageOnServer(petmomId, 13);
-			/*String title = "[알람] 예약 입금 확인";
-			StringBuilder content = new StringBuilder(" 돌보미 예약에 입금하셨습니다.");
-			content.append(" 거래가 성사되었습니다. 거래목록을 통해 내역을 확인하실 수 있습니다.");
-			content.append(" 이용해주셔서 감사합니다.");
-			MessageVO message = new MessageVO();
-			message.setTitle(title);
-			message.setContent(content.toString());
-			message.setId(petmomId);
-			messageDAO.insertMessage(message);*/
 			//메세지-펫시터
 			messageService.sendMessageOnServer(petsitterId, 14);
-			/*String title2 = "[알람] 펫맘 입금 확인";
-			StringBuilder content2 = new StringBuilder(" 예약 입금되셨습니다.");
-			content2.append(" 거래가 성사되었습니다. 거래목록을 통해 내역을 확인하실 수 있습니다.");
-			content2.append(" 감사합니다.");
-			MessageVO message2 = new MessageVO();
-			message2.setTitle(title2);
-			message2.setContent(content2.toString());
-			message2.setId(petsitterId);
-			messageDAO.insertMessage(message2);*/
 		}
 	}
 
@@ -124,6 +112,10 @@ public class TradeInfoServieImpl implements TradeInfoServie{
 
 			list = list3;
 		}
+		for (TradeInfoVO v : list) {
+			System.out.println(v.toString());
+		}
+		
  		return list;
 	}
 

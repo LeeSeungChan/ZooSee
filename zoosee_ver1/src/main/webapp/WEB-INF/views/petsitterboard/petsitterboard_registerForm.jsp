@@ -6,7 +6,7 @@
 		var flag = "${flag}";
 		if(flag == "true"){
 			alert("이미 등록한 회원입니다.");
-			location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do";
+			location.href="${initParam.root}psboard_petsitterboard_myPetsitterBoard.do";
 		}
 		
 		// 공란체크하기
@@ -75,11 +75,11 @@
 <div class="BJHeaderLayout0">
 <div class="BJHeaderLayout" >
 <div class="BJHeader2" >
-	<a class="BJA" href="${initParam.root}interceptor_member_detail.do">마이페이지</a>
-	<a class="BJA" href="${initParam.root}interceptor_member_update.do">회원정보수정</a>
+	<a class="BJA" href="${initParam.root}member_detail.do">마이페이지</a>
+	<a class="BJA" href="${initParam.root}member_update.do">회원정보수정</a>
    	<c:if test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
-       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 펫시터게시글등록</a>
-       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
+       <a class="BJA" href="${initParam.root}petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 펫시터게시글등록</a>
+       <a class="BJA" href="${initParam.root}petsitterboard_myPetsitterBoard.do">내 글 보기</a>
       </c:if>
 	</div>
 </div>
@@ -96,7 +96,7 @@
 		<div class="well well-sm">펫시터 게시물 등록</div>
 	</div>
 	<div class="BJMain2Div">
-		<form method="post" action="interceptor_petsitterboardRegister.do"
+		<form method="post" action="petsitterboardRegister.do"
 			id="petsitterboardregForm">
 			<input type="hidden" name="petsitterNo" value="${petsitterVO.petsitterNo}" />
 			<div class="BJWriteTableLine">

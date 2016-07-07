@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_message_list.do">전체 메세지 목록</a> 
-			<a class="BJA" href="${initParam.root}interceptor_message_uncheckedlist.do">안 읽은 메세지 목록</a>
+			<a class="BJA" href="${initParam.root}message_list.do">전체 메세지 목록</a> 
+			<a class="BJA" href="${initParam.root}message_uncheckedlist.do">안 읽은 메세지 목록</a>
 		</div>
 	</div>
 </div>
@@ -18,7 +19,7 @@
 				<h3 class="panel-title">MESSAGE</h3>
 			</div>
 			<div class="panel-body">
-				${sessionScope.mvo.name } 님의 메세지입니다.
+				<sec:authentication property="principal.name"/> 님의 메세지입니다.
 				<div style="text-align: right;"></div>
 			</div>
 		</div>

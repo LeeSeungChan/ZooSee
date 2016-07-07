@@ -10,12 +10,12 @@
 			if ("${qnaBoardVO.answer}" != answer) {
 				if ("${qnaBoardVO.answer}" == "") {
 					if (confirm("답변을 등록하시겠습니까?")) {
-						location.replace("${initParam.root}interceptor_admin_update_answer.do?memberVO.id=${qnaBoardVO.memberVO.id}&boardNo=${qnaBoardVO.boardNo}&answer="+answer);
+						location.replace("${initParam.root}admin_update_answer.do?memberVO.id=${qnaBoardVO.memberVO.id}&boardNo=${qnaBoardVO.boardNo}&answer="+answer);
 					}
 				} else {
 					if (answer != "") {
 						if (confirm("답변을 수정하시겠습니까?")) {
-							location.replace("${initParam.root}interceptor_admin_update_answer.do?memberVO.id=${qnaBoardVO.memberVO.id}&boardNo=${qnaBoardVO.boardNo}&answer="+answer);
+							location.replace("${initParam.root}admin_update_answer.do?memberVO.id=${qnaBoardVO.memberVO.id}&boardNo=${qnaBoardVO.boardNo}&answer="+answer);
 						}
 					} else {
 						alert("답변을 공란으로 입력할 수 없습니다.");
@@ -34,7 +34,7 @@
 		});
 		
 		$("#check").click(function() {
-			location.replace("${initParam.root}interceptor_admin_qna_list.do?when=all");
+			location.replace("${initParam.root}admin_qna_list.do?when=all");
 		});
 	});
 </script>
@@ -45,11 +45,11 @@
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_list.do?when=all">모든
+				href="${initParam.root}admin_qna_list.do?when=all">모든
 				Q&A 목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_list.do?when=nonAnswer">답변
+				href="${initParam.root}admin_qna_list.do?when=nonAnswer">답변
 				미등록 Q&A 목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_findbyid.do">아이디로
+				href="${initParam.root}admin_qna_findbyid.do">아이디로
 				Q&A 검색</a>
 
 

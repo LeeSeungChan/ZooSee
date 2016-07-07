@@ -20,10 +20,10 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_list.do">자유게시판</a> 
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_write.do" >자유게시판 글등록</a>
-			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a> 
-			<a class="BJA" href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+			<a class="BJA" href="${initParam.root}freeBoard_list.do">자유게시판</a> 
+			<a class="BJA" href="${initParam.root}freeBoard_write.do" >자유게시판 글등록</a>
+			<a class="BJA" href="${initParam.root}qna_list.do">Q&A게시판</a> 
+			<a class="BJA" href="${initParam.root}qna_board_register.do">Q&A 등록</a>
 		</div>
 	</div>
 </div>
@@ -42,7 +42,7 @@
 	<div class="BJMain2Div" >
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine">
-				<form method="post" id="updateForm" action="${initParam.root}interceptor_freeBoard_updateFreeBoard.do?freeBoardNo=${requestScope.freeBoardVO.freeBoardNo}">
+				<form method="post" id="updateForm" action="${initParam.root}freeBoard_updateFreeBoard.do?freeBoardNo=${requestScope.freeBoardVO.freeBoardNo}">
 				<div class="form-group" >
 				<table class="BJFreeBoardWriteTableDiv">
 					<tr>
@@ -53,18 +53,12 @@
 					</tr>
 					<tr >
 						<td>이름</td>
-						<td style="float: left; margin-left: 3%; ">${sessionScope.mvo.name }</td>
+						<td style="float: left; margin-left: 3%; ">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.name}</td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td  align="center" colspan="2"> <textarea  style="resize:none;" class="BJform-controlBig input-lg" name="freeBoardContents" id="inputLarge" class="BJform-controlBig input-lg" rows="10"  >${freeBoardVO.freeBoardContents }</textarea></td>
 					</tr>
-					<!-- <tr>
-						<td></td>
-						<td style="margin-left:40%; " colspan="2">
-							<input class="BJbtn btn-default" type="submit" value="수정" >
-						</td>
-					</tr> -->
 				</table>
 				</div>
 			</div>	

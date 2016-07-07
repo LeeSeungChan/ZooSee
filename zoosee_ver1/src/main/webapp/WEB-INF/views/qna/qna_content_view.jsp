@@ -5,13 +5,13 @@
 	$(document).ready(function() {
 		$("#update").click(function() {
 			if (confirm("수정하시겠습니까?")) {
-				location.replace("interceptor_qna_update.do?boardNo=${qnaBoardVO.boardNo}");
+				location.replace("qna_update.do?boardNo=${qnaBoardVO.boardNo}");
 			}
 		});
 		
 		$("#delete").click(function() {
 			if (confirm("삭제하겠습니까?")) {
-				location.replace("interceptor_qna_delete.do?boardNo=${qnaBoardVO.boardNo}");
+				location.replace("qna_delete.do?boardNo=${qnaBoardVO.boardNo}");
 			}
 		});
 	});
@@ -22,10 +22,10 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_list.do">자유게시판</a> 
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_write.do" >자유게시판 글등록</a>
-			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a> 
-			<a class="BJA" href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+			<a class="BJA" href="${initParam.root}freeBoard_list.do">자유게시판</a> 
+			<a class="BJA" href="${initParam.root}freeBoard_write.do" >자유게시판 글등록</a>
+			<a class="BJA" href="${initParam.root}qna_list.do">Q&A게시판</a> 
+			<a class="BJA" href="${initParam.root}qna_board_register.do">Q&A 등록</a>
 		</div>
 	</div>
 </div>

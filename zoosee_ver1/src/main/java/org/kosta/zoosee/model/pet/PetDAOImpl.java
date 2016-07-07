@@ -42,13 +42,33 @@ public class PetDAOImpl implements PetDAO {
 		template.delete("pet.delete", petNo);
 	}
 
-	@Override
+	/*@Override
 	public PetVO getPetVO(String id) {
  		return template.selectOne("pet.getPetVO", id);
+	}*/
+
+	@Override
+	public List<PetVO> detailPetAndMemberInfo(String id) {
+		return template.selectList("pet.detailPetAndMemberInfo",id);
 	}
 
 	@Override
-	public PetVO detailPetAndMemberInfo(String id) {
-		return template.selectOne("pet.detailPetAndMemberInfo",id);
+	public int getPetCountById(String id) 
+	{
+		return template.selectOne("pet.getPetCountById",id);
+	}
+
+	@Override
+	public List<PetVO> getPetVOList(String id) 
+	{
+		return template.selectList("pet.petList",id);
+	}
+
+	// 2016.07.06
+	// petNo 갖고오기
+	@Override
+	public List<Integer> getPetNo(String id) 
+	{
+		return template.selectList("pet.getPetNo",id);
 	}
 }

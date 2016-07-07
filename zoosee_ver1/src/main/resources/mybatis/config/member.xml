@@ -35,14 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMemberVO" resultType="memberVO" >
-		select id,name ,addresscode,address,detailaddress, gender, email, tel, job, rank, existence
+		select id,name ,addresscode,address,detailaddress, gender, email, password, tel, job, rank, existence
 		from pet_member
-		where id=#{value}
+		where id=#{value} and enabled=1
 	</select>
 	
-	<delete id="deleteMember">
-		delete pet_member where id=#{id}
-	</delete>
+	<update id="deleteMember">
+		update pet_member set enabled=0 where id=#{value}
+	</update>
 	<select id="findRank" resultType="string">
 		select rank from pet_member where id=#{id}
 	</select>
@@ -91,6 +91,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="resign">
 		delete pet_member where id=#{value}
 	</delete>
+	<!-- 2016.07.05 추가된 내용 
+	Authority 테이블에 권한 리스트 가져오기
+	 -->
+	<select id="selectAuthorityByUsername" resultType="authority">
+		select username,authority
+		from authorities
+		where username=#{value}
+	</select>
+	<!-- Authorities Insert -->
+	<insert id="registerAuthorities" parameterType="map">
+		insert into Authorities(username,authority)
+		values(#{id},#{authority})
+	</insert>
+	
+	<!-- Authorities Update -->
+	<update id="updateAuthoties" parameterType="map">
+		update authorities set authority=#{authority}
+		where username=#{username}
+	</update>
+	
 	<!-- 이승찬 추가 - 혹시 몰라서 백업용 -->
 	<!-- <update id="registerPet">
 		update pet_member set rank='petmom' where id=#{id}

@@ -11,8 +11,8 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_MessageList.do">보낸 메세지 목록</a> 
-			<a class="BJA" href="${initParam.root}interceptor_admin_message.do">메세지 보내기</a>
+			<a class="BJA" href="${initParam.root}admin_MessageList.do">보낸 메세지 목록</a> 
+			<a class="BJA" href="${initParam.root}admin_message.do">메세지 보내기</a>
 		</div>
 	</div>
 </div>
@@ -40,7 +40,7 @@
 					<c:forEach items="${listVO.list }" var="message">
 						<tr>
 								<td><a
-									href="interceptor_admin_message_content.do?message_no=${message.message_no }">
+									href="admin_message_content.do?message_no=${message.message_no }">
 										${message.title}</a></td>
 								<td>관리자</td>
 								<td>${message.time_posted }</td>
@@ -55,7 +55,7 @@
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
 						<li><a
-							href="interceptor_admin_MessageList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+							href="admin_MessageList.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
@@ -66,7 +66,7 @@
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a
-								href="interceptor_admin_MessageList.do?pageNo=${i}">${i}</a></li>
+								href="admin_MessageList.do?pageNo=${i}">${i}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="active"><a>${i}</a></li>
@@ -76,7 +76,7 @@
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
 						<li><a
-							href="interceptor_admin_MessageList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+							href="admin_MessageList.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

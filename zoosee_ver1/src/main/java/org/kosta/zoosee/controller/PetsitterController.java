@@ -1,7 +1,6 @@
 package org.kosta.zoosee.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
 import org.kosta.zoosee.model.vo.ReviewVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,15 +35,16 @@ public class PetsitterController {
 	@Resource
 	private ReviewService reviewService;
 
+
 	@Resource(name = "petsitterUploadPath")
 	private String uploadPath;
 
-	@RequestMapping("interceptor_petsitter_register.do")
+	@RequestMapping("petsitter_register.do")
 	public ModelAndView petsitterRegisterForm() {
 		return new ModelAndView("petsitter_register");
 	}
 
-	@RequestMapping("interceptor_petsitter_registerPetsitter.do")
+	@RequestMapping("petsitter_registerPetsitter.do")
 	public ModelAndView registerPetsitter(HttpServletRequest request,
 			PetsitterVO petsitterVO, FileVO fileVO) {
 		List<MultipartFile> list = fileVO.getFile();
@@ -56,7 +57,7 @@ public class PetsitterController {
 				try {
 					list.get(i).transferTo(new File(filePath));
 					nameList.add(fileName);
-				} catch (IllegalStateException | IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -71,17 +72,21 @@ public class PetsitterController {
 				petsitterVO.setPetsitterImg(filePath);
 			}
 		}
-		MemberVO mvo = (MemberVO) request.getSession(false).getAttribute("mvo");
+		// 2016.07.05
+		// 시큐리티 세션 추가
+		MemberVO mvo = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		petsitterVO.setMemberVO(mvo);
 		petsitterService.registerPetsitter(petsitterVO);
 		return new ModelAndView("redirect:home.do");
 	}
 
 	// 팻시터 정보 수정폼
-	@RequestMapping("interceptor_petsitter_updateform.do")
+	@RequestMapping("ps_petsitter_updateform.do")
 	public ModelAndView petsitter_updateForm(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		//HttpSession session = request.getSession(false);
+		// 2016.07.05
+		// 시큐리티 세션 설정
+		MemberVO mvo = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		PetsitterVO petsitterVO = petsitterService.findPetsitterById(mvo
 				.getId());
 		return new ModelAndView("petsitter_updateform", "petsitterVO",
@@ -89,11 +94,13 @@ public class PetsitterController {
 	}
 
 	// 팻시터 정보 수정
-	@RequestMapping("interceptor_petsitter_update.do")
+	@RequestMapping("ps_petsitter_update.do")
 	public ModelAndView petsitter_update(PetsitterVO petsitterVO,
 			FileVO fileVO, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		//HttpSession session = request.getSession(false);
+		// 2016.07.05
+		// 시큐리티 세션 설정
+		MemberVO mvo = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		petsitterVO.setMemberVO(mvo);
 		List<MultipartFile> list = fileVO.getFile();
 		ArrayList<String> nameList = new ArrayList<String>();
@@ -105,7 +112,7 @@ public class PetsitterController {
 				try {
 					list.get(i).transferTo(new File(filePath));
 					nameList.add(fileName);
-				} catch (IllegalStateException | IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -125,7 +132,7 @@ public class PetsitterController {
 	}
 
 	// 팻시터 정보페이지
-	@RequestMapping("petsitter_detail.do")
+	@RequestMapping("ps_petsitter_detail.do")
 	public ModelAndView petsitterDetailPage(int petsitterNo, int petsitterboard_no) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("petsitter_detail");
@@ -144,7 +151,7 @@ public class PetsitterController {
 	}
 
 	// 펫시터 자기정보 보기
-	@RequestMapping("interceptor_petsitter_info.do")
+	@RequestMapping("ps_petsitter_info.do")
 	public ModelAndView petsitter_info(String id) {
 		PetsitterVO petsitterVO = petsitterService.findPetsitterById(id);
 		return new ModelAndView("petsitter_info", "petsitterVO", petsitterVO);

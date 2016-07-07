@@ -1,3 +1,29 @@
+-- 펫맘 아이디로 자 거래목록 찾기
+select A.tradeinfo_no,A.tradeSdate,A.tradeEdate,A.tradePrice,A.id,A.name,
+        A.petsitterNo,A.petsitterId,m.name as petsitterName,A.petsitterboard_no,A.title
+from(SELECT pm.id,pm.name,t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
+                p.petsitterNo,P.id as petsitterId,pb.petsitterboard_title as title
+      from pet_member pm, tradeInfo t, petsitter p, petsitterboard pb
+      where pm.id=t.id and pb.petsitterNo = p.petsitterNo and p.petsitterNo=t.petsitterNo 
+             and t.petsitterboard_no=pb.petsitterboard_no and pm.id='wwww' order by t.tradeinfo_no desc) A, PET_MEMBER m
+where A.petsitterId=m.id
+-- 펫시터 아이디로 자기 거래목록 찾기
+  select A.tradeinfo_no,A.tradeSdate,A.tradeEdate,A.tradePrice,A.id,m.name,
+  		 A.petsitterNo,A.petsitterId,A.petsitterName,A.petsitterboard_no,A.title
+  from(
+     SELECT m.id as petsitterId,m.name as petsitterName,t.id,
+     	       t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
+               pm.petsitterNo,pb.petsitterboard_title as title
+     from pet_member m, tradeInfo t, petsitter pm, petsitterboard pb
+     where pm.id=m.id and pb.petsitterNo = pm.petsitterNo and pm.petsitterNo=t.petsitterNo 
+          and t.petsitterboard_no=pb.petsitterboard_no and m.id='eeee' order by t.tradeinfo_no desc
+  	 )A, pet_member m
+  where A.id = m.id
+
+	(select pet.petNo,r.reserve_no,r.reserve_price,r.reserve_recog,r.petsitterboard_no,r.id
+	     from RESERVE r, PET_MEMBER pm, PET pet
+    	 where r.id=pm.id and pm.id='wwww' and r.petNo=pet.petNo and r.reserve_recog='2') B,
+	
 alter table petsitterboard drop column petsitterboard_price;
 alter table petsitterboard drop column petsitterboard_petsize;
 alter table petsitterboard drop column petsitterboard_pettype;
@@ -284,13 +310,16 @@ create table message(
    --게시판 게시글 번호
    constraint fk_pet3_id foreign key(id) references pet_member(id) on delete cascade
 )
-
-
-	select fb.freeboard_no,fb.freeboard_title,fb.freeboard_hits,fb.freeBoardTimePosted,pm.id ,pm.name
-		from(
-		     select  freeboard_no,freeboard_title, freeBoardTimePosted,freeboard_hits ,ceil(rownum/5) as page, id
-			 from(
-				select freeboard_no,freeboard_title,to_char(freeboard_timePosted,'YYYY.MM.DD') as freeBoardTimePosted ,freeboard_hits,id
-				from freeboard order by freeboard_no desc
-				) 
-		) fb, pet_member pm where fb.id=pm.id and page=1
+select A.tradeinfo_no,A.petmom_id,m.name as petmom_Name,A.id,A.name,A.petsitterboard_no,A.title,
+  		   A.tradeSdate,A.tradeEdate,A.tradePrice,A.petsitterNo
+from(
+	SELECT m.id,m.name,t.id as petmom_id,t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
+		   pm.petsitterNo,pb.petsitterboard_title as title
+	from pet_member m, tradeInfo t, petsitter pm, petsitterboard pb
+	where pm.id=m.id and pb.petsitterNo = pm.petsitterNo and pm.petsitterNo=t.petsitterNo 
+		  and t.petsitterboard_no=pb.petsitterboard_no and m.id='eeee' order by t.tradeinfo_no desc
+)A, pet_member m, PET pet 
+where pet.id=A.petmom_Id and A.petmom_id = m.id and pet.id=m.id
+		
+select * from tradeInfo
+	

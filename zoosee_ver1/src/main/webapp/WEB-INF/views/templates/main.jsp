@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script>
 	function clickNotification(notification, flag){
 		// notification 클릭하면 새로 이동
@@ -12,13 +13,13 @@
 			}
 			
 			if(flag == "request"){
-				location.href='interceptor_reserve_reserveMyList.do?petMasterSignal='+petMasterSignal;
+				location.href='reserve_reserveMyList.do?petMasterSignal='+petMasterSignal;
 			}
 			if(flag == "complete"){
-				location.href='interceptor_reserve_reserveMyList.do?petMasterSignal='+petMasterSignal;
+				location.href='reserve_reserveMyList.do?petMasterSignal='+petMasterSignal;
 			}
 			if(flag == "deal"){
-				location.href='interceptor_tradeInfo_getTradeMyList.do';
+				location.href='tradeInfo_getTradeMyList.do';
 			}
 		}
 	}
@@ -150,17 +151,17 @@
 	<div class="BJMainDIVBottom" align="center">
 		<div class="BJMainBoardDiv" >
 			<div class="BJMainBoardC1">
-				<a href="${initParam.root}interceptor_petsitter_register.do">
+				<a href="${initParam.root}petsitter_register.do">
 					<img  src="${initParam.root }resources/image/petsitterimg2V2.jpg" style="width: 100%; height:100%; max-width: 760px; vertical-align: middle" />
 				</a>
 			</div>
 			<div class="BJMainBoardC2">
-				<a href="${initParam.root}interceptor_qna_list.do">
+				<a href="${initParam.root}qna_list.do">
 					<img src="${initParam.root }resources/image/zoosee3.jpg" style="width: 100%; height:100%; max-width: 760px; vertical-align: middle" />
 				</a>
 			</div>
 			<div class="BJMainBoardC3">
-				<a href="${initParam.root}interceptor_freeBoard_list.do">
+				<a href="${initParam.root}freeBoard_list.do">
 					<img src="${initParam.root }resources/image/pet5v1.jpg" style="width: 100%; height:100%; max-width: 760px; vertical-align: middle" />
 				</a>
 			</div>

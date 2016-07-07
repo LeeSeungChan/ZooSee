@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.kosta.zoosee.model.message.ListVO;
 import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.vo.MemberVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,33 +37,37 @@ public class MessageController {
 		return map;
 	}
 	
-	@RequestMapping("interceptor_message_list.do")
+	@RequestMapping("message_list.do")
 	public ModelAndView messageList(String pageNo,HttpServletRequest request){
-		HttpSession session = request.getSession(false);
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-		String id = mvo.getId();
+		/*HttpSession session = request.getSession(false);
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");*/
+		// 2016.07.05
+		// 시큐리티 세션가져오기
+		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		ListVO list=messageService.getMessageList(pageNo,id);
 		return new ModelAndView("message_list","list",list);
 	}
 	
-	@RequestMapping("interceptor_message_uncheckedlist.do")
+	@RequestMapping("message_uncheckedlist.do")
 	public ModelAndView messageUncheckedList(HttpServletRequest request){
-		HttpSession session=request.getSession(false);
-		String id=((MemberVO)session.getAttribute("mvo")).getId();
+		//HttpSession session=request.getSession(false);
+		// 2016.07.05
+		// 시큐리티 세션
+		String id=((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		String pageNo=request.getParameter("pageNo");
 		ListVO list=messageService.messageUncheckedList(id,pageNo);
 		return new ModelAndView("message_uncheckedlist","listVO",list);
 	}
 	
-	@RequestMapping("interceptor_message_content.do")
+	@RequestMapping("message_content.do")
 	public ModelAndView showContent(String message_no){
 		return new ModelAndView("message_showcontent","message",messageService.getMessageByNo(message_no));
 	}
 	
-	@RequestMapping("interceptor_message_updateCheckedAll.do")
+	@RequestMapping("message_updateCheckedAll.do")
 	public ModelAndView updateCheckedAll(String id){
 		messageService.updateCheckedAll(id);
-		return new ModelAndView("redirect:interceptor_message_list.do");
+		return new ModelAndView("redirect:message_list.do");
 	}
 	
 	

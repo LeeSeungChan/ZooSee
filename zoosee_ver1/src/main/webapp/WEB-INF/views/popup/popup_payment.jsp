@@ -30,7 +30,7 @@
     			alert("약관에 동의해주세요!");
     			return false;
     		}else{
-    			var of= "${initParam.root}interceptor_reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
+    			var of= "${initParam.root}reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
 				of += "petsitterId=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}";
 				document.write("<br><br><br><br><br><br><br><br><br><br><br><h2>결제 진행중...</h2>");
 				document.write("<h2>잠시만 기다려 주세요...</h2>");
@@ -74,7 +74,7 @@
     			$("#bank").focus();
     			return false;
     		}else{
-    			var of= "${initParam.root}interceptor_reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
+    			var of= "${initParam.root}reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
 				of += "petsitterId=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}";
 				document.write("<br><br><br><br><br><br><br><br><br><br><br><h2>결제 진행중...</h2>");
 				document.write("<h2>잠시만 기다려 주세요...</h2>");
@@ -86,7 +86,7 @@
     		
     	}); 
 	/* 	$(".update").click(function(){
-			var of= "${initParam.root}interceptor_reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
+			var of= "${initParam.root}reserve_reserveDealAccept.do?reserve_no=${reserveVO.reserve_no}&";
 				of += "petsitterId=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}";
 				document.write("진행중");
 				wait(3000);

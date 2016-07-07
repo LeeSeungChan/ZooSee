@@ -10,7 +10,7 @@
 							if (confirm("계정을 삭제 하시겠습니까?")) {
 								$.ajax({
 									type : "post",
-									url : "interceptor_admin_resign.do",
+									url : "admin_resign.do",
 									data : "id="
 											+ $(this).parent().parent()
 													.children().eq(0).text(),
@@ -34,8 +34,8 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_adminList.do">직원 목록</a>
-			<a class="BJA" href="${initParam.root}interceptor_admin_findById.do">관리자 권한 부여</a>
+			<a class="BJA" href="${initParam.root}admin_adminList.do">직원 목록</a>
+			<a class="BJA" href="${initParam.root}admin_findById.do">관리자 권한 부여</a>
 		</div>
 	</div>
 </div>
@@ -83,7 +83,7 @@
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
 						<li><a
-							href="i${initParam.root}interceptor_admin_memberlist.do?rank=normal&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+							href="i${initParam.root}admin_memberlist.do?rank=normal&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
@@ -94,7 +94,7 @@
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a
-								href="${initParam.root}interceptor_admin_memberlist.do?rank=normal&pageNo=${i}">${i}</a>
+								href="${initParam.root}admin_memberlist.do?rank=normal&pageNo=${i}">${i}</a>
 							<li>
 						</c:when>
 						<c:otherwise>
@@ -105,7 +105,7 @@
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
 						<li><a
-							href="${initParam.root}interceptor_admin_memberlist.do?rank=normal&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+							href="${initParam.root}admin_memberlist.do?rank=normal&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

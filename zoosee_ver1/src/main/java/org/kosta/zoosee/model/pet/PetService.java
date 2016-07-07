@@ -18,5 +18,9 @@ public interface PetService {
 
 	public abstract void deletePet(int petNo);
 
-	public abstract PetVO detailPetAndMemberInfo(String id);
+	public abstract List<PetVO> detailPetAndMemberInfo(String id);
+
+	// 2016.07.06
+	// petNo 갖고오기
+	public abstract List<Integer> getPetNo(String id);
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
 
 		/*사진 바로 업로드 미리보기*/
@@ -62,21 +63,19 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_pet_list.do">펫목록</a>
-			<a class="BJA" href="${initParam.root}interceptor_pet_register.do">펫등록</a>
-			<c:choose>
-				<c:when test="${mvo.rank=='petsitter' || mvo.rank=='petmaster'}">
+			<a class="BJA" href="${initParam.root}pet_list.do">펫목록</a>
+			<a class="BJA" href="${initParam.root}pet_register.do">펫등록</a>
+				<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
 					<a class="BJA"
-						href="${initParam.root}interceptor_petsitter_updateform.do">펫시터
+						href="${initParam.root}ps_petsitter_updateform.do">펫시터
 						정보 수정</a>
 					<a class="BJA"
-						href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터
+						href="${initParam.root}ps_petsitter_info.do?id=<sec:authentication property="principal.id"/>">펫시터
 						정보 보기</a>
-				</c:when>
-				<c:otherwise>
+				</sec:authorize>
+				<sec:authorize ifAnyGranted="ROLE_MEMBER,ROLE_PETMOM">
 					<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
-				</c:otherwise>
-			</c:choose>
+				</sec:authorize>
 		</div>
 	</div>
 </div>
@@ -86,14 +85,14 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">반려동물 등록</h3>
 			</div>
-			<div class="panel-body">${mvo.name }님의 소중한 반려동물을 등록하기 위한 공간입니다.
+			<div class="panel-body"><sec:authentication property="principal.name"/>님의 소중한 반려동물을 등록하기 위한 공간입니다.
 			</div>
 		</div>
-		<div class="well well-sm">${mvo.name }님의 소중한 반려동물의 등록</div>
+		<div class="well well-sm"><sec:authentication property="principal.name"/>님의 소중한 반려동물의 등록</div>
 	</div>
 <!-- 전체 시작 -->
 <div class="WJcontainer7">
-<form method="post" action="interceptor_registerPet.do" id="regForm" enctype="multipart/form-data">
+<form method="post" action="pet_registerPet.do" id="regForm" enctype="multipart/form-data">
 		<!-- 왼쪽 시작-->
 		<div style="float:left; width:50%;">
 		<br>

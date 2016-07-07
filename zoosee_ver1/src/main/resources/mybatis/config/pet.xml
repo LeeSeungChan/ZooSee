@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="petList" resultType="petVO">
 		select petNo,petName,petAge,petType,petGender,petNeutral,petImg,petSize,etc,id from pet 
-		where id=#{value}
+		where id=#{value} order by petNo asc
 	</select>
 	
 	<update id="update" parameterType="petVO">
@@ -37,10 +37,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from pet where petNo=#{value}
 	</delete>
 	
-	<select id="getPetVO" parameterType="string" resultType="petVO">
+	<select id="getPetCountById" resultType="int">
+		select count(petNo) from pet where id=#{value}
+	</select>
+	
+	<!-- 2016.07.06 PetNo 갖고오기 -->
+	<select id="getPetNo" resultType="int">
+		select pet.petNo
+		from RESERVE r, PET_MEMBER pm, PET pet
+		where r.id=pm.id and pm.id=#{value} and r.petNo=pet.petNo
+	</select>
+	
+	<!-- <select id="getPetVO" parameterType="string" resultType="petVO">
 		select petNo,petName,petAge,petType,petGender,petNeutral,petImg,petSize,etc from PET
 		where id=#{value}
-	</select>
+	</select> -->
 	<!-- <resultMap type="petVO" id="petRM">
 		<result property="memberVO.id" column="id" />	
 	</resultMap> -->

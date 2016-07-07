@@ -9,11 +9,11 @@
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_list.do?when=all">모든
+				href="${initParam.root}admin_qna_list.do?when=all">모든
 				Q&A 목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_list.do?when=nonAnswer">
+				href="${initParam.root}admin_qna_list.do?when=nonAnswer">
 				답변 미등록 Q&A 목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_findbyid.do"> 아이디로
+				href="${initParam.root}admin_qna_findbyid.do"> 아이디로
 				Q&A 검색</a>
 		</div>
 	</div>
@@ -53,10 +53,10 @@
 									<tr>
 										<td>${Question.boardNo }</td>
 										<td><a
-											href="${initParam.root}interceptor_admin_showQuestion.do?boardNo=${Question.boardNo}">
+											href="${initParam.root}admin_showQuestion.do?boardNo=${Question.boardNo}">
 												${Question.title }</a></td>
 										<td><a
-											href="${initParam.root}interceptor_admin_getMemberVO.do?id=${Question.memberVO.id}">
+											href="${initParam.root}admin_getMemberVO.do?id=${Question.memberVO.id}">
 												${Question.memberVO.name}(${Question.memberVO.id})</a></td>
 										<td>${Question.timePosted }</td>
 										<td><c:choose>
@@ -77,7 +77,7 @@
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
 						<li><a
-							href="${initParam.root}interceptor_admin_qna_find_view.do?id=${param.id}&pageNo=${pb.startPageOfPageGroup-1}">
+							href="${initParam.root}admin_qna_find_view.do?id=${param.id}&pageNo=${pb.startPageOfPageGroup-1}">
 								&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
@@ -89,7 +89,7 @@
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a
-								href="${initParam.root}interceptor_admin_qna_find_view.do?id=${param.id}&pageNo=${i}">${i}</a></li>
+								href="${initParam.root}admin_qna_find_view.do?id=${param.id}&pageNo=${i}">${i}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="active"><a>${i}</a></li>
@@ -99,7 +99,7 @@
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
 						<li><a
-							href="${initParam.root}interceptor_admin_qna_find_view.do?id=${param.id}&pageNo=${pb.endPageOfPageGroup+1}">
+							href="${initParam.root}admin_qna_find_view.do?id=${param.id}&pageNo=${pb.endPageOfPageGroup+1}">
 								&raquo;</a></li>
 					</c:when>
 					<c:otherwise>

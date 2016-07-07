@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -18,7 +18,7 @@
 		 		
 		 		if(confirm("등록하시겠습니까?")){
 		 			var id="${mvo.id}";
-		 			var url="${initParam.root}interceptor_tradeInfo_inputReview.do?ref_id=${param.id}&id="+id+"&star_rate="+$('#star_rate').val()+"&content="+$('#textConent').val();
+		 			var url="${initParam.root}tradeInfo_inputReview.do?ref_id=${param.id}&id="+id+"&star_rate="+$('#star_rate').val()+"&content="+$('#textConent').val();
 		 			opener.parent.location=url;
 		 			window.close();
 		 		}
@@ -38,9 +38,9 @@
 </script>
 </head>
 <body>
-	<form  id="reviewForm"action="interceptor_tradeInfo_inputReview.do">
+	<form  id="reviewForm"action="tradeInfo_inputReview.do">
 		<input type="hidden" name="ref_id" value="${param.id}">
-		<input type="hidden" name="id" value="${SessionScope.mvo.id}">
+		<input type="hidden" name="id" value="<sec:authentication property="principal.id"/>">
 		
 		<%--댓글작성란 --%>
 		<div class="BJReplyInput" >

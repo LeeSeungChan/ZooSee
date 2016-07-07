@@ -12,7 +12,7 @@
 							if (confirm("관리자 권한을 주시겠습니까?")) {
 								$.ajax({
 									type : "post",
-									url : "interceptor_admin_addAdmin.do",
+									url : "admin_addAdmin.do",
 									data : "id="
 											+ $(this).parent().parent()
 													.children().eq(0).text(),
@@ -38,9 +38,9 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_adminList.do">직원
+			<a class="BJA" href="${initParam.root}admin_adminList.do">직원
 				목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_admin_findById.do">관리자 권한 부여</a>
+				href="${initParam.root}admin_findById.do">관리자 권한 부여</a>
 		</div>
 	</div>
 </div>
@@ -74,7 +74,7 @@
 									<script type="text/javascript">
 										alert("해당 아이디로 검색되는 회원이 없습니다.");
 										location
-												.replace("${initParam.root}interceptor_admin_findById.do");
+												.replace("${initParam.root}admin_findById.do");
 									</script>
 								</c:if>
 								<tbody>
@@ -96,7 +96,7 @@
 									<script type="text/javascript">
 										alert("해당 이름으로 검색된 회원이 없습니다.");
 										location
-												.replace("${initParam.root}interceptor_admin_findById.do");
+												.replace("${initParam.root}admin_findById.do");
 									</script>
 								</c:if>
 								<tbody>

@@ -51,11 +51,11 @@
 <!-- Handler interceptor 를 이용한 인증확인 -->
 <!-- 
  -->
-<mvc:interceptors>
+<!-- <mvc:interceptors>
 	<mvc:interceptor>
-		<mvc:mapping path="/interceptor_*.do"/>
+		<mvc:mapping path="/*.do"/>
 		<bean class="org.kosta.zoosee.interceptor.LoginInterceptor"/>
 	</mvc:interceptor>
-</mvc:interceptors>	
+</mvc:interceptors>	 -->
 
 </beans>

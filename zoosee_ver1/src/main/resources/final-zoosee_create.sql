@@ -14,7 +14,9 @@ CREATE TABLE PET_MEMBER(
 	tel varchar2(100) not null,				-- 연락처
 	job varchar2(100) not null,				-- 직업
 	rank varchar2(100) not null,
-	existence varchar2(100) not null
+	existence varchar2(100) not null,
+	enabled number not null					-- 2016.07.05 추가된 컬럼, 탈퇴상태를 나타냄
+												-- 0 : 탈퇴상태  1 : 현재 회원
 )
 
 -- 회원이 입력하는 pet 정보 테이블--------------------------------------------------
@@ -204,4 +206,22 @@ create table review(
    constraint fk_pet5_id foreign key(id) references pet_member(id) on delete cascade,
    constraint fk_pet6_id foreign key(ref_id) references pet_member(id) on delete cascade
 )
+-------------------------------------------------------
+-- 2016.07.05 추가된 테이블
+-- 권한 테이블
+/*
+ * SECURITY는 권한이 일치하는 대상에 대해 권한을 주기 때문에 
+   관리자 권한 즉, ROLE_ADMIN을 보유하고 있더라도 
+   사용자 권한인 ROLE_USER를 보유하고 있지 않을 경우 접근을 못하게 된다 
+   따라서 한 유저는 여러개의 권한(1:n)을 보유할 수 있어야 하므로 테이블을 생성한다 
+   authorities
+ */
+select * from authorities
+drop table authorities;
+create table authorities(
+	username varchar2(100) not null,
+	authority varchar(30) not null,
+	constraint fk_authorities foreign key(username) references pet_member(id)
+)
 
+-------------------------------------------------------

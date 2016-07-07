@@ -18,7 +18,15 @@ public interface PetDAO {
 
 	public abstract void deletePet(int petNo);
 
-	public abstract PetVO getPetVO(String id);
+	/*public abstract PetVO getPetVO(String id);*/
 	
-	public abstract PetVO detailPetAndMemberInfo(String id);
+	public abstract List<PetVO> detailPetAndMemberInfo(String id);
+
+	public abstract int getPetCountById(String id);
+
+	public abstract List<PetVO> getPetVOList(String id);
+
+	//2016.07.06
+	// petNo 갖고오기
+	public abstract List<Integer> getPetNo(String id);
 }

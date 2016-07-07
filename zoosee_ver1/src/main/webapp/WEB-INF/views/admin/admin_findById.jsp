@@ -19,9 +19,9 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_adminList.do">직원
+			<a class="BJA" href="${initParam.root}admin_adminList.do">직원
 				목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_admin_findById.do">관리자 권한 부여</a>
+				href="${initParam.root}admin_findById.do">관리자 권한 부여</a>
 		</div>
 	</div>
 </div>
@@ -38,7 +38,7 @@
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine_2">
 				<form id="findForm"
-					action="${initParam.root}interceptor_admin_findInfoByValue.do">
+					action="${initParam.root}admin_findInfoByValue.do">
 					<div style="vertical-align: middle;">
 						<table>
 							<tr>

@@ -1,7 +1,6 @@
 package org.kosta.zoosee.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.kosta.zoosee.model.pet.PetService;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,47 +23,50 @@ public class PetController {
 	private PetService petService;
 	@Resource(name="petUploadPath")
 	private String petUploadPath;
-	
-	@RequestMapping(value="interceptor_registerPet.do", method=RequestMethod.POST)
+	@RequestMapping(value="pet_registerPet.do", method=RequestMethod.POST)
 	public ModelAndView write(PetVO pvo, MultipartFile petImg2, HttpSession session) {
-		if(session==null||session.getAttribute("mvo")==null){
-			return new ModelAndView("redirect:home.do");
-		}
-		pvo.setMemberVO((MemberVO)session.getAttribute("mvo"));
+		// 2016.07.05
+		// 시큐리티 세션
+		pvo.setMemberVO((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		String path = petUploadPath+petImg2.getOriginalFilename();
 		if(petImg2.isEmpty()==false){	
 			File uploadFile=new File(path);
 			try {
 				petImg2.transferTo(uploadFile);
-			} catch (IllegalStateException | IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		path = path.substring(path.indexOf("upload\\"));
 		pvo.setPetImg(path);
 		petService.registerPet(pvo);
-		return new ModelAndView("redirect:interceptor_pet_detail.do?petNo="+pvo.getPetNo());
+		return new ModelAndView("redirect:pet_detail.do?petNo="+pvo.getPetNo());
 	}
-	@RequestMapping("interceptor_pet_detail.do")
+	@RequestMapping("pet_detail.do")
 		public ModelAndView petDetail(int petNo){
 			PetVO pvo=petService.petDetail(petNo);
 			return new ModelAndView("pet_detail","petVO",pvo);
 	}
-	@RequestMapping("interceptor_pet_list.do")
+	@RequestMapping("pet_list.do")
 	public ModelAndView petList(HttpServletRequest request){
-		HttpSession session=request.getSession(false);
-		String id=((MemberVO)session.getAttribute("mvo")).getId();
+		//HttpSession session=request.getSession(false);
+		// 2016.07.05
+		// 시큐리티 세션
+		String id=((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		List<PetVO> list=petService.petList(id);
 		return new ModelAndView("pet_list","list",list);
 	}
-	@RequestMapping("interceptor_pet_update.do")
+	@RequestMapping("pet_update.do")
 	public ModelAndView petUpdate(int petNo){
 		return new ModelAndView("pet_update","pvo",petService.petDetail(petNo));
 	}
-	@RequestMapping(value="interceptor_pet_update_result.do", method=RequestMethod.POST)
+	@RequestMapping(value="pet_update_result.do", method=RequestMethod.POST)
 	public String petUpadteResult(HttpServletRequest request,PetVO vo, MultipartFile petImg3){
-		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("mvo")!=null) {
+		//HttpSession session = request.getSession(false);
+		// 2016.07.05 
+		// 시큐리티 세션
+		MemberVO mvo = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (mvo!=null) {
 			String path = petUploadPath+petImg3.getOriginalFilename();
 			if(petImg3.isEmpty()==false){	
 				File uploadFile=new File(path);
@@ -72,21 +75,23 @@ public class PetController {
 				petService.petUpdateResult(vo);
 				try {
 					petImg3.transferTo(uploadFile);
-				} catch (IllegalStateException | IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}else{
 				petService.updatePetNoImg(vo);
 			}
-			return "redirect:interceptor_pet_detail.do?petNo="+vo.getPetNo();
+			return "redirect:pet_detail.do?petNo="+vo.getPetNo();
 		}else{
 			return "redirect:home.do";
 		}
 	}
-	@RequestMapping("interceptor_pet_delete.do")
+	@RequestMapping("pet_delete.do")
 	public ModelAndView deletePet(HttpServletRequest request,int petNo) {
-		HttpSession session=request.getSession(false);
-		String id=((MemberVO)session.getAttribute("mvo")).getId();
+		//HttpSession session=request.getSession(false);
+		// 2016.07.05
+		// 시큐리티 세션
+		String id=((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		petService.deletePet(petNo);		
 		return new ModelAndView("pet_list","list",petService.petList(id));
 	}

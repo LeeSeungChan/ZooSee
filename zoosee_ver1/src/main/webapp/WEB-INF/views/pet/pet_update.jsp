@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
+
 <script type="text/javascript">
 	/*사진 바로 업로드 미리보기*/
 
@@ -34,7 +36,7 @@
 										function() {
 											if (confirm("정보를 수정하셨습니까?")) {
 												location
-														.replace("interceptor_pet_update.do?petNo=${petVO.petNo}");
+														.replace("pet_update.do?petNo=${petVO.petNo}");
 											} else {
 												return false;
 											}
@@ -45,8 +47,8 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_pet_list.do">펫목록</a>
-			<a class="BJA" href="${initParam.root}interceptor_pet_register.do">펫등록</a>
+			<a class="BJA" href="${initParam.root}pet_list.do">펫목록</a>
+			<a class="BJA" href="${initParam.root}pet_register.do">펫등록</a>
 		</div>
 	</div>
 </div>
@@ -56,15 +58,15 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">반려동물 정보수정</h3>
 			</div>
-			<div class="panel-body">${mvo.name }님의 소중한 반려동물 "${pvo.petName}"의 정보수정을 입력하기 위한 공간입니다.
+			<div class="panel-body"><sec:authentication property="principal.name"/>님의 소중한 반려동물 "${pvo.petName}"의 정보수정을 입력하기 위한 공간입니다.
 			</div>
 		</div>
-		<div class="well well-sm">${mvo.name }님의 소중한 ${pvo.petType}(${pvo.petName})의 상세정보</div>
+		<div class="well well-sm"><sec:authentication property="principal.name"/>님의 소중한 ${pvo.petType}(${pvo.petName})의 상세정보</div>
 	</div>
 <!-- 전체 시작 -->
 <div class="WJcontainer7">
 	<!-- 왼쪽 시작-->
-	<form action="interceptor_pet_update_result.do"
+	<form action="pet_update_result.do"
 		enctype="multipart/form-data" method="post">
 		<input type="hidden" name="petNo" value="${pvo.petNo}">
 		<div style="float: left; width: 50%;">

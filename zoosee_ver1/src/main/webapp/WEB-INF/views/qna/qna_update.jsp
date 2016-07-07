@@ -21,10 +21,10 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout" >
 		<div class="BJHeader2" >
-			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A 목록</a>	
-			<a class="BJA"  href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
-			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a> 
-			<a class="BJA" href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+			<a class="BJA" href="${initParam.root}qna_list.do">Q&A 목록</a>	
+			<a class="BJA"  href="${initParam.root}qna_board_register.do">Q&A 등록</a>
+			<a class="BJA" href="${initParam.root}qna_list.do">Q&A게시판</a> 
+			<a class="BJA" href="${initParam.root}qna_board_register.do">Q&A 등록</a>
 		</div>
 	</div>
 </div>
@@ -41,7 +41,7 @@
 	<div class="BJMain2Div">
 		<c:choose>
 			<c:when test="${empty qnaBoardVO.answer}">
-				<form id="updateForm" action="interceptor_qna_update_result.do">
+				<form id="updateForm" action="qna_update_result.do">
 					<input type="hidden" name="boardNo" value="${qnaBoardVO.boardNo}">
 					<div class="BJWriteTableLine">
 						<div class="SBHrAllLine_1">
@@ -70,7 +70,7 @@
 			<c:otherwise>
 				<script type="text/javascript">
 					alert("답변이 등록된 질문은 수정이 불가 합니다. 새로 질문을 등록하세요.");
-					location.href = "${initParam.root}interceptor_qna_list.do";
+					location.href = "${initParam.root}qna_list.do";
 				</script>
 			</c:otherwise>
 		</c:choose>

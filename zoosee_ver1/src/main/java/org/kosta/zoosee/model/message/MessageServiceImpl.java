@@ -73,9 +73,11 @@ public class MessageServiceImpl implements MessageService {
 		java.io.FileInputStream fi = null;
 		try {
 			/******* message sample 엑셀 경로 *******/
+			// 2015.07.06
+			// kosta -> kosta1
 			fi = new java.io.FileInputStream(
 					new java.io.File(
-							"C:\\Users\\kosta\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\resources\\excel\\message.xls"));
+							"C:\\Users\\kosta1\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\resources\\excel\\message.xls"));
 			Workbook workbook = Workbook.getWorkbook(fi);
 			Sheet sheet = workbook.getSheet(0); // 첫번째 시트를 얻어옴
 

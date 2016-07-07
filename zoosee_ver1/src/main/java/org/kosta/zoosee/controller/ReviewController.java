@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.review.ReviewService;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.ReviewVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,16 +33,12 @@ public class ReviewController {
 	}
 	
 	//리뷰 등록
-	@RequestMapping("interceptor_tradeInfo_inputReview.do")
+	@RequestMapping("tradeInfo_inputReview.do")
 	public ModelAndView inputReview(ReviewVO rvo,HttpServletRequest request){
-		HttpSession session=request.getSession(false);
-		if(session!=null){
-			rvo.setId(((MemberVO)session.getAttribute("mvo")).getId()); 
-		}
+		rvo.setId(((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
 		reviewService.inputReview(rvo);
 		int petsitterboard_no=boardService.myPetsitterboard(rvo.getRef_id());
 		return new ModelAndView("redirect:petsitterboardDetail.do","petsitterboard_no",petsitterboard_no);
-		
 	}
 	
 	
@@ -50,7 +46,6 @@ public class ReviewController {
    @ResponseBody
    public Object avgStarRate(String id){
       Double avg = reviewService.avg(id);
-
       HashMap<String,Double> map = new HashMap<String,Double>();
       map.put("avg", avg);
       return map;

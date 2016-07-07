@@ -21,10 +21,10 @@
 	<div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_list.do">자유게시판</a> 
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_write.do" >자유게시판 글등록</a>
-			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a> 
-			<a class="BJA" href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+			<a class="BJA" href="${initParam.root}freeBoard_list.do">자유게시판</a> 
+			<a class="BJA" href="${initParam.root}freeBoard_write.do" >자유게시판 글등록</a>
+			<a class="BJA" href="${initParam.root}qna_list.do">Q&A게시판</a> 
+			<a class="BJA" href="${initParam.root}qna_board_register.do">Q&A 등록</a>
 		</div>
 	</div>
 </div>
@@ -39,7 +39,7 @@
 		<div class="well well-sm">질문 작성</div>
 	</div>
 	<div class="BJMain2Div">
-		<form id="registerQNAForm" action="interceptor_registerQNA.do">
+		<form id="registerQNAForm" action="qna_registerQNA.do">
 			<div class="BJWriteTableLine">
 				<div class="SBHrAllLine">
 					<table class="SBtable">

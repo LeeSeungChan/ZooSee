@@ -9,7 +9,10 @@
   </context-param>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/spring/root-context.xml</param-value>
+    <param-value>
+    /WEB-INF/spring/root-context.xml 
+    /WEB-INF/spring/security-spring.xml
+    </param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -42,4 +45,19 @@
       <session-config>
         <session-timeout>10000</session-timeout>
     </session-config>
+    
+    <!-- Spring Security -->
+   <filter>
+    	<description>스프링 시큐리티 필터 등록</description>
+    	<filter-name>springSecurityFilterChain</filter-name>
+    	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>    
+    <filter-mapping>
+    	<filter-name>springSecurityFilterChain</filter-name>
+    	<url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <error-page>
+    	<error-code>403</error-code>
+    	<location>/WEB-INF/views/error/auth_error.jsp</location>
+    </error-page>
 </web-app>

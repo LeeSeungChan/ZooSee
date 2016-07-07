@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript">
   alert("거래목록에 존재하지 않습니다!");
-  location.href="interceptor_tradeInfo_getTradeMyList.do";
+  location.href="tradeInfo_getTradeMyList.do";
 </script>

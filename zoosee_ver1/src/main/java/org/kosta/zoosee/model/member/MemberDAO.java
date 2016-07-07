@@ -3,6 +3,7 @@ package org.kosta.zoosee.model.member;
 import java.util.HashMap;
 import java.util.List;
 
+import org.kosta.zoosee.model.vo.Authority;
 import org.kosta.zoosee.model.vo.MemberVO;
 
 public interface MemberDAO {
@@ -48,5 +49,19 @@ public interface MemberDAO {
 	public abstract int addAdmin(String id);
 
 	public abstract int resign(String id);
+	
+	// 2016.07.05 추가
+	// 시큐리티 권한 관련
+	// 시큐리티 권한 확인
+	public abstract List<Authority> selectAuthorityByUsername(String id);
+	// 시큐리티 table Authority insert 부분.
+	// ROLE_ 패턴
+	// 일반회원 : ROLE_MEMBER
+	// 돌보미 : ROLE_PETSITTER
+	// 관리자 : ROLE_ADMIN
+	// 펫마스터 : ROLE_PETMASTER
+	public abstract void registerAuthorities(HashMap<String,String> map);
+	// 권한 update
+	public abstract int updateAuthoties(HashMap<String, String> map);
 
 }

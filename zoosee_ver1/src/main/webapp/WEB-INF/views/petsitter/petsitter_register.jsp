@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
  	$(document).ready(function(){
- 	      var rank="${sessionScope.mvo.rank}";
+ 	      var rank="<sec:authentication property='principal.rank'/>";
  	       if(rank=="petsitter" || rank =="petmaster"){
  	          alert("이미 등록된 회원입니다!");
  	          $(location).attr('href',"home.do");
@@ -99,7 +100,7 @@ ZOOSEE 는 그 어떤 스킬이나 역량보다 "동물에 대한 진심과 사�
 <br>
 
 <div style="border:1px solid #DFDFDF; border-radius: 6px;  background-color:#F4F4F4;  text-align: center; width: 30%; margin-left: 35%">
-<form action="interceptor_petsitter_registerPetsitter.do" method="post" enctype="multipart/form-data" id="registerPetsitterForm" style="text-align: center;">
+<form action="petsitter_registerPetsitter.do" method="post" enctype="multipart/form-data" id="registerPetsitterForm" style="text-align: center;">
 <br>
 <div class="form-group" style="width:200px; text-align: center; margin-left: auto; margin-right: auto;" >
   <label class="control-label">*지원자 성명</label>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -9,19 +10,19 @@
 		
 		$("#update").click(function() {
 			if (confirm("${petVO.petName}의 정보를 수정하시겠습니까?")) {
-				location.replace("interceptor_pet_update.do?petNo=${petVO.petNo}");
+				location.replace("pet_update.do?petNo=${petVO.petNo}");
 			}
 		});
 		
 		$("#delete").click(function() {
 			if (confirm("${petVO.petName}을(를) 삭제하겠습니까?")) {
-				location.replace("interceptor_pet_delete.do?petNo=${petVO.petNo}");
+				location.replace("pet_delete.do?petNo=${petVO.petNo}");
 			}
 		});
 		
 		$("#list").click(function() {
 			if (confirm("펫 목록으로 돌아 가시겠습니까?")) {
-				location.replace("interceptor_pet_list.do");
+				location.replace("pet_list.do");
 			}
 		});
 	});
@@ -31,17 +32,15 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_pet_list.do">펫목록</a>
-			<a class="BJA" href="${initParam.root}interceptor_pet_register.do">펫등록</a>
-			<c:choose>
-				<c:when test="${sessionScope.mvo.rank=='petsitter' || sessionScope.mvo.rank=='petmaster'}">
-					<a class="BJA" href="${initParam.root}interceptor_petsitter_updateform.do">펫시터 정보 수정</a>
-					<a class="BJA" href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터 정보 보기</a>
-				</c:when>
-				<c:otherwise>
+			<a class="BJA" href="${initParam.root}pet_list.do">펫목록</a>
+			<a class="BJA" href="${initParam.root}pet_register.do">펫등록</a>
+				<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
+					<a class="BJA" href="${initParam.root}ps_petsitter_updateform.do">펫시터 정보 수정</a>
+					<a class="BJA" href="${initParam.root}ps_petsitter_info.do?id=<sec:authentication property="principal.id"/>">펫시터 정보 보기</a>
+				</sec:authorize>
+				<sec:authorize ifAnyGranted="ROLE_MEMBER,ROLE_PETMOM">
 					<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
-				</c:otherwise>
-			</c:choose>
+				</sec:authorize>
 		</div>
 	</div>
 </div>
@@ -51,9 +50,9 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">반려동물 상세보기</h3>
 			</div>
-			<div class="panel-body">${mvo.name }님의 소중한 반려동물 "${petVO.petName}"의 상세정보를 보여 드리기 위한 공간입니다.</div>
+			<div class="panel-body"><sec:authentication property="principal.name"/>님의 소중한 반려동물 "${petVO.petName}"의 상세정보를 보여 드리기 위한 공간입니다.</div>
 		</div>
-		<div class="well well-sm">${mvo.name }님의 소중한 ${petVO.petType}(${petVO.petName})의 상세정보</div>
+		<div class="well well-sm"><sec:authentication property="principal.name"/>님의 소중한 ${petVO.petType}(${petVO.petName})의 상세정보</div>
 	</div>
 	
 	<!-- 전체 시작 -->

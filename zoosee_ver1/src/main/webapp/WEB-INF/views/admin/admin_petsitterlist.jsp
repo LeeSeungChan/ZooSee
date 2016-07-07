@@ -10,7 +10,7 @@ $(document).ready(function() {
 		if (confirm("펫시터를 추방하시겠습니까?")) {
 			$.ajax({
 				type : "post",
-				url : "interceptor_admin_deletePetsitter.do",
+				url : "admin_deletePetsitter.do",
 				data : "id="+ $(this).parent().parent().children().eq(0).text(),
 			});
 			$(this).parent().parent().children().eq(4).html("삭제됨");
@@ -26,13 +26,13 @@ $(document).ready(function() {
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
+				href="${initParam.root}admin_memberlist.do?rank=normal">일반회원</a>
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a> <a
+				href="${initParam.root}admin_petmomList.do">펫맘</a> <a
 				class="BJA"
-				href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
+				href="${initParam.root}admin_petsitterList.do?value=recog">펫시터</a>
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
+				href="${initParam.root}admin_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>
@@ -68,7 +68,7 @@ $(document).ready(function() {
 								<tr>
 									<td>${l.memberVO.id}</td>
 									<td><a
-										href="interceptor_admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=recog">${l.memberVO.name}</a></td>
+										href="admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=recog">${l.memberVO.name}</a></td>
 									<td>${l.memberVO.email}</td>
 									<td>${l.memberVO.tel}</td>
 									<td><input type="button" class="BJbtn2" name="deleteBtn" value="탈퇴"></td>
@@ -85,7 +85,7 @@ $(document).ready(function() {
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
 						<li><a
-							href="interceptor_admin_petsitterList.do?value=recog&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+							href="admin_petsitterList.do?value=recog&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
@@ -96,7 +96,7 @@ $(document).ready(function() {
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a
-								href="interceptor_admin_petsitterList.do?value=recog&pageNo=${i}">${i}</a></li>
+								href="admin_petsitterList.do?value=recog&pageNo=${i}">${i}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="active"><a>${i}</a></li>
@@ -106,7 +106,7 @@ $(document).ready(function() {
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
 						<li><a
-							href="interceptor_admin_petsitterList.do?value=recog&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+							href="admin_petsitterList.do?value=recog&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

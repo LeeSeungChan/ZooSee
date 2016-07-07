@@ -14,6 +14,11 @@ public interface ReserveService {
 
 	void reserveRegister(ReserveVO reserveVO, PetsitterboardVO petsitterboardVO);
 
+	// 2016.07.06
+	// petNo을 같이 넘겨줌
+	ReserveVO getReserveVO(int reserve_no, int petNo);
+	
+	// petNo 를 안넘기고 함?
 	ReserveVO getReserveVO(int reserve_no);
 
 	List<PetCalendarVO> getReserveDate(int reserve_no);

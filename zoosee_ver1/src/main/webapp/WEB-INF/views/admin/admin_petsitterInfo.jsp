@@ -9,7 +9,7 @@
 						$("#petsitterInfoForm :input[name=backBtn]")
 								.click(
 										function() {
-											location.href = "${initParam.root}interceptor_admin_petsitterList.do?value=${param.value}";
+											location.href = "${initParam.root}admin_petsitterList.do?value=${param.value}";
 
 										});
 
@@ -20,13 +20,13 @@
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_memberlist.do?rank=normal">일반회원</a>
+				href="${initParam.root}admin_memberlist.do?rank=normal">일반회원</a>
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_petmomList.do">펫맘</a> <a
+				href="${initParam.root}admin_petmomList.do">펫맘</a> <a
 				class="BJA"
-				href="${initParam.root}interceptor_admin_petsitterList.do?value=recog">펫시터</a>
+				href="${initParam.root}admin_petsitterList.do?value=recog">펫시터</a>
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_petsitterList.do?value=nonrecog">펫시터
+				href="${initParam.root}admin_petsitterList.do?value=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>

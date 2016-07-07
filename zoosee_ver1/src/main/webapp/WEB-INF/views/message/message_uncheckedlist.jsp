@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-		<a  class="BJA" href="${initParam.root}interceptor_message_list.do"> 전체 메세지 목록</a>
-		<a class="BJA"  href="${initParam.root}interceptor_message_uncheckedlist.do">안 읽은 메세지 목록</a>
+		<a  class="BJA" href="${initParam.root}message_list.do"> 전체 메세지 목록</a>
+		<a class="BJA"  href="${initParam.root}message_uncheckedlist.do">안 읽은 메세지 목록</a>
 		</div>
 	</div>
 </div>
@@ -21,9 +22,9 @@
 						<h3 class="panel-title">MESSAGE</h3>
 					</div>
 					<div class="panel-body">
-						${sessionScope.mvo.name } 님의 읽지 않은 메세지가 없습니다.
+						<sec:authentication property="principal.name"/> 님의 읽지 않은 메세지가 없습니다.
 						<div style="text-align: right;">
-							<a href="${initParam.root}interceptor_message_list.do">메세지 전체보기</a>
+							<a href="${initParam.root}message_list.do">메세지 전체보기</a>
 						</div>
 					</div>
 				</div>
@@ -39,9 +40,9 @@
 						<h3 class="panel-title">MESSAGE</h3>
 					</div>
 					<div class="panel-body">
-						${sessionScope.mvo.name } 님의 읽지 않은 메세지 목록입니다.
+						<sec:authentication property="principal.name"/> 님의 읽지 않은 메세지 목록입니다.
 						<div style="text-align: right;">
-							<a href="interceptor_message_updateCheckedAll.do?id=${sessionScope.mvo.id }">메세지 모두 읽기</a> 
+							<a href="message_updateCheckedAll.do?id=<sec:authentication property="principal.id"/>">메세지 모두 읽기</a> 
 						</div>
 					</div>
 				</div>
@@ -66,7 +67,7 @@
 											<c:if test="${message.checked==0}">읽지않음</c:if> 
 											<c:if test="${message.checked==1}">읽음</c:if></td>
 										<td>
-											<a href="interceptor_message_content.do?message_no=${message.message_no }">
+											<a href="message_content.do?message_no=${message.message_no }">
 												${message.title}</a>
 										</td>
 										<td>관리자</td>
@@ -86,7 +87,7 @@
 					<c:choose>
 						<c:when test="${pb.previousPageGroup}">
 							<li>
-								<a href="${initParam.root}interceptor_message_uncheckedlist.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
+								<a href="${initParam.root}message_uncheckedlist.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
 							</li>
 						</c:when>
 						<c:otherwise>
@@ -97,7 +98,7 @@
 						end="${pb.endPageOfPageGroup}">
 						<c:choose>
 							<c:when test="${pb.nowPage!=i}">
-								<li><a href="${initParam.root}interceptor_message_uncheckedlist.do?pageNo=${i}">${i}</a></li>
+								<li><a href="${initParam.root}message_uncheckedlist.do?pageNo=${i}">${i}</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="active"><a>${i}</a></li>
@@ -106,7 +107,7 @@
 					</c:forEach>
 					<c:choose>
 						<c:when test="${pb.nextPageGroup}">
-							<li><a href="${initParam.root}interceptor_message_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+							<li><a href="${initParam.root}message_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="disabled"><a>&raquo;</a></li>

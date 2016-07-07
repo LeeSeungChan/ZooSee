@@ -18,7 +18,7 @@
 		});
 
 		$("#cancelBtn").click(function() {
-			location.href = "${initParam.root}interceptor_freeBoard_list.do";
+			location.href = "${initParam.root}freeBoard_list.do";
 		});
 	});
 </script>
@@ -26,11 +26,11 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_list.do">자유게시판</a>
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_write.do">자유게시판
-				글등록</a> <a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a>
+			<a class="BJA" href="${initParam.root}freeBoard_list.do">자유게시판</a>
+			<a class="BJA" href="${initParam.root}freeBoard_write.do">자유게시판
+				글등록</a> <a class="BJA" href="${initParam.root}qna_list.do">Q&A게시판</a>
 			<a class="BJA"
-				href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+				href="${initParam.root}qna_board_register.do">Q&A 등록</a>
 		</div>
 	</div>
 </div>
@@ -48,7 +48,7 @@
 	</div>
 	<div class="BJMain2Div">
 		<form method="post"
-			action="${initParam.root}interceptor_freeBoard_contentWrite.do"
+			action="${initParam.root}freeBoard_contentWrite.do"
 			id="wirteForm">
 			<div class="form-group">
 				<div class="BJWriteTableLine">
@@ -61,7 +61,7 @@
 							</tr>
 							<tr>
 								<th>Writer</th>
-								<td style="float: left; margin-left: 3%;">${sessionScope.mvo.name }</td>
+								<td style="float: left; margin-left: 3%;">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.name}</td>
 							</tr>
 							<tr>
 								<th>Content</th>
@@ -69,14 +69,6 @@
 										style="resize: none;" name="freeBoardContents" id="inputLarge"
 										class="BJform-controlBig input-lg" rows="15"></textarea></td>
 							</tr>
-							<!-- <tr>
-							<td></td>
-							<td 	style="margin-left:40%; " colspan="2">
-							
-								<input class="BJbtn btn-default" type="button" value="목록" id="cancelBtn">
-								<input class="BJbtn btn-default" type="submit" value="등록" >
-							</td>
-						</tr> -->
 						</table>
 					</div>
 				</div>

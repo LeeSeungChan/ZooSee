@@ -23,8 +23,8 @@
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_MessageList.do">보낸 메세지 목록</a>
-		 <a class="BJA" href="${initParam.root}interceptor_admin_message.do">메세지 보내기</a>
+				href="${initParam.root}admin_MessageList.do">보낸 메세지 목록</a>
+		 <a class="BJA" href="${initParam.root}admin_message.do">메세지 보내기</a>
 		</div>
 	</div>
 </div>
@@ -40,7 +40,7 @@
 		<div class="well well-sm">메세지 작성</div>
 	</div>
 	<div class="BJMain2Div">
-		<form id="registerQNAForm" action="interceptor_admin_sendMessage.do">
+		<form id="registerQNAForm" action="admin_sendMessage.do">
 			<div class="BJWriteTableLine">
 				<div class="SBHrAllLine_1">
 					<table class="SBtable">

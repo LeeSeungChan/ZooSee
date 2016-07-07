@@ -18,9 +18,7 @@ public class MapController {
 	
 	@RequestMapping("mapDetail.do")
 	public ModelAndView mapDetail(String address, String id){
-		//System.out.println(address + id);
 		MemberVO memberVO = memberService.getMemberVO(id);
-		
 		return new ModelAndView("map/mapDetail", "memberVO", memberVO);
 	}
 }

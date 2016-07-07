@@ -10,6 +10,7 @@ import org.kosta.zoosee.model.admin.AdminService;
 import org.kosta.zoosee.model.member.MemberService;
 import org.kosta.zoosee.model.petsitter.PetsitterService;
 import org.kosta.zoosee.model.qnaboard.ListVO;
+import org.kosta.zoosee.model.security.SecurityService;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.MessageVO;
 import org.kosta.zoosee.model.vo.PetVO;
@@ -31,7 +32,7 @@ public class AdminController {
 	private MemberService memberService;
 
 	/* 관리자 페이지 - 회원이 등록한 모든 Q&A게시물 보기 */
-	@RequestMapping("interceptor_admin_qna_list.do")
+	@RequestMapping("admin_qna_list.do")
 	public ModelAndView getQuestionList(HttpServletRequest request) {
 		ListVO list = new ListVO();
 		String when = request.getParameter("when");
@@ -49,23 +50,23 @@ public class AdminController {
 	}
 
 	/* 관리자 페이지 - 회원이 등록한 해당 Q&A게시물 상세보기 */
-	@RequestMapping("interceptor_admin_showQuestion.do")
+	@RequestMapping("admin_showQuestion.do")
 	public ModelAndView showQuestion(int boardNo) {
 		return new ModelAndView("admin_showQuestion", "qnaBoardVO",
 				adminService.showQuestion(boardNo));
 	}
 
 	/* 관리자 페이지 - 답변등록하기 */
-	@RequestMapping("interceptor_admin_update_answer.do")
+	@RequestMapping("admin_update_answer.do")
 	public ModelAndView updateAnswer(QNABoardVO qnaBoardVO) {
 		adminService.updateAnswer(qnaBoardVO);
 		return new ModelAndView(
-				"redirect:interceptor_admin_showQuestion.do?boardNo="
+				"redirect:admin_showQuestion.do?boardNo="
 						+ qnaBoardVO.getBoardNo());
 	}
 
 	/* 관리자 페이지 - 아이디로 Q&A 검색하기 */
-	@RequestMapping("interceptor_admin_qna_find_view.do")
+	@RequestMapping("admin_qna_find_view.do")
 	public ModelAndView findByIdQNA(HttpServletRequest request) {
 		String pageNo = request.getParameter("pageNo");
 		String id = request.getParameter("id");
@@ -74,18 +75,18 @@ public class AdminController {
 	}
 
 	/* 관리자 페이지 - 모든 회원에게 메세지 보내기 */
-	@RequestMapping("interceptor_admin_sendMessage.do")
+	@RequestMapping("admin_sendMessage.do")
 	public ModelAndView sendMessage(MessageVO messageVO,
 			HttpServletRequest request) {
 		adminService.sendMessage(messageVO);
 		HttpSession session = request.getSession(false);
 		String id = ((MemberVO) session.getAttribute("mvo")).getId();
-		return new ModelAndView("redirect:interceptor_admin_MessageList.do?id="
+		return new ModelAndView("redirect:admin_MessageList.do?id="
 				+ id);
 	}
 
 	/* 관리자 페이지 - 보낸 메세지 리스트 */
-	@RequestMapping("interceptor_admin_MessageList.do")
+	@RequestMapping("admin_MessageList.do")
 	public ModelAndView messageList(HttpServletRequest request, String pageNo,
 			String id) {
 		if (id == null) {
@@ -98,7 +99,7 @@ public class AdminController {
 	}
 
 	/* 관리자 페이지 - 펫 맘 리스트 */
-	@RequestMapping("interceptor_admin_petmomList.do")
+	@RequestMapping("admin_petmomList.do")
 	public ModelAndView getPetmomList(String pageNo) {
 		org.kosta.zoosee.model.member.ListVO list = adminService
 				.getPetmomList(pageNo);
@@ -106,7 +107,7 @@ public class AdminController {
 	}
 
 	/* 관리자 페이지 -펫맘 정보 */
-	@RequestMapping("interceptor_admin_getPetmomInfo.do")
+	@RequestMapping("admin_getPetmomInfo.do")
 	public ModelAndView getPetmomInfo(String id) {
 		MemberVO memberVO = adminService.getPetmomInfo(id);
 		List<PetVO> list = adminService.getPetListById(id);
@@ -118,7 +119,7 @@ public class AdminController {
 	}
 
 	/* 관리자 페이지 - 펫시터정보보기 */
-	@RequestMapping("interceptor_admin_getPetsitterVO.do")
+	@RequestMapping("admin_getPetsitterVO.do")
 	public ModelAndView getPetsitterVO(int petsitterNo, String value) {
 		PetsitterVO pvo = petsitterService.getPetsitterVO(petsitterNo);
 		ModelAndView mv = new ModelAndView("admin_petsitterInfo");
@@ -128,7 +129,7 @@ public class AdminController {
 	}
 
 	/* 관리자 페이지 - 펫시터 리스트 */
-	@RequestMapping("interceptor_admin_petsitterList.do")
+	@RequestMapping("admin_petsitterList.do")
 	public ModelAndView petsitterList(String value, HttpServletRequest request) {
 		String pageNo = request.getParameter("pageNo");
 		ModelAndView mv = new ModelAndView();
@@ -145,7 +146,7 @@ public class AdminController {
 	}
 
 	/* 관리자 페이지 - 멤버 리스트 */
-	@RequestMapping("interceptor_admin_memberlist.do")
+	@RequestMapping("admin_memberlist.do")
 	public ModelAndView memberList(String rank, HttpServletRequest requestion) {
 		String pageNo = requestion.getParameter("pageNo");
 		org.kosta.zoosee.model.member.ListVO list = memberService.memberList(
@@ -154,45 +155,44 @@ public class AdminController {
 	}
 
 	/* 관리자 페이지 - 멤버 추방 */
-	@RequestMapping(value = "interceptor_admin_delete.do", method = RequestMethod.POST)
+	@RequestMapping(value = "admin_delete.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void deleteMember(String id) {
 		memberService.deleteMember(id);
 	}
 
 	/* 관리자 페이지 - 멤버정보보기 */
-	@RequestMapping("interceptor_admin_getMemberVO.do")
+	@RequestMapping("admin_getMemberVO.do")
 	public ModelAndView getMemberVO(String id) {
 		return new ModelAndView("admin_memberInfo", "memberVO",
 				memberService.getMemberVO(id));
 	}
 
 	/* 관리자 페이지 - 펫시터 추방 */
-	@RequestMapping(value = "interceptor_admin_deletePetsitter.do", method = RequestMethod.POST)
+	@RequestMapping(value = "admin_deletePetsitter.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void deletePetsitter(String id) {
 		petsitterService.deletePetsitter(id);
 	}
 
 	/* 관리자 페이지 - 펫시터 인증 */
-	@RequestMapping(value = "interceptor_admin_recognitionPetsitter.do", method = RequestMethod.POST)
+	@RequestMapping(value = "admin_recognitionPetsitter.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void recognitionPetsitter(int petsitterNo) {
-
 		String id = memberService.findIdByPetsitterNo(petsitterNo);
-
 		petsitterService.recognitionPetsitter(petsitterNo, id);
+		
 	}
 
 	/* 관리자 페이지 - 직원 관리 */
-	@RequestMapping("interceptor_admin_adminList.do")
+	@RequestMapping("admin_adminList.do")
 	public ModelAndView adminList(String pageNo) {
 		org.kosta.zoosee.model.member.ListVO list = adminService
 				.adminList(pageNo);
 		return new ModelAndView("admin_adminList", "listVO", list);
 	}
 	/* 관리자 페이지 - 관리자 권한 부여*/
-	@RequestMapping("interceptor_admin_findInfoByValue.do")
+	@RequestMapping("admin_findInfoByValue.do")
 	public ModelAndView findInfoByValue(String value,String how){
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("how",how);
@@ -200,16 +200,14 @@ public class AdminController {
 		mv.setViewName("admin_adminManage");
 		if(how.equals("id")){
 			MemberVO memberVO=adminService.findInfoById(value);
-			System.out.println(memberVO);
 			mv.addObject("memberVO",memberVO);
 		}else if(how.equals("name")){
 			List<MemberVO> list=adminService.findInfoByName(value);
-			System.out.println(list);
 			mv.addObject("list",list);
 		}
 		return mv;
 	}
-	@RequestMapping(value="interceptor_admin_addAdmin.do",method=RequestMethod.POST)
+	@RequestMapping(value="admin_addAdmin.do",method=RequestMethod.POST)
 	@ResponseBody
 	public String addAdmin(String id){
 		String result="ok";
@@ -219,7 +217,7 @@ public class AdminController {
 		}
 		return result;
 	}
-	@RequestMapping(value="interceptor_admin_resign.do",method=RequestMethod.POST)
+	@RequestMapping(value="admin_resign.do",method=RequestMethod.POST)
 	@ResponseBody
 	public String resign(String id){
 		String result="ok";

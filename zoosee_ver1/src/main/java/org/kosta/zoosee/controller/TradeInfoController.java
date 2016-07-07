@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.pet.PetService;
@@ -15,6 +14,7 @@ import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.TradeInfoVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,13 +33,10 @@ public class TradeInfoController {
 	private PetsitterService petsitterService;
 	
 	// 버튼 누르면 초기값, 아이디 세션아이디.
-	@RequestMapping("interceptor_tradeInfo_getTradeMyList.do")
+	@RequestMapping("tradeInfo_getTradeMyList.do")
 	public ModelAndView getTradeMyList(HttpServletRequest request){
 		MemberVO memberVO = null;
-		HttpSession session = request.getSession(false);
-		if(session != null){
-			memberVO = (MemberVO)session.getAttribute("mvo");
-		}
+		memberVO = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		// id의 rank에 따라 다른 list를 찾는다.
 		List<TradeInfoVO> list = tradeInfoService.getTradeMyList(memberVO.getId());
 		ModelAndView mv = new ModelAndView("tradeInfo_tradeMyList", "tradeInfoList", list);
@@ -48,19 +45,14 @@ public class TradeInfoController {
 	
 	@RequestMapping("tradeInfo_tradeInfoCheck.do")
 	public ModelAndView tradeInfo_tradeInfoCheck(HttpServletRequest request){
-		HttpSession session = request.getSession(false);
-		String id = request.getParameter("id"); // 정보를 보고자하는 id를 받아온다.
-		String rank = null; // session의 rank 받기
-		if(session != null){
-			rank = ((MemberVO)session.getAttribute("mvo")).getRank();	
-		}
-		
+		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId(); // 정보를 보고자하는 id를 받아온다.
+		String rank = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getRank();
 		ModelAndView mv= new ModelAndView();
 		
-		PetVO petVO = petService.detailPetAndMemberInfo(id);
+		List<PetVO> petList = petService.detailPetAndMemberInfo(id);
 		PetsitterVO petsitterVO = petsitterService.findPetsitterById(id);
 		
-		if(petVO == null){ 
+		if(petList.size() == 0){ 
 		// pet정보가 없으므로 펫시터
 			mv.setViewName("tradeInfo_tradeShowPetsitterDetail");
 			mv.addObject("petsitterVO", petsitterVO);
@@ -68,10 +60,12 @@ public class TradeInfoController {
 			
 		}else if(petsitterVO == null){
 		// 펫시터 정보가 없으므로 펫맘
+			PetVO petVO = petList.get(0);
 			mv.setViewName("tradeInfo_tradeShowPetMomDetail");
 			mv.addObject("petVO", petVO);
 		}else{
 		// 둘다 있으므로 펫마스터
+			PetVO petVO = petList.get(0);
 			mv.setViewName("tradeInfo_tradeShowPetMasterDetail");
 			mv.addObject("petsitterVO", petsitterVO);
 			mv.addObject("petVO", petVO);

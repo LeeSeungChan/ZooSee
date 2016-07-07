@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+	<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
    $(document).ready(function() {
-      $("#pass_check_btn").click(function() {
-         var id = $("#hiddenId").val();
+      $("#pass_check_btn").click(function() 
+    	{
          var password = $("#checkPassword").val();
          $.ajax({
             type : "post",
             url : "check.do",
-            data : "id=" + id + "&password=" + password,
+            data : "id=" + "<sec:authentication property='principal.id'/>" + "&password=" + password,
             dataType : "json",
             success : function(result) {
                if (result.check == "ok") {
@@ -24,8 +25,8 @@
          });//ajax
       });//onclick
       $("#password").focus();
-      $("#existence option[value=" + "'${mvo.existence}'" + "]").attr('selected', 'selected');
-      $("input:radio[name=gender][value="+ '<c:out value="${ mvo.gender }"/>' + "]").attr("checked", "checked");
+      $("#existence option[value="+"'${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.existence}'"+"]").attr('selected', 'selected');
+      $("input:radio[name=gender][value="+ "<sec:authentication property='principal.gender'/>" + "]").attr("checked", "checked");
       $("#password").keyup(function() {
          $("#passCheckView").empty();
          $("#passView").empty();
@@ -93,7 +94,7 @@
             });
             $("#cancle").click(function() {
                if (confirm("회원 정보 수정을 취소하시겠습니까?")) {
-                  location.href = "interceptor_member_detail.do";
+                  location.href = "m_member_detail.do";
                }
             });
          });
@@ -120,17 +121,16 @@
 <div class="BJHeaderLayout0">
       <div class="BJHeaderLayout">
          <div class="BJHeader2">
-            <a class="BJA" href="${initParam.root}interceptor_member_detail.do">마이페이지</a>
-            <a class="BJA" href="${initParam.root}interceptor_member_update.do">회원정보수정</a>
-            <c:if
-               test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
+            <a class="BJA" href="${initParam.root}m_member_detail.do">마이페이지</a>
+            <a class="BJA" href="${initParam.root}member_update.do">회원정보수정</a>
+            <sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
                <a class="BJA"
-                  href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}">
+                  href="${initParam.root}petsitterboard_registerform.do?id=<sec:authentication property="principal.id"/>">
                   펫시터게시글등록</a>
                <a class="BJA"
-                  href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do">내
+                  href="${initParam.root}petsitterboard_myPetsitterBoard.do">내
                   글 보기</a>
-            </c:if>
+           </sec:authorize>
          </div>
       </div>
    </div>
@@ -152,7 +152,7 @@
                <div style="float: center;">
                   정보 수정을 위해 비밀번호를 입력해주세요.<br>
                   <div class="WJform-group">
-                     <input type="hidden" id="hiddenId" value="${sessionScope.mvo.id}">
+                     <input type="hidden" id="hiddenId" value="<sec:authentication property="principal.id"/>">
                      <input class="WJform-control" id="checkPassword" name="checkPassword"
                         placeholder="Password" type="password"> <input
                         type="hidden" name="checked" id="checked" value="false">
@@ -184,11 +184,11 @@
             src="${initParam.root}resources/image/Mzoosee.png"></a>
       </div>
       <div class="WJLayout" style="text-align: left;" id="member_register">
-         <form action="interceptor_member_update_result.do" method="post"
+         <form action="m_member_update_result.do" method="post"
             id="updateForm">
             <div class="WJform-group">
                <label>id</label> <input class="WJform-control" type="text"
-                  name="id" value="${mvo.id}" readonly="readonly">
+                  name="id" value="<sec:authentication property="principal.id"/>" readonly="readonly">
             </div>
             <div class="WJform-group">
                <label>Password</label> <input class="WJform-control" id="password"
@@ -203,14 +203,14 @@
             </div>
             <div class="WJform-group">
                <label>Name</label> <input class="WJform-control" type="text"
-                  name="name" value="${mvo.name}">
+                  name="name" value="<sec:authentication property="principal.name"/>">
             </div>
             <div class="WJform-group">
                <label>Address</label>
                <div class="WJform-group">
                   <input class="WJform-control2" style="float: left; width: 49.5%;"
                      type="text" id="addressCode" name="addressCode"
-                     value="${mvo.addressCode}" readonly="readonly"> <a
+                     value="<sec:authentication property="principal.addressCode"/>" readonly="readonly"> <a
                      href="javascript:openDaumPostcode()"> <input
                      class="active WJbtn btn-default"
                      style="float: right; width: 49.5%;" type="button"
@@ -220,15 +220,15 @@
             </div>
             <div class="WJform-group">
                <input class="WJform-control " type="text" name="address"
-                  id="address" value="${mvo.address}" readonly="readonly"> <input
-                  class="WJform-control " type="text" value="${mvo.detailAddress}"
+                  id="address" value="<sec:authentication property="principal.address"/>" readonly="readonly"> <input
+                  class="WJform-control " type="text" value="<sec:authentication property="principal.detailAddress"/>"
                   name="detailAddress" id="detailAddress"
                   placeholder="Enter Address"> <input type="hidden"
                   name="dong_addr" id="dong_addr" value="">
             </div>
             <div class="WJform-group">
                <label>Email address</label> <input class="WJform-control"
-                  type="text" name="email" value="${mvo.email}">
+                  type="text" name="email" value="<sec:authentication property="principal.email"/>">
             </div>
             <div class="WJform-group" align="center">
                <div class="radio">
@@ -241,11 +241,11 @@
             </div>
             <div class="WJform-group">
                <label>Tel</label> <input class="WJform-control" type="text"
-                  value="${mvo.tel}" name="tel">
+                  value="<sec:authentication property="principal.tel"/>" name="tel">
             </div>
             <div class="WJform-group">
                <label>Job</label> <input class="WJform-control" type="text"
-                  value="${mvo.job }" name="job">
+                  value="<sec:authentication property="principal.job"/>" name="job">
             </div>
             <div class="WJform-group">
                <label>Existence</label> <select class="WJform-control"

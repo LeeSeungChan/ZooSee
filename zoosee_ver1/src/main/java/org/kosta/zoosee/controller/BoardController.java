@@ -17,6 +17,7 @@ import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
 import org.kosta.zoosee.model.vo.ReviewVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,14 +35,16 @@ public class BoardController {
 	@Resource
 	private ReviewService reviewService;
 	// 헤더에서 보드 등록 폼.JSP로 이동하는
-	@RequestMapping("interceptor_petsitterboard_registerform.do")
+	@RequestMapping("psboard_petsitterboard_registerform.do")
 	public ModelAndView registerBoard(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
+		/*HttpSession session = request.getSession(false);
 		String id = null;
 		if(session != null && session.getAttribute("mvo") != null){
 			id = ((MemberVO)session.getAttribute("mvo")).getId();
-		}
-		
+		}*/
+		// 2016.07.05
+		// 시큐리티 세션
+		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		PetsitterVO petsitterVO = petsitterService.findPetsitterById(id);
 		PetsitterboardVO pbVO = reserveService.getBoardVOByPetsitterId(id);
 		String flag = "false";
@@ -57,7 +60,7 @@ public class BoardController {
 	}
 
 	// 펫시터보드 등록하는
-	@RequestMapping(value="interceptor_petsitterboardRegister.do", method=RequestMethod.POST)
+	@RequestMapping(value="psboard_petsitterboardRegister.do", method=RequestMethod.POST)
 	public ModelAndView registerPetsitterboard(@ModelAttribute PetsitterboardVO petsitterboardVO, PetsitterVO petsitterVO) {
 		boardServie.registerPetsitterboard(petsitterboardVO, petsitterVO);
 
@@ -142,17 +145,18 @@ public class BoardController {
 		return mv;
 	}
 
-	@RequestMapping("interceptor_petsitterboard_myPetsitterBoard.do")
+	@RequestMapping("psboard_petsitterboard_myPetsitterBoard.do")
 	public ModelAndView myPetsitterboard(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		String id = ((MemberVO) session.getAttribute("mvo")).getId();
+		//HttpSession session = request.getSession(false);
+		// 2016.07.05
+		// 시큐리티 세션 
+		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		int petsitterboard_no = boardServie.myPetsitterboard(id);
-
 		return new ModelAndView("redirect:petsitterboardDetail.do?petsitterboard_no="+ petsitterboard_no);
 	}
 	
 	//게시글 수정 뷰
-	@RequestMapping("interceptor_petsitterboard_myPetsitterBoardUpdateView.do")
+	@RequestMapping("psboard_petsitterboard_myPetsitterBoardUpdateView.do")
 	public ModelAndView myPetsitterboardUpdateView(int petsitterboard_no) {
 		ModelAndView mv = new ModelAndView("petsitterboard_updateForm");
 		List<String> list = boardServie.getPetCalendarDate(petsitterboard_no);
@@ -179,14 +183,14 @@ public class BoardController {
 	}
 		
 	//게시글 수정
-	@RequestMapping("interceptor_petsitterboardUpdate.do")
+	@RequestMapping("psboard_petsitterboardUpdate.do")
 	public ModelAndView myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO){            
 		boardServie.myPetsitterboardUpdate(petsitterboardVO,petsitterVO);
-		return new ModelAndView("redirect:interceptor_petsitterboard_myPetsitterBoard.do");
+		return new ModelAndView("redirect:petsitterboard_myPetsitterBoard.do");
 	}
 	
 	//게시글삭제
-	@RequestMapping("interceptor_petsitterboard_myPetsitterBoardDelete.do")
+	@RequestMapping("psboard_petsitterboard_myPetsitterBoardDelete.do")
 	public ModelAndView myPetsitterBoardDelete(int petsitterboard_no){
 		boardServie.myPetsitterBoardDelete(petsitterboard_no);
 		return new ModelAndView("redirect:home.do");

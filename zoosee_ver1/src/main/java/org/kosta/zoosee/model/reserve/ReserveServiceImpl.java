@@ -1,6 +1,7 @@
 package org.kosta.zoosee.model.reserve;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -58,7 +59,11 @@ public class ReserveServiceImpl implements ReserveService {
 		reserveVO.setPetsitterboardVO(petsitterboardVO2);
 
 		// PetVO 가져오기 /* !! PetDAOImpl, pet.xml에 각각 추가 수정 */
-		PetVO petVO = petDAO.getPetVO(reserveVO.getMemberVO().getId());
+		// 2016.07.06
+		// PetVO 를 id로만 찾으려면 여러개 나와서
+		// List 로 받고 0번째 PetVO를 set 해줌
+		List<PetVO> petVOList = petDAO.getPetVOList(reserveVO.getMemberVO().getId());
+		PetVO petVO = petVOList.get(0);
 		reserveVO.setPetVO(petVO);
 
 		// reserveVO에 reserve_recog=0으로 초기화
@@ -78,8 +83,12 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public ReserveVO getReserveVO(int reserve_no) {
-		return reserveDAO.getReserveVO(reserve_no);
+	public ReserveVO getReserveVO(int reserve_no, int petNo) 
+	{
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("reserve_no",reserve_no);
+		map.put("petNo", petNo);
+		return reserveDAO.getReserveVO(map);
 	}
 
 	@Override
@@ -104,20 +113,23 @@ public class ReserveServiceImpl implements ReserveService {
 		}
 	}
 
+	// 2016.07.06
+	// id로 예약 리스트 조회
 	@Override
 	public List<ReserveVO> showMyReserveList(MemberVO memberVO,
 			String petMasterSignal) {
 		List<ReserveVO> list = new ArrayList<ReserveVO>();
+		HashMap<String,String> map = new HashMap<String,String>();
 		String id = memberVO.getId();
-
-		PetVO petVO = petDAO.getPetVO(id);
+		int petVOCount = petDAO.getPetCountById(id);
 		PetsitterVO petsitterVO = petsitterDAO.findPetsitterById(id);
-
-		if (petVO == null) {
+		if (petVOCount ==0) {
 			// 완전 PETSITTER
+			// petmomId
 			list = reserveDAO.showPetsitterReserveList(id);
 		} else if (petsitterVO == null) {
 			// 완전 PETMOM
+			// petsitterId
 			list = reserveDAO.showPetMomReserveList(id);
 		} else {
 			// PetMaster 중에서 변수가 1이면 맘 and 0이면 시터 입장
@@ -185,5 +197,11 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public ReserveVO popupPayment(int reserve_no) {
 		return reserveDAO.popupPayment(reserve_no);
+	}
+
+	@Override
+	public ReserveVO getReserveVO(int reserve_no) 
+	{
+		return reserveDAO.getReserveVO(reserve_no);
 	}
 }

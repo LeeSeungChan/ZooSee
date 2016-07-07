@@ -7,6 +7,6 @@
 		} else {
 			alert("질문 수정에 실패하셨습니다.");
 		}
-		location.replace("${initParam.root}interceptor_qna_list.do");
+		location.replace("${initParam.root}qna_list.do");
 	});
 </script>

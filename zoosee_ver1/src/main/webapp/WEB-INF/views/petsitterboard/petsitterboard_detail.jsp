@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
 	var a = new Array();
 	var receiveData = new Array();
-   
   	// Controller로부터 예약된 날짜 리스트를 받아와서 JS Array object로 변환
   	function dateFormatChange(){
 	   	var data = "${calendarList}";
@@ -24,7 +23,7 @@
 
       	$("#deleteId").click(function(){
         	if(confirm("삭제하시겠습니까?")){
-            	location.href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardDelete.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}";
+            	location.href="${initParam.root}psboard_petsitterboard_myPetsitterBoardDelete.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}";
         	} 
       	});
       
@@ -183,7 +182,6 @@
                         	interval = 1;
                            	price = price/2;
                        	}
-                        //alert(edate.getDate() - sdate.getDate() + 1 + "일");
                      	}else{
                        		var month  = sdate.getMonth()+1;
                        		var sday;
@@ -233,10 +231,9 @@
         });
          
         $("#reserveRegForm").submit(function(){
-            var rank = "${sessionScope.mvo.rank}";
-            var id = "${sessionScope.mvo.id}";
+            var rank = ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank};
+            var id = ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id};
             var boardId = "${petsitterboardVO.petsitterVO.memberVO.id}";
-            
             if($("#sdate").val() == ""){
                	alert("시작일을 선택해 주세요.");
                 return false;
@@ -244,7 +241,6 @@
                 alert("종료일을 선택해 주세요.");
                 return false;
             }
-
             if(confirm("예약 요청하시겠습니까?")){
             	if(id == boardId){
                 	alert("본인한테 예약 불가합니다.");
@@ -282,14 +278,14 @@
 	<div class="BJHeaderLayout0">
 		<div class="BJHeaderLayout" >
 			<div class="BJHeader2" >
-				<a class="BJA" href="${initParam.root}interceptor_member_detail.do">마이페이지</a>
-				<a class="BJA" href="${initParam.root}interceptor_member_update.do">회원정보수정</a>
-				<c:if test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
-			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 펫시터게시글등록</a>
-			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
-			       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoardUpdateView.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}">내 글 수정</a>
+				<a class="BJA" href="${initParam.root}m_member_detail.do">마이페이지</a>
+				<a class="BJA" href="${initParam.root}m_member_update.do">회원정보수정</a>
+				<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
+			       <a class="BJA" href="${initParam.root}psboard_petsitterboard_registerform.do?id=<sec:authentication property="principal.id"/>"> 펫시터게시글등록</a>
+			       <a class="BJA" href="${initParam.root}psboard_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
+			       <a class="BJA" href="${initParam.root}psboard_petsitterboard_myPetsitterBoardUpdateView.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}">내 글 수정</a>
 			       <a class="BJA" id="deleteId" href="#">내 글 삭제</a>
-		    	</c:if>
+		    	</sec:authorize>
 			</div>
 		</div>
 	</div>
@@ -307,9 +303,9 @@
 		<div class="well well-sm">펫시터 정보 확인 및 예약</div>
 	</div>
 	<div class="BJMain2Div">
-	<form method="post" action="interceptor_reserveRegister.do" id="reserveRegForm">
+	<form method="post" action="reserveRegister.do" id="reserveRegForm">
 		<input type="hidden" name="petsitterboard_no" value="${petsitterboardVO.petsitterboard_no}" />
-		<input type="hidden" name="id" value="${sessionScope.mvo.id}" />
+		<input type="hidden" name="id" value="<sec:authentication property="principal.id"/>" />
      	<input type="hidden" name="petsitterId" value="${petsitterboardVO.petsitterVO.memberVO.id}"/>
      	<input type="hidden" name="petCheckNumber" value="0"/>
      	<input type="hidden" name="reserve_price" />

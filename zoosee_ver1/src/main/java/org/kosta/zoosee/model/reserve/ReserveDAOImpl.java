@@ -1,5 +1,6 @@
 package org.kosta.zoosee.model.reserve;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,10 +18,20 @@ public class ReserveDAOImpl implements ReserveDAO{
 	public int reserveRegister(ReserveVO reserveVO) {
 		return template.insert("reserve.reserveRegister", reserveVO);
 	}
-
+	
+	// 2016.07.06
+	// 펫맘 예약 VO
 	@Override
-	public ReserveVO getReserveVO(int reserve_no) {
- 		return template.selectOne("reserve.getReserveVO", reserve_no);
+	public ReserveVO getReserveVO(HashMap<String,Integer> map) {
+ 		return template.selectOne("reserve.getReserveVO", map);
+	}
+	
+	// 2016.07.06
+	// 펫시터 예약 VO
+	@Override
+	public ReserveVO getReserveVO(int reserve_no) 
+	{
+		return template.selectOne("reserve.getReserveVOPetsitter",reserve_no);
 	}
 
 	// 예약 취소 시 테이블에서 delete
@@ -78,4 +89,6 @@ public class ReserveDAOImpl implements ReserveDAO{
 	public ReserveVO popupPayment(int reserve_no) {
 		return template.selectOne("reserve.popupPayment", reserve_no);
 	}
+
+	
 }

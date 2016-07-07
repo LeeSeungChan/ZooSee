@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+	<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("input:radio[name=gender][value=" + '<c:out value="${ mvo.gender }"/>' + "]").attr("checked","checked");
+		$("input:radio[name=gender][value=" + "<sec:authentication property='principal.gender'/>" + "]").attr("checked","checked");
 		$("#update").click(function() {
 			if (confirm("수정하시겠습니까?")) {
 			location.replace("${initParam.root}member_update.do");
@@ -11,22 +12,21 @@
 		});
 		$("#delete").click(function() {
 			if (confirm("탈퇴하시겠습니까?")) {
-				location.replace("${initParam.root}member_delete.do");
+				location.replace("${initParam.root}m_member_delete.do");
 			}
 		});
-    	$("input:radio[name=existence][value=" + '<c:out value="${ mvo.existence }"/>' + "]").attr("checked","checked");
 	});
 </script>
 <!-- 더블헤더 -->
 <div class="BJHeaderLayout0">
 <div class="BJHeaderLayout" >
 <div class="BJHeader2" >
-	<a class="BJA" href="${initParam.root}interceptor_member_detail.do">마이페이지</a>
-	<a class="BJA" href="${initParam.root}interceptor_member_update.do">회원정보수정</a>
-   	<c:if test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
-       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 펫시터게시글등록</a>
-       <a class="BJA" href="${initParam.root}interceptor_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
-      </c:if>
+	<a class="BJA" href="${initParam.root}m_member_detail.do">마이페이지</a>
+	<a class="BJA" href="${initParam.root}member_update.do">회원정보수정</a>
+   	<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
+       <a class="BJA" href="${initParam.root}psboard_petsitterboard_registerform.do?id=<sec:authentication property="principal.id"/>"> 펫시터게시글등록</a>
+       <a class="BJA" href="${initParam.root}psboard_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
+     </sec:authorize>
 	</div>
 </div>
 </div>
@@ -41,21 +41,21 @@
             <form>
                <div class="WJform-group">
                 <label>id</label>
-                <input class="WJform-control"  type="text" value="${mvo.id}" readonly="readonly" style="background-color: #F4F4F4;">
+                <input class="WJform-control"  type="text" value="<sec:authentication property="principal.id"/>" readonly="readonly" style="background-color: #F4F4F4;">
               </div>
                <div class="WJform-group">
                 <label>Name</label>
-                <input class="WJform-control" type="text" value="${mvo.name}" readonly="readonly" style="background-color: #F4F4F4;">
+                <input class="WJform-control" type="text" value="<sec:authentication property="principal.name"/>" readonly="readonly" style="background-color: #F4F4F4;">
               </div>
                 <div class="WJform-group">
                 <label>Address</label>
-                <input class="WJform-control"  value="우편번호 : ${mvo.addressCode}" disabled="disabled" style="background-color: #F4F4F4;">
-                <input class="WJform-control"  value="${mvo.address}" disabled="disabled" style="background-color: #F4F4F4;">
-                <input class="WJform-control"  value="${mvo.detailAddress}"disabled="disabled" style="background-color: #F4F4F4;">
+                <input class="WJform-control"  value="우편번호 : <sec:authentication property="principal.addressCode"/>" disabled="disabled" style="background-color: #F4F4F4;">
+                <input class="WJform-control"  value="<sec:authentication property="principal.address"/>" disabled="disabled" style="background-color: #F4F4F4;">
+                <input class="WJform-control"  value="<sec:authentication property="principal.detailAddress"/>"disabled="disabled" style="background-color: #F4F4F4;">
               </div>
               <div class="WJform-group">
                 <label>Email address</label>
-                <input class="WJform-control" type="text" value="${mvo.email}" readonly="readonly" style="background-color: #F4F4F4;">
+                <input class="WJform-control" type="text" value="<sec:authentication property="principal.email"/>" readonly="readonly" style="background-color: #F4F4F4;">
               </div>
               <div class="WJform-group" align="center">
                 <div class="radio">
@@ -67,15 +67,15 @@
               </div>
               <div class="WJform-group">
                 <label>Tel</label>
-                <input class="WJform-control" type="text" value="${mvo.tel}" readonly="readonly" style="background-color: #F4F4F4;">
+                <input class="WJform-control" type="text" value="<sec:authentication property="principal.tel"/>" readonly="readonly" style="background-color: #F4F4F4;">
               </div>
                <div class="WJform-group">
                 <label>Job</label>
-                <input class="WJform-control" type="text" value="${mvo.job }" readonly="readonly" style="background-color: #F4F4F4;">
+                <input class="WJform-control" type="text" value="<sec:authentication property="principal.job"/>" readonly="readonly" style="background-color: #F4F4F4;">
               </div>
                <div class="WJform-group">
                 <label>Existence</label>
-                <input class="WJform-control" value="${mvo.existence}" disabled="disabled"  style="background-color: #F4F4F4;">
+                <input class="WJform-control" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.existence}" disabled="disabled"  style="background-color: #F4F4F4;">
               </div>
               <br>
               <div class="WJform-group">
@@ -85,32 +85,3 @@
      		  </form>       
         </div>
 </div>
-
-<%-- 
-아이디
-<input type="text" name="id" value="${mvo.id }" readonly="readonly">
-<br>
-이름
-<input type="text" name="name" value="${mvo.name }" readonly="readonly">
-<br>
-주소
-<input type="text" name="address" value="${mvo.address }"
-	readonly="readonly">
-<br>
-이메일
-<input type="email" name="email" value="${mvo.email }"
-	readonly="readonly">
-<br>
-연락처
-<input type="text" name="tel" value="${mvo.tel }" readonly="readonly">
-<br>
-직업
-<input type="text" name="job" value="${mvo.job }" readonly="readonly">
-<br>
-펫 양육 경험 <br>
-<input type="radio" name="existence" value="A" disabled="disabled" > 키워본 경험이 없다<br>
-<input type="radio" name="existence" value="B" disabled="disabled" > 키워본 경험이 있다<br>
-<input type="radio" name="existence" value="C" disabled="disabled"> 현재 키우고 있다<br>
-<input type="button" value="수정" id="update">
-<input type="button" value="탈퇴" id="delete">
- --%>

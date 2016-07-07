@@ -9,11 +9,11 @@
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
 			<a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_list.do?when=all">모든
+				href="${initParam.root}admin_qna_list.do?when=all">모든
 				Q&A 목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_list.do?when=nonAnswer">답변
+				href="${initParam.root}admin_qna_list.do?when=nonAnswer">답변
 				미등록 Q&A 목록</a> <a class="BJA"
-				href="${initParam.root}interceptor_admin_qna_findbyid.do">아이디로
+				href="${initParam.root}admin_qna_findbyid.do">아이디로
 				Q&A 검색</a>
 		</div>
 	</div>
@@ -46,10 +46,10 @@
 							<tr>
 								<td>${Question.boardNo }</td>
 								<td><a
-									href="${initParam.root}interceptor_admin_showQuestion.do?boardNo=${Question.boardNo}">
+									href="${initParam.root}admin_showQuestion.do?boardNo=${Question.boardNo}">
 										${Question.title }</a></td>
 								<td><a
-									href="${initParam.root}interceptor_admin_getMemberVO.do?id=${Question.memberVO.id}">
+									href="${initParam.root}admin_getMemberVO.do?id=${Question.memberVO.id}">
 										${Question.memberVO.name}(${Question.memberVO.id})</a></td>
 								<td>${Question.timePosted }</td>
 								<td><c:choose>
@@ -68,7 +68,7 @@
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
 						<li><a
-							href="interceptor_admin_qna_list.do?pageNo=${pb.startPageOfPageGroup-1}&when=${when}">&laquo;</a></li>
+							href="admin_qna_list.do?pageNo=${pb.startPageOfPageGroup-1}&when=${when}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
@@ -79,7 +79,7 @@
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a
-								href="interceptor_admin_qna_list.do?pageNo=${i}&when=${when}">${i}</a></li>
+								href="admin_qna_list.do?pageNo=${i}&when=${when}">${i}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="active"><a>${i}</a></li>
@@ -89,7 +89,7 @@
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
 						<li><a
-							href="interceptor_qna_list.do?pageNo=${pb.endPageOfPageGroup+1}&when=${when}">&raquo;</a></li>
+							href="qna_list.do?pageNo=${pb.endPageOfPageGroup+1}&when=${when}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

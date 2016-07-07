@@ -7,7 +7,7 @@ $(document).ready(function(){
 		location.replace("${initParam.root}home.do");
 	}else{
 		alert("회원 탈퇴에 실패하셨습니다. 다시 시도하세요.");
-		location.replace("${initParam.root}interceptor_member_detail.do")
+		location.replace("${initParam.root}m_member_detail.do")
 	}
 });
 </script>

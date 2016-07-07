@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean name="customizedAuthenticationProvider"
+		class="org.kosta.zoosee.model.security.MemberAuthenticationProvider" />
+	<sec:http use-expressions="true">
+		<!-- admin 일때 권한 -->
+		<sec:intercept-url pattern="/admin_*" access="hasRole('ROLE_ADMIN')" />
+		<!-- 회원의 권한 -->
+		<sec:intercept-url pattern="/m_*" access="hasAnyRole('ROLE_MEMBER','ROLE_PETMOM','ROLE_PETSITTER','ROLE_PETMASTER','ROLE_ADMIN')" />
+		<!-- 돌보미(petsitter) 의 권한 -->
+		<sec:intercept-url pattern="/ps_*" access="hasAnyRole('ROLE_PETMOM','ROLE_PETMASTER','ROLE_ADMIN','ROLE_PETSITTER')" />
+		<!-- 예약시 권한 -->
+		<sec:intercept-url pattern="/reserve*" access="hasAnyRole('ROLE_PETMOM','ROLE_PETSITTER','ROLE_PETMASTER')" />
+		<!-- 정보관리 권한 -->
+		<sec:intercept-url pattern="/pet_*" access="hasAnyRole('ROLE_PETMOM','ROLE_ADMIN','ROLE_MEMBER','ROLE_PETSITTER','ROLE_PETMASTER')" />
+		<!-- 거래목록시 권한 -->
+		<sec:intercept-url pattern="/tradeInfo_*" access="hasAnyRole('ROLE_PETMOM','ROLE_PETSITTER','ROLE_PETMASTER')" />
+		<!-- 펫시터 게시판 권한 -->
+		<sec:intercept-url pattern="/psboard_*" access="hasAnyRole('ROLE_PETSITTER','ROLE_PETMASTER')" />
+		<!-- 자유게시판 권한 -->
+		<sec:intercept-url pattern="/freeboard_*" access="hasAnyRole('ROLE_PETMOM','ROLE_ADMIN','ROLE_MEMBER','ROLE_PETSITTER','ROLE_PETMASTER')" />
+		<!-- 메세지 권한 -->
+		<sec:intercept-url pattern="/message_*" access="hasAnyRole('ROLE_PETMOM','ROLE_ADMIN','ROLE_MEMBER','ROLE_PETSITTER','ROLE_PETMASTER')" />
+		<!-- qna 권한 -->
+		<sec:intercept-url pattern="/qna_*" access="hasAnyRole('ROLE_PETMOM','ROLE_ADMIN','ROLE_MEMBER','ROLE_PETSITTER','ROLE_PETMASTER')" />
+		
+		<!-- 허가  -->
+		<sec:intercept-url pattern="/**" access="permitAll" />
+		<!-- 로그인 실패시 홈으로. -->
+		<sec:form-login login-page="/member_login.do"
+			login-processing-url="/loginMember.do" authentication-failure-url="/loginfail.do"
+			username-parameter="id" default-target-url="/home.do"
+			password-parameter="password" />
+		<sec:logout logout-url="/logout.do" logout-success-url="/home.do" />
+	</sec:http>
+	<sec:authentication-manager>
+		<sec:authentication-provider ref="customizedAuthenticationProvider">		
+		</sec:authentication-provider>
+	</sec:authentication-manager>	
+</beans>

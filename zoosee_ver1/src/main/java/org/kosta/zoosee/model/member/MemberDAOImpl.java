@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.kosta.zoosee.model.vo.Authority;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -40,9 +41,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO getMemberVO(String id) {
 		return template.selectOne("member.getMemberVO",id);
 	}
+	// 2016.07.05
+	// delete 에서 update로 변경
+	// enabeld 를 0으로
 	@Override
 	public int deleteMember(String id) {
-		return template.delete("member.deleteMember",id);
+		return template.update("member.deleteMember",id);
 	}
 	@Override
 	public void upgradeRank(HashMap<String,String> map) {
@@ -102,5 +106,30 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int resign(String id){
 		return template.delete("member.resign",id);
+	}
+	/*
+	 * 2016.07.03 추가 부분
+	 * selectAuthorityByUsername(String id) 
+	 * registerAuthorities(String id)
+	 * 
+	 */
+	// 권한을 갖고 있는 멤버의 List
+	@Override
+	public List<Authority> selectAuthorityByUsername(String id) 
+	{
+		return template.selectList("member.selectAuthorityByUsername",id);
+	}
+	// 권한 insert 
+	@Override
+	public void registerAuthorities(HashMap<String,String> map)
+	{
+		template.insert("member.registerAuthorities",map);
+	}
+	// 권한 update 
+	@Override
+	public int updateAuthoties(HashMap<String, String> map) 
+	{
+		int i = template.update("member.updateAuthoties", map);
+		return i;
 	}
 }

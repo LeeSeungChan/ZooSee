@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_list.do">자유게시판</a>
-			<a class="BJA" href="${initParam.root}interceptor_freeBoard_write.do">자유게시판 글등록</a> 
-			<a class="BJA" href="${initParam.root}interceptor_qna_list.do">Q&A게시판</a>
-			<a class="BJA" href="${initParam.root}interceptor_qna_board_register.do">Q&A 등록</a>
+			<a class="BJA" href="${initParam.root}freeBoard_list.do">자유게시판</a>
+			<a class="BJA" href="${initParam.root}freeBoard_write.do">자유게시판 글등록</a> 
+			<a class="BJA" href="${initParam.root}qna_list.do">Q&A게시판</a>
+			<a class="BJA" href="${initParam.root}qna_board_register.do">Q&A 등록</a>
 		</div>
 	</div>
 </div>
@@ -43,8 +42,8 @@
 							<td>${freeBoardList.freeBoardNo }</td>
 							<td>
 								<c:choose>
-									<c:when test="${sessionScope.mvo!=null}">
-										<a href="${initParam.root}interceptor_freeBoard_showFreeBoardContent.do?freeBoardNo=${freeBoardList.freeBoardNo}">
+									<c:when test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal != null}">
+										<a href="${initParam.root}freeBoard_showFreeBoardContent.do?freeBoardNo=${freeBoardList.freeBoardNo}">
 												${freeBoardList.freeBoardTitle}</a>
 									</c:when>
 									<c:otherwise>
@@ -67,7 +66,7 @@
 				<c:set var="pb" value="${requestScope.listVO.pagingBean}"></c:set>
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
-						<li><a href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+						<li><a href="${initParam.root}freeBoard_list.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
@@ -76,7 +75,7 @@
 				<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
-							<li><a href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${i}">${i}</a></li>
+							<li><a href="${initParam.root}freeBoard_list.do?pageNo=${i}">${i}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="active"><a>${i}</a></li>
@@ -85,7 +84,7 @@
 				</c:forEach>
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
-						<li><a href="${initParam.root}interceptor_freeBoard_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+						<li><a href="${initParam.root}freeBoard_list.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

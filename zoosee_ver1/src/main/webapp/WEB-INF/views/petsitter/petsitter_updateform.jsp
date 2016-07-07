@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 
 <script type="text/javascript">
 	$(document).ready(function() {			
 		$("#pass_check_btn").click(function(){
 			var id=$("#id").val();
 			var password=$("#password").val();
-
 			$.ajax({
 				type : "post",
 				url : "check.do",
@@ -93,17 +93,15 @@
 	<div class="BJHeaderLayout0">
 		<div class="BJHeaderLayout">
 			<div class="BJHeader2">
-				<a class="BJA" href="${initParam.root}interceptor_pet_list.do">펫목록</a>
-				<a class="BJA" href="${initParam.root}interceptor_pet_register.do">펫등록</a>
-				<c:choose>
-					<c:when test="${mvo.rank=='petsitter' || mvo.rank=='petmaster'}">
-						<a class="BJA" href="${initParam.root}interceptor_petsitter_updateform.do">펫시터 정보 수정</a>
-						<a class="BJA" href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터 정보 보기</a>
-					</c:when>
-					<c:otherwise>
+				<a class="BJA" href="${initParam.root}pet_list.do">펫목록</a>
+				<a class="BJA" href="${initParam.root}pet_register.do">펫등록</a>
+					<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
+						<a class="BJA" href="${initParam.root}ps_petsitter_updateform.do">펫시터 정보 수정</a>
+						<a class="BJA" href="${initParam.root}ps_petsitter_info.do?id=<sec:authentication property="principal.id"/>">펫시터 정보 보기</a>
+					</sec:authorize>
+					<sec:authorize ifAnyGranted="ROLE_PETMOM,ROLE_MEMBER">
 						<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
-					</c:otherwise>
-				</c:choose>
+					</sec:authorize>
 			</div>
 		</div>
 	</div>
@@ -121,7 +119,7 @@
 					<div style="float: center; " >
 					정보 수정을 위해 	비밀번호를 입력해주세요.<br>
 						<div class="WJform-group">
-							<input type="hidden" id="id" value="${sessionScope.mvo.id}">
+							<input type="hidden" id="id" value="<sec:authentication property="principal.id"/>">
 							<input class="WJform-control" id="password"
 								name="password" placeholder="Password" type="password">
 							<input type="hidden" name="checked" id="checked" value="false">
@@ -146,22 +144,20 @@
 	<div class="BJHeaderLayout0">
 		<div class="BJHeaderLayout">
 			<div class="BJHeader2">
-				<a class="BJA" href="${initParam.root}interceptor_pet_list.do">펫목록</a>
-				<a class="BJA" href="${initParam.root}interceptor_pet_register.do">펫등록</a>
-				<c:choose>
-					<c:when test="${mvo.rank=='petsitter' || mvo.rank=='petmaster'}">
-						<a class="BJA" href="${initParam.root}interceptor_petsitter_updateform.do">펫시터 정보 수정</a>
-						<a class="BJA" href="${initParam.root}interceptor_petsitter_info.do?id=${sessionScope.mvo.id}">펫시터 정보 보기</a>
-					</c:when>
-					<c:otherwise>
+				<a class="BJA" href="${initParam.root}pet_list.do">펫목록</a>
+				<a class="BJA" href="${initParam.root}pet_register.do">펫등록</a>
+				<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
+						<a class="BJA" href="${initParam.root}ps_petsitter_updateform.do">펫시터 정보 수정</a>
+						<a class="BJA" href="${initParam.root}ps_petsitter_info.do?id=<sec:authentication property="principal.id"/>">펫시터 정보 보기</a>
+					</sec:authorize>
+					<sec:authorize ifAnyGranted="ROLE_PETMOM,ROLE_MEMBER">
 						<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
-					</c:otherwise>
-				</c:choose>
+					</sec:authorize>
 			</div>
 		</div>
 	</div>
 	<div class="BJMainKING">
-	<form name="updateForm" action="interceptor_petsitter_update.do" style="text-align: center;" method="post"
+	<form name="updateForm" action="ps_petsitter_update.do" style="text-align: center;" method="post"
 		enctype="multipart/form-data" id="updateForm">
 		<h3 align="center">ZOOSEE 펫시터 정보수정</h3><br> <br>
 		<div style="text-align: center; text-align: center; width: 30%; margin-left: 35%">

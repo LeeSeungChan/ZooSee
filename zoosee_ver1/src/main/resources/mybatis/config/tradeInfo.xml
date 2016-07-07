@@ -23,20 +23,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="title" property="petsitterboardVO.petsitterboard_title"/>
 		<result column="petsitterNo" property="petsitterVO.petsitterNo"/>
 	</resultMap>
-	<select id="getTradeVOPetMomList" parameterType="map" resultMap="tradeInfoRM">
-		select A.tradeinfo_no,A.id,A.name,A.petsitterId,m.name as petsitterName,A.petsitterboard_no,A.title,
-	  		   A.tradeSdate,A.tradeEdate,A.tradePrice,A.petsitterNo
-		from(
-			SELECT m.id,m.name,t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
-				   pm.petsitterNo,PM.id as petsitterId,pb.petsitterboard_title as title
-			from pet_member m, tradeInfo t, petsitter pm, petsitterboard pb
-			where m.id=t.id and pb.petsitterNo = pm.petsitterNo and pm.petsitterNo=t.petsitterNo 
-				  and t.petsitterboard_no = pb.petsitterboard_no and m.id=#{value} order by t.tradeinfo_no desc
-			)A, pet_member m, PET pet 
-		where A.petsitterId = m.id and pet.id=A.id
+	<select id="getTradeVOPetMomList" parameterType="string" resultMap="tradeInfoRM">
+		select A.tradeinfo_no,A.tradeSdate,A.tradeEdate,A.tradePrice,A.id,A.name,
+        		A.petsitterNo,A.petsitterId,pm.name as petsitterName,A.petsitterboard_no,A.title
+		from(SELECT pm.id,pm.name,t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
+		                p.petsitterNo,P.id as petsitterId,pb.petsitterboard_title as title
+		      from pet_member pm, tradeInfo t, petsitter p, petsitterboard pb
+		      where pm.id=t.id and pb.petsitterNo = p.petsitterNo and p.petsitterNo=t.petsitterNo 
+		             and t.petsitterboard_no=pb.petsitterboard_no and pm.id=#{value} order by t.tradeinfo_no desc) A, PET_MEMBER pm
+		where A.petsitterId=pm.id
 	</select>
 	
-	<resultMap type="tradeInfoVO" id="tradeInfoRM2">
+	<!-- <resultMap type="tradeInfoVO" id="tradeInfoRM2">
 		<result column="petmom_id" property="memberVO.id"/>
 		<result column="petmom_Name" property="memberVO.name"/>
 		<result column="id" property="petsitterVO.memberVO.id"/>
@@ -44,17 +42,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="petsitterboard_no" property="petsitterboardVO.petsitterboard_no"/>
 		<result column="title" property="petsitterboardVO.petsitterboard_title"/>
 		<result column="petsitterNo" property="petsitterVO.petsitterNo"/>
-	</resultMap>
-	<select id="getTradeVOPetsitterList" parameterType="map" resultMap="tradeInfoRM2">
-		select A.tradeinfo_no,A.petmom_id,m.name as petmom_Name,A.id,A.name,A.petsitterboard_no,A.title,
-	  		   A.tradeSdate,A.tradeEdate,A.tradePrice,A.petsitterNo
-		from(
-			SELECT m.id,m.name,t.id as petmom_id,t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
-				   pm.petsitterNo,pb.petsitterboard_title as title
-			from pet_member m, tradeInfo t, petsitter pm, petsitterboard pb
-			where pm.id=m.id and pb.petsitterNo = pm.petsitterNo and pm.petsitterNo=t.petsitterNo 
-				  and t.petsitterboard_no=pb.petsitterboard_no and m.id=#{value} order by t.tradeinfo_no desc
-		)A, pet_member m, PET pet 
-		where pet.id=A.petmom_Id and A.petmom_id = m.id
+	</resultMap> -->
+	<select id="getTradeVOPetsitterList" resultMap="tradeInfoRM">
+		 select A.tradeinfo_no,A.tradeSdate,A.tradeEdate,A.tradePrice,A.id,m.name,
+  		 		 A.petsitterNo,A.petsitterId,A.petsitterName,A.petsitterboard_no,A.title
+		  from(
+		     SELECT m.id as petsitterId,m.name as petsitterName,t.id,
+		     	       t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
+		               pm.petsitterNo,pb.petsitterboard_title as title
+		     from pet_member m, tradeInfo t, petsitter pm, petsitterboard pb
+		     where pm.id=m.id and pb.petsitterNo = pm.petsitterNo and pm.petsitterNo=t.petsitterNo 
+		          and t.petsitterboard_no=pb.petsitterboard_no and m.id=#{value} order by t.tradeinfo_no desc
+		  	 )A, pet_member m
+		  where A.id = m.id
 	</select>
 </mapper>

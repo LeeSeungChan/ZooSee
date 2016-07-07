@@ -18,9 +18,9 @@
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
-			<a class="BJA" href="${initParam.root}interceptor_admin_qna_list.do?when=all">모든 Q&A 목록</a> 
-			<a class="BJA" href="${initParam.root}interceptor_admin_qna_list.do?when=nonAnswer">답변 미등록 Q&A 목록</a> 
-			<a class="BJA" href="${initParam.root}interceptor_admin_qna_findbyid.do">아이디로 Q&A 검색</a>
+			<a class="BJA" href="${initParam.root}admin_qna_list.do?when=all">모든 Q&A 목록</a> 
+			<a class="BJA" href="${initParam.root}admin_qna_list.do?when=nonAnswer">답변 미등록 Q&A 목록</a> 
+			<a class="BJA" href="${initParam.root}admin_qna_findbyid.do">아이디로 Q&A 검색</a>
 		</div>
 	</div>
 </div>
@@ -37,7 +37,7 @@
 	<div class="BJMain2Div" align="center">
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine_2" >
-				<form id="findForm" action="${initParam.root}interceptor_admin_qna_find_view.do">
+				<form id="findForm" action="${initParam.root}admin_qna_find_view.do">
 					<div style="vertical-align: middle;">
 						<div style="float: left; width: 55%;">
 							<div style="margin-left: 50%; float: right;">

@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.kosta.zoosee.model.message.MessageDAO;
 import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.qnaboard.PagingBean;
+import org.kosta.zoosee.model.security.SecurityService;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.ReserveVO;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class MemberServiceImpl implements MemberService {
 	private MessageDAO messageDAO;
 	@Resource
 	private MessageService messageService;
+	@Resource
+	private SecurityService securityService;
 	
 	
 	@Override
@@ -31,6 +34,10 @@ public class MemberServiceImpl implements MemberService {
 		if(i==1){
 			messageService.sendMessageOnServer(mvo.getId(),1);
 		}
+		// 2016.07.05 추가
+		// 시큐리티 Authorities insert 
+		// 기본권한을 ROLE_MEMBER
+		securityService.registerAuthorities(mvo.getId(),null);
 	}
 
 	@Override
@@ -70,6 +77,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.getMemberVO(id);
 	}
 
+	//2016.07.03
+	// delete 메서드 update로 수정.
+	// enabled 0 으로 바뀜.
 	@Override
 	public String deleteMember(String id) {
 		int i=memberDAO.deleteMember(id);
