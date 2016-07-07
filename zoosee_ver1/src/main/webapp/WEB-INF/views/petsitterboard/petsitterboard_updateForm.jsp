@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
 	var a = new Array();
     var receiveData = new Array();
@@ -29,7 +30,7 @@
       	var flag = "${flag}";
       	if(flag == "true"){
         	alert("이미 등록한 회원입니다.");
-        	location.href="${initParam.root}petsitterboard_myPetsitterBoard.do";
+        	location.href="${initParam.root}psboard_petsitterboard_myPetsitterBoard.do";
       	}
      
       	// 공란체크하기
@@ -192,10 +193,10 @@
 <div class="BJHeader2" >
 	<a class="BJA" href="${initParam.root}member_detail.do">마이페이지</a>
 	<a class="BJA" href="${initParam.root}member_update.do">회원정보수정</a>
-   	<c:if test="${sessionScope.mvo.rank == 'petsitter' || sessionScope.mvo.rank == 'petmaster'}">
-       <a class="BJA" href="${initParam.root}petsitterboard_registerform.do?id=${sessionScope.mvo.id}"> 펫시터게시글등록</a>
-       <a class="BJA" href="${initParam.root}petsitterboard_myPetsitterBoard.do">내 글 보기</a>
-      </c:if>
+    <sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
+       <a class="BJA" href="${initParam.root}petsitterboard_registerform.do?id=<sec:authentication property="principal.id"/>"> 펫시터게시글등록</a>
+       <a class="BJA" href="${initParam.root}psboard_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
+    </sec:authorize>
 	</div>
 </div>
 </div>
@@ -211,7 +212,7 @@
 		<div class="well well-sm">펫시터 게시물 수정</div>
 	</div>
 	<div class="BJMain2Div">
-		<form method="post" action="petsitterboardUpdate.do"id="petsitterboardregForm">
+		<form method="post" action="psboard_petsitterboardUpdate.do"id="petsitterboardregForm">
 			<input type="hidden" name="petsitterNo" value="${requestScope.petsitterboardVO.petsitterVO.petsitterNo}" />
 			<input type="hidden" name="petsitterboard_no" value="${requestScope.petsitterboardVO.petsitterboard_no }" />
 			<div class="BJWriteTableLine">

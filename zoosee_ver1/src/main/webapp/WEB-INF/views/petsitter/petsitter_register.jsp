@@ -3,8 +3,8 @@
 <%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
  	$(document).ready(function(){
- 	      var rank="<sec:authentication property='principal.rank'/>";
- 	       if(rank=="petsitter" || rank =="petmaster"){
+ 	      var rank="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}";
+ 	       if(rank=="pre_petsitter" || rank=="petsitter" || rank =="petmaster"){
  	          alert("이미 등록된 회원입니다!");
  	          $(location).attr('href',"home.do");
  	       }

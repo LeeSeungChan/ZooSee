@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 	<insert id="registerMember" parameterType="memberVO">
-		insert into Pet_MEMBER(id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence)
-		values(#{id},#{name},#{addressCode},#{address},#{detailAddress},#{gender},#{email},#{password},#{tel},#{job},#{rank},#{existence})
+		insert into Pet_MEMBER(id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence,enabled)
+		values(#{id},#{name},#{addressCode},#{address},#{detailAddress},#{gender},#{email},#{password},#{tel},#{job},#{rank},#{existence},1)
 	</insert>
 	
 	<select id="loginMember" resultType="memberVO" parameterType="memberVO">

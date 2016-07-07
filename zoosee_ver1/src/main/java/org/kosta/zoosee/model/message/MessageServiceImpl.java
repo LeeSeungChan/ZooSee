@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MessageServiceImpl implements MessageService {
-
 	@Resource
 	private MessageDAO messageDAO;
 
@@ -76,8 +75,7 @@ public class MessageServiceImpl implements MessageService {
 			// 2015.07.06
 			// kosta -> kosta1
 			fi = new java.io.FileInputStream(
-					new java.io.File(
-							"C:\\Users\\kosta1\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\resources\\excel\\message.xls"));
+					new java.io.File("C:\\Users\\kosta\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\resources\\excel\\message.xls"));
 			Workbook workbook = Workbook.getWorkbook(fi);
 			Sheet sheet = workbook.getSheet(0); // 첫번째 시트를 얻어옴
 

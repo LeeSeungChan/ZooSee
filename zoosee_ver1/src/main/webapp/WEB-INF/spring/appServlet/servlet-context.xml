@@ -48,6 +48,10 @@
 	<constructor-arg value="C:\\Users\\kosta\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\upload\\petsitter\\"/>
 </bean>
 
+<!-- <bean id="messagePath" class="java.lang.String">
+	<constructor-arg value="C:\\Users\\kosta\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\resources\\excel\\message.xls"/>
+</bean> -->
+
 <!-- Handler interceptor 를 이용한 인증확인 -->
 <!-- 
  -->

@@ -69,7 +69,7 @@
 								</sec:authorize>
 								<sec:authorize ifAnyGranted="ROLE_PETMASTER">
 									<c:choose>
-										<c:when test="${tradeInfoVO.memberVO.name == mvo.name}">
+										<c:when test="${tradeInfoVO.memberVO.name == sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.name}">
 											<td style="vertical-align: middle;">${tradeInfoVO.memberVO.name}</td>
 											<td style="vertical-align: middle;"><a
 												href="tradeInfo_tradeInfoCheck.do?id=${tradeInfoVO.petsitterVO.memberVO.id}">

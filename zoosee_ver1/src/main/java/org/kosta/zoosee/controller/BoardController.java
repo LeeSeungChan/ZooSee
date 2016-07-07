@@ -186,7 +186,7 @@ public class BoardController {
 	@RequestMapping("psboard_petsitterboardUpdate.do")
 	public ModelAndView myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO){            
 		boardServie.myPetsitterboardUpdate(petsitterboardVO,petsitterVO);
-		return new ModelAndView("redirect:petsitterboard_myPetsitterBoard.do");
+		return new ModelAndView("redirect:psboard_petsitterboard_myPetsitterBoard.do");
 	}
 	
 	//게시글삭제

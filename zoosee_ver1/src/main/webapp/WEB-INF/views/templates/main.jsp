@@ -8,7 +8,7 @@
 		notification.onclick = function(event) {
 			//event.preventDefault(); // prevent the browser from focusing the Notification's tab
 			var petMasterSignal = 0;
-			if("${sessionScope.mvo.rank}" == "petmaster"){
+			if("${ssessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}" == "petmaster"){
 				petMasterSignal = 2;
 			}
 			
@@ -59,7 +59,7 @@
 	function prepareNotification(petMomName, petsitterName, petImg, flag){
 		var str = new Array();
 		var options1, options2;
-		var rank = "${sessionScope.mvo.rank}";
+		var rank = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}";
 		
 		if(rank == "petsitter" || rank == "petmaster"){
 			str[0] = "'" + petMomName + "'님이 '" + petsitterName + "'님에게 '예약신청'하였습니다.";
@@ -74,7 +74,7 @@
 	}
 
     $(document).ready(function(){
-		var name = "${sessionScope.mvo.name}";
+		var name = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.name}";
     	
 		if(name == null || name == ""){
     		console.log("no login");    		

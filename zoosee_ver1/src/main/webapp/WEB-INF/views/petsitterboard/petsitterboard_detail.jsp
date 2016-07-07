@@ -274,7 +274,7 @@
 <c:set var="petsitterVO" value="${petsitterboardVO.petsitterVO }"></c:set>
 <c:set var="memberVO" value="${petsitterboardVO.petsitterVO.memberVO}"></c:set>
 <!-- 더블헤더 -->
-<c:if test="${sessionScope.mvo.id== petsitterboardVO.petsitterVO.memberVO.id}">
+<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id== petsitterboardVO.petsitterVO.memberVO.id}">
 	<div class="BJHeaderLayout0">
 		<div class="BJHeaderLayout" >
 			<div class="BJHeader2" >

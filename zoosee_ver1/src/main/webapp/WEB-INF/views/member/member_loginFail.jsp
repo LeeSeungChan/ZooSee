@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript">
-alert("로그인에 실패하셨습니다. 아이디와 비밀번호를 확인하세요.");
-location.replace("${initParam.root}member_login.do");
-</script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+   <script type="text/javascript">
+   alert("<c:out value='${SPRING_SECURITY_LAST_EXCEPTION.message}'/>");
+   location.href="member_login.do";
+   </script>
+</c:if>
