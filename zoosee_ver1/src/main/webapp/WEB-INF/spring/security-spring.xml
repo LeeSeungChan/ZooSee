@@ -31,17 +31,16 @@
 		
 		<!-- 허가  -->
 		<sec:intercept-url pattern="/**" access="permitAll" />
-		<!-- 로그인 실패시 홈으로. -->
+		<!-- 로그인 실패시 홈으로. --> <!-- default-target-url은 원래 home.do가 오리지날 -->
 		<sec:form-login login-page="/member_login.do"
-			login-processing-url="/loginMember.do" authentication-failure-url="/loginfail.do"
-			username-parameter="id" default-target-url="/home.do"
+			login-processing-url="/login.do" authentication-failure-url="/loginfail.do"
+			username-parameter="id" default-target-url="/loginSuccess.do" 
 			password-parameter="password" />
 		<sec:logout logout-url="/logout.do" logout-success-url="/home.do" />
 	</sec:http>
 	
 	<sec:authentication-manager>
-		<sec:authentication-provider ref="customizedAuthenticationProvider">		
-		</sec:authentication-provider>
+		<sec:authentication-provider ref="customizedAuthenticationProvider" />
 	</sec:authentication-manager>	
 	
 </beans>

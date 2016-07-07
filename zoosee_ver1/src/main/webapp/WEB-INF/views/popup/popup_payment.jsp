@@ -34,7 +34,7 @@
 				of += "petsitterId=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}";
 				document.write("<br><br><br><br><br><br><br><br><br><br><br><h2>결제 진행중...</h2>");
 				document.write("<h2>잠시만 기다려 주세요...</h2>");
-				wait(3000);
+				wait(2000);
 				alert("결제가 완료되었습니다. \n감사합니다.^^");
 				opener.parent.location=of;
 				self.close();

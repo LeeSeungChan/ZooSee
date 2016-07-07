@@ -33,9 +33,13 @@ public class MemberController {
 		return "redirect:member_register_result.do";
 	}
 	/* Member 로그인 메서드 */
-	@RequestMapping(value="loginMember.do", method=RequestMethod.POST)
-	public ModelAndView loginMember(MemberVO mvo, HttpServletRequest request){
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	public ModelAndView loginMember(HttpServletRequest request){
 		System.out.println("로그인멤버.do 실행");
+		
+		MemberVO mvo = new MemberVO();
+		mvo.setId(request.getParameter("id"));
+		mvo.setPassword(request.getParameter("password"));
 		
 		ModelAndView mv = new ModelAndView("home");
 		MemberVO vo = memberService.loginMember(mvo);
@@ -53,12 +57,35 @@ public class MemberController {
 			return new ModelAndView("loginfail.do");
 		}
 	}
+	@RequestMapping("loginSuccess.do")
+	public ModelAndView loginMemberSuccess(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("member_loginSuccess");
+		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+		String password = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPassword();
+		String rank = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getRank();
+		
+		MemberVO mvo = new MemberVO();
+		mvo.setId(id);
+		mvo.setPassword(password);
+		MemberVO vo = memberService.loginMember(mvo);
+		
+		String petMasterSignal = "";
+		if(rank.equals("petmaster")){
+			// showMyReserveList에서 petmaster의 전체 예약목록을 뽑아오기 위해 2로 설정
+			petMasterSignal = "2";
+		}
+		List<ReserveVO> reserveList = reserveService.showMyReserveList(vo, petMasterSignal);
+		HashMap<String, List<ReserveVO>> map = memberService.showReserveList(reserveList);
+		mv.addObject("reserveTotalList", map);
+		return mv;
+	}
 	
 	// 2016.07.05 추가
 	// fail 추가.
 	@RequestMapping("loginfail.do")
 	public String loginMemberFail()
 	{
+		System.out.println("loginfail.do 실행");
 		return "member_loginFail";
 	}
 	

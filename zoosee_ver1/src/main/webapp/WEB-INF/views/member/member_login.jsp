@@ -38,7 +38,7 @@
 			<div align="center">
 				<a href="home.do"><img src="${initParam.root}resources/image/Mzoosee.png"></a>
 			</div>
-			<form method="post" action="loginMember.do" id="memberLoginForm">
+			<form method="post" action="login.do" id="memberLoginForm">
 				<div style="float:center;">
 					<div class="WJform-group">
 						<input class="WJform-control" id="id" name="id" placeholder="id" type="text">
