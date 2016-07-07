@@ -58,12 +58,13 @@
 								<sec:authorize ifAnyGranted="ROLE_PETMOM">
 									<td style="vertical-align: middle;">
 										<a href="tradeInfo_tradeInfoCheck.do?id=${tradeInfoVO.petsitterVO.memberVO.id}">
-											${tradeInfoVO.petsitterVO.memberVO.name} </a></td>
+											${tradeInfoVO.petsitterVO.memberVO.name}</a>
+									</td>
 									<td style="vertical-align: middle;">${tradeInfoVO.memberVO.name}</td>
 								</sec:authorize>
 								<sec:authorize ifAnyGranted="ROLE_PETSITTER">
-									<td style="vertical-align: middle;"><a
-										href="tradeInfo_tradeInfoCheck.do?id=${tradeInfoVO.memberVO.id}">
+									<td style="vertical-align: middle;">
+										<a href="tradeInfo_tradeInfoCheck.do?id=${tradeInfoVO.memberVO.id}">
 											${tradeInfoVO.memberVO.name}</a></td>
 									<td style="vertical-align: middle;">${tradeInfoVO.petsitterVO.memberVO.name}</td>
 								</sec:authorize>

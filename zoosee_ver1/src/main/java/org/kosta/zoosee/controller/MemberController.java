@@ -35,6 +35,8 @@ public class MemberController {
 	/* Member 로그인 메서드 */
 	@RequestMapping(value="loginMember.do", method=RequestMethod.POST)
 	public ModelAndView loginMember(MemberVO mvo, HttpServletRequest request){
+		System.out.println("로그인멤버.do 실행");
+		
 		ModelAndView mv = new ModelAndView("home");
 		MemberVO vo = memberService.loginMember(mvo);
 		if(vo != null){

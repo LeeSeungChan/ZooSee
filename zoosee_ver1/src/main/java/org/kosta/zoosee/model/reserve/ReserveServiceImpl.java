@@ -116,10 +116,8 @@ public class ReserveServiceImpl implements ReserveService {
 	// 2016.07.06
 	// id로 예약 리스트 조회
 	@Override
-	public List<ReserveVO> showMyReserveList(MemberVO memberVO,
-			String petMasterSignal) {
+	public List<ReserveVO> showMyReserveList(MemberVO memberVO, String petMasterSignal) {
 		List<ReserveVO> list = new ArrayList<ReserveVO>();
-		HashMap<String,String> map = new HashMap<String,String>();
 		String id = memberVO.getId();
 		int petVOCount = petDAO.getPetCountById(id);
 		PetsitterVO petsitterVO = petsitterDAO.findPetsitterById(id);

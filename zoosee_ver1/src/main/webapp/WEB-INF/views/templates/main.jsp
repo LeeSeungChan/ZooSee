@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
-<script>
+<script type="text/javascript">
 	function clickNotification(notification, flag){
 		// notification 클릭하면 새로 이동
 		notification.onclick = function(event) {
@@ -80,12 +80,6 @@
     		console.log("no login");    		
     	}else{
     		<c:forEach items="${requestScope.reserveTotalList.reserveRequestList}" var="reserveVO">
-    			/* var jsonData = {
-    				"petMomName":"${reserveVO.memberVO.name}",
-    				"name":"${sessionScope.mvo.name}",
-    				"flag":"request"};	
-    			console.log(jsonData + "|" + typeof jsonData); */
-    		
     			prepareNotification("${reserveVO.memberVO.name}", name, "${reserveVO.petVO.petImg}", "request")
    			</c:forEach>
    			<c:forEach items="${requestScope.reserveTotalList.reserveCompleteList}" var="reserveVO">

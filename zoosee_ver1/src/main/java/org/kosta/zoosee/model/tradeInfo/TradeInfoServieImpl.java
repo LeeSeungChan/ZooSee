@@ -23,7 +23,6 @@ import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.PetsitterboardVO;
 import org.kosta.zoosee.model.vo.ReserveVO;
 import org.kosta.zoosee.model.vo.TradeInfoVO;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -111,9 +110,6 @@ public class TradeInfoServieImpl implements TradeInfoServie{
 			Collections.sort(list3, new TradeInfo_No_Desc());
 
 			list = list3;
-		}
-		for (TradeInfoVO v : list) {
-			System.out.println(v.toString());
 		}
 		
  		return list;

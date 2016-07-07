@@ -3,8 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
 	<bean name="customizedAuthenticationProvider"
 		class="org.kosta.zoosee.model.security.MemberAuthenticationProvider" />
+	
 	<sec:http use-expressions="true">
 		<!-- admin 일때 권한 -->
 		<sec:intercept-url pattern="/admin_*" access="hasRole('ROLE_ADMIN')" />
@@ -36,8 +38,10 @@
 			password-parameter="password" />
 		<sec:logout logout-url="/logout.do" logout-success-url="/home.do" />
 	</sec:http>
+	
 	<sec:authentication-manager>
 		<sec:authentication-provider ref="customizedAuthenticationProvider">		
 		</sec:authentication-provider>
 	</sec:authentication-manager>	
+	
 </beans>

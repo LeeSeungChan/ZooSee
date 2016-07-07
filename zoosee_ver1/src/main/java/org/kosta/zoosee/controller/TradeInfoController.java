@@ -45,8 +45,11 @@ public class TradeInfoController {
 	
 	@RequestMapping("tradeInfo_tradeInfoCheck.do")
 	public ModelAndView tradeInfo_tradeInfoCheck(HttpServletRequest request){
-		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId(); // 정보를 보고자하는 id를 받아온다.
-		String rank = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getRank();
+		//String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId(); 
+		// 정보를 보고자하는 id를 받아온다.
+		//String rank = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getRank();
+		String id = request.getParameter("id");
+		
 		ModelAndView mv= new ModelAndView();
 		
 		List<PetVO> petList = petService.detailPetAndMemberInfo(id);
@@ -56,8 +59,6 @@ public class TradeInfoController {
 		// pet정보가 없으므로 펫시터
 			mv.setViewName("tradeInfo_tradeShowPetsitterDetail");
 			mv.addObject("petsitterVO", petsitterVO);
-			
-			
 		}else if(petsitterVO == null){
 		// 펫시터 정보가 없으므로 펫맘
 			PetVO petVO = petList.get(0);
@@ -71,7 +72,7 @@ public class TradeInfoController {
 			mv.addObject("petVO", petVO);
 		}
 		
-		mv.addObject("tradeInfoCheck", rank);
+		//mv.addObject("tradeInfoCheck", rank);
 		mv.addObject("checkId", id);
 		return mv;
 	}
