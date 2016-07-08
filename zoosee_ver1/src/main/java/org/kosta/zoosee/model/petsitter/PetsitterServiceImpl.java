@@ -72,17 +72,14 @@ public class PetsitterServiceImpl implements PetsitterService {
 			String rank = memberDAO.findRank(id);
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", id);
-			String inputRank = "rank";
-			if (rank.equals("pre_petsitter")) {// 멤버의 rank가 prepetsitter 이면
-												// petsitter로 update
-				inputRank = "petsitter";
+			if (rank.equals("pre_petsitter")) {// 멤버의 rank가 prepetsitter 이면 petsitter로 update
+				map.put("rank", "petsitter");
+				
 				securityService.updateAuthoties(id,"ROLE_PETSITTER");
-			} else if (rank.equals("pre_petmaster")) {// 멤버의 rank가 petmom이면
-														// petmaster로 update
-				inputRank = "petmaster";
+			} else if (rank.equals("pre_petmaster")) {// 멤버의 rank가 petmom이면 petmaster로 update
+				map.put("rank", "petmaster");
 				securityService.updateAuthoties(id,"ROLE_PETMASTER");
 			}
-			map.put("rank", inputRank);
 			memberDAO.upgradeRank(map);
 			// 메세지 보내기
 			messageService.sendMessageOnServer(id, 7);

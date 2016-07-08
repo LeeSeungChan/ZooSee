@@ -16,6 +16,7 @@ import org.kosta.zoosee.model.vo.MessageVO;
 import org.kosta.zoosee.model.vo.PetVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.kosta.zoosee.model.vo.QNABoardVO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,8 @@ public class AdminController {
 	private PetsitterService petsitterService;
 	@Resource
 	private MemberService memberService;
+	@Resource
+	private SecurityService securityService;
 
 	/* 관리자 페이지 - 회원이 등록한 모든 Q&A게시물 보기 */
 	@RequestMapping("admin_qna_list.do")
@@ -76,33 +79,26 @@ public class AdminController {
 
 	/* 관리자 페이지 - 모든 회원에게 메세지 보내기 */
 	@RequestMapping("admin_sendMessage.do")
-	public ModelAndView sendMessage(MessageVO messageVO,
-			HttpServletRequest request) {
+	public ModelAndView sendMessage(MessageVO messageVO, HttpServletRequest request) {
 		adminService.sendMessage(messageVO);
-		HttpSession session = request.getSession(false);
-		String id = ((MemberVO) session.getAttribute("mvo")).getId();
-		return new ModelAndView("redirect:admin_MessageList.do?id="
-				+ id);
+		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+		return new ModelAndView("redirect:admin_MessageList.do?id="+ id);
 	}
 
 	/* 관리자 페이지 - 보낸 메세지 리스트 */
 	@RequestMapping("admin_MessageList.do")
-	public ModelAndView messageList(HttpServletRequest request, String pageNo,
-			String id) {
+	public ModelAndView messageList(HttpServletRequest request, String pageNo, String id) {
 		if (id == null) {
-			HttpSession session = request.getSession(false);
-			id = ((MemberVO) session.getAttribute("mvo")).getId();
+			id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		}
-		org.kosta.zoosee.model.message.ListVO list = adminService.messageList(
-				id, pageNo);
+		org.kosta.zoosee.model.message.ListVO list = adminService.messageList(id, pageNo);
 		return new ModelAndView("admin_message_list", "listVO", list);
 	}
 
 	/* 관리자 페이지 - 펫 맘 리스트 */
 	@RequestMapping("admin_petmomList.do")
 	public ModelAndView getPetmomList(String pageNo) {
-		org.kosta.zoosee.model.member.ListVO list = adminService
-				.getPetmomList(pageNo);
+		org.kosta.zoosee.model.member.ListVO list = adminService.getPetmomList(pageNo);
 		return new ModelAndView("admin_petmomlist", "listVO", list);
 	}
 
@@ -191,12 +187,11 @@ public class AdminController {
 				.adminList(pageNo);
 		return new ModelAndView("admin_adminList", "listVO", list);
 	}
-	/* 관리자 페이지 - 관리자 권한 부여*/
+	
 	@RequestMapping("admin_findInfoByValue.do")
 	public ModelAndView findInfoByValue(String value,String how){
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("how",how);
-		System.out.println(how);
 		mv.setViewName("admin_adminManage");
 		if(how.equals("id")){
 			MemberVO memberVO=adminService.findInfoById(value);
@@ -207,11 +202,14 @@ public class AdminController {
 		}
 		return mv;
 	}
+	/* 관리자 페이지 - 관리자 권한 부여*/
 	@RequestMapping(value="admin_addAdmin.do",method=RequestMethod.POST)
 	@ResponseBody
 	public String addAdmin(String id){
 		String result="ok";
+		
 		int i=adminService.addAdmin(id);
+		securityService.updateAuthoties(id,"ROLE_ADMIN");
 		if(i==0){
 			result="fail";
 		}

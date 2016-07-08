@@ -139,8 +139,21 @@ public class ReserveServiceImpl implements ReserveService {
 				// list 2개 뽑아와서 합치기
 				List<ReserveVO> list1 = reserveDAO.showPetMomReserveList(id);
 				List<ReserveVO> list2 = reserveDAO.showPetsitterReserveList(id);
-				list.addAll(0, list1);
-				list.addAll(list.size()-1, list2);
+				
+				if(list1.size() != 0 && list2.size() != 0){
+				// 리스트 둘다 존재할 때
+					list.addAll(0, list1);
+					list.addAll(list.size()-1, list2);
+				}else if(list1.size() == 0 && list2.size() != 0){
+				// list2만 존재할 때
+					list.addAll(0, list2);
+				}else if(list1.size() != 0 && list2.size() == 0){
+				// list1만 존재할 때
+					list.addAll(0, list1);
+				}else{
+				// 리스트 존재 하지않을 때
+					;
+				}
 			}
 		}
 		return list;

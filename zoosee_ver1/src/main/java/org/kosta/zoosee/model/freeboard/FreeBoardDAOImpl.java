@@ -16,7 +16,6 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 
 	@Override
 	public List<FreeBoardVO> getFreeBoardList(int pageNo) {
-		System.out.println(template.selectList("freeboard.getFreeBoardList",pageNo));
 		return template.selectList("freeboard.getFreeBoardList",pageNo);
 	}
 

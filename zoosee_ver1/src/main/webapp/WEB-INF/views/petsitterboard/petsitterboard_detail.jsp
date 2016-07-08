@@ -38,6 +38,11 @@
             success:function(result){
             	var avg = result.avg*20;
                 $("#star-rating").css({width: avg+'%'});  
+                if(result.avg>=1){
+            	$("#avgStar-rating").html("평균별점:"+result.avg+"점");
+                }else{
+               	$("#avgStar-rating").html("등록된 후기가 없습니다! >_<");	
+                }
             }
         });
       
@@ -231,9 +236,10 @@
         });
          
         $("#reserveRegForm").submit(function(){
-            var rank = ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank};
-            var id = ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id};
+            var rank = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}";
+            var id = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}";
             var boardId = "${petsitterboardVO.petsitterVO.memberVO.id}";
+            
             if($("#sdate").val() == ""){
                	alert("시작일을 선택해 주세요.");
                 return false;
@@ -250,7 +256,7 @@
                     alert("로그인 후 예약 가능합니다.");
                   	location.href="${initParam.root}member_login.do";
                     return false;
-               }else if(rank == 'normal' || rank == 'petsitter'){
+               }else if(rank == 'normal' || rank == 'petsitter' || rank == 'pre_petsitter'){
                     alert("펫등록 후 예약 가능합니다.");
                     location.href="${initParam.root}pet_register.do";
                     return false;
@@ -273,8 +279,8 @@
 
 <c:set var="petsitterVO" value="${petsitterboardVO.petsitterVO }"></c:set>
 <c:set var="memberVO" value="${petsitterboardVO.petsitterVO.memberVO}"></c:set>
+
 <!-- 더블헤더 -->
-<c:if test="${not empty sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}">
 <c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id== petsitterboardVO.petsitterVO.memberVO.id}">
 	<div class="BJHeaderLayout0">
 		<div class="BJHeaderLayout" >
@@ -290,7 +296,6 @@
 			</div>
 		</div>
 	</div>
-</c:if>
 </c:if>
 
 <div class="BJMainKING">
@@ -405,11 +410,14 @@
 			<div style="margin-bottom: 5%; ">
 			<!-- 평균 별점 -->
 				<div style=" height:45px; width:100%; font-size: 25px; vertical-align: middle;">
-					후기(${requestScope.reviewList.size()})
-					<div style="float:right; margin-right:50%; margin-bottom: 2%;">  
+					후기(${requestScope.reviewList.size()}) 
+					<div style="display:inline;  margin-right:50%; margin-bottom: 2%;">  
 						<span class="star-rating"  style="margin-top: 1%;">
 							<span id="star-rating" style ="width:100%;"></span>
-						</span>         
+						</span>  
+					<h6 style="display: inline;">
+						<span id="avgStar-rating"></span>
+					</h6>
 					</div>
 				</div>	
  				<!-- 리뷰 리스트 -->
@@ -426,7 +434,7 @@
 						<tr>
 							<td align="left" >${reviewList.name}</td>
 							<td>
-								<span class="star-rating2" style="margin-left:75%;" >
+								<span class="star-rating2" style="margin-left:75%; float: right;" >
 									<span id="star-rating${status.index }" style="width:${reviewList.star_rate*17}%; float:left;"></span>
 								</span>
 							</td>

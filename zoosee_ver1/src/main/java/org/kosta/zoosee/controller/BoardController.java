@@ -63,7 +63,6 @@ public class BoardController {
 	@RequestMapping(value="psboard_petsitterboardRegister.do", method=RequestMethod.POST)
 	public ModelAndView registerPetsitterboard(@ModelAttribute PetsitterboardVO petsitterboardVO, PetsitterVO petsitterVO) {
 		boardServie.registerPetsitterboard(petsitterboardVO, petsitterVO);
-
 		return new ModelAndView("redirect:home.do");
 	}
 
