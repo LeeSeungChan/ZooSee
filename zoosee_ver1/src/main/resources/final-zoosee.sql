@@ -1,3 +1,4 @@
+
 -- 펫맘 아이디로 자 거래목록 찾기
 select A.tradeinfo_no,A.tradeSdate,A.tradeEdate,A.tradePrice,A.id,A.name,
         A.petsitterNo,A.petsitterId,m.name as petsitterName,A.petsitterboard_no,A.title
