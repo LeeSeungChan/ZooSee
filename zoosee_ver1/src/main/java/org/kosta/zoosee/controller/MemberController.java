@@ -85,7 +85,6 @@ public class MemberController {
 	@RequestMapping("loginfail.do")
 	public String loginMemberFail()
 	{
-		System.out.println("loginfail.do 실행");
 		return "member_loginFail";
 	}
 	
