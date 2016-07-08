@@ -321,7 +321,7 @@
         	<div class="SBremote">
 	            <div class="SBremote_main">
 	            	<div class="SBremote_Img_form">
-		                <a href="petsitter_detail.do?petsitterNo=${petsitterVO.petsitterNo}&petsitterboard_no=${petsitterboardVO.petsitterboard_no}">
+		                <a href="#">
 		                	<img src="${initParam.root}${petsitterVO.petsitterImg}" class="SBImg">
 		                </a>
 	               	</div>
