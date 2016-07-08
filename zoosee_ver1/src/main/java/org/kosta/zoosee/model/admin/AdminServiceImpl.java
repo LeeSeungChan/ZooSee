@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-
 	@Resource
 	private QNABoardDAO qnaBoardDAO;
 	@Resource
@@ -169,5 +168,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int resign(String id) {
 		return memberDAO.resign(id);
+	}
+
+	@Override
+	public MessageVO messageContent(String message_no) {
+		 return messageDAO.getMessageByNo(message_no);
 	}
 }

@@ -225,4 +225,10 @@ public class AdminController {
 		}
 		return result;
 	}
+	
+	@RequestMapping("admin_message_content.do")
+	public ModelAndView messageContent(String message_no){
+		MessageVO message=adminService.messageContent(message_no);
+	    return new ModelAndView("admin_message_content","message",message);
+	}
 }

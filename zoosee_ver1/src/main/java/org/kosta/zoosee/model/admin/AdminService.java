@@ -40,4 +40,6 @@ public interface AdminService {
 
 	int resign(String id);
 
+	MessageVO messageContent(String message_no);
+
 }

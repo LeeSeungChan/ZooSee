@@ -2,34 +2,29 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!-- 멤버  리스트 보여주는 화면 -->
-<script>
-	 $(document).ready(function() {
-				;
-				$("#memberlistForm :input[name=deleteBtn]").click(
-						function() {
-							if (confirm("계정을 삭제 하시겠습니까?")) {
-								$.ajax({
-									type : "post",
-									url : "admin_resign.do",
-									data : "id="
-											+ $(this).parent().parent()
-													.children().eq(0).text(),
-									succes : function(data){
-										if(data=="ok"){
-											alert("계정이 삭제되었습니다.");
-										}else{
-											alert("계정 삭제에 실패하셨습니다. 다시 시도하세요.");
-										}
-									}
-								});
-								$(this).parent().parent().children().eq(4)
-										.html("삭제됨")
-							}
-						});
-			}); 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#memberlistForm :input[name=deleteBtn]").click(function() {
+			if (confirm("계정을 삭제 하시겠습니까?")) {
+				$.ajax({
+					type : "post",
+					url : "admin_resign.do",
+					data : "id=" + $(this).parent().parent().children().eq(0).text(),
+					succes : function(data){
+						if(data=="ok"){
+							alert("계정이 삭제되었습니다.");
+						}else{
+							alert("계정 삭제에 실패하셨습니다. 다시 시도하세요.");
+						}
+					}
+				});
+				$(this).parent().parent().children().eq(4).html("삭제됨")
+			}
+		});
+	}); 
 </script>
-<link rel="stylesheet" type="text/css"
-	href="${initParam.root}resources/css/sb.css">
+
+<link rel="stylesheet" type="text/css" href="${initParam.root}resources/css/sb.css">
 <!-- 더블헤더 -->
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
