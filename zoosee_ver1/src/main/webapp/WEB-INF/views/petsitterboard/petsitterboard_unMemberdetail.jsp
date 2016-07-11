@@ -18,14 +18,7 @@
   	}
       
 	$(document).ready(function(){
-		dateFormatChange();
-
-      	$("#deleteId").click(function(){
-        	if(confirm("삭제하시겠습니까?")){
-            	location.href="${initParam.root}psboard_petsitterboard_myPetsitterBoardDelete.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}";
-        	} 
-      	});
-      
+		dateFormatChange(); 
       	var startDay = "${petsitterboardVO.startDay}";
       	var endDay = "${petsitterboardVO.endDay}";
 
@@ -63,9 +56,6 @@
             showMonthAfterYear: true,
             yearSuffix: '',
             showOn: 'focus',
-            //buttonText: "달력",
-            //buttonImage:'${initParam.root}resources/image/calendar-1.jpg',
-            //buttonImageOnly: true,
             changeMonth: true,
             changeYear: true,
             showButtonPanel: true,
@@ -109,9 +99,6 @@
             showMonthAfterYear: true,
             yearSuffix: '',
             showOn: 'focus',
-            //buttonText: "달력",
-            //buttonImage:'${initParam.root}resources/image/calendar-1.jpg',
-            //buttonImageOnly: false,
             changeMonth: true,
             changeYear: true,
             showButtonPanel: true,
@@ -152,10 +139,7 @@
                     	for(var j=0;j<receiveData.length;j++){
                         	var rDay=[];
                           	rDay=receiveData[j].split("-");
-                          
-	                        /*if(sDay[2]==lastDay.getDate()){
-	                        	sDay[2]=1;
-	                        }*/
+
                           	if(sDay[2]==rDay[2]){
                             	result=0;
                              	break;
@@ -206,8 +190,6 @@
                            		}
                         	}
                         	var tday = (eday + sday + 1);
-                     
-                        	//alert((tday - 1) + "박" + tday + "일");
                         	interval = new Number(eday + sday + 1);
                      	}
                    
@@ -223,9 +205,6 @@
 				}
 			}
 		});
-        /*$.datepicker.setDefaults($.datepicker.regional['ko']); 
-        $.datepicker.regional['ko'] = {
-        };*/
 
         $("#petCheckNumber").change(function(){
         	var petCheckNumber = new Number($("#petCheckNumber").val());
@@ -234,42 +213,15 @@
             $("#reserveRegForm :input[name=reserve_price]").val(reserve_price);
         });
          
-        $("#reserveRegForm").submit(function(){
-            var rank = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}";
-            var id = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}";
-            var boardId = "${petsitterboardVO.petsitterVO.memberVO.id}";
-            
-            if($("#sdate").val() == ""){
-               	alert("시작일을 선택해 주세요.");
-                return false;
-            }else if($("#edate").val() == ""){
-                alert("종료일을 선택해 주세요.");
-                return false;
-            }
-            if(confirm("예약 요청하시겠습니까?")){
-            	if(id == boardId){
-                	alert("본인한테 예약 불가합니다.");
-                    this.reset();
-                    return false;
-               }else if(id == null || id == ""){
-                    alert("로그인 후 예약 가능합니다.");
-                  	location.href="${initParam.root}member_login.do";
-                    return false;
-               }else if(rank == 'normal' || rank == 'petsitter' || rank == 'pre_petsitter'){
-                    alert("펫등록 후 예약 가능합니다.");
-                    location.href="${initParam.root}pet_register.do";
-                    return false;
-                }
-            }else{
-               return false;
-            }
+       	$("#reserveRegForm").submit(function(){
+           alert("로그인 후  이용해 주세요!");
+           location.href="${initParam.root}member_login.do";
+           return false;
          });
         
         $("#addressMap").click(function(){
-	        //alert("${petsitterboardVO.petsitterVO.memberVO.address}");
 	        var address = "${petsitterboardVO.petsitterVO.memberVO.address}";
 	        var id = "${petsitterboardVO.petsitterVO.memberVO.id}";
-	         
 	        window.open("${initParam.root}mapDetail.do?id="+id+"&address="+address,"",
                "toolbar=yes,scrollbars=yes,top=100,left=600,width=740,height=760");
       });
@@ -278,24 +230,6 @@
 
 <c:set var="petsitterVO" value="${petsitterboardVO.petsitterVO }"></c:set>
 <c:set var="memberVO" value="${petsitterboardVO.petsitterVO.memberVO}"></c:set>
-
-<!-- 더블헤더 -->
-<c:if test="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id== petsitterboardVO.petsitterVO.memberVO.id}">
-	<div class="BJHeaderLayout0">
-		<div class="BJHeaderLayout" >
-			<div class="BJHeader2" >
-				<a class="BJA" href="${initParam.root}m_member_detail.do">마이페이지</a>
-				<a class="BJA" href="${initParam.root}m_member_update.do">회원정보수정</a>
-				<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
-			       <a class="BJA" href="${initParam.root}psboard_petsitterboard_registerform.do?id=<sec:authentication property="principal.id"/>"> 펫시터게시글등록</a>
-			       <a class="BJA" href="${initParam.root}psboard_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
-			       <a class="BJA" href="${initParam.root}psboard_petsitterboard_myPetsitterBoardUpdateView.do?petsitterboard_no=${petsitterboardVO.petsitterboard_no}">내 글 수정</a>
-			       <a class="BJA" id="deleteId" href="#">내 글 삭제</a>
-		    	</sec:authorize>
-			</div>
-		</div>
-	</div>
-</c:if>
 
 <div class="BJMainKING">
 <div class="BJMainDiv" style="margin-bottom: 10%;">
@@ -311,7 +245,6 @@
 	<div class="BJMain2Div">
 	<form method="post" action="reserveRegister.do" id="reserveRegForm">
 		<input type="hidden" name="petsitterboard_no" value="${petsitterboardVO.petsitterboard_no}" />
-		<input type="hidden" name="id" value="<sec:authentication property="principal.id"/>" />
      	<input type="hidden" name="petsitterId" value="${petsitterboardVO.petsitterVO.memberVO.id}"/>
      	<input type="hidden" name="petCheckNumber" value="0"/>
      	<input type="hidden" name="reserve_price" />

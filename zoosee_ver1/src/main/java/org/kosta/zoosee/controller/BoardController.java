@@ -37,11 +37,6 @@ public class BoardController {
 	// 헤더에서 보드 등록 폼.JSP로 이동하는
 	@RequestMapping("psboard_petsitterboard_registerform.do")
 	public ModelAndView registerBoard(HttpServletRequest request) {
-		/*HttpSession session = request.getSession(false);
-		String id = null;
-		if(session != null && session.getAttribute("mvo") != null){
-			id = ((MemberVO)session.getAttribute("mvo")).getId();
-		}*/
 		// 2016.07.05
 		// 시큐리티 세션
 		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
@@ -114,12 +109,21 @@ public class BoardController {
 
 	// 펫시터보드 디테일 보기
 	@RequestMapping("petsitterboardDetail.do")
-	public ModelAndView getboardDetail(int petsitterboard_no) {
-		ModelAndView mv = new ModelAndView("petsitterboard_detail");
-
+	public ModelAndView getboardDetail(int petsitterboard_no, HttpServletRequest request) 
+	{
+		System.out.println();
+		ModelAndView mv = new ModelAndView();
+		// 비회원이 볼때.   
+		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof MemberVO)
+		{
+			mv.setViewName("petsitterboard_detail");
+		}
+		else
+		{
+			mv.setViewName("petsitterboard_unMemberdetail");
+		}
 		PetsitterboardVO petsitterboardVO = boardServie.getboardDetail(petsitterboard_no);
 		List<String> list = boardServie.getPetCalendarDate(petsitterboard_no);
-		
 		// 날짜 포맷 바꾸는([2016-06-01]을 [2016-6-1]로) insert할 때 바꿔야 한다.
 		for (int i = 0; i < list.size(); i++) {
 			String[] ab = list.get(i).split("-");

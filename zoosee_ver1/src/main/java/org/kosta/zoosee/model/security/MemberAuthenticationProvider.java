@@ -45,7 +45,6 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		//2.사용자 정보 디비로 부터 조회(UserDetailsService에서 했던 작업)
 		String id = authentication.getName();//사용자가 로그인시 넘겨준 ID 조회
 		MemberVO member = memberDAO.getMemberVO(id);
-		
 		if(member == null){
 			throw new UsernameNotFoundException("회원 아이디가 존재하지 않습니다");
 		}
