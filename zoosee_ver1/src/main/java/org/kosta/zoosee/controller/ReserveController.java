@@ -142,7 +142,7 @@ public class ReserveController {
 		}
 		if(pvo==null)
 		{
-			System.out.println("pvo null");
+			//System.out.println("pvo null");
 			reserveService.updateReserveRecogImpossible(reserve_no);
 		}else{
 			// reservce_reocg를 1로 올려준다.
