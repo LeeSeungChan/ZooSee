@@ -10,6 +10,7 @@ import org.kosta.zoosee.model.message.MessageDAO;
 import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.qnaboard.PagingBean;
 import org.kosta.zoosee.model.security.SecurityService;
+import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.springframework.stereotype.Service;
 
@@ -50,13 +51,13 @@ public class PetsitterServiceImpl implements PetsitterService {
 	}
 
 	@Override
-	public ListVO petsitterList(String value, String pageNo) {
+	public ListVO petsitterList(String recog, String pageNo) {
 		if (pageNo == null) {
 			pageNo = "1";
 		}
-		int totalContents = petsitterDAO.petsitterListCount(value);
+		int totalContents = petsitterDAO.petsitterListCount(recog);
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("value", value);
+		map.put("value", recog);
 		map.put("pageNo", pageNo);
 		List<PetsitterVO> list = petsitterDAO.petsitterList(map);
 		PagingBean pagingBean = new PagingBean(totalContents,
@@ -95,7 +96,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 
 	@Override
 	public void deletePetsitter(String id) {
-		petsitterDAO.deletePetsitter(id);
+		//petsitterDAO.deletePetsitter(id);
 		// 멤버 등급
 				String rank = memberDAO.findRank(id);
 				HashMap<String, String> map = new HashMap<String, String>();
@@ -112,6 +113,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 				}
 				map.put("rank", inputRank);
 				memberDAO.upgradeRank(map);
+				petsitterDAO.deletePetsitter(id);
 	}
 
 	@Override

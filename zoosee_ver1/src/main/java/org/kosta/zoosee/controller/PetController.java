@@ -7,7 +7,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.zoosee.model.member.MemberService;
 import org.kosta.zoosee.model.pet.PetService;
+import org.kosta.zoosee.model.security.SecurityService;
 import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetVO;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,8 +23,14 @@ import org.springframework.web.servlet.ModelAndView;
 public class PetController {
 	@Resource
 	private PetService petService;
+	@Resource
+	private MemberService memberService;
+	@Resource
+	private SecurityService securityService;
+	
 	@Resource(name="petUploadPath")
 	private String petUploadPath;
+	
 	@RequestMapping(value="pet_registerPet.do", method=RequestMethod.POST)
 	public ModelAndView write(PetVO pvo, MultipartFile petImg2, HttpSession session) {
 		// 2016.07.05
@@ -40,6 +48,15 @@ public class PetController {
 		path = path.substring(path.indexOf("upload\\"));
 		pvo.setPetImg(path);
 		petService.registerPet(pvo);
+		MemberVO mvo = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(mvo.getRank().equals("petsitter"))
+		{
+			securityService.updateAuthoties(mvo.getId(),"ROLE_PETMASTER");
+		}
+		else if(mvo.getRank().equals("normal"))
+		{
+			securityService.updateAuthoties(mvo.getId(),"ROLE_PETMOM");
+		}
 		return new ModelAndView("redirect:pet_detail.do?petNo="+pvo.getPetNo());
 	}
 	@RequestMapping("pet_detail.do")
@@ -88,11 +105,27 @@ public class PetController {
 	}
 	@RequestMapping("pet_delete.do")
 	public ModelAndView deletePet(HttpServletRequest request,int petNo) {
-		//HttpSession session=request.getSession(false);
 		// 2016.07.05
 		// 시큐리티 세션
 		String id=((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		petService.deletePet(petNo);		
-		return new ModelAndView("pet_list","list",petService.petList(id));
+		petService.deletePet(petNo);
+		List<PetVO> list = petService.petList(id);
+		// 펫 목록이 0 이면 다 삭제 이므로 rank로 떨어져야됌.
+		if(list.size()==0)
+		{
+			MemberVO mvo = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(mvo.getRank().equals("petmom"))
+			{
+				mvo.setRank("normal");
+				securityService.updateAuthoties(id,"ROLE_MEMBER");
+			}
+			else if(mvo.getRank().equals("petmaster"))
+			{
+				mvo.setRank("petsitter");
+				securityService.updateAuthoties(id,"ROLE_PETSITTER");
+			}
+			memberService.updateMember(mvo);
+		}
+		return new ModelAndView("pet_list","list",list);
 	}
 }

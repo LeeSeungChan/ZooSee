@@ -121,10 +121,18 @@ public class ReserveServiceImpl implements ReserveService {
 		String id = memberVO.getId();
 		int petVOCount = petDAO.getPetCountById(id);
 		PetsitterVO petsitterVO = petsitterDAO.findPetsitterById(id);
+		
 		if (petVOCount ==0) {
 			// 완전 PETSITTER
 			// petmomId
 			list = reserveDAO.showPetsitterReserveList(id);
+			
+			for(int i = 0; i < list.size(); i++){
+				if(list.get(i).getPetsitterboardVO().getPetsitterVO().getMemberVO().getRank().equals("normal")){
+					System.out.println("탈퇴놈 확인");
+					reserveDAO.updateReserveRecogImpossible(list.get(i).getReserve_no());
+				}
+			}
 		} else if (petsitterVO == null) {
 			// 완전 PETMOM
 			// petsitterId
@@ -214,5 +222,11 @@ public class ReserveServiceImpl implements ReserveService {
 	public ReserveVO getReserveVO(int reserve_no) 
 	{
 		return reserveDAO.getReserveVO(reserve_no);
+	}
+
+	// reserve_recog를 3(예약 불가)으로 update 
+	@Override
+	public void updateReserveRecogImpossible(int reserve_no) {
+ 		reserveDAO.updateReserveRecogImpossible(reserve_no);
 	}
 }

@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="petsitterTel" property="petsitterboardVO.petsitterVO.memberVO.tel"/>
 		<result column="petsitterEmail" property="petsitterboardVO.petsitterVO.memberVO.email"/>
 		<result column="petsitterExistence" property="petsitterboardVO.petsitterVO.memberVO.existence"/>
+		<result column="petsitterRank" property="petsitterboardVO.petsitterVO.memberVO.rank"/>
 	</resultMap>
 	<select id="getReserveVO" parameterType="map" resultMap="reserveMap">
 		SELECT A.reserve_no,A.reserve_price,A.reserve_recog,A.id,A.name,A.address,A.email,A.tel,A.petNo,A.petName,A.petType,
@@ -64,15 +65,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="showPetsitterReserveList" parameterType="map" resultMap="reserveMap">
 		<!-- new 버전 : petsitterId로 reserveList 뽑기 -->
 		select C.reserve_no,C.reserve_price,C.reserve_recog,C.petsitterboard_no,C.petsitterboard_title,C.id,pm.name,
-		      C.petsitterId,C.petsitterName,C.petsitterImg,C.petsitterNo,
+		      C.petsitterRank,C.petsitterId,C.petsitterName,C.petsitterImg,C.petsitterNo,
 		      C.petNo,pet.petType,pet.petImg
 		from(
 		   select r.reserve_no,r.reserve_price,r.reserve_recog,B.petsitterboard_no,B.petsitterboard_title,r.id,
-		         B.petsitterId,B.petsitterName,B.petsitterImg,B.petsitterNo,
+		         B.petsitterId,B.petsitterName,B.petsitterRank,B.petsitterImg,B.petsitterNo,
 		         r.petNo
 		   from(
-		      select pb.petsitterboard_no,pb.petsitterboard_title, A.petsitterId,A.petsitterName,A.petsitterImg,A.petsitterNo
-		      from(select pm.id as petsitterId,pm.name as petsitterName,ps.petsitterImg,ps.petsitterNo
+		      select pb.petsitterboard_no,pb.petsitterboard_title, A.petsitterId,A.petsitterName,
+		      		 A.petsitterRank,A.petsitterImg,A.petsitterNo
+		      from(select pm.id as petsitterId,pm.name as petsitterName,pm.rank as petsitterRank,ps.petsitterImg,ps.petsitterNo
 		          from PET_MEMBER pm, petsitter ps
 		          where pm.id=#{value} and pm.id=ps.id) A, petsitterboard pb
 		      where A.petsitterNo=pb.petsitterNo) B, reserve r
@@ -137,6 +139,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateReserveRecog" parameterType="int">
 		UPDATE RESERVE SET reserve_recog=reserve_recog+1
+		WHERE reserve_no=#{value}
+	</update>
+	
+	<update id="updateReserveRecogImpossible" parameterType="int">
+		UPDATE RESERVE SET reserve_recog='3'
 		WHERE reserve_no=#{value}
 	</update>
 </mapper>

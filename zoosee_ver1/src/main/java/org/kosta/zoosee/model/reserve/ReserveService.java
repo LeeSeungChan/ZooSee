@@ -42,5 +42,7 @@ public interface ReserveService {
 	int getReserveIdCheck(String id);
 	
 	ReserveVO popupPayment(int reserve_no);
+
+	void updateReserveRecogImpossible(int reserve_no);
 }
  

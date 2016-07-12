@@ -48,9 +48,9 @@
 			<a class="BJA"
 				href="${initParam.root}admin_petmomList.do">펫맘</a> <a
 				class="BJA"
-				href="${initParam.root}admin_petsitterList.do?value=recog">펫시터</a>
+				href="${initParam.root}admin_petsitterList.do?recog=recog">펫시터</a>
 			<a class="BJA"
-				href="${initParam.root}admin_petsitterList.do?value=nonrecog">펫시터
+				href="${initParam.root}admin_petsitterList.do?recog=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>
@@ -91,7 +91,7 @@
 											<td>${l.petsitterNo}</td>
 											<td>${l.memberVO.id}</td>
 											<td><a
-												href="admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&value=nonrecog">${l.memberVO.name}</a></td>
+												href="admin_getPetsitterVO.do?petsitterNo=${l.petsitterNo}&recog=nonrecog">${l.memberVO.name}</a></td>
 											<td>${l.memberVO.email}</td>
 											<td>${l.memberVO.tel}</td>
 											<td><input type="button"  class="BJbtn2"name="recogBtn" value="승인"></td>
@@ -110,7 +110,7 @@
 				<c:choose>
 					<c:when test="${pb.previousPageGroup}">
 						<li><a
-							href="admin_petsitterList.do?value=nonrecog&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+							href="admin_petsitterList.do?recog=nonrecog&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&laquo;</a></li>
@@ -121,7 +121,7 @@
 					<c:choose>
 						<c:when test="${pb.nowPage!=i}">
 							<li><a
-								href="admin_petsitterList.do?value=nonrecog&pageNo=${i}">${i}</a>
+								href="admin_petsitterList.do?recog=nonrecog&pageNo=${i}">${i}</a>
 							<li>
 						</c:when>
 						<c:otherwise>
@@ -132,7 +132,7 @@
 				<c:choose>
 					<c:when test="${pb.nextPageGroup}">
 						<li><a
-							href="admin_petsitterList.do?value=nonrecog&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+							href="admin_petsitterList.do?recog=nonrecog&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled"><a>&raquo;</a></li>

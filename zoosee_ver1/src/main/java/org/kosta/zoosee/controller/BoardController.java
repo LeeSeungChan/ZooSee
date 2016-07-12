@@ -27,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 	@Resource
-	private BoardService boardServie;
+	private BoardService boardService;
 	@Resource
 	private PetsitterService petsitterService;
 	@Resource
@@ -57,7 +57,7 @@ public class BoardController {
 	// 펫시터보드 등록하는
 	@RequestMapping(value="psboard_petsitterboardRegister.do", method=RequestMethod.POST)
 	public ModelAndView registerPetsitterboard(@ModelAttribute PetsitterboardVO petsitterboardVO, PetsitterVO petsitterVO) {
-		boardServie.registerPetsitterboard(petsitterboardVO, petsitterVO);
+		boardService.registerPetsitterboard(petsitterboardVO, petsitterVO);
 		return new ModelAndView("redirect:home.do");
 	}
 
@@ -73,7 +73,7 @@ public class BoardController {
 		ListVO lvo = null;
 		int pn = 1;
 		HashMap<Integer, PetsitterboardVO> map = new HashMap<Integer, PetsitterboardVO>();
-		int total = boardServie.totalCount(service, petSize, petType);
+		int total = boardService.totalCount(service, petSize, petType);
 		if (pageNo == null) {
 			map = listInMap(pn, service, petSize, petType);
 			// total
@@ -100,7 +100,7 @@ public class BoardController {
 		map.put("service", service);
 		map.put("petSize", petSize);
 		map.put("petType", petType);
-		List<PetsitterboardVO> list = boardServie.getConditionList(map);
+		List<PetsitterboardVO> list = boardService.getConditionList(map);
 		for (int i = 0; i < list.size(); i++) {
 			boardmap.put(i, list.get(i));
 		}
@@ -122,8 +122,8 @@ public class BoardController {
 		{
 			mv.setViewName("petsitterboard_unMemberdetail");
 		}
-		PetsitterboardVO petsitterboardVO = boardServie.getboardDetail(petsitterboard_no);
-		List<String> list = boardServie.getPetCalendarDate(petsitterboard_no);
+		PetsitterboardVO petsitterboardVO = boardService.getboardDetail(petsitterboard_no);
+		List<String> list = boardService.getPetCalendarDate(petsitterboard_no);
 		// 날짜 포맷 바꾸는([2016-06-01]을 [2016-6-1]로) insert할 때 바꿔야 한다.
 		for (int i = 0; i < list.size(); i++) {
 			String[] ab = list.get(i).split("-");
@@ -154,15 +154,29 @@ public class BoardController {
 		// 2016.07.05
 		// 시큐리티 세션 
 		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		int petsitterboard_no = boardServie.myPetsitterboard(id);
+		int petsitterboard_no=0;
+		try
+		{
+			petsitterboard_no = boardService.myPetsitterboard(id);
+		}
+		catch(Exception e)
+		{
+			return new ModelAndView("redirect:petsitterboard_error.do");
+		}
 		return new ModelAndView("redirect:petsitterboardDetail.do?petsitterboard_no="+ petsitterboard_no);
+	}
+	
+	@RequestMapping("petsitterboard_error.do")
+	public String petsitterboardErrorView()
+	{
+		return "error/petsitterboard_error";
 	}
 	
 	//게시글 수정 뷰
 	@RequestMapping("psboard_petsitterboard_myPetsitterBoardUpdateView.do")
 	public ModelAndView myPetsitterboardUpdateView(int petsitterboard_no) {
 		ModelAndView mv = new ModelAndView("petsitterboard_updateForm");
-		List<String> list = boardServie.getPetCalendarDate(petsitterboard_no);
+		List<String> list = boardService.getPetCalendarDate(petsitterboard_no);
 
 		// 날짜 포맷 바꾸는([2016-06-01]을 [2016-6-1]로) insert할 때 바꿔야 한다.
 		for (int i = 0; i < list.size(); i++) {
@@ -180,7 +194,7 @@ public class BoardController {
 			list.set(i, str2);
 		}
 		mv.addObject("calendarList", list);
-		PetsitterboardVO petsitterboardVO = boardServie.getboardDetail(petsitterboard_no);
+		PetsitterboardVO petsitterboardVO = boardService.getboardDetail(petsitterboard_no);
 		mv.addObject("petsitterboardVO", petsitterboardVO);
 		return mv;
 	}
@@ -188,14 +202,14 @@ public class BoardController {
 	//게시글 수정
 	@RequestMapping("psboard_petsitterboardUpdate.do")
 	public ModelAndView myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO){            
-		boardServie.myPetsitterboardUpdate(petsitterboardVO,petsitterVO);
+		boardService.myPetsitterboardUpdate(petsitterboardVO,petsitterVO);
 		return new ModelAndView("redirect:psboard_petsitterboard_myPetsitterBoard.do");
 	}
 	
 	//게시글삭제
 	@RequestMapping("psboard_petsitterboard_myPetsitterBoardDelete.do")
 	public ModelAndView myPetsitterBoardDelete(int petsitterboard_no){
-		boardServie.myPetsitterBoardDelete(petsitterboard_no);
+		boardService.myPetsitterBoardDelete(petsitterboard_no);
 		return new ModelAndView("redirect:home.do");
 	}
 }

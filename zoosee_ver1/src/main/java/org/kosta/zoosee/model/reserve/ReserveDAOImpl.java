@@ -90,5 +90,8 @@ public class ReserveDAOImpl implements ReserveDAO{
 		return template.selectOne("reserve.popupPayment", reserve_no);
 	}
 
-	
+	@Override
+	public void updateReserveRecogImpossible(int reserve_no) {
+		template.update("reserve.updateReserveRecogImpossible", reserve_no);
+	}
 }

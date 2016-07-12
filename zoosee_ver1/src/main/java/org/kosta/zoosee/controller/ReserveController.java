@@ -54,24 +54,11 @@ public class ReserveController {
 		// mylist로 쏴줌
 		return new ModelAndView("redirect:reserve_reserveMyList.do?petMasterSignal=1");
 	}
-	// 수정 예정. 2016.07.06
-	// 예약 정보
-	/*@RequestMapping("reserveDetail.do")
-	public ModelAndView showReserve(int reserve_no){
-		ReserveVO reserveVO = reserveService.getReserveVO(reserve_no);
-		List<PetCalendarVO> list2 = reserveService.getReserveDate(reserve_no);
-		ModelAndView mv = new ModelAndView("reserve_reserveDetail");
-		mv.addObject("reserveDetail", reserveVO);
-		mv.addObject("reserveSdate", list2.get(0));
-		mv.addObject("reserveEdate", list2.get(list2.size()-1));
-		return mv;
-	}*/
 	
 	// 본인 예약된 or 예약한 리스트 보기
 	@RequestMapping("reserve_reserveMyList.do")
 	public ModelAndView showMyReserveList(HttpServletRequest request){
 		String petMasterSignal = request.getParameter("petMasterSignal");
-		//System.out.println(petMasterSignal);
 		if(petMasterSignal == null || petMasterSignal == ""){
 			petMasterSignal = "";
 		}
@@ -121,6 +108,10 @@ public class ReserveController {
 		int reserve_no = Integer.parseInt(request.getParameter("reserve_no"));
 		ReserveVO reserveVO = null;
 		PetsitterVO petsitterVO = petsitterService.findPetsitterById(id);
+		if(petsitterVO==null)
+		{
+			// 펫시터가 비활성화 상태일때
+		}
 		PetsitterboardVO petsitterboardVO = reserveService.getBoardVOByPetsitterId(id);
 		petsitterboardVO.setPetsitterVO(petsitterVO);
 		// 2016.07.06
@@ -134,7 +125,6 @@ public class ReserveController {
 		mv.addObject("reserveEdate", list2.get(list2.size()-1));
 		mv.addObject("petsitterboardVO", petsitterboardVO);
 		mv.addObject("reserveVO", reserveVO);
-		//mv.addObject("petList", petList);
 		return mv;
 	}
 	
@@ -142,39 +132,48 @@ public class ReserveController {
 	// 펫시터 기준
 	@RequestMapping("reserve_reserveAccept.do")
 	public ModelAndView reserveAccept(HttpServletRequest request,int reserve_no,String id){
-		String petsitterId = null; // 본인(PETSITTER) 아이디 session에서 받아온다.
-		//HttpSession session = request.getSession(false);
+		String petsitterId = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+		// 본인(PETSITTER) 아이디 session에서 받아온다.
 		int checkId = reserveService.getReserveIdCheck(id); // 신청자(PETMOM) 아이디
-		if(checkId == 0){
+		PetsitterVO pvo =petsitterService.findPetsitterById(petsitterId);
+		if(checkId == 0)
+		{
 			return new ModelAndView("redirect:reserve_reserveAcceptFail.jsp");
 		}
-		//본인(PETSITTER) 아이디
-		petsitterId = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		
-		// pet_Calendar의 pet_reserve를 no에서 yes로 업데이트
-		petCalendarService.updatePetReserve(reserve_no,id,petsitterId);
-		
-		// reservce_reocg를 1로 올려준다.
-		reserveService.updateReserveRecog(reserve_no);
-		
+		if(pvo==null)
+		{
+			System.out.println("pvo null");
+			reserveService.updateReserveRecogImpossible(reserve_no);
+		}else{
+			// reservce_reocg를 1로 올려준다.
+			reserveService.updateReserveRecog(reserve_no);
+		}
 		return new ModelAndView("redirect:reserve_reserveMyList.do?id="+petsitterId);
 	}
-	// 펫시터가 승낙까지 했고 펫맘이 거래하기 누르는
-	// 펫마스터가 거래하기를 누르면 거래목록이 안나옴.
+	// 펫시터가 승낙까지 했고 펫맘이 거래하기
 	@RequestMapping("reserve_reserveDealAccept.do")
 	public ModelAndView reserveDealAccept(HttpServletRequest request,String petsitterId,int reserve_no){
 		String petmomId = null; 
 		// 본인(펫맘) 아이디 session에서 받아온다.
 		petmomId = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+		PetsitterVO pvo = petsitterService.findPetsitterById(petsitterId);
 		
-		// 거래내역에 삽입한다.
-		TradeInfoVO tradeInfoVO = new TradeInfoVO();
-		tradeInfoServie.registerTradeInfo(tradeInfoVO, reserve_no, petmomId, petsitterId);
-		
-		// recog를 2로 올려준다
-		reserveService.updateReserveRecog(reserve_no);
-		
-		return new ModelAndView("redirect:tradeInfo_subgetTradeMyList.do");
+		if(pvo.getMemberVO().getRank().equals("normal")){
+			System.out.println("pvo null");
+			reserveService.updateReserveRecogImpossible(reserve_no);
+			return new ModelAndView("redirect:reserve_reserveMyList.do?id="+petsitterId);
+		}else{
+			// pet_Calendar의 pet_reserve를 no에서 yes로 업데이트
+			petCalendarService.updatePetReserve(reserve_no,petmomId,petsitterId);
+			
+			// 거래내역에 삽입한다.
+			TradeInfoVO tradeInfoVO = new TradeInfoVO();
+			tradeInfoServie.registerTradeInfo(tradeInfoVO, reserve_no, petmomId, petsitterId);
+			// recog를 2로 올려준다
+			reserveService.updateReserveRecog(reserve_no);
+			
+			return new ModelAndView("redirect:tradeInfo_subgetTradeMyList.do");
+		}
 	}
 	// 위에서 redirect로 오는 것을 받는
 	@RequestMapping("tradeInfo_subgetTradeMyList.do")

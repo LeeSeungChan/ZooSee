@@ -36,5 +36,7 @@ public interface ReserveDAO {
 	
 	ReserveVO popupPayment(int reserve_no);
 
+	void updateReserveRecogImpossible(int reserve_no);
+
 	
 }

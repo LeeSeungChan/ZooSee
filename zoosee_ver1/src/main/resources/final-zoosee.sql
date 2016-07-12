@@ -1,4 +1,3 @@
-
 -- 펫맘 아이디로 자 거래목록 찾기
 select A.tradeinfo_no,A.tradeSdate,A.tradeEdate,A.tradePrice,A.id,A.name,
         A.petsitterNo,A.petsitterId,m.name as petsitterName,A.petsitterboard_no,A.title
@@ -311,16 +310,11 @@ create table message(
    --게시판 게시글 번호
    constraint fk_pet3_id foreign key(id) references pet_member(id) on delete cascade
 )
-select A.tradeinfo_no,A.petmom_id,m.name as petmom_Name,A.id,A.name,A.petsitterboard_no,A.title,
-  		   A.tradeSdate,A.tradeEdate,A.tradePrice,A.petsitterNo
-from(
-	SELECT m.id,m.name,t.id as petmom_id,t.tradeinfo_no,t.tradePrice,t.tradeSdate,t.tradeEdate,t.petsitterboard_no,
-		   pm.petsitterNo,pb.petsitterboard_title as title
-	from pet_member m, tradeInfo t, petsitter pm, petsitterboard pb
-	where pm.id=m.id and pb.petsitterNo = pm.petsitterNo and pm.petsitterNo=t.petsitterNo 
-		  and t.petsitterboard_no=pb.petsitterboard_no and m.id='eeee' order by t.tradeinfo_no desc
-)A, pet_member m, PET pet 
-where pet.id=A.petmom_Id and A.petmom_id = m.id and pet.id=m.id
-		
-select * from tradeInfo
-	
+
+DELETE FROM PETSITTER WHERE fk_member_id IN (SELECT id FROM PETSITTER);
+delete from PETSITTER where petsitterNo=81 cascade
+delete from PETSITTER where id='eeee' cascade contraints
+
+select * from petsitter
+
+update petsitter set petsitter_enabled=1 where id ='eeee'

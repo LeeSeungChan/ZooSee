@@ -34,9 +34,9 @@
 			<a class="BJA"
 				href="${initParam.root}admin_petmomList.do">펫맘</a> <a
 				class="BJA"
-				href="${initParam.root}admin_petsitterList.do?value=recog">펫시터</a>
+				href="${initParam.root}admin_petsitterList.do?recog=recog">펫시터</a>
 			<a class="BJA"
-				href="${initParam.root}admin_petsitterList.do?value=nonrecog">펫시터
+				href="${initParam.root}admin_petsitterList.do?recog=nonrecog">펫시터
 				신청자</a>
 		</div>
 	</div>

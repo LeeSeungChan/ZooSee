@@ -60,18 +60,26 @@
 											<tr>
 												<td>${reserveVO.reserve_no}</td>
 												<td>${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}</td>
-												<td><a
-													href="reserve_showPesitterDetail.do?reserve_no=${reserveVO.reserve_no}&id=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}">
-														${reserveVO.petsitterboardVO.petsitterVO.memberVO.name} </a></td>
 												<c:choose>
 													<c:when test="${reserveVO.reserve_recog == '0'}">
+														<td>
+															<a href="reserve_showPesitterDetail.do?reserve_no=${reserveVO.reserve_no}&id=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}">
+																${reserveVO.petsitterboardVO.petsitterVO.memberVO.name} </a>
+														</td>
 														<td>예약신청</td>
 													</c:when>
 													<c:when test="${reserveVO.reserve_recog == '1'}">
+														<td>
+															<a href="reserve_showPesitterDetail.do?reserve_no=${reserveVO.reserve_no}&id=${reserveVO.petsitterboardVO.petsitterVO.memberVO.id}">
+																${reserveVO.petsitterboardVO.petsitterVO.memberVO.name} </a>
+														</td>
 														<td>예약완료</td>
 													</c:when>
-													<c:when test="${reserveVO.reserve_recog == '2'}">
-														<td>거래중</td>
+													<c:when test="${reserveVO.reserve_recog == '3'}">
+														<td>
+															${reserveVO.petsitterboardVO.petsitterVO.memberVO.name}
+														</td>
+														<td>예약 불가</td>
 													</c:when>
 												</c:choose>
 											</tr>

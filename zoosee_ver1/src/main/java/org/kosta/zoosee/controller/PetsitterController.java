@@ -88,8 +88,20 @@ public class PetsitterController {
 		MemberVO mvo = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		PetsitterVO petsitterVO = petsitterService.findPetsitterById(mvo
 				.getId());
-		return new ModelAndView("petsitter_updateform", "petsitterVO",
-				petsitterVO);
+		if(petsitterVO == null)
+		{
+			return new ModelAndView("redirect:petsitterError.do");
+		}
+		else
+		{
+			return new ModelAndView("petsitter_updateform", "petsitterVO",petsitterVO);
+		}
+	}
+	
+	@RequestMapping("petsitterError.do")
+	public String petsitter_error()
+	{
+		return "'petsitter_error";
 	}
 
 	// 팻시터 정보 수정

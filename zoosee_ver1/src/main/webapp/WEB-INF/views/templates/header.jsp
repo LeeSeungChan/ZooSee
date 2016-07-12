@@ -63,7 +63,7 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="${initParam.root}admin_petsitterList.do?value=recog">회원 관리</a></li>
+						<li><a href="${initParam.root}admin_petsitterList.do?recog=recog">회원 관리</a></li>
 						<li><a href="${initParam.root}admin_qna_list.do?when=all">Q&A 목록</a></li>
 						<li><a href="${initParam.root}admin_adminList.do">직원 관리</a></li>
 						<li><a href="${initParam.root}admin_MessageList.do">전체 공지 메세지</a></li>

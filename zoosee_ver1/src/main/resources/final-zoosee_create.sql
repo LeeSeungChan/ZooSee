@@ -44,7 +44,7 @@ CREATE sequence petsitterNo_seq
 DROP sequence petsitterNo_seq
 
 SELECT * FROM PETSITTER
-DROP TABLE PETSITTER
+DROP TABLE PETSITTER cascade constraint
 
 CREATE TABLE PETSITTER(
    petsitterNo number primary key,		-- 돌보미의 고유 번호(시퀀스)
@@ -57,6 +57,7 @@ CREATE TABLE PETSITTER(
    petsitterImg varchar2(100) not null, -- 펫시터 사진
    adminRecog varchar2(50) not null,	-- 인증 받은 여부
    id varchar2(100) not null,			-- PET_MEMBER의 아이디 FK
+   petsitter_enabled number not null, -- petsitter 상태 ( 0 :  추방 , 1: 펫시터 기능 사용 가능 )
    constraint fk_member_id foreign key(id) references PET_MEMBER(id) on delete cascade
 )
 

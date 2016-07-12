@@ -18,9 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<insert id="registerPetsitter"  parameterType="petsitterVO" >
- 		insert into petsitter(petsitterNo,petNumber,service,price,petSize,petType,houseImg,petsitterImg,adminrecog,id)
+ 		insert into petsitter(petsitterNo,petNumber,service,price,petSize,petType,houseImg,petsitterImg,adminrecog,id,petsitter_enabled)
 		values
-		(petsitterNo_seq.nextval,#{petNumber},#{service},#{price},#{petSize},#{petType},#{houseImg},#{petsitterImg},'nonrecog',#{memberVO.id})
+		(petsitterNo_seq.nextval,#{petNumber},#{service},#{price},#{petSize},#{petType},#{houseImg},#{petsitterImg},'nonrecog',#{memberVO.id},1)
  	</insert>
  	
  	<select id="petsitterListCount" resultType="int">
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 				select p.petsitterNo,p.adminRecog,pm.id,pm.name,pm.tel,pm.email 
 				from petsitter p ,pet_member pm
-			    where p.id=pm.id and  adminRecog=#{value} order by petsitterNo desc
+			    where p.id=pm.id and p.petsitter_enabled=1 and adminRecog=#{value} order by petsitterNo desc
 			)
 		)where page=#{pageNo}
 	</select>
@@ -48,19 +48,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select p.petsitterNo,p.petNumber,p.service,p.price,p.petSize,p.petType,p.houseImg,p.petsitterImg,p.adminRecog,
 		         pm.id,pm.name ,pm.address, pm.gender, pm.email, pm.tel, pm.job
 			from petsitter p ,pet_member pm
-		where p.id=pm.id and petsitterNo=#{value}
+		where p.id=pm.id and petsitterNo=#{value} and p.petsitter_enabled=1
 	</select>
 	
 	<select id="findPetsitterById" resultType="petsitterVO" resultMap="petsitterRM">
 		select p.petsitterNo,p.petNumber,p.service,p.price,p.petSize,p.petType,p.houseImg,p.petsitterImg,p.adminRecog,
 		         pm.id,pm.name,pm.address,pm.gender,pm.email,pm.tel,pm.job,pm.rank,pm.existence
 			from petsitter p ,pet_member pm
-		where p.id=pm.id and pm.id=#{value}
+		where p.id=pm.id and pm.id=#{value} and p.petsitter_enabled=1
 	</select>
 	
-	<delete id="deletePetsitter" >
-		delete from PETSITTER where id=#{value}
-	</delete>
+	<update id="deletePetsitter" parameterType="string">
+		update petsitter set petsitter_enabled=0 where id =#{value}
+	</update>
  	
  	<update id="update" parameterType="petsitterVO">
        update petsitter set price=#{price},petType=#{petType},petSize=#{petSize},petNumber=#{petNumber},service=#{service},houseImg=#{houseImg},petsitterImg=#{petsitterImg},adminRecog=#{adminRecog}

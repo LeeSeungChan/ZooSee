@@ -126,15 +126,15 @@ public class AdminController {
 
 	/* 관리자 페이지 - 펫시터 리스트 */
 	@RequestMapping("admin_petsitterList.do")
-	public ModelAndView petsitterList(String value, HttpServletRequest request) {
+	public ModelAndView petsitterList(String recog, HttpServletRequest request) {
 		String pageNo = request.getParameter("pageNo");
 		ModelAndView mv = new ModelAndView();
 		org.kosta.zoosee.model.petsitter.ListVO list = new org.kosta.zoosee.model.petsitter.ListVO();
-		if (value.equals("recog")) {// value -> recog 이면 펫시터 리스트
-			list = petsitterService.petsitterList(value, pageNo);
+		if (recog.equals("recog")) {// value -> recog 이면 펫시터 리스트
+			list = petsitterService.petsitterList(recog, pageNo);
 			mv.setViewName("admin_petsitterlist");
 		} else {// value -> nonrecog 이면 펫시터 대기자 리스트
-			list = petsitterService.petsitterList(value, pageNo);
+			list = petsitterService.petsitterList(recog, pageNo);
 			mv.setViewName("admin_petsitterwaitinglist");
 		}
 		mv.addObject("listVO", list);
@@ -153,7 +153,8 @@ public class AdminController {
 	/* 관리자 페이지 - 멤버 추방 */
 	@RequestMapping(value = "admin_delete.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void deleteMember(String id) {
+	public void deleteMember(String id) 
+	{
 		memberService.deleteMember(id);
 	}
 
@@ -167,7 +168,8 @@ public class AdminController {
 	/* 관리자 페이지 - 펫시터 추방 */
 	@RequestMapping(value = "admin_deletePetsitter.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void deletePetsitter(String id) {
+	public void deletePetsitter(String id) 
+	{
 		petsitterService.deletePetsitter(id);
 	}
 
