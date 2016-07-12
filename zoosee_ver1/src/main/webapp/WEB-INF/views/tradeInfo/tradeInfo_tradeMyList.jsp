@@ -5,10 +5,11 @@
 <!-- 더블헤더 -->
 <script type="text/javascript">
 	function openPopup(id){
-		var content=null;
+		var content = null;
 		window.open("${initParam.root}popup_reviewPopup.do?id="+id,"","width=700 height=400 left=150 top=100 ");
 	}
 </script>
+
 <div class="BJMainKING">
 <div class="BJMainKING">
 <!-- 더블헤더 -->
@@ -32,9 +33,9 @@
 	<div class="BJMain2Div" align="center">
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine_1">
-					<c:if test="${empty tradeInfoList }">
-						<div style="margin-bottom: 3%">거래하신 내역이 없습니다.</div>
-					</c:if>
+				<c:if test="${empty tradeInfoList}">
+					<div style="margin-bottom: 3%">거래하신 내역이 없습니다.</div>
+				</c:if>
 				<table class="table table-striped table-hover" style="width: 100%">
 					<tr class="active">
 						<th style="width: 10%"><label>거래번호</label></th>

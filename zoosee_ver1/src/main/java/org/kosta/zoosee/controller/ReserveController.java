@@ -45,13 +45,11 @@ public class ReserveController {
 	@RequestMapping("reserveRegister.do")
 	public ModelAndView reserveRegister(HttpServletRequest request, ReserveVO reserveVO, PetsitterboardVO petsitterboardVO){
 		// 멤버VO set해주기
-		String id = request.getParameter("id");//예약자 id
+		String id = request.getParameter("id"); //예약자 id
 		reserveVO.setMemberVO(reserveService.getMemberVO(id));
 		// 예약요청하기
 		reserveService.reserveRegister(reserveVO, petsitterboardVO);
 		
-		//2016.07.06
-		// mylist로 쏴줌
 		return new ModelAndView("redirect:reserve_reserveMyList.do?petMasterSignal=1");
 	}
 	
@@ -62,13 +60,14 @@ public class ReserveController {
 		if(petMasterSignal == null || petMasterSignal == ""){
 			petMasterSignal = "";
 		}
-		// 2016.07.05
+		
 		// 시큐리티 세션
-		//HttpSession session = request.getSession(false);
 		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = memberService.getMemberVO(id);
+		
 		List<ReserveVO> reserveList = reserveService.showMyReserveList(memberVO, petMasterSignal);
+		
+		ModelAndView mv = new ModelAndView();
 		mv.addObject("reserveList", reserveList);
 		if(memberVO.getRank().equals("petsitter")){
 			mv.setViewName("reserve_reserveMyList");
@@ -90,9 +89,11 @@ public class ReserveController {
 	public ModelAndView showPetmomDetail(HttpServletRequest request){
 		String id = request.getParameter("id");
 		int reserve_no = Integer.parseInt(request.getParameter("reserve_no"));
+		
 		MemberVO memberVO = reserveService.showPetmomDetail(id);
 		List<Integer> petNolist = petService.getPetNo(id);
 		ReserveVO reserveVO = reserveService.getReserveVO(reserve_no,petNolist.get(0));
+		
 		ModelAndView mv = new ModelAndView("reserve_reservePetmomDetail");
 		mv.addObject("memberVO", memberVO);
 		mv.addObject("reserveVO", reserveVO);
@@ -106,19 +107,15 @@ public class ReserveController {
 		String id = request.getParameter("id");
 		String petmomId = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		int reserve_no = Integer.parseInt(request.getParameter("reserve_no"));
-		ReserveVO reserveVO = null;
+		
 		PetsitterVO petsitterVO = petsitterService.findPetsitterById(id);
-		if(petsitterVO==null)
-		{
-			// 펫시터가 비활성화 상태일때
-		}
 		PetsitterboardVO petsitterboardVO = reserveService.getBoardVOByPetsitterId(id);
 		petsitterboardVO.setPetsitterVO(petsitterVO);
 		// 2016.07.06
 		// petNo 을 넘겨주고 reserve 를 갖고옴
 		List<Integer> petNolist = petService.getPetNo(petmomId);
-		reserveVO = reserveService.getReserveVO(reserve_no,petNolist.get(0));
-		//List<PetVO> petList = petService.petList(id);
+		ReserveVO reserveVO = reserveService.getReserveVO(reserve_no,petNolist.get(0));
+		
 		ModelAndView mv = new ModelAndView("reserve_reservePesitterDetail");
 		List<PetCalendarVO> list2 = reserveService.getReserveDate(reserve_no);
 		mv.addObject("reserveSdate", list2.get(0));
@@ -133,21 +130,15 @@ public class ReserveController {
 	@RequestMapping("reserve_reserveAccept.do")
 	public ModelAndView reserveAccept(HttpServletRequest request,int reserve_no,String id){
 		String petsitterId = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		// 본인(PETSITTER) 아이디 session에서 받아온다.
+		
 		int checkId = reserveService.getReserveIdCheck(id); // 신청자(PETMOM) 아이디
-		PetsitterVO pvo =petsitterService.findPetsitterById(petsitterId);
-		if(checkId == 0)
-		{
+		if(checkId == 0){
 			return new ModelAndView("redirect:reserve_reserveAcceptFail.jsp");
 		}
-		if(pvo==null)
-		{
-			//System.out.println("pvo null");
-			reserveService.updateReserveRecogImpossible(reserve_no);
-		}else{
-			// reservce_reocg를 1로 올려준다.
-			reserveService.updateReserveRecog(reserve_no);
-		}
+		
+		// reservce_reocg를 1로 올려준다.
+		reserveService.updateReserveRecog(reserve_no);
+		
 		return new ModelAndView("redirect:reserve_reserveMyList.do?id="+petsitterId);
 	}
 	// 펫시터가 승낙까지 했고 펫맘이 거래하기
@@ -159,7 +150,6 @@ public class ReserveController {
 		PetsitterVO pvo = petsitterService.findPetsitterById(petsitterId);
 		
 		if(pvo.getMemberVO().getRank().equals("normal")){
-			System.out.println("pvo null");
 			reserveService.updateReserveRecogImpossible(reserve_no);
 			return new ModelAndView("redirect:reserve_reserveMyList.do?id="+petsitterId);
 		}else{

@@ -93,35 +93,3 @@
 <div style="width:100%; height: 50px; margin-top: 2%;">
 	<input class="active WJbtn btn-block btn-info" style="width:5%; margin-left:47%; "onclick="history.go(-1)" type="button" value="확인" >   
 </div>
-			<%--
-			<label>이름</label> <input class="WJform-control6" type="text"
-				value="${memberVO.id}" readonly="readonly"
-				style="background-color: #F4F4F4;">	 		
-				<label>이름</label> <input class="WJform-control6" type="text"
-				value="${memberVO.name}" readonly="readonly"
-				style="background-color: #F4F4F4;">	
-			<label>주소</label> <input class="WJform-control6" type="text"
-				value="우편번호 :${memberVO.addressCode}" readonly="readonly"
-				style="background-color: #F4F4F4;">
-			<input class="WJform-control6" type="text"
-				value=" ${memberVO.address}" readonly="readonly"
-				style="background-color: #F4F4F4;">
-			<input class="WJform-control6" type="text"
-				value="${memberVO.detailAddress}" readonly="readonly"
-				style="background-color: #F4F4F4;">
-			<label>이메일</label> <input class="WJform-control6" type="text"
-				value="${memberVO.email}" readonly="readonly"
-				style="background-color: #F4F4F4;">			
-			<label>성별</label> <input class="WJform-control6" type="text"
-				value="${memberVO.gender}" readonly="readonly"
-				style="background-color: #F4F4F4;">
-			<label>전화번호</label> <input class="WJform-control6" type="text"
-				value="${memberVO.tel}" readonly="readonly"
-				style="background-color: #F4F4F4;">
-			<label>직업</label> <input class="WJform-control6" type="text"
-				value="${memberVO.job}" readonly="readonly"
-				style="background-color: #F4F4F4;">
-			<label>펫 키운 경험</label> <input class="WJform-control6" type="text"
-				value="${memberVO.existence}" readonly="readonly"
-				style="background-color: #F4F4F4;"> --%>
-	
