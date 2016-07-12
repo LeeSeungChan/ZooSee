@@ -22,7 +22,7 @@
  		$("#replyForm").submit(function(){
  			var content = $("#content").val();
  			if(content==""){
-				alert("내용을 입력해주세요!")
+				alert("내용을 입력해주세요!")	  	
 				return false;
  			}
  		})
@@ -127,7 +127,7 @@
 						</td>
 					</c:if>
 					<td align="right">
-						<c:if test="${reply.con==0}">
+						<c:if test="${reply.con==0&&sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id==reply.id}">
 							<input class="BJbtn2" type="button" value="삭제" onclick="del_reply(${reply.grp },${reply.lvl},${reply.ref})">
 						</c:if>
 					</td>
