@@ -1,6 +1,8 @@
 package org.kosta.zoosee.model.vo;
 
-public class MemberVO {
+import java.io.Serializable;
+
+public class MemberVO implements Serializable {
 	private String id;
 	private String name;
 	private String addressCode;

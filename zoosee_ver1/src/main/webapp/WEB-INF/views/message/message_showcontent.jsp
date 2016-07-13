@@ -2,7 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
+<script type="text/javascript" src="${initParam.root}resources/js/backfix.min.js"></script>
+<script type="text/javascript">
+<%-- 뒤로가기 버튼 누를 시 읽음 으로 바꿈--%>
+bajb_backdetect.OnBack = function(){		
+	window.history.back=function(){
+		document.location="${initParam.root}message_list.do";
+	}
+}
+function histotyBack(){
+	document.location="${initParam.root}message_list.do";
+}
 
+</script>
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">
 		<div class="BJHeader2">
@@ -51,5 +63,5 @@
 </div>
 
 <div style="width:100%; height: 50px; margin-top: 2%;">
-	<input class="active SBbtn btn-default" style="width:5%; margin-left:48%; "onclick="history.go(-1)" type="button" value="확인" >   
+	<input class="active SBbtn btn-default" style="width:5%; margin-left:48%; "onclick="histotyBack()" type="button" value="확인" >   
 </div>

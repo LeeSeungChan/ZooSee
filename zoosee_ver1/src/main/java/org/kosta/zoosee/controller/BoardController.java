@@ -46,7 +46,15 @@ public class BoardController {
 		if(pbVO != null){
 			flag = "true";
 		}
-		
+		try
+		{
+			int i = boardService.myPetsitterboard(id);
+			request.setAttribute("boardInfo","ok");
+		}
+		catch(NullPointerException e)
+		{
+			request.setAttribute("boardInfo","no");
+		}
 		ModelAndView mv = new ModelAndView("petsitterboard_registerForm");
 		mv.addObject("petsitterVO", petsitterVO);
 		mv.addObject("flag", flag);

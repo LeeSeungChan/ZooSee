@@ -33,14 +33,11 @@ public class MessageController {
 		HashMap<String,String> map = new HashMap<String, String>();
 		//맵에 result값을 넣는다
 		map.put("count", count);
-		
 		return map;
 	}
 	
 	@RequestMapping("message_list.do")
 	public ModelAndView messageList(String pageNo,HttpServletRequest request){
-		/*HttpSession session = request.getSession(false);
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");*/
 		// 2016.07.05
 		// 시큐리티 세션가져오기
 		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
@@ -50,7 +47,6 @@ public class MessageController {
 	
 	@RequestMapping("message_uncheckedlist.do")
 	public ModelAndView messageUncheckedList(HttpServletRequest request){
-		//HttpSession session=request.getSession(false);
 		// 2016.07.05
 		// 시큐리티 세션
 		String id=((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();

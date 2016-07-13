@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.member.MemberService;
 import org.kosta.zoosee.model.reserve.ReserveService;
 import org.kosta.zoosee.model.vo.MemberVO;
@@ -25,6 +26,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Resource
 	private ReserveService reserveService;
+	@Resource
+	private BoardService boardService;
 	
 	/* Member 회원가입하는 메서드 */
 	@RequestMapping(value="registerMember.do", method=RequestMethod.POST)
@@ -102,8 +105,6 @@ public class MemberController {
 		if(message=="fail"){
 			mv.setViewName("redirect:member_update_fail.do");
 		}else{
-			/*HttpSession session=request.getSession(false);
-			session.setAttribute("mvo", vo);*/
 			mv.setViewName("redirect:m_member_detail.do");
 		}
 		return mv;
@@ -113,18 +114,31 @@ public class MemberController {
 	@RequestMapping("m_member_delete.do")
 	public ModelAndView deleteMember(HttpServletRequest request){
 		HttpSession session=request.getSession(false);
-		//String id=((MemberVO)session.getAttribute("mvo")).getId();
 		// 2016.07.06
 		// 세션 아이디 설정
 		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 		String result=memberService.deleteMember(id);
-		if(result=="ok"){
+		if(result.equals("ok") && session!=null){
 			session.invalidate();
 		}
-		return new ModelAndView("member_delete_result","result",result);
+		return new ModelAndView("member/delete_result","result",result);
 	}
+	
 	@RequestMapping("m_member_detail.do")
-	public ModelAndView memberDetail(){
+	public ModelAndView memberDetail(HttpServletRequest request)
+	{
+		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+		try
+		{
+			int i = boardService.myPetsitterboard(id);
+			System.out.println("boardservice.myPetsitterboard result = "+i);
+			request.setAttribute("boardInfo","ok");
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("boardservice.myPetsitterboard result = no");
+			request.setAttribute("boardInfo","no");
+		}
 		return new ModelAndView("member_detail");
 	}
 	
@@ -142,8 +156,20 @@ public class MemberController {
 			return map;
 		}
 	}
-
-	
-	
+	@RequestMapping("member_update")
+	public String updateForm(HttpServletRequest request)
+	{
+		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+		try
+		{
+			int i = boardService.myPetsitterboard(id);
+			request.setAttribute("boardInfo","ok");
+		}
+		catch(NullPointerException e)
+		{
+			request.setAttribute("boardInfo","no");
+		}
+		return "member_update";
+	}
 	
 }

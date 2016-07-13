@@ -36,7 +36,7 @@
 			login-processing-url="/login.do" authentication-failure-url="/loginfail.do"
 			username-parameter="id" default-target-url="/loginSuccess.do" 
 			password-parameter="password" />
-		<sec:logout logout-url="/logout.do" logout-success-url="/home.do" />
+		<sec:logout logout-url="/logout.do" logout-success-url="/home.do"/>
 	</sec:http>
 	
 	<sec:authentication-manager>

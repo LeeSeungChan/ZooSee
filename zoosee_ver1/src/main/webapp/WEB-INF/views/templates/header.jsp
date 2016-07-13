@@ -80,8 +80,8 @@
 						<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="${initParam.root}m_member_detail.do">계정관리</a></li>
+						<sec:authorize ifAnyGranted="ROLE_MEMBER,ROLE_PETSITTER,ROLE_PETMOM,ROLE_PETMASTER">
 						<li><a href="${initParam.root}pet_list.do">정보관리</a></li>
-						<sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMOM,ROLE_PETMASTER,ROLE_ADMIN">
 						<li><a href="${initParam.root}reserve_reserveMyList.do?petMasterSignal=${petMasterSignal}">예약목록</a></li>
 						<li><a href="${initParam.root}tradeInfo_getTradeMyList.do?id=<sec:authentication property="principal.id"/>">거래목록</a></li>
 						</sec:authorize>

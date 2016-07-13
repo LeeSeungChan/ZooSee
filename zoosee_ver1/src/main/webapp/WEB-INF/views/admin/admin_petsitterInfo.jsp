@@ -9,7 +9,7 @@
 						$("#petsitterInfoForm :input[name=backBtn]")
 								.click(
 										function() {
-											location.href = "${initParam.root}admin_petsitterList.do?value=${param.value}";
+											location.href = "${initParam.root}admin_petsitterList.do?recog=recog";
 
 										});
 

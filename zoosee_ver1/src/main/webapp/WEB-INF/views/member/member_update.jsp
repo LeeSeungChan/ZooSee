@@ -124,12 +124,14 @@
             <a class="BJA" href="${initParam.root}m_member_detail.do">마이페이지</a>
             <a class="BJA" href="${initParam.root}member_update.do">회원정보수정</a>
             <sec:authorize ifAnyGranted="ROLE_PETSITTER,ROLE_PETMASTER">
-               <a class="BJA"
-                  href="${initParam.root}petsitterboard_registerform.do?id=<sec:authentication property="principal.id"/>">
-                  펫시터게시글등록</a>
-               <a class="BJA"
-                  href="${initParam.root}petsitterboard_myPetsitterBoard.do">내
-                  글 보기</a>
+               <c:choose>
+		   			<c:when test="${'ok' eq requestScope.boardInfo}">
+		   				<a class="BJA" href="${initParam.root}psboard_petsitterboard_myPetsitterBoard.do">내 글 보기</a>
+		   			</c:when>
+		   			<c:otherwise>
+		   				<a class="BJA" href="${initParam.root}psboard_petsitterboard_registerform.do?id=<sec:authentication property="principal.id"/>"> 펫시터게시글등록</a>
+		   			</c:otherwise>
+   				</c:choose>   
            </sec:authorize>
          </div>
       </div>
