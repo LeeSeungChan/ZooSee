@@ -122,6 +122,13 @@ public class ReserveController {
 		mv.addObject("reserveEdate", list2.get(list2.size()-1));
 		mv.addObject("petsitterboardVO", petsitterboardVO);
 		mv.addObject("reserveVO", reserveVO);
+		// 추가
+		// 펫맘이 거래하기 버튼이 활성화 되어있는 페이지 에서
+		// 거절할 시 거래가 취소되었습니다
+		if(reserveVO.getReserve_recog()==1)
+		{
+			mv.addObject("tradeCancle","notTrade");
+		}
 		return mv;
 	}
 	
@@ -130,8 +137,7 @@ public class ReserveController {
 	@RequestMapping("reserve_reserveAccept.do")
 	public ModelAndView reserveAccept(HttpServletRequest request,int reserve_no,String id){
 		String petsitterId = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		
-		int checkId = reserveService.getReserveIdCheck(id); // 신청자(PETMOM) 아이디
+		int checkId = reserveService.getReserveIdCheck(id,petsitterId); // 신청자(PETMOM) 아이디
 		if(checkId == 0){
 			return new ModelAndView("redirect:reserve_reserveAcceptFail.jsp");
 		}
@@ -175,9 +181,9 @@ public class ReserveController {
 	@RequestMapping("reserve_reserveCancel.do")
 	public ModelAndView reserveCancle(String reserve_no,String petsitterId,String petmomId){
 		int check = reserveService.reserveCancle(Integer.parseInt(reserve_no),petsitterId,petmomId);
-
 		return new ModelAndView("redirect:reserve_reserveDelete.do?check="+check);
 	}
+	
 	@RequestMapping("reserve_reserveDelete.do")
 	public ModelAndView reserveDeleteResult(int check){
 		return new ModelAndView("reserve_reserveDeleteResult","check",check);

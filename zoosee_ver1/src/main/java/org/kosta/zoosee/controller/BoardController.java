@@ -119,7 +119,6 @@ public class BoardController {
 	@RequestMapping("petsitterboardDetail.do")
 	public ModelAndView getboardDetail(int petsitterboard_no, HttpServletRequest request) 
 	{
-		System.out.println();
 		ModelAndView mv = new ModelAndView();
 		// 비회원이 볼때.   
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof MemberVO)

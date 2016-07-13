@@ -98,13 +98,13 @@ public class ReserveServiceImpl implements ReserveService {
 
 	// 예약 거절시 삭제하는
 	@Override
-	public int reserveCancle(int reserve_no, String petsitterId, String petmomId) {
+	public int reserveCancle(int reserve_no, String petsitterId, String petmomId) 
+	{
 		int check1 = petCalendarDAO.deleteCanlendar(reserve_no);
 		int check2 = reserveDAO.reserveCancle(reserve_no);
-
 		if (check1 == 0 || check2 == 0) {
 			return 0;
-		} else {
+		}else{
 			//메세지-예약자(펫맘)
 			messageService.sendMessageOnServer(petmomId, 11);
 			//메세지-펫시터
@@ -206,10 +206,15 @@ public class ReserveServiceImpl implements ReserveService {
 	// 펫시터가 승인시 recog 1로 올려주는
 	public void updateReserveRecog(int reserve_no) {
 		reserveDAO.updateReserveRecog(reserve_no);
+		
 	}
 
 	@Override
-	public int getReserveIdCheck(String id) {
+	public int getReserveIdCheck(String id,String petsitterId) {
+		//메세지-예약자(펫맘)
+		messageService.sendMessageOnServer(id,2);
+		//메세지-펫시터
+		messageService.sendMessageOnServer(petsitterId,3);
 		return reserveDAO.getReserveIdCheck(id);
 	}
 	
@@ -221,6 +226,7 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public ReserveVO getReserveVO(int reserve_no) 
 	{
+		
 		return reserveDAO.getReserveVO(reserve_no);
 	}
 

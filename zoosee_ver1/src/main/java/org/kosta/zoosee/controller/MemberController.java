@@ -36,9 +36,9 @@ public class MemberController {
 		return "redirect:member_register_result.do";
 	}
 	/* Member 로그인 메서드 */
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	/*@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public ModelAndView loginMember(HttpServletRequest request){
-		System.out.println("로그인멤버.do 실행");
+		
 		
 		MemberVO mvo = new MemberVO();
 		mvo.setId(request.getParameter("id"));
@@ -59,7 +59,7 @@ public class MemberController {
 		}else{
 			return new ModelAndView("loginfail.do");
 		}
-	}
+	}*/
 	@RequestMapping("loginSuccess.do")
 	public ModelAndView loginMemberSuccess(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("member_loginSuccess");
@@ -131,12 +131,10 @@ public class MemberController {
 		try
 		{
 			int i = boardService.myPetsitterboard(id);
-			System.out.println("boardservice.myPetsitterboard result = "+i);
 			request.setAttribute("boardInfo","ok");
 		}
 		catch(NullPointerException e)
 		{
-			System.out.println("boardservice.myPetsitterboard result = no");
 			request.setAttribute("boardInfo","no");
 		}
 		return new ModelAndView("member_detail");

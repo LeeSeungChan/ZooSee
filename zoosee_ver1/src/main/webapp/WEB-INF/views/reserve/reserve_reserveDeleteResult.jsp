@@ -9,6 +9,12 @@
     			location.replace("${initParam.root}reserve_reserveMyList.do?id=<sec:authentication property='principal.id'/>");
     		</script>
 		</c:when>
+		<c:when test="${check ==2 }">
+			<script type="text/javascript">
+			alert("거래를 취소하셨습니다.");
+   			location.replace("${initParam.root}reserve_reserveMyList.do?id=<sec:authentication property='principal.id'/>");
+   			</script>
+		</c:when>
 		<c:otherwise>
 			<script type="text/javascript">
     			alert("잘못된 접근입니다.");

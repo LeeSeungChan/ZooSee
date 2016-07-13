@@ -52,6 +52,7 @@ public class MessageDAOImpl implements MessageDAO {
 
 	@Override
 	public void insertMessage(MessageVO message) {
+		System.out.println(message);
 		template.insert("message.insertMessage",message);		
 	}
 

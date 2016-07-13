@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
 	function clickNotification(notification, flag){
 		// notification 클릭하면 새로 이동
@@ -76,13 +76,13 @@
 		alert("로그인에 성공하셨습니다.");
 
    		<c:forEach items="${requestScope.reserveTotalList.reserveRequestList}" var="reserveVO">
-   			prepareNotification("${reserveVO.memberVO.name}", name, "${reserveVO.petVO.petImg}", "request")
+   			prepareNotification("${reserveVO.memberVO.name}","${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.name}", "${reserveVO.petVO.petImg}", "request")
   		</c:forEach>
   		<c:forEach items="${requestScope.reserveTotalList.reserveCompleteList}" var="reserveVO">
-  			prepareNotification("${reserveVO.memberVO.name}", name, "${reserveVO.petVO.petImg}", "complete");
+  			prepareNotification("${reserveVO.memberVO.name}", "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.name}", "${reserveVO.petVO.petImg}", "complete");
 		</c:forEach>
 		<c:forEach items="${requestScope.reserveTotalList.reserveDealList}" var="reserveVO">
-			prepareNotification("${reserveVO.memberVO.name}", name, "${reserveVO.petVO.petImg}", "deal");
+			prepareNotification("${reserveVO.memberVO.name}", "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.name}", "${reserveVO.petVO.petImg}", "deal");
 		</c:forEach>
 	});
 </script>

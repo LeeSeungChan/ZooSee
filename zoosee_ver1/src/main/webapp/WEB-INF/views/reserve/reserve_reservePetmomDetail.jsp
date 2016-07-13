@@ -23,6 +23,8 @@
 		$(":input[name=noBtn]").click(function(){
 			if(confirm("예약 거절하시겠습니까?")){
 				location.replace("reserve_reserveCancel.do?reserve_no=${reserveVO.reserve_no}&petsitterId=<sec:authentication property='principal.id'/>&petmomId=${memberVO.id}");
+			}else{
+				return false;
 			}
 		});
 		$(":input[name=backBtn]").click(function(){

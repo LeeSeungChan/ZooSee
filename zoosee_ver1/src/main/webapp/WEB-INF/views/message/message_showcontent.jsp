@@ -7,13 +7,13 @@
 <%-- 뒤로가기 버튼 누를 시 읽음 으로 바꿈--%>
 bajb_backdetect.OnBack = function(){		
 	window.history.back=function(){
+			document.location="${initParam.root}message_list.do";
+			return false;
+		}
+	}	
+	function histotyBack(){
 		document.location="${initParam.root}message_list.do";
 	}
-}
-function histotyBack(){
-	document.location="${initParam.root}message_list.do";
-}
-
 </script>
 <div class="BJHeaderLayout0">
 	<div class="BJHeaderLayout">

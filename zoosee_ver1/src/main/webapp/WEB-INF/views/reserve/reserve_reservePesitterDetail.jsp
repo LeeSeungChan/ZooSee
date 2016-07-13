@@ -17,9 +17,13 @@
 			
 		$(":input[name=noBtn]").click(function(){
 			if(confirm("예약을 취소하시겠습니까?")){
-				location.replace("reserve_reserveCancel.do?reserve_no=${reserveVO.reserve_no}");
+				location.replace("reserve_reserveCancel.do?reserve_no=${reserveVO.reserve_no}&petsitterId=${petsitterboardVO.petsitterVO.memberVO.id}"+
+						"&petmomId=${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.id}");
+			}else{
+				return false;
 			}
 		});
+		
 	});
 </script>
 

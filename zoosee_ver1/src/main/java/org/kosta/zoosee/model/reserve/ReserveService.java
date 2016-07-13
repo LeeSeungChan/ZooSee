@@ -39,7 +39,7 @@ public interface ReserveService {
 
 	void updateReserveRecog(int reserve_no);
 
-	int getReserveIdCheck(String id);
+	int getReserveIdCheck(String id,String petsitterId);
 	
 	ReserveVO popupPayment(int reserve_no);
 
