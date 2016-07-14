@@ -1,4 +1,21 @@
-
+select page, petsitterboard_no, petsitterboard_title,price,petSize,petType,address,name,petsitterImg,houseImg
+	from
+	(
+		select ceil(rownum/6) as page,petsitterboard_no,petsitterboard_title,price,petSize,petType,petsitterNo,
+		address,name,petsitterImg,houseImg
+		from
+		(
+			select pb.petsitterboard_no,pb.petsitterboard_title,a.price,
+				   a.petSize,a.petType,pb.petsitterNo,a.address,a.name,a.petsitterImg,a.houseImg
+			from  
+			(
+				select pt.petsitterNo,m.address,m.name,pt.price,pt.petSize,pt.petType,pt.petsitterImg,pt.houseImg 
+				from pet_member m, petsitter pt where m.id=pt.id 
+			) a, petsitterboard pb
+			where a.petsitterNo = pb.petsitterNo order by pb.petsitterboard_no desc
+		)
+	) where page=1
+	
 alter table petsitterboard drop column petsitterboard_price;
 alter table petsitterboard drop column petsitterboard_petsize;
 alter table petsitterboard drop column petsitterboard_pettype;

@@ -178,10 +178,7 @@
 			</div>
 		</div><br/>
 
-<%-- <button onclick="notifyMe()">Notify me!</button> --%>
-
 		<div align="center">
-		<!-- <div align="right" style="border:1px solid blue;">	 -->
 			<ul class="pager">
 			<c:choose>
 			<c:when test="${requestScope.condition == 'search'}">
@@ -263,18 +260,4 @@
 		</div>
 	</div>
 </div>
-	
 
-<%-- 
-	<table border="1">
-		<tr>
-			<c:forEach items="${lvo.map}" var="map" varStatus="i">
-				<td><a href="petsitterboardDetail.do?petsitterboard_no=${map.value.petsitterboard_no}">${map.value}</a></td>
-				<c:if test="${i.index%3 == 2 && i.index+1 != list.size()}">
-					</tr>
-					<tr>
-				</c:if>
-			</c:forEach>
-		</tr>
-	</table>
-</div> --%>
