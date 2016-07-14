@@ -134,6 +134,7 @@
 				<th style="text-align: right;">총 결제가격</th>
 				<td>${reserveVO.reserve_price}원</td>
 			</tr>
+			<tr>
 			<th style="text-align: right; vertical-align: middle;">결제 방법</th>
 			<td>
 				<div class="radio" align="center">
@@ -151,6 +152,7 @@
 					</label>
 				</div>
 			</td>
+			</tr>
 		</table>
 	</form>
 

@@ -240,8 +240,6 @@
 									<tr>
 										<td style="width: 15%;"><input type="radio"name="petType" value="dog" />강아지</td>
 										<td style="width: 10%;"><input type="radio"name="petType" value="cat" />고양이</td>
-										<td style="width: 10%;"><input type="radio"name="petType" value="bird" />조류</td>
-										<td style="width: 10%;"><input type="radio"name="petType" value="fish" />어류</td>
 										<td style="width: 15%;"><input type="radio"name="petType" value="etc" />기타</td>
 									</tr>
 								</table>
@@ -290,7 +288,7 @@
 				</div>
 			</div>
 			<div class="SBbtn_1">
-				<input type="submit" class="active SBbtn btn-default" value="게시물 등록" />
+				<input type="submit" class="active SBbtn btn-default" value="게시물 수정" />
 			</div>
 		</form>
 	</div>

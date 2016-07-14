@@ -29,7 +29,6 @@ public class PagingBean {
 	 */
 	private int totalContents;
 	
-	private int num1;
 	/**
 	 * 총게시물수와 현재 페이지 정보를 할당 
 	 * @param totalContents
@@ -137,7 +136,6 @@ public class PagingBean {
 		if(this.getTotalPage()<num){
 			num=this.getTotalPage();
 		}
-		num1=num;
 		return num;
 	}
 	/**

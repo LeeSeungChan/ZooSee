@@ -2,7 +2,6 @@ package org.kosta.zoosee.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.qnaboard.ListVO;
 import org.kosta.zoosee.model.qnaboard.QNABoardService;

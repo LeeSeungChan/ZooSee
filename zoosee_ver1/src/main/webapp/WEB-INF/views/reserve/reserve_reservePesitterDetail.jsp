@@ -29,9 +29,9 @@
 
 
 <div class="BJMainKING">
-<div class="BJMainDiv" style="margin-bottom: 6%;margin-top: 5%;">
+<div class="BJMainDiv" style="margin-bottom:13%;margin-top: 5%;">
 	<div class="BJPanel" style="width: 80%; margin-left: 10%;">
-		<div class="panel panel-info">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">펫시터 상세정보</h3>
 			</div>
@@ -102,11 +102,11 @@
 		
 		<div style="float: left; width: 49.5%;">
 		<input type="button" value="거래하기" id="okBtn" name="okBtn"
-		class="active WJbtn btn-block btn-info">
+		class="active WJbtn btn-block btn-default">
 		</div>
 		<div style="float: right; width: 49.5%;">
 		<input type="button" value="취소하기" id="noBtn" name="noBtn"
-		class="active WJbtn btn-block btn-info">
+		class="active WJbtn btn-block btn-default">
 		</div>
 	</div>
 	</div>

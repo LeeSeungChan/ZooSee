@@ -3,6 +3,7 @@ package org.kosta.zoosee.model.vo;
 import java.io.Serializable;
 
 public class MemberVO implements Serializable {
+	private static final long serialVersionUID = -1864562554518014787L;
 	private String id;
 	private String name;
 	private String addressCode;

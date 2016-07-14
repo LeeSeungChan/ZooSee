@@ -35,31 +35,8 @@ public class MemberController {
 		memberService.registerMember(mvo);
 		return "redirect:member_register_result.do";
 	}
-	/* Member 로그인 메서드 */
-	/*@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public ModelAndView loginMember(HttpServletRequest request){
-		
-		
-		MemberVO mvo = new MemberVO();
-		mvo.setId(request.getParameter("id"));
-		mvo.setPassword(request.getParameter("password"));
-		
-		ModelAndView mv = new ModelAndView("home");
-		MemberVO vo = memberService.loginMember(mvo);
-		if(vo != null){
-			String petMasterSignal = "";
-			if(vo.getRank().equals("petmaster")){
-				// showMyReserveList에서 petmaster의 전체 예약목록을 뽑아오기 위해 2로 설정
-				petMasterSignal = "2";
-			}
-			List<ReserveVO> reserveList = reserveService.showMyReserveList(vo, petMasterSignal);
-			HashMap<String, List<ReserveVO>> map = memberService.showReserveList(reserveList);
-			mv.addObject("reserveTotalList", map);
-			return mv;
-		}else{
-			return new ModelAndView("loginfail.do");
-		}
-	}*/
+
+	// 로그인 성공 시
 	@RequestMapping("loginSuccess.do")
 	public ModelAndView loginMemberSuccess(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("member_loginSuccess");

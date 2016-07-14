@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.message.ListVO;
 import org.kosta.zoosee.model.message.MessageService;

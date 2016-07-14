@@ -80,7 +80,7 @@
                    	return [true];
                	}
          	},
-            minDate: startDay, //startDay,
+            minDate: startDay,
             maxDate: endDay,
             onSelect:function(selectedDate){
             	$("#edate").datepicker("option", "minDate", selectedDate );

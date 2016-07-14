@@ -10,7 +10,6 @@ import org.kosta.zoosee.model.message.MessageDAO;
 import org.kosta.zoosee.model.message.MessageService;
 import org.kosta.zoosee.model.qnaboard.PagingBean;
 import org.kosta.zoosee.model.security.SecurityService;
-import org.kosta.zoosee.model.vo.MemberVO;
 import org.kosta.zoosee.model.vo.PetsitterVO;
 import org.springframework.stereotype.Service;
 

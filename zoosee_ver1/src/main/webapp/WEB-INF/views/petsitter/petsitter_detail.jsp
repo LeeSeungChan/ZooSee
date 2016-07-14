@@ -31,7 +31,7 @@
 </c:if>
 
 <div class="BJMainKING">
-	<div style="width: 60%; margin-left: 20%; margin-right: 20%; height: auto; margin-bottom:10% ">
+	<div style="width: 60%; margin-left:20%; margin-right:20%; height:auto; margin-bottom:10% ">
 		<div style="height: 170px; background-color:#F5F5F5;">
 			<div style="border:1px solid red; margin:0 auto; width:220px; height:220px; float: left;" >
 				<img id="UploadedImg" style="border: 3px solid #DFDFDF;" src="${initParam.root}${petsitterVO.petsitterImg}"
@@ -108,6 +108,6 @@
 					</table><hr>
 				</div>
 			</c:forEach>
-		</div><br><br><br>
+		</div>
 	</div>
 </div>

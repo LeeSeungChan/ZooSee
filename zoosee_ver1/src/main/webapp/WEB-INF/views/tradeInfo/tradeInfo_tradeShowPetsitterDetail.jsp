@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 더블헤더 -->
 <div class="BJMainKING">
-	<div class="BJMainDiv" style="margin-bottom: 6%;margin-top: 5%;">
+	<div class="BJMainDiv" style="margin-bottom:10%;margin-top: 5%;">
 		<div class="BJPanel" style="width: 80%; margin-left: 10%;">
 			<div class="panel panel-primary">
 				<div class="panel-heading">

@@ -27,5 +27,5 @@
 		padding: 5px;
 		height: 70px;
 		border-top: 1px solid black;
-		clear:both; /* float 속성 요소 아래에 배치하기 위해 float 속성 초기화(clear)   */
+		/* clear:both; */ /* float 속성 요소 아래에 배치하기 위해 float 속성 초기화(clear)   */
 	}

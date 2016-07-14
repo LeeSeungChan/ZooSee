@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.kosta.zoosee.model.board.BoardService;
 import org.kosta.zoosee.model.board.ListVO;
@@ -208,9 +207,9 @@ public class BoardController {
 		
 	//게시글 수정
 	@RequestMapping("psboard_petsitterboardUpdate.do")
-	public ModelAndView myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO){            
+	public ModelAndView myPetsitterboardUpdate(PetsitterboardVO petsitterboardVO,PetsitterVO petsitterVO){  
 		boardService.myPetsitterboardUpdate(petsitterboardVO,petsitterVO);
-		return new ModelAndView("redirect:psboard_petsitterboard_myPetsitterBoard.do");
+		return new ModelAndView("redirect:petsitterboardDetail.do?petsitterboard_no="+petsitterboardVO.getPetsitterboard_no());
 	}
 	
 	//게시글삭제
