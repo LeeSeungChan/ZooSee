@@ -4,7 +4,7 @@
 <script type="text/javascript">
  	$(document).ready(function(){
  	      var rank="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}";
- 	       if(rank=="pre_petsitter" || rank=="petsitter" || rank =="petmaster"){
+ 	       if(rank=="pre_petsitter" || rank=="petsitter" || rank =="petmaster" || rank =="admin"){
  	          alert("이미 등록된 회원입니다!");
  	          $(location).attr('href',"home.do");
  	       }

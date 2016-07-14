@@ -136,7 +136,7 @@
 				<div class="SBHrAllLine">
 					<form method="get" action="getConditionList.do" id="searchForm">
 					<!-- 검색조건 두덩어리 -->
-					<div class="BJBoardSearchLayout2">
+					<div class="BJBoardSearchLayout2" style="margin-left:5%;">
 						<!-- 검색조건 한덩어리 -->
 						<div class="BJBoardSearchLayout">
 							<div><h4>서비스</h4></div>
@@ -155,7 +155,7 @@
 						</div>
  					</div>
 				 	<!-- 검색조건 두덩어리 -->
-					<div class="BJBoardSearchLayout2">
+					<div class="BJBoardSearchLayout2" style="margin-left:5%;">
 						<!-- 검색조건 한덩어리 -->
 						<div class="BJBoardSearchLayout">
 							<div><h4>반려견크기</h4></div>

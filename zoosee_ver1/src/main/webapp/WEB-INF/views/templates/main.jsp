@@ -4,6 +4,15 @@
 <%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <script type="text/javascript">
     $(document).ready(function(){
+    	$("#psReg").click(function(){
+    		var rank = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}";
+    		
+    		if(rank == petmaster || rank == petsitter){
+    			alert("이미 등록된 펫시터입니다.");
+    			location.replace("home.do");
+    		}
+    	});
+    	
     	var $body = $(document.body), //자주 사용하기에 캐시되게 변수에 넣어준다
     	$top = '';
 
@@ -53,8 +62,8 @@
 	<div class="BJMainDIVBottom" align="center">
 		<div class="BJMainBoardDiv" >
 			<div class="BJMainBoardC1">
-				<a href="${initParam.root}petsitter_register.do">
-					<img  src="${initParam.root }resources/image/petsitterimg2V2.jpg" style="width: 100%; height:100%; max-width: 760px; vertical-align: middle" />
+				<a id="psReg" href="${initParam.root}petsitter_register.do">
+					<img src="${initParam.root }resources/image/petsitterimg2V2.jpg" style="width: 100%; height:100%; max-width: 760px; vertical-align: middle" />
 				</a>
 			</div>
 			<div class="BJMainBoardC2">

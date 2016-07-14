@@ -99,7 +99,7 @@
 				<c:forEach items="${petList}" var="p">
 				<tr>
 					<td>
-						<img src="${L.petImg}" width="70" height="70" style="border-radius: 100px; 
+						<img src="${p.petImg}" width="70" height="70" style="border-radius: 100px; 
 							-moz-border-radius: 100px;-khtml-border-radius: 100px;-webkit-border-radius: 100px;">
                  		<div style="margin-bottom: 3%; margin-top: 3%;"></div>
                 	 </td>
