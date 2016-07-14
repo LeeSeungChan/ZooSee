@@ -75,6 +75,13 @@
 		}
 		
 		$(document).ready(function(){
+			$(document).keydown(function(e){
+				if(e.keyCode === 8){
+					location.href="${initParam.root}home.do";
+					return false;
+				}
+			});
+			
 			var searchAddress = "${address}";
 			if(searchAddress != null){
 				navChange(searchAddress);

@@ -25,8 +25,8 @@
          });//ajax
       });//onclick
       $("#password").focus();
-      $("#existence option[value="+"'${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.existence}'"+"]").attr('selected', 'selected');
-      $("input:radio[name=gender][value="+ "<sec:authentication property='principal.gender'/>" + "]").attr("checked", "checked");
+      $("#existence option[value="+"'${memberVO.existence}'"+"]").attr('selected', 'selected');
+      $("input:radio[name=gender][value="+ "'${memberVO.gender}'" + "]").attr("checked", "checked");
       $("#password").keyup(function() {
          $("#passCheckView").empty();
          $("#passView").empty();
@@ -105,10 +105,8 @@
    daum.postcode.load(function() {
       daumPostcode = new daum.Postcode({
          oncomplete : function(data) {
-            $("#dong_addr").val(
-                  data.sido + " " + data.sigungu + " " + data.bname);
-            document.getElementById('addressCode').value = data.postcode
-                  || data.zonecode;
+            $("#dong_addr").val(data.sido + " " + data.sigungu + " " + data.bname);
+            document.getElementById('addressCode').value = data.postcode || data.zonecode;
             document.getElementById('address').value = data.address;
             document.getElementById('detailAddress').focus();
          }
@@ -137,121 +135,102 @@
       </div>
    </div>
 
-<span id="unchecked">  <!-- 비밀번호 확인 폼 -->
+<div id="unchecked">  <!-- 비밀번호 확인 폼 -->
    <div class="WJcontainer3">
-      <div
-         style="border: 1px solid #0f0fd9; border-radius: 10px; height: 550px; width: 50%; margin-top: 10%; margin-left: 25%; background-color: white">
-         <%-- <img src="${initParam.root}resources/image/Mmain.jpg" style="position: absolute; height:230px;  width:30%;"> --%>
+      <div style="border: 1px solid #0f0fd9; border-radius: 10px; height: 550px; width: 50%; margin-top: 10%; margin-left: 25%; background-color: white">
          <div class="WJLayout2" style="text-align: left;">
-            <!-- 사진 중간 정렬 시작-->
             <div align="center">
-               <a href="home.do"><img
-                  src="${initParam.root}resources/image/Mzoosee.png"></a>
+               <a href="home.do"><img src="${initParam.root}resources/image/Mzoosee.png"></a>
             </div>
-            <!-- 사진 중간 정렬 끝-->
             <form action="" id="memberLoginForm" method="post">
-               <!-- 왼쪽 시작-->
                <div style="float: center;">
                   정보 수정을 위해 비밀번호를 입력해주세요.<br>
                   <div class="WJform-group">
                      <input type="hidden" id="hiddenId" value="<sec:authentication property="principal.id"/>">
-                     <input class="WJform-control" id="checkPassword" name="checkPassword"
-                        placeholder="Password" type="password"> <input
-                        type="hidden" name="checked" id="checked" value="false">
+                     <input class="WJform-control" id="checkPassword" name="checkPassword" placeholder="Password" type="password"> 
+                     <input type="hidden" name="checked" id="checked" value="false">
                   </div>
                   <br>
-                  <button type="button" class="active WJbtn btn-block btn-primary"
-                     style="margin-bottom: 5%" id="pass_check_btn">확인</button>
+                  <button type="button" class="active WJbtn btn-block btn-primary" style="margin-bottom: 5%" id="pass_check_btn">확인</button>
                   <div align="center">
-                     비밀번호가 기억나지 않으신가요?<br> <a
-                        href="javascript:findPasswordPopup()">비밀번호찾기</a>
+                     비밀번호가 기억나지 않으신가요?<br> 
+                     <a href="javascript:findPasswordPopup()">비밀번호찾기</a>
                   </div>
                </div>
-
             </form>
          </div>
-         <!-- 텍스트는 왼쪽 정렬 및 삽입 중간 정렬 끝-->
       </div>
    </div>
-</span>
+</div>
 
 
-
-
-
-<span id="checkedpass" style="display: none;">
+<div id="checkedpass" style="display: none;">
    <div class="WJcontainer4">
       <div align="center">
-         <a href="home.do"><img
-            src="${initParam.root}resources/image/Mzoosee.png"></a>
+         <a href="home.do"><img src="${initParam.root}resources/image/Mzoosee.png"></a>
       </div>
       <div class="WJLayout" style="text-align: left;" id="member_register">
-         <form action="m_member_update_result.do" method="post"
-            id="updateForm">
+         <form action="m_member_update_result.do" method="post" id="updateForm">
             <div class="WJform-group">
-               <label>id</label> <input class="WJform-control" type="text"
-                  name="id" value="<sec:authentication property="principal.id"/>" readonly="readonly">
+               <label>id</label> 
+               <input class="WJform-control" type="text" name="id" value="${memberVO.id}" readonly="readonly">
             </div>
             <div class="WJform-group">
-               <label>Password</label> <input class="WJform-control" id="password"
-                  name="password" placeholder="Password" type="password"> <span
-                  id="passView"></span>
+               <label>Password</label> 
+               <input class="WJform-control" id="password" name="password" placeholder="Password" type="password"> 
+               <span id="passView"></span>
             </div>
             <div class="WJform-group">
-               <label>PasswordCheck</label> <input class="WJform-control"
-                  id="passwordCheck" name="passwordCheck"
-                  placeholder="PasswordCheck" type="password"> <span
-                  id="passCheckView"></span>
+               <label>PasswordCheck</label> 
+               <input class="WJform-control" id="passwordCheck" name="passwordCheck" placeholder="PasswordCheck" type="password"> 
+               <span id="passCheckView"></span>
             </div>
             <div class="WJform-group">
-               <label>Name</label> <input class="WJform-control" type="text"
-                  name="name" value="<sec:authentication property="principal.name"/>">
+               <label>Name</label> 
+               <input class="WJform-control" type="text" name="name" value="${memberVO.name}" /> 
             </div>
             <div class="WJform-group">
                <label>Address</label>
                <div class="WJform-group">
-                  <input class="WJform-control2" style="float: left; width: 49.5%;"
-                     type="text" id="addressCode" name="addressCode"
-                     value="<sec:authentication property="principal.addressCode"/>" readonly="readonly"> <a
-                     href="javascript:openDaumPostcode()"> <input
-                     class="active WJbtn btn-default"
-                     style="float: right; width: 49.5%;" type="button"
-                     value="Zip Code">
+                  <input class="WJform-control2" style="float:left; width:49.5%;" type="text" id="addressCode" name="addressCode"
+                     value="${memberVO.addressCode}" readonly="readonly"> 
+                  <a href="javascript:openDaumPostcode()"> 
+                     <input class="active WJbtn btn-default" style="float: right; width: 49.5%;" type="button" value="Zip Code">
                   </a>
                </div>
             </div>
             <div class="WJform-group">
-               <input class="WJform-control " type="text" name="address"
-                  id="address" value="<sec:authentication property="principal.address"/>" readonly="readonly"> <input
-                  class="WJform-control " type="text" value="<sec:authentication property="principal.detailAddress"/>"
-                  name="detailAddress" id="detailAddress"
-                  placeholder="Enter Address"> <input type="hidden"
-                  name="dong_addr" id="dong_addr" value="">
+               <input class="WJform-control" type="text" name="address"
+                  id="address" value="${memberVO.address}" readonly="readonly"> 
+               <input class="WJform-control " type="text" value="${memberVO.detailAddress}"
+                  name="detailAddress" id="detailAddress" placeholder="Enter Address"> 
+               <input type="hidden" name="dong_addr" id="dong_addr" value="">
             </div>
             <div class="WJform-group">
-               <label>Email address</label> <input class="WJform-control"
-                  type="text" name="email" value="<sec:authentication property="principal.email"/>">
+               <label>Email address</label> 
+               <input class="WJform-control" type="text" name="email" value="${memberVO.email}">
             </div>
             <div class="WJform-group" align="center">
                <div class="radio">
-                  <label class="radio-inline"> <input type="radio"
-                     name="gender" value="man">MAN
-                  </label> <label class="radio-inline"> <input type="radio"
-                     name="gender" value="woman">WOMAN
+                  <label class="radio-inline"> 
+                  <input type="radio" name="gender" value="man">MAN
+                  </label> 
+                  <label class="radio-inline"> 
+                  <input type="radio" name="gender" value="woman">WOMAN
                   </label>
                </div>
             </div>
             <div class="WJform-group">
-               <label>Tel</label> <input class="WJform-control" type="text"
-                  value="<sec:authentication property="principal.tel"/>" name="tel">
+               <label>Tel</label> 
+               <input class="WJform-control" type="text" value="${memberVO.tel}" name="tel">
             </div>
             <div class="WJform-group">
-               <label>Job</label> <input class="WJform-control" type="text"
-                  value="<sec:authentication property="principal.job"/>" name="job">
+               <label>Job</label> 
+               <input class="WJform-control" type="text" value="${memberVO.job}" name="job">
             </div>
             <div class="WJform-group">
-               <label>Existence</label> <select class="WJform-control"
-                  id="existence" name="existence">
+               <label>Existence</label>
+               <select class="WJform-control" id="existence" name="existence">
                   <option value="" selected>선택하세요.</option>
                   <option value="키워본 경험이 없다.">키워본 경험이 없다.</option>
                   <option value="키워본 경험이 있다.">키워본 경험이 있다.</option>
@@ -260,12 +239,10 @@
             </div>
             <br>
             <div align="center">
-               <input type="submit" class="active WJbtn btn-default"
-                  value="Confirm" style="float: left; width: 49.5%;"> <input
-                  type="button" class="active WJbtn btn-default" value="Cancle"
-                  id="cancle" style="float: right; width: 49.5%;">
+               <input type="submit" class="active WJbtn btn-default" value="Confirm" style="float: left; width: 49.5%;"> 
+               <input type="button" class="active WJbtn btn-default" value="Cancle" id="cancle" style="float: right; width: 49.5%;">
             </div>
          </form>
       </div>
    </div>
-</span>
+</div>

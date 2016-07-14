@@ -44,7 +44,10 @@
       });
       $("#passwordCheck").keyup(function(){
          $("#passCheckView").empty();
-         if($("#passwordCheck").val()==$("#password").val()){
+         
+         if($("#passwordCheck").val() == ""){
+        	 $("#passCheckView").html("비밀번호를 재확인하세요.").css("background","red");
+         }else if($("#passwordCheck").val()==$("#password").val()){
             $("#passCheckView").html("비밀번호 일치").css("background","yellow");
          }else{
             $("#passCheckView").html("비밀번호 불일치").css("background","red");

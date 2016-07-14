@@ -5,91 +5,96 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 	<insert id="registerMember" parameterType="memberVO">
-		insert into Pet_MEMBER(id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence,enabled)
+		insert into PET_MEMBER(id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence,enabled)
 		values(#{id},#{name},#{addressCode},#{address},#{detailAddress},#{gender},#{email},#{password},#{tel},#{job},#{rank},#{existence},1)
 	</insert>
 	
 	<select id="loginMember" resultType="memberVO" parameterType="memberVO">
-		select id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence from Pet_MEMBER
+		select id,name,addresscode,address,detailaddress,gender,email,password,tel,job,rank,existence from PET_MEMBER
 		where id=#{id} and password=#{password}
 	</select>
 	
 	<select id="memberIdCheck" resultType="int">
-		select count(*) from pet_member where id=#{value}
+		select count(*) from PET_MEMBER where id=#{value}
 	</select>
 	
 	<update id="updateMember" parameterType="memberVO">
-		update Pet_MEMBER set name=#{name},password=#{password},addresscode=#{addressCode},detailaddress=#{detailAddress},address=#{address},email=#{email},tel=#{tel},job=#{job},existence=#{existence}
+		update PET_MEMBER 
+		set name=#{name},password=#{password},addresscode=#{addressCode},detailaddress=#{detailAddress},address=#{address},
+			gender=#{gender},email=#{email},tel=#{tel},job=#{job},existence=#{existence}
 		where id=#{id}
 	</update>
 	
 	<select id="memberList" resultType="memberVO" parameterType="string">
 		select id,name,email,tel,rank
-			from(select ceil(rownum/10) as page,id,name,email,tel,rank
-			from pet_member where rank=#{rank}
-		)where page=#{pageNo}
+		from(select ceil(rownum/10) as page,id,name,email,tel,rank
+			 from PET_MEMBER where rank=#{rank})
+		where page=#{pageNo}
 	</select>
 	
 	<select id="memberListCount" resultType="int">
-		select count(*) from pet_member where rank=#{value}
+		select count(*) from PET_MEMBER where rank=#{value}
 	</select>
 	
 	<select id="getMemberVO" resultType="memberVO" >
 		select id,name ,addresscode,address,detailaddress, gender, email, password, tel, job, rank, existence
-		from pet_member
+		from PET_MEMBER
 		where id=#{value} and enabled=1
 	</select>
 	
 	<update id="deleteMember">
-		update pet_member set enabled=0 where id=#{value}
+		update PET_MEMBER set enabled=0 where id=#{value}
 	</update>
 	<select id="findRank" resultType="string">
-		select rank from pet_member where id=#{id}
+		select rank from PET_MEMBER where id=#{id}
 	</select>
 	<select id="findIdByPetsitterNo" resultType="string">
-		select p.id from pet_member pm, petsitter p where p.id=pm.id and p.petsitterNo=#{value}
+		select p.id 
+		from PET_MEMBER pm, petsitter p 
+		where p.id=pm.id and p.petsitterNo=#{value}
 	</select>
 	<update id="upgradeRank">
-		update pet_member set rank=#{rank} where id=#{id}
+		update PET_MEMBER set rank=#{rank} where id=#{id}
 	</update>
 	
 	<select id="allMemberIdList" resultType="string">
-		select id from pet_member
+		select id from PET_MEMBER
 	</select>
 	<!-- 관리자 펫맘 리스트 뽑기 -->
 	<select id="getPetmomList" resultType="memberVO">
 		select id,name,email,tel,rank 
-		from(select ceil(rownum/10) as page,id,name,email,tel,rank from pet_member
-			where rank='petmom' or rank='pre_petmaster' or rank='petmaster'
-		) where page=#{value}
+		from(select ceil(rownum/10) as page,id,name,email,tel,rank 
+			 from PET_MEMBER
+			 where rank='petmom' or rank='pre_petmaster' or rank='petmaster') 
+		where page=#{value}
 	</select>
 	<select id="getPetmomListCount" resultType="int">
-		select count(*) from pet_member
+		select count(*) from PET_MEMBER
 		where rank='petmom' or rank='pre_petmaster' or rank='petmaster'
 	</select>
 	<!-- 아이디 찾기 -->
 	<select id="findEmailByMemberVO" resultType="memberVO">
-		select id,name from pet_member where email=#{value}
+		select id,name from PET_MEMBER where email=#{value}
 	</select>
 	<!-- 임시 비밀번호 select -->
 	<select id="findPasswordByMemberVO" parameterType="map" resultType="memberVO">
-	  	select name,password from pet_member where id=#{id} and email=#{email}
+	  	select name,password from PET_MEMBER where id=#{id} and email=#{email}
 	</select>
 	<!-- 임시비밀번호 update -->
 	<update id="updateMemberPassword" parameterType="map">
-		update pet_member set password=#{password} where id=#{id}
+		update PET_MEMBER set password=#{password} where id=#{id}
 	</update>
 	<select id="findInfoById" resultType="memberVO">
-		select id,name,email,tel,rank from pet_member where id=#{value}	
+		select id,name,email,tel,rank from PET_MEMBER where id=#{value}	
 	</select>
 	<select id="findInfoByName" resultType="memberVO">
-		select id,name,email,tel,rank from pet_member where name=#{value}	
+		select id,name,email,tel,rank from PET_MEMBER where name=#{value}	
 	</select>
 	<update id="addAdmin">
-		update pet_member set rank='admin' where id=#{value}
+		update PET_MEMBER set rank='admin' where id=#{value}
 	</update>
 	<delete id="resign">
-		delete pet_member where id=#{value}
+		delete PET_MEMBER where id=#{value}
 	</delete>
 	<!-- 2016.07.05 추가된 내용 
 	Authority 테이블에 권한 리스트 가져오기

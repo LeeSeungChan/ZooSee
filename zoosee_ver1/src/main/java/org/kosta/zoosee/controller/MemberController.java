@@ -92,23 +92,40 @@ public class MemberController {
 	}
 	
 	/* Member 회원가입시 아이디 중복확인 메서드 */
-	@RequestMapping(value="memberIdCheck.do",method=RequestMethod.POST)
+	@RequestMapping(value="memberIdCheck.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int memberIdCheck(String id){
 		return memberService.memberIdCheck(id);
 	}
 	/* Member 정보수정 메서드 */
-	@RequestMapping(value="m_member_update_result.do",method=RequestMethod.POST)
+	@RequestMapping(value="m_member_update_result.do", method=RequestMethod.POST)
 	public ModelAndView updateMember(MemberVO vo,HttpServletRequest request){
-		String message=memberService.updateMember(vo);
+		String message = memberService.updateMember(vo);
+		MemberVO mvo = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		SetSpringSessionMemberVO(mvo, vo);
 		ModelAndView mv=new ModelAndView();
 		if(message=="fail"){
 			mv.setViewName("redirect:member_update_fail.do");
 		}else{
-			mv.setViewName("redirect:m_member_detail.do");
+			mv.setViewName("redirect:member_detail.do");
 		}
 		return mv;
 	}
+	private void SetSpringSessionMemberVO(MemberVO mvo, MemberVO vo)
+	{
+		mvo.setPassword(vo.getPassword());
+		mvo.setName(vo.getName());
+		mvo.setAddress(vo.getAddress());
+		mvo.setAddressCode(vo.getAddressCode());
+		mvo.setDetailAddress(vo.getDetailAddress());
+		mvo.setEmail(vo.getEmail());
+		mvo.setGender(vo.getGender());
+		mvo.setJob(vo.getJob());
+		mvo.setTel(vo.getTel());
+		mvo.setRank(vo.getRank());
+		mvo.setExistence(vo.getExistence());
+	}
+	
 	
 	//멤버 회원 탈퇴
 	@RequestMapping("m_member_delete.do")
@@ -117,7 +134,7 @@ public class MemberController {
 		// 2016.07.06
 		// 세션 아이디 설정
 		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		String result=memberService.deleteMember(id);
+		String result = memberService.deleteMember(id);
 		if(result.equals("ok") && session!=null){
 			session.invalidate();
 		}
@@ -154,20 +171,23 @@ public class MemberController {
 			return map;
 		}
 	}
-	@RequestMapping("member_update")
-	public String updateForm(HttpServletRequest request)
+	
+	@RequestMapping("m_member_update.do")
+	public ModelAndView updateForm(HttpServletRequest request)
 	{
 		String id = ((MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+		ModelAndView mv = new ModelAndView("member_update");
+		MemberVO memberVO = memberService.getMemberVO(id);
+		mv.addObject("memberVO", memberVO);
 		try
 		{
 			int i = boardService.myPetsitterboard(id);
-			request.setAttribute("boardInfo","ok");
+			mv.addObject("boardInfo","ok");
 		}
 		catch(NullPointerException e)
 		{
-			request.setAttribute("boardInfo","no");
+			mv.addObject("boardInfo","no");
 		}
-		return "member_update";
+		return mv;
 	}
-	
 }
