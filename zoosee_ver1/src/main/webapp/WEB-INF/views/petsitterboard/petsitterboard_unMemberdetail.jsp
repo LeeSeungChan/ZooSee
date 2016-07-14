@@ -253,14 +253,10 @@
         	<div class="SBremote">
 	            <div class="SBremote_main">
 	            	<div class="SBremote_Img_form">
-		                <a href="#">
-		                	<img src="${initParam.root}${petsitterVO.petsitterImg}" class="SBImg">
-		                </a>
+		                <img src="${initParam.root}${petsitterVO.petsitterImg}" class="SBImg">
 	               	</div>
 	                <div class="SBremote_name">
-	                	<a href="petsitter_detail.do?petsitterNo=${petsitterVO.petsitterNo}&petsitterboard_no=${petsitterboardVO.petsitterboard_no}">
-	                		<h4 style="font-weight:bold; color:gray;">${memberVO.name}</h4>
-	                  	</a>
+	                	<h4 style="font-weight:bold; color:gray;">${memberVO.name}</h4>
 	                	<h6 style="font-size: 11px;">${memberVO.address}</h6>
 	                	<span class="label label-success" id="addressMap">지도 보기</span>
 	                </div>

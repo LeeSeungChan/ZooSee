@@ -6,8 +6,11 @@
     $(document).ready(function(){
     	$("#psReg").click(function(){
     		var rank = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}";
-    		
-    		if(rank == petmaster || rank == petsitter){
+
+  			if(rank == null || rank == ""){
+  				alert("로그인하고 등록 가능합니다.");
+  				location.href="login.do";
+  			}else if(rank == petmaster || rank == petsitter){
     			alert("이미 등록된 펫시터입니다.");
     			location.replace("home.do");
     		}
