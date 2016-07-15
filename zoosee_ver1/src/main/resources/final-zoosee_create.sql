@@ -137,6 +137,7 @@ CREATE TABLE TRADEINFO(
 
 -- qna게시판--------------------------------------------------------------
 create sequence qnaboard_seq;
+drop sequence qnaboard_seq;
 -- 질문게시판(1:1)
 CREATE TABLE QNABOARD(
 	qnaboard_no number primary key not null, 	--게시물 번호
@@ -226,3 +227,48 @@ create table authorities(
 )
 
 -------------------------------------------------------
+create table PET_MEMBER;
+drop table PET_MEMBER;
+CREATE sequence petNo_seq;
+DROP sequence petNo_seq;
+drop table pet;
+CREATE sequence petsitterNo_seq;
+DROP sequence petsitterNo_seq;
+drop table petsitter;
+CREATE sequence petsitterboard_no_seq nocache;
+DROP sequence petsitterboard_no_seq;
+drop table petsitterboard;
+create table petsitterboard;
+CREATE sequence reserve_no_seq nocache;
+DROP sequence reserve_no_seq;
+drop table reserve;
+create table reserve;
+CREATE sequence pet_calNO_seq nocache;
+DROP sequence pet_calNO_seq;
+drop table PET_CALENDAR;
+CREATE sequence tradeinfo_no_seq nocache;
+DROP sequence tradeinfo_no_seq;
+DROP TABLE TRADEINFO;
+create sequence qnaboard_seq nocache;
+drop sequence qnaboard_seq;
+DROP TABLE QNABOARD;
+create sequence freeboard_seq;
+drop sequence freeboard_seq;
+CREATE TABLE freeboard;
+drop TABLE freeboard;
+create table freebaord;
+create sequence freeboard_reply_seq nocache;
+drop sequence freeboard_reply_seq;
+drop table freeboard_reply;
+create table freeboard_reply;
+create sequence message_seq nocache;
+drop sequence message_seq;
+create table message;
+drop table message;
+create sequence review_seq nocache;
+drop sequence review_seq;
+drop table review;
+create table review;
+drop table authorities;
+create table authorities;
+

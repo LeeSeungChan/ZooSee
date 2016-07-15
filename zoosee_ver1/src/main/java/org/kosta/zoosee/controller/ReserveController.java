@@ -145,7 +145,7 @@ public class ReserveController {
 		// reservce_reocg를 1로 올려준다.
 		reserveService.updateReserveRecog(reserve_no);
 		
-		return new ModelAndView("redirect:reserve_reserveMyList.do?id="+petsitterId);
+		return new ModelAndView("redirect:reserve_reserveMyList.do?id="+petsitterId+"&petMasterSignal=0");
 	}
 	// 펫시터가 승낙까지 했고 펫맘이 거래하기
 	@RequestMapping("reserve_reserveDealAccept.do")

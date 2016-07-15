@@ -26,9 +26,20 @@
 					<a class="BJA" href="${initParam.root}ps_petsitter_updateform.do">펫시터 정보 수정</a>
 					<a class="BJA" href="${initParam.root}ps_petsitter_info.do?id=<sec:authentication property="principal.id"/>">펫시터 정보 보기</a>
 				</sec:authorize>
-				<sec:authorize ifAnyGranted="ROLE_MEMBER,ROLE_PETMOM">
-					<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
-				</sec:authorize>
+				<c:choose>
+					<c:when test="${'pre_petsitter' eq sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank || 'pre_petsmater' eq sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}">
+					<a class="BJA" href="${initParam.root}ps_petsitter_updateform.do">펫시터 정보 수정</a>
+					</c:when>
+					<c:otherwise>
+						<sec:authorize ifAnyGranted="ROLE_MEMBER,ROLE_PETMOM">
+							<a class="BJA" href="${initParam.root}petsitter_register.do">펫시터신청</a>
+						</sec:authorize>
+					</c:otherwise>
+				</c:choose>
+				<%-- <sec:authorize ifAnyGranted="ROLE_PRE_PETSITTER,ROLE_PRE_PETMASTER">
+					<a class="BJA" href="${initParam.root}ps_petsitter_updateform.do">펫시터 정보 수정</a>
+				</sec:authorize> --%>
+				
 		</div>
 	</div>
 </div>

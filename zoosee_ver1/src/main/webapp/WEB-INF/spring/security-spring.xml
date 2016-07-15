@@ -28,6 +28,8 @@
 		<sec:intercept-url pattern="/message_*" access="hasAnyRole('ROLE_PETMOM','ROLE_ADMIN','ROLE_MEMBER','ROLE_PETSITTER','ROLE_PETMASTER')" />
 		<!-- qna 권한 -->
 		<sec:intercept-url pattern="/qna_*" access="hasAnyRole('ROLE_PETMOM','ROLE_ADMIN','ROLE_MEMBER','ROLE_PETSITTER','ROLE_PETMASTER')" />
+		<!-- petregister 체크 -->
+		<sec:intercept-url pattern="/petsitter_registerPetsitter" access="hasAnyRole('ROLE_PETMOM','ROLE_PETSITTER','ROLE_MEMBER','ROLE_PETMASTER')"/>
 		
 		<!-- 허가  -->
 		<sec:intercept-url pattern="/**" access="permitAll" />

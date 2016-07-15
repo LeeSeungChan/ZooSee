@@ -6,14 +6,13 @@
     $(document).ready(function(){
     	$("#psReg").click(function(){
     		var rank = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.rank}";
-
-  			if(rank == null || rank == ""){
-  				alert("로그인하고 등록 가능합니다.");
-  				location.href="login.do";
-  			}else if(rank == petmaster || rank == petsitter){
-    			alert("이미 등록된 펫시터입니다.");
-    			location.replace("home.do");
-    		}
+    		if(rank == null || rank == ""){
+                alert("로그인하고 등록 가능합니다.");
+                $(this).attr("href", "${initParam.root}member_login.do");
+             }else if(rank == petmaster || rank == petsitter){
+               alert("이미 등록된 펫시터입니다.");
+               $(this).attr("href", "${initParam.root}home.do");
+            }
     	});
     	
     	var $body = $(document.body), //자주 사용하기에 캐시되게 변수에 넣어준다
@@ -37,9 +36,6 @@
                 $top.fadeOut();
             }
         });
-        $("button").click(function(){
-        	$(":input[name=address]").val("");
-        });
     });
 </script>
 
@@ -50,7 +46,7 @@
 			<h3 style="color:white;">답답한 케이지가 아닌 펫시터의 집에서 당신의 강아지만 돌봐드립니다</h3> 
 		</div>
 		<div class="WJMainSection">
-			<form role="search" action="findAllPetsitterList.do">
+			<form role="search" action="findAllPetsitterList.do" id="searchForm" onsubmit="submitSearch">
 				<div class="WJMainSearchDiv">
 					<div style="float: left; width: 70%;">
 						<input type="text" class="WJform-control3" name="address" placeholder="서울/경기/인천" />

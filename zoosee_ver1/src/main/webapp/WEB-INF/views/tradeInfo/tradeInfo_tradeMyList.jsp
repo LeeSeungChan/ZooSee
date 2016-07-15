@@ -33,11 +33,13 @@
 	<div class="BJMain2Div" align="center">
 		<div class="BJWriteTableLine">
 			<div class="SBHrAllLine_1">
-				<c:if test="${empty tradeInfoList}">
+			<c:choose>
+				<c:when test="${empty tradeInfoList}">
 					<div style="margin-bottom: 3%">거래하신 내역이 없습니다.</div>
-				</c:if>
+				</c:when>
+				<c:otherwise>
 				<table class="table table-striped table-hover" style="width: 100%">
-					<tr class="active">
+				<tr class="active">
 						<th style="width: 10%"><label>거래번호</label></th>
 						<sec:authorize ifAnyGranted="ROLE_PETMOM">
 							<th style="width: 7.5%"><label>펫시터</label></th>
@@ -52,7 +54,7 @@
 						<th style="width: 15%"><label>시작일</label></th>
 						<th style="width: 15%"><label>마감일</label></th>
 						<th style="width: 10%"><label>상태</label></th>
-					</tr>
+				</tr>
 					<c:forEach items="${tradeInfoList}" var="tradeInfoVO">
 						<tr>
 							<td style="vertical-align: middle;">${tradeInfoVO.tradeinfo_no}</td>
@@ -104,6 +106,8 @@
 						</tr>
 					</c:forEach>
 				</table>
+				</c:otherwise>
+			</c:choose>
 			</div>
 		</div>
 	</div>

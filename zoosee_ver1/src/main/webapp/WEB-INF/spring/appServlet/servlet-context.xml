@@ -39,13 +39,14 @@
 
 <!-- 업로드 경로 설정 -->
 <bean id="uploadPath" class="java.lang.String">
-	<constructor-arg value="C:\\Users\\kosta\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\upload\\"/>
+<!-- C:\\Users\\kosta1\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\upload\\ -->
+	<constructor-arg value="C:\\Users\\kosta1\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\upload\\"/>
 </bean>
 <bean id="petUploadPath" class="java.lang.String">
-	<constructor-arg value="C:\\Users\\kosta\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\upload\\pet\\"/>
+	<constructor-arg value="C:\\Users\\kosta1\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\upload\\pet\\"/>
 </bean>
 <bean id="petsitterUploadPath" class="java.lang.String">
-	<constructor-arg value="C:\\Users\\kosta\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\upload\\petsitter\\"/>
+	<constructor-arg value="C:\\Users\\kosta1\\git\\zoosee\\zoosee_ver1\\src\\main\\webapp\\upload\\petsitter\\"/>
 </bean>
 
 <!-- <bean id="messagePath" class="java.lang.String">
